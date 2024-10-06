@@ -1,5 +1,6 @@
 package org.adamkattan.rest;
 
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -7,18 +8,24 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.AnalysisInput;
 import org.adamkattan.model.AnalysisInputQuery;
+import org.adamkattan.service.AnalysisInputService;
 
 @Path("/analysis-inputs")
 public class AnalysisInputController {
 
+    @Inject
+    AnalysisInputService analysisInputService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
-        var analysisInput = AnalysisInput.find("appName", query.appName).list();
+        var analysisInput = analysisInputService.getAppAnalysisInputs(query);
+
         if (analysisInput.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND)
                     .build();
         }
+
         return Response.ok(analysisInput).build();
     }
 
@@ -26,9 +33,7 @@ public class AnalysisInputController {
     @Path("/latest")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppLatestAnalysisInputByVersion(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = AnalysisInput
-                .find("appName = ?1 ORDER BY string_to_array(version, '.')::int[] DESC", query.appName)
-                .firstResult();
+        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByVersion(query);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -43,9 +48,7 @@ public class AnalysisInputController {
     @Path("/latest-upload")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppLatestAnalysisInputByTimestamp(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = AnalysisInput
-                .find("appName = ?1 ORDER BY createdAt DESC", query.appName)
-                .firstResult();
+        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(query);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND)
