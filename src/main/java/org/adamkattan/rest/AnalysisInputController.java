@@ -6,8 +6,8 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.AnalysisInput;
-import org.adamkattan.model.AnalysisInputQuery;
+import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.input.AnalysisInputQuery;
 import org.adamkattan.service.AnalysisInputService;
 
 @Path("/analysis-inputs")

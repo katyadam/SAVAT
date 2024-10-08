@@ -3,8 +3,8 @@ package org.adamkattan.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.BeanParam;
-import org.adamkattan.model.AnalysisInput;
-import org.adamkattan.model.AnalysisInputQuery;
+import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.input.AnalysisInputQuery;
 
 import java.util.List;
 

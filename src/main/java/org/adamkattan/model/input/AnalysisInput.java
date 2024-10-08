@@ -1,4 +1,4 @@
-package org.adamkattan.model;
+package org.adamkattan.model.input;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
@@ -6,7 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import org.adamkattan.model.entities.AnalysisInputEntities;
+import org.adamkattan.model.entities.Entities;
+import org.adamkattan.model.graph.CommunicationGraph;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -29,11 +30,11 @@ public class AnalysisInput extends PanacheEntity {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "entities")
-    public AnalysisInputEntities entities;
+    public Entities entities;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "communication_graph")
-    public AnalysisJsonObject communicationGraph;
+    public CommunicationGraph communicationGraph;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;

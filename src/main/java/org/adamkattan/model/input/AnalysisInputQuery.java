@@ -1,4 +1,4 @@
-package org.adamkattan.model;
+package org.adamkattan.model.input;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.ws.rs.QueryParam;
