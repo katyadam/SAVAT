@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import org.adamkattan.model.entities.AnalysisInputEntities;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "analysis_input")
 public class AnalysisInput extends PanacheEntity {
-    @NotBlank(message = "app_name is required")
+    @NotBlank(message = "appName is required")
     @Column(nullable = false, name = "app_name")
     public String appName;
 
@@ -22,9 +23,17 @@ public class AnalysisInput extends PanacheEntity {
     @Column(nullable = false)
     public String version;
 
+    @NotBlank(message = "commitHash is required")
+    @Column(nullable = false, name = "commit_hash")
+    public String commitHash;
+
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(nullable = false, columnDefinition = "jsonb", name = "result_json")
-    public AnalysisJsonObject resultJson;
+    @Column(nullable = false, columnDefinition = "jsonb", name = "entities")
+    public AnalysisInputEntities entities;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(nullable = false, columnDefinition = "jsonb", name = "communication_graph")
+    public AnalysisJsonObject communicationGraph;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
