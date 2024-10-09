@@ -65,10 +65,10 @@ public class AnalysisInputController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Transactional
     public Response postAnalysisInput(@Valid AnalysisInput analysisInput) {
-        AnalysisInput newAnalysisInput = entityManager.merge(analysisInput);
-        return Response.ok(newAnalysisInput).build();
+        analysisInput.persist();
+        return Response.ok("Successfully uploaded!").build();
     }
 }
