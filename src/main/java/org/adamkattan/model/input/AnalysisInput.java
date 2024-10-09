@@ -7,7 +7,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.entities.Entities;
-import org.adamkattan.model.graph.CommunicationGraph;
+import org.adamkattan.model.graph.Graph;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -33,8 +33,8 @@ public class AnalysisInput extends PanacheEntity {
     public Entities entities;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(nullable = false, columnDefinition = "jsonb", name = "communication_graph")
-    public CommunicationGraph communicationGraph;
+    @Column(nullable = false, columnDefinition = "jsonb", name = "graph")
+    public Graph graph;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
