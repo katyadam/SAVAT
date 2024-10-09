@@ -1,8 +1,16 @@
 package org.adamkattan.model.graph;
 
-public class Graph {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private GraphNode nodes;
-    private GraphLink links;
+import java.io.Serializable;
+import java.util.List;
+
+public class Graph implements Serializable {
+
+    @JsonProperty("nodes")
+    private List<GraphNode> nodes;
+
+    @JsonProperty("links")
+    private List<GraphLink> links;
 
 }
