@@ -1,7 +1,6 @@
 package org.adamkattan.rest;
 
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -16,9 +15,6 @@ public class AnalysisInputController {
 
     @Inject
     AnalysisInputService analysisInputService;
-
-    @Inject
-    EntityManager entityManager;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -65,10 +61,9 @@ public class AnalysisInputController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     @Transactional
     public Response postAnalysisInput(@Valid AnalysisInput analysisInput) {
         analysisInput.persist();
-        return Response.ok("Successfully uploaded!").build();
+        return Response.status(201).build();
     }
 }
