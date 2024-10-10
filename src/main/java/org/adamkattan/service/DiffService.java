@@ -20,9 +20,9 @@ public class DiffService {
 
 
     public Optional<AnalysisOutput> getPlainDifference(AnalysisInput input) {
-        var latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(
-                new AnalysisInputQuery(input.appName)
-        );
+        AnalysisInputQuery analysisInputQuery = new AnalysisInputQuery();
+        analysisInputQuery.appName = input.appName;
+        var latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(analysisInputQuery);
         Optional<AnalysisOutput> result = plainDifference.getPlainDifference(latestInput, input);
 
         if (result.isPresent()) {

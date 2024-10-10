@@ -22,15 +22,13 @@ public class PlainDifference {
 
         boolean isDifferent = compareEntities(newInput.entities, oldInput.entities) &&
                 compareGraphs(newInput.graph, oldInput.graph);
-        var result = AnalysisOutput.builder()
-                .appName(newInput.appName)
-                .newVersion(newInput.version)
-                .oldVersion(oldInput.version)
-                .newCommitHash(newInput.commitHash)
-                .oldCommitHash(oldInput.commitHash)
-                .isDifferent(isDifferent)
-                .build();
-
+        var result = new AnalysisOutput();
+        result.appName = newInput.appName;
+        result.newVersion = newInput.version;
+        result.oldVersion = oldInput.version;
+        result.newCommitHash = newInput.commitHash;
+        result.oldCommitHash = oldInput.commitHash;
+        result.isDifferent = isDifferent;
         return Optional.of(result);
     }
 
