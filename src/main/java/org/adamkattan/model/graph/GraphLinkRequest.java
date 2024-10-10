@@ -4,35 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class GraphLinkRequest implements Serializable {
-
-    @JsonProperty("type")
-    private String type; // TODO: PUT, GET
-
-    @JsonProperty("uri")
-    private String uri;
-
-    @JsonProperty("requestReturn")
-    private String requestReturn;
-
-    @JsonProperty("endpointFunction")
-    private String endpointFunction;
-
-    @JsonProperty("endpointMsName")
-    private String endpointMsName;
-
-    @JsonProperty("targetEndpointUri")
-    private String targetEndpointUri;
-
-    @JsonProperty("isCollection")
-    private Boolean isCollection;
-
-    @JsonProperty("parentMethod")
-    private String parentMethod;
-
-    @JsonProperty("msName")
-    private String msName;
-
-    @JsonProperty("restCallInClassName")
-    private String restCallInClassName;
+public record GraphLinkRequest(
+        @JsonProperty("type") String type,
+        @JsonProperty("uri") String uri,
+        @JsonProperty("requestReturn") String requestReturn,
+        @JsonProperty("endpointFunction") String endpointFunction,
+        @JsonProperty("endpointMsName") String endpointMsName,
+        @JsonProperty("targetEndpointUri") String targetEndpointUri,
+        @JsonProperty("isCollection") Boolean isCollection,
+        @JsonProperty("parentMethod") String parentMethod,
+        @JsonProperty("msName") String msName,
+        @JsonProperty("restCallInClassName") String restCallInClassName
+) implements Serializable {
 }

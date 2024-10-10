@@ -4,24 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class EntityLink implements Serializable {
-
-    @JsonProperty("source")
-    private String source;
-
-    @JsonProperty("target")
-    private String target;
-
-    @JsonProperty("msSource")
-    private String msSource;
-
-    @JsonProperty("msTarget")
-    private String msTarget;
-
-    @JsonProperty("sourceMultiplicity")
-    private String sourceMultiplicity;
-
-    @JsonProperty("targetMultiplicity")
-    private Integer targetMultiplicity;
-
+public record EntityLink(
+        @JsonProperty("source") String source,
+        @JsonProperty("target") String target,
+        @JsonProperty("msSource") String msSource,
+        @JsonProperty("msTarget") String msTarget,
+        @JsonProperty("sourceMultiplicity") String sourceMultiplicity,
+        @JsonProperty("targetMultiplicity") Integer targetMultiplicity
+) implements Serializable {
 }

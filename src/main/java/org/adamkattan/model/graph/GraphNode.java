@@ -4,12 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class GraphNode implements Serializable {
-
-    @JsonProperty("nodeName")
-    private String nodeName;
-
-    @JsonProperty("nodeType")
-    private String nodeType;
-
+public record GraphNode(
+        @JsonProperty("nodeName") String nodeName,
+        @JsonProperty("nodeType") String nodeType
+) implements Serializable {
 }

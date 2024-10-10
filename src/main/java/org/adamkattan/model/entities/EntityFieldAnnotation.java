@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class EntityFieldAnnotation implements Serializable {
-
-    @JsonProperty("annotation")
-    private String annotation;
-
+public record EntityFieldAnnotation(
+        @JsonProperty("annotation") String annotation
+) implements Serializable {
 }

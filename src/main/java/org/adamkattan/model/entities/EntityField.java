@@ -5,27 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
-public class EntityField implements Serializable {
-
-    @JsonProperty("fieldName")
-    private String fieldName;
-
-    @JsonProperty("fieldFullName")
-    private String fieldFullName;
-
-    @JsonProperty("fieldType")
-    private String fieldType;
-
-    @JsonProperty("fieldAnnotations")
-    private List<EntityFieldAnnotation> fieldAnnotations;
-
-    @JsonProperty("fieldIsReference")
-    private Boolean fieldIsReference;
-
-    @JsonProperty("fieldEntityRefName")
-    private String fieldEntityRefName;
-
-    @JsonProperty("isCollection")
-    private Boolean isCollection;
-
+public record EntityField(
+        @JsonProperty("fieldName") String fieldName,
+        @JsonProperty("fieldFullName") String fieldFullName,
+        @JsonProperty("fieldType") String fieldType,
+        @JsonProperty("fieldAnnotations") List<EntityFieldAnnotation> fieldAnnotations,
+        @JsonProperty("fieldIsReference") Boolean fieldIsReference,
+        @JsonProperty("fieldEntityRefName") String fieldEntityRefName,
+        @JsonProperty("isCollection") Boolean isCollection
+) implements Serializable {
 }

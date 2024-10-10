@@ -5,18 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
-public class EntityNode implements Serializable {
-
-    @JsonProperty("msName")
-    private String msName;
-
-    @JsonProperty("nodeName")
-    private String nodeName;
-
-    @JsonProperty("nodeFullName")
-    private String nodeFullName;
-
-    @JsonProperty("fields")
-    private List<EntityField> fields;
-
+public record EntityNode(
+        @JsonProperty("msName") String msName,
+        @JsonProperty("nodeName") String nodeName,
+        @JsonProperty("nodeFullName") String nodeFullName,
+        @JsonProperty("fields") List<EntityField> fields
+) implements Serializable {
 }

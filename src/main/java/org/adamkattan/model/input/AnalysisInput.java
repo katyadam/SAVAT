@@ -43,4 +43,5 @@ public class AnalysisInput extends PanacheEntity {
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
+
 }
