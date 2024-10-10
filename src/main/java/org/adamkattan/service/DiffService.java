@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.analysis.PlainDifference;
 import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.input.AnalysisInputQuery;
 import org.adamkattan.model.output.AnalysisOutput;
 
 import java.util.Optional;
@@ -18,8 +19,11 @@ public class DiffService {
     PlainDifference plainDifference;
 
 
-    public Optional<AnalysisOutput> getPlainDifference(AnalysisInput newInput, AnalysisInput oldInput) {
-        Optional<AnalysisOutput> result = plainDifference.getPlainDifference(newInput, oldInput);
+    public Optional<AnalysisOutput> getPlainDifference(AnalysisInput input) {
+        var latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(
+                new AnalysisInputQuery(input.appName)
+        );
+        Optional<AnalysisOutput> result = plainDifference.getPlainDifference(latestInput, input);
 
         if (result.isPresent()) {
             var resultToPersist = result.get();
