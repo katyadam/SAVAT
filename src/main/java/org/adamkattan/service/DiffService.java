@@ -23,7 +23,7 @@ public class DiffService {
         AnalysisInputQuery analysisInputQuery = new AnalysisInputQuery();
         analysisInputQuery.appName = input.appName;
         var latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(analysisInputQuery);
-        Optional<AnalysisOutput> result = plainDifference.getPlainDifference(latestInput, input);
+        Optional<AnalysisOutput> result = plainDifference.getPlainDifference(input, latestInput);
 
         if (result.isPresent()) {
             var resultToPersist = result.get();

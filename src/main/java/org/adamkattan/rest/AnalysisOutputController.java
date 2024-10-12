@@ -30,7 +30,7 @@ public class AnalysisOutputController {
         Optional<AnalysisOutput> plainDifference = diffService.getPlainDifference(analysisInput);
 
         return Response.status(200)
-                .entity(plainDifference.isPresent() ? plainDifference.get().toString() : "")
+                .entity(plainDifference.isPresent() ? plainDifference.get() : "")
                 .build();
     }
 

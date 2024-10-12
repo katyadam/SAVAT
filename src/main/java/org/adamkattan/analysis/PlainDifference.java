@@ -20,7 +20,7 @@ public class PlainDifference {
             return Optional.empty();
         }
 
-        boolean isDifferent = compareEntities(newInput.entities, oldInput.entities) &&
+        boolean areSame = compareEntities(newInput.entities, oldInput.entities) &&
                 compareGraphs(newInput.graph, oldInput.graph);
         var result = new AnalysisOutput();
         result.appName = newInput.appName;
@@ -28,7 +28,7 @@ public class PlainDifference {
         result.oldVersion = oldInput.version;
         result.newCommitHash = newInput.commitHash;
         result.oldCommitHash = oldInput.commitHash;
-        result.isDifferent = isDifferent;
+        result.isDifferent = !areSame;
         return Optional.of(result);
     }
 
