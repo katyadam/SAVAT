@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public record MicroserviceNode(
-        @JsonProperty String name,
-        @JsonProperty List<MicroserviceMethodNode> methods
+        @JsonProperty("name") String name,
+        @JsonProperty("methods") List<MicroserviceMethodNode> methods
 ) implements Serializable {
 }

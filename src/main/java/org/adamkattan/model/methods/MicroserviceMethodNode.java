@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 public record MicroserviceMethodNode(
-        @JsonProperty String name,
-        @JsonProperty String bytecodeHash
+        @JsonProperty("name") String name,
+        @JsonProperty("bytecodeHash") String bytecodeHash
 ) implements Serializable {
 }
