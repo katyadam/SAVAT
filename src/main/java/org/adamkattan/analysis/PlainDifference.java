@@ -3,11 +3,10 @@ package org.adamkattan.analysis;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.adamkattan.model.entities.Entities;
-import org.adamkattan.model.graph.Graph;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.output.AnalysisOutput;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -20,8 +19,9 @@ public class PlainDifference {
             return Optional.empty();
         }
 
-        boolean areSame = compareEntities(newInput.entities, oldInput.entities) &&
-                compareGraphs(newInput.graph, oldInput.graph);
+        boolean areSame = compare(newInput.entities, oldInput.entities) &&
+                compare(newInput.graph, oldInput.graph) &&
+                compare(newInput.methods, oldInput.methods);
         var result = new AnalysisOutput();
         result.appName = newInput.appName;
         result.newVersion = newInput.version;
@@ -32,7 +32,7 @@ public class PlainDifference {
         return Optional.of(result);
     }
 
-    private boolean compareEntities(Entities newEntities, Entities oldEntities) {
+    private <T> boolean compare(T newEntities, T oldEntities) {
         try {
             String newJson = objectMapper.writeValueAsString(newEntities);
             String oldJson = objectMapper.writeValueAsString(oldEntities);
@@ -41,15 +41,4 @@ public class PlainDifference {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean compareGraphs(Graph newGraph, Graph oldGraph) {
-        try {
-            String newJson = objectMapper.writeValueAsString(newGraph);
-            String oldJson = objectMapper.writeValueAsString(oldGraph);
-            return newJson.equals(oldJson);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

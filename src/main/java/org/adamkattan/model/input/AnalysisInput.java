@@ -8,10 +8,12 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.entities.Entities;
 import org.adamkattan.model.graph.Graph;
+import org.adamkattan.model.methods.MicroserviceNode;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "analysis_input")
@@ -35,6 +37,10 @@ public class AnalysisInput extends PanacheEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "graph")
     public Graph graph;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(nullable = false, columnDefinition = "jsonb", name = "methods")
+    public List<MicroserviceNode> methods;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
