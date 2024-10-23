@@ -19,7 +19,7 @@ public class AnalysisInputController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
-        var analysisInput = analysisInputService.getAppAnalysisInputs(query);
+        var analysisInput = analysisInputService.getAppAnalysisInputs(query.appName);
 
         if (analysisInput.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -33,7 +33,7 @@ public class AnalysisInputController {
     @Path("/latest")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppLatestAnalysisInputByVersion(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByVersion(query);
+        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByVersion(query.appName);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -48,7 +48,7 @@ public class AnalysisInputController {
     @Path("/latest-upload")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAppLatestAnalysisInputByTimestamp(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(query);
+        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(query.appName);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND)

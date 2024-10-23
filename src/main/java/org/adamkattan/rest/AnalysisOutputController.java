@@ -3,15 +3,14 @@ package org.adamkattan.rest;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.output.AnalysisOutput;
-import org.adamkattan.service.DiffService;
+import org.adamkattan.model.output.DifferenceOutput;
+import org.adamkattan.model.output.DifferenceType;
+import org.adamkattan.service.DifferenceService;
 
 import java.util.Optional;
 
@@ -19,19 +18,28 @@ import java.util.Optional;
 public class AnalysisOutputController {
 
     @Inject
-    DiffService diffService;
+    DifferenceService differenceService;
 
     @POST
     @Path("/plain-diff")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response plainDiff(@Valid AnalysisInput analysisInput) {
-        Optional<AnalysisOutput> plainDifference = diffService.getPlainDifference(analysisInput);
+    public Response isDifferentThenLast(@Valid AnalysisInput analysisInput) {
+        Optional<AnalysisOutput> plainDifference = differenceService.isDifferent(analysisInput);
 
         return Response.status(200)
                 .entity(plainDifference.isPresent() ? plainDifference.get() : "")
                 .build();
     }
 
+    @POST
+    @Path("/show-diff/{type}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response showDiff(@Valid AnalysisInput analysisInput, @PathParam("type") DifferenceType type) {
+        DifferenceOutput diff = differenceService.getDifference(analysisInput, type);
+        return Response.ok(diff).build();
+    }
 }

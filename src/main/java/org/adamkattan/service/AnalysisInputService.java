@@ -1,29 +1,26 @@
 package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.validation.Valid;
-import jakarta.ws.rs.BeanParam;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.input.AnalysisInputQuery;
 
 import java.util.List;
 
 @ApplicationScoped
 public class AnalysisInputService {
 
-    public List<AnalysisInput> getAppAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
-        return AnalysisInput.find("appName", query.appName).list();
+    public List<AnalysisInput> getAppAnalysisInputs(String appName) {
+        return AnalysisInput.find("appName", appName).list();
     }
 
-    public AnalysisInput getAppLatestAnalysisInputByVersion(AnalysisInputQuery query) {
+    public AnalysisInput getAppLatestAnalysisInputByVersion(String appName) {
         return AnalysisInput
-                .find("appName = ?1 ORDER BY string_to_array(version, '.') DESC", query.appName)
+                .find("appName = ?1 ORDER BY string_to_array(version, '.') DESC", appName)
                 .firstResult();
     }
 
-    public AnalysisInput getAppLatestAnalysisInputByTimestamp(AnalysisInputQuery query) {
+    public AnalysisInput getAppLatestAnalysisInputByTimestamp(String appName) {
         return AnalysisInput
-                .find("appName = ?1 ORDER BY createdAt DESC", query.appName)
+                .find("appName = ?1 ORDER BY createdAt DESC", appName)
                 .firstResult();
     }
 }
