@@ -6,7 +6,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.output.AnalysisOutput;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 @ApplicationScoped
