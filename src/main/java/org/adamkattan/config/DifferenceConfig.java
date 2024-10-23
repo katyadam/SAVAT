@@ -5,7 +5,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
-public class DiffConfig {
+public class DifferenceConfig {
 
     @Produces
     @ApplicationScoped
