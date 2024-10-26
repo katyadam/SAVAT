@@ -1,8 +1,9 @@
-# change-impact-analysis
+# Change Impact Analysis
+
+This project is part of Bachelor thesis, that is trying to use known change impact analysis techniques in systems
+using microservices.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
 ## Running the application in dev mode
 
@@ -12,7 +13,15 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+or using Quarkus CLI
+
+```shell script
+quarkus dev
+```
+
+> **_NOTE:_**  Also you should run [Docker dependencies](#docker-dependencies)
+
+After successfully running the project, you can access its Swagger UI at <http://localhost:8080/q/swagger-ui/>
 
 ## Packaging and running the application
 
@@ -53,31 +62,8 @@ You can then execute your native executable with: `./target/change-impact-analys
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
-
 ### Docker dependencies
+
 ```
 docker run --name cia-pg -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=cia -p 5432:5432 -d postgres
 ```
