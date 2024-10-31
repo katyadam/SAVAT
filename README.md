@@ -1,7 +1,6 @@
 # Change Impact Analysis
 
-This project is part of Bachelor thesis, that is trying to use known change impact analysis techniques in systems
-using microservices.
+This project is part of a bachelor thesis that is trying to use known change impact analysis techniques in systems using microservices.
 
 ## Running the application using Docker
 

@@ -1,7 +1,6 @@
 # Change Impact Analysis
 
-This project is part of Bachelor thesis, that is trying to use known change impact analysis techniques in systems
-using microservices.
+This project is part of a bachelor thesis that is trying to use known change impact analysis techniques in systems using microservices.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -21,7 +20,7 @@ quarkus dev
 
 > **_NOTE:_** Also you should run [Docker dependencies](#docker-dependencies)
 
-> **_NOTE:_** If you want to run whole application, then proceed to [root README.md](../README.md)
+> **_NOTE:_** If you want to run the whole application, then proceed to [root README.md](../README.md)
 
 After successfully running the project, you can access its Swagger UI at <http://localhost:8080/q/swagger-ui/>
 
