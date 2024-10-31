@@ -37,10 +37,18 @@ public class DifferenceService {
 
     public DifferenceOutput getDifference(AnalysisInput input, DifferenceType type) {
         var latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(input.appName);
+        return computeDifference(input, latestInput, type);
+    }
+
+    public DifferenceOutput getDifference(AnalysisInput input, AnalysisInput chosenInput, DifferenceType type) {
+        return computeDifference(input, chosenInput, type);
+    }
+
+    private DifferenceOutput computeDifference(AnalysisInput src, AnalysisInput dest, DifferenceType type) {
         var diffRows = switch (type) {
-            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(input.entities, latestInput.entities);
-            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(input.graph, latestInput.graph);
-            case DifferenceType.METHODS -> differenceAnalysis.getDifferenceRows(input.methods, latestInput.methods);
+            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.entities, dest.entities);
+            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.graph, dest.graph);
+            case DifferenceType.METHODS -> differenceAnalysis.getDifferenceRows(src.methods, dest.methods);
         };
         StringBuilder oldJson = new StringBuilder();
         StringBuilder newJson = new StringBuilder();
@@ -49,9 +57,9 @@ public class DifferenceService {
             newJson.append(diffRow.getNewLine()).append(System.lineSeparator());
         }
         return new DifferenceOutput(
-                input.appName,
-                input.version,
-                latestInput.version,
+                src.appName,
+                src.version,
+                dest.version,
                 newJson.toString(),
                 oldJson.toString(),
                 type

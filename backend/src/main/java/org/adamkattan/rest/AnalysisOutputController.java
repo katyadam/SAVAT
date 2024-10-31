@@ -28,7 +28,7 @@ public class AnalysisOutputController {
     public Response isDifferentThenLast(@Valid AnalysisInput analysisInput) {
         Optional<AnalysisOutput> plainDifference = differenceService.isDifferent(analysisInput);
 
-        return Response.status(200)
+        return Response.ok()
                 .entity(plainDifference.isPresent() ? plainDifference.get() : "")
                 .build();
     }

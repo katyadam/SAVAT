@@ -22,8 +22,7 @@ public class AnalysisInputController {
         var analysisInput = analysisInputService.getAppAnalysisInputs(query.appName);
 
         if (analysisInput.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         return Response.ok(analysisInput).build();
@@ -36,9 +35,7 @@ public class AnalysisInputController {
         AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByVersion(query.appName);
 
         if (latestInput == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("No analysis input found")
-                    .build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         return Response.ok(latestInput).build();
@@ -51,9 +48,7 @@ public class AnalysisInputController {
         AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(query.appName);
 
         if (latestInput == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("No analysis input found")
-                    .build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         return Response.ok(latestInput).build();
@@ -64,6 +59,6 @@ public class AnalysisInputController {
     @Transactional
     public Response postAnalysisInput(@Valid AnalysisInput analysisInput) {
         analysisInput.persist();
-        return Response.status(201).build();
+        return Response.status(Response.Status.CREATED).build();
     }
 }
