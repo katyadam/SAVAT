@@ -19,7 +19,9 @@ or using Quarkus CLI
 quarkus dev
 ```
 
-> **_NOTE:_**  Also you should run [Docker dependencies](#docker-dependencies)
+> **_NOTE:_** Also you should run [Docker dependencies](#docker-dependencies)
+
+> **_NOTE:_** If you want to run whole application, then proceed to [root README.md](../README.md)
 
 After successfully running the project, you can access its Swagger UI at <http://localhost:8080/q/swagger-ui/>
 
