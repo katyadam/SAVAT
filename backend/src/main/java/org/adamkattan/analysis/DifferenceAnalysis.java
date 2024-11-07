@@ -24,7 +24,7 @@ public class DifferenceAnalysis {
     }
 
     public Optional<AnalysisOutput> isDifferent(AnalysisInput newInput, AnalysisInput oldInput) {
-        if (!newInput.appName.equals(oldInput.appName)) {
+        if (!newInput.project.projectName.equals(oldInput.project.projectName)) {
             return Optional.empty();
         }
 
@@ -32,7 +32,7 @@ public class DifferenceAnalysis {
                 compare(newInput.graph, oldInput.graph) &&
                 compare(newInput.methods, oldInput.methods);
         var result = new AnalysisOutput();
-        result.appName = newInput.appName;
+        result.project = newInput.project;
         result.newVersion = newInput.version;
         result.oldVersion = oldInput.version;
         result.newCommitHash = newInput.commitHash;

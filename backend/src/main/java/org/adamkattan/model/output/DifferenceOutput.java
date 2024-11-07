@@ -1,7 +1,7 @@
 package org.adamkattan.model.output;
 
 public record DifferenceOutput(
-        String appName,
+        String projectName,
         String newVersion,
         String oldVersion,
         String newJson,

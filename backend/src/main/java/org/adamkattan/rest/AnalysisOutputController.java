@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.output.AnalysisOutput;
+import org.adamkattan.model.output.ChangedMethodsOutput;
 import org.adamkattan.model.output.DifferenceOutput;
 import org.adamkattan.model.output.DifferenceType;
 import org.adamkattan.service.DifferenceService;
@@ -34,12 +35,22 @@ public class AnalysisOutputController {
     }
 
     @POST
-    @Path("/show-diff/{type}")
+    @Path("/json-diff/{type}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response showDiff(@Valid AnalysisInput analysisInput, @PathParam("type") DifferenceType type) {
-        DifferenceOutput diff = differenceService.getDifference(analysisInput, type);
-        return Response.ok(diff).build();
+    public Response jsonDiff(@Valid AnalysisInput analysisInput, @PathParam("type") DifferenceType type) {
+        DifferenceOutput output = differenceService.getJsonDifference(analysisInput, type);
+        return Response.ok(output).build();
+    }
+
+    @POST
+    @Path("/methods-diff")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response methodsDiff(@Valid AnalysisInput analysisInput) {
+        ChangedMethodsOutput output = differenceService.getChangedMethods(analysisInput);
+        return Response.ok(output).build();
     }
 }

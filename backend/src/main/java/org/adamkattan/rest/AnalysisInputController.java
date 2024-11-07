@@ -8,7 +8,11 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputQuery;
+import org.adamkattan.model.project.Project;
 import org.adamkattan.service.AnalysisInputService;
+import org.adamkattan.service.ProjectService;
+
+import java.util.List;
 
 @Path("/analysis-inputs")
 public class AnalysisInputController {
@@ -16,10 +20,14 @@ public class AnalysisInputController {
     @Inject
     AnalysisInputService analysisInputService;
 
+    @Inject
+    ProjectService projectService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAppAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
-        var analysisInput = analysisInputService.getAppAnalysisInputs(query.appName);
+    public Response getProjectAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
+        Project project = projectService.getProjectByName(query.projectName);
+        List<AnalysisInput> analysisInput = analysisInputService.getProjectAnalysisInputs(project);
 
         if (analysisInput.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -31,8 +39,9 @@ public class AnalysisInputController {
     @GET
     @Path("/latest")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAppLatestAnalysisInputByVersion(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByVersion(query.appName);
+    public Response getProjectLatestAnalysisInputByVersion(@Valid @BeanParam AnalysisInputQuery query) {
+        Project project = projectService.getProjectByName(query.projectName);
+        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByVersion(project);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -44,8 +53,9 @@ public class AnalysisInputController {
     @GET
     @Path("/latest-upload")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAppLatestAnalysisInputByTimestamp(@Valid @BeanParam AnalysisInputQuery query) {
-        AnalysisInput latestInput = analysisInputService.getAppLatestAnalysisInputByTimestamp(query.appName);
+    public Response getProjectLatestAnalysisInputByTimestamp(@Valid @BeanParam AnalysisInputQuery query) {
+        Project project = projectService.getProjectByName(query.projectName);
+        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(project);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
