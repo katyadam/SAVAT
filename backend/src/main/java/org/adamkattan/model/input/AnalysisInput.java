@@ -44,6 +44,17 @@ public class AnalysisInput extends PanacheEntity {
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 
+    public static AnalysisInputDto toDto(AnalysisInput input) {
+        return new AnalysisInputDto(
+                input.project.id,
+                input.version,
+                input.commitHash,
+                input.entities,
+                input.graph,
+                input.methods
+        );
+    }
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

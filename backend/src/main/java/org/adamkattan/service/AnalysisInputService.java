@@ -4,7 +4,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputDto;
-import org.adamkattan.model.project.Project;
 
 import java.util.List;
 
@@ -14,19 +13,19 @@ public class AnalysisInputService {
     @Inject
     ProjectService projectService;
 
-    public List<AnalysisInput> getProjectAnalysisInputs(Project project) {
-        return AnalysisInput.find("project", project).list();
+    public List<AnalysisInput> getProjectAnalysisInputs(Long projectId) {
+        return AnalysisInput.find("project.id", projectId).list();
     }
 
-    public AnalysisInput getProjectLatestAnalysisInputByVersion(Project project) {
+    public AnalysisInput getProjectLatestAnalysisInputByVersion(Long projectId) {
         return AnalysisInput
-                .find("project = ?1 ORDER BY string_to_array(version, '.') DESC", project)
+                .find("project.id = ?1 ORDER BY string_to_array(version, '.') DESC", projectId)
                 .firstResult();
     }
 
-    public AnalysisInput getProjectLatestAnalysisInputByTimestamp(Project project) {
+    public AnalysisInput getProjectLatestAnalysisInputByTimestamp(Long projectId) {
         return AnalysisInput
-                .find("project = ?1 ORDER BY createdAt DESC", project)
+                .find("project.id = ?1 ORDER BY createdAt DESC", projectId)
                 .firstResult();
     }
 

@@ -8,10 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputDto;
-import org.adamkattan.model.input.AnalysisInputQuery;
-import org.adamkattan.model.project.Project;
 import org.adamkattan.service.AnalysisInputService;
-import org.adamkattan.service.ProjectService;
 
 import java.util.List;
 
@@ -21,48 +18,46 @@ public class AnalysisInputController {
     @Inject
     AnalysisInputService analysisInputService;
 
-    @Inject
-    ProjectService projectService;
-
     @GET
+    @Path("/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectAnalysisInputs(@Valid @BeanParam AnalysisInputQuery query) {
-        Project project = projectService.getProjectByName(query.projectName);
-        List<AnalysisInput> analysisInput = analysisInputService.getProjectAnalysisInputs(project);
+    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) {
+        List<AnalysisInput> analysisInputs = analysisInputService.getProjectAnalysisInputs(projectId);
 
-        if (analysisInput.isEmpty()) {
+        if (analysisInputs.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(analysisInput).build();
+        var dtos = analysisInputs.stream()
+                .map(AnalysisInput::toDto)
+                .toList();
+        return Response.ok(dtos).build();
     }
 
     @GET
-    @Path("/latest")
+    @Path("/latest/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectLatestAnalysisInputByVersion(@Valid @BeanParam AnalysisInputQuery query) {
-        Project project = projectService.getProjectByName(query.projectName);
-        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByVersion(project);
+    public Response getProjectLatestAnalysisInputByVersion(@PathParam("projectId") Long projectId) {
+        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByVersion(projectId);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(latestInput).build();
+        return Response.ok(AnalysisInput.toDto(latestInput)).build();
     }
 
     @GET
-    @Path("/latest-upload")
+    @Path("/latest-upload/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectLatestAnalysisInputByTimestamp(@Valid @BeanParam AnalysisInputQuery query) {
-        Project project = projectService.getProjectByName(query.projectName);
-        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(project);
+    public Response getProjectLatestAnalysisInputByTimestamp(@PathParam("projectId") Long projectId) {
+        AnalysisInput latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(projectId);
 
         if (latestInput == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(latestInput).build();
+        return Response.ok(AnalysisInput.toDto(latestInput)).build();
     }
 
     @POST

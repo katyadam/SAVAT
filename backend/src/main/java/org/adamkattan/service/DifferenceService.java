@@ -26,7 +26,7 @@ public class DifferenceService {
 
 
     public Optional<AnalysisOutput> isDifferent(AnalysisInput input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project);
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
         Optional<AnalysisOutput> result = differenceAnalysis.isDifferent(input, latestInput);
 
         if (result.isPresent()) {
@@ -40,7 +40,7 @@ public class DifferenceService {
     }
 
     public DifferenceOutput getJsonDifference(AnalysisInput input, DifferenceType type) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project);
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
         return computeDifference(input, latestInput, type);
     }
 
@@ -49,7 +49,7 @@ public class DifferenceService {
     }
 
     public ChangedMethodsOutput getChangedMethods(AnalysisInput input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project);
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
         return computeChangedMethods(input.methods, latestInput.methods);
     }
 

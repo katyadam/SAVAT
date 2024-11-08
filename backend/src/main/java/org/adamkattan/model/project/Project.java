@@ -17,11 +17,11 @@ public class Project extends PanacheEntity {
     @Column(nullable = false, name = "project_name")
     public String projectName;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Column(nullable = false, name = "inputs")
     public List<AnalysisInput> inputs;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Column(nullable = false, name = "outputs")
     public List<AnalysisOutput> outputs;
 
