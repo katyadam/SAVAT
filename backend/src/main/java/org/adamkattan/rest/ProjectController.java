@@ -11,7 +11,7 @@ import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.project.CreateProjectDto;
 import org.adamkattan.service.ProjectService;
 
-@Path("/project")
+@Path("/projects")
 public class ProjectController {
 
     @Inject
@@ -25,5 +25,11 @@ public class ProjectController {
         return Response.status(Response.Status.CREATED)
                 .entity(projectService.createProject(projectDto))
                 .build();
+    }
+
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllProjects() {
+        return Response.ok(projectService.getAllProjects()).build();
     }
 }
