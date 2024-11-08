@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.input.AnalysisInputDto;
 import org.adamkattan.model.input.AnalysisInputQuery;
 import org.adamkattan.model.project.Project;
 import org.adamkattan.service.AnalysisInputService;
@@ -67,8 +68,9 @@ public class AnalysisInputController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response postAnalysisInput(@Valid AnalysisInput analysisInput) {
-        analysisInput.persist();
-        return Response.status(Response.Status.CREATED).build();
+    public Response addAnalysisInput(@Valid AnalysisInputDto analysisInputDto) {
+        return Response.status(Response.Status.CREATED)
+                .entity(analysisInputService.addAnalysisInputToProject(analysisInputDto))
+                .build();
     }
 }
