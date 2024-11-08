@@ -3,7 +3,7 @@ package org.adamkattan.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.input.AnalysisInputDto;
+import org.adamkattan.model.input.CreateAnalysisInputDto;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class AnalysisInputService {
                 .firstResult();
     }
 
-    public AnalysisInput addAnalysisInputToProject(AnalysisInputDto analysisInputDto) {
+    public AnalysisInput addAnalysisInputToProject(CreateAnalysisInputDto analysisInputDto) {
         var project = projectService.getProjectById(analysisInputDto.projectId());
         var analysisInput = new AnalysisInput();
         analysisInput.project = project;

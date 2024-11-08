@@ -5,12 +5,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.analysis.DifferenceAnalysis;
 import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.input.CreateAnalysisInputDto;
+import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.methods.MicroserviceMethodNode;
 import org.adamkattan.model.methods.MicroserviceNode;
-import org.adamkattan.model.output.AnalysisOutput;
-import org.adamkattan.model.output.ChangedMethodsOutput;
-import org.adamkattan.model.output.DifferenceOutput;
-import org.adamkattan.model.output.DifferenceType;
+import org.adamkattan.model.output.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,32 +24,23 @@ public class DifferenceService {
     DifferenceAnalysis differenceAnalysis;
 
 
-    public Optional<AnalysisOutput> isDifferent(AnalysisInput input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
-        Optional<AnalysisOutput> result = differenceAnalysis.isDifferent(input, latestInput);
-
-        if (result.isPresent()) {
-            var resultToPersist = result.get();
-
-            if (!resultToPersist.isPersistent())
-                resultToPersist.persist();
-        }
-
-        return result;
+    public Optional<PlainDifferenceOutput> isDifferent(CreateAnalysisInputDto input) {
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
+        return differenceAnalysis.isDifferent(input, AnalysisInput.toDto(latestInput));
     }
 
-    public DifferenceOutput getJsonDifference(AnalysisInput input, DifferenceType type) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
-        return computeDifference(input, latestInput, type);
+    public DifferenceOutput getJsonDifference(CreateAnalysisInputDto input, DifferenceType type) {
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
+        return computeDifference(input, AnalysisInput.toDto(latestInput), type);
     }
 
-    public DifferenceOutput getJsonDifference(AnalysisInput input, AnalysisInput chosenInput, DifferenceType type) {
+    public DifferenceOutput getJsonDifference(CreateAnalysisInputDto input, CreateAnalysisInputDto chosenInput, DifferenceType type) {
         return computeDifference(input, chosenInput, type);
     }
 
-    public ChangedMethodsOutput getChangedMethods(AnalysisInput input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.project.id);
-        return computeChangedMethods(input.methods, latestInput.methods);
+    public ChangedMethodsOutput getChangedMethods(MethodsInputDto input) {
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
+        return computeChangedMethods(input.methods(), latestInput.methods);
     }
 
     private ChangedMethodsOutput computeChangedMethods(List<MicroserviceNode> src, List<MicroserviceNode> dest) {
@@ -81,11 +71,11 @@ public class DifferenceService {
         return new ChangedMethodsOutput(changedMs);
     }
 
-    private DifferenceOutput computeDifference(AnalysisInput src, AnalysisInput dest, DifferenceType type) {
+    private DifferenceOutput computeDifference(CreateAnalysisInputDto src, CreateAnalysisInputDto dest, DifferenceType type) {
         var diffRows = switch (type) {
-            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.entities, dest.entities);
-            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.graph, dest.graph);
-            case DifferenceType.METHODS -> differenceAnalysis.getDifferenceRows(src.methods, dest.methods);
+            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.entities(), dest.entities());
+            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.graph(), dest.graph());
+            case DifferenceType.METHODS -> differenceAnalysis.getDifferenceRows(src.methods(), dest.methods());
         };
         StringBuilder oldJson = new StringBuilder();
         StringBuilder newJson = new StringBuilder();
@@ -94,9 +84,9 @@ public class DifferenceService {
             newJson.append(diffRow.getNewLine()).append(System.lineSeparator());
         }
         return new DifferenceOutput(
-                src.project.projectName,
-                src.version,
-                dest.version,
+                src.projectId(),
+                src.version(),
+                dest.version(),
                 newJson.toString(),
                 oldJson.toString(),
                 type

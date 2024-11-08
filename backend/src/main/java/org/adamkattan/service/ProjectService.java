@@ -21,7 +21,6 @@ public class ProjectService {
         var project = new Project();
         project.projectName = projectDto.projectName();
         project.inputs = new ArrayList<>();
-        project.outputs = new ArrayList<>();
         project.persist();
         return project;
     }

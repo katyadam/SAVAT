@@ -7,7 +7,7 @@ import org.adamkattan.model.methods.MicroserviceNode;
 
 import java.util.List;
 
-public record AnalysisInputDto(
+public record CreateAnalysisInputDto(
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,

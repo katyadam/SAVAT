@@ -44,8 +44,8 @@ public class AnalysisInput extends PanacheEntity {
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 
-    public static AnalysisInputDto toDto(AnalysisInput input) {
-        return new AnalysisInputDto(
+    public static CreateAnalysisInputDto toDto(AnalysisInput input) {
+        return new CreateAnalysisInputDto(
                 input.project.id,
                 input.version,
                 input.commitHash,

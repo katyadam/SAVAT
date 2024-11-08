@@ -7,7 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.input.AnalysisInputDto;
+import org.adamkattan.model.input.CreateAnalysisInputDto;
 import org.adamkattan.service.AnalysisInputService;
 
 import java.util.List;
@@ -63,7 +63,7 @@ public class AnalysisInputController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addAnalysisInput(@Valid AnalysisInputDto analysisInputDto) {
+    public Response addAnalysisInput(@Valid CreateAnalysisInputDto analysisInputDto) {
         return Response.status(Response.Status.CREATED)
                 .entity(analysisInputService.addAnalysisInputToProject(analysisInputDto))
                 .build();

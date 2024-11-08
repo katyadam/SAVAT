@@ -4,7 +4,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.output.AnalysisOutput;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,10 +19,6 @@ public class Project extends PanacheEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Column(nullable = false, name = "inputs")
     public List<AnalysisInput> inputs;
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Column(nullable = false, name = "outputs")
-    public List<AnalysisOutput> outputs;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;

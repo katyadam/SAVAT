@@ -6,11 +6,12 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.output.AnalysisOutput;
+import org.adamkattan.model.input.CreateAnalysisInputDto;
+import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.output.ChangedMethodsOutput;
 import org.adamkattan.model.output.DifferenceOutput;
 import org.adamkattan.model.output.DifferenceType;
+import org.adamkattan.model.output.PlainDifferenceOutput;
 import org.adamkattan.service.DifferenceService;
 
 import java.util.Optional;
@@ -26,8 +27,8 @@ public class AnalysisOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response isDifferentThenLast(@Valid AnalysisInput analysisInput) {
-        Optional<AnalysisOutput> plainDifference = differenceService.isDifferent(analysisInput);
+    public Response isDifferentThenLast(@Valid CreateAnalysisInputDto analysisInputDto) {
+        Optional<PlainDifferenceOutput> plainDifference = differenceService.isDifferent(analysisInputDto);
 
         return Response.ok()
                 .entity(plainDifference.isPresent() ? plainDifference.get() : "")
@@ -39,8 +40,8 @@ public class AnalysisOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response jsonDiff(@Valid AnalysisInput analysisInput, @PathParam("type") DifferenceType type) {
-        DifferenceOutput output = differenceService.getJsonDifference(analysisInput, type);
+    public Response jsonDiff(@Valid CreateAnalysisInputDto analysisInputDto, @PathParam("type") DifferenceType type) {
+        DifferenceOutput output = differenceService.getJsonDifference(analysisInputDto, type);
         return Response.ok(output).build();
     }
 
@@ -49,8 +50,8 @@ public class AnalysisOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response methodsDiff(@Valid AnalysisInput analysisInput) {
-        ChangedMethodsOutput output = differenceService.getChangedMethods(analysisInput);
+    public Response methodsDiff(@Valid MethodsInputDto methodsInputDto) {
+        ChangedMethodsOutput output = differenceService.getChangedMethods(methodsInputDto);
         return Response.ok(output).build();
     }
 }
