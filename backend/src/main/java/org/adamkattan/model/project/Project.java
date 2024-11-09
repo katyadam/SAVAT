@@ -16,7 +16,7 @@ public class Project extends PanacheEntity {
     @Column(nullable = false, name = "project_name")
     public String projectName;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "inputs")
     public List<AnalysisInput> inputs;
 

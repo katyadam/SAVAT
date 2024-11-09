@@ -58,6 +58,7 @@ public class AnalysisInput extends PanacheEntity {
 
     public static AnalysisInputDto toDto(AnalysisInput input) {
         return new AnalysisInputDto(
+                input.id,
                 input.project.id,
                 input.version,
                 input.commitHash,

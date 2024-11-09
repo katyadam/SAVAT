@@ -29,7 +29,7 @@ public class AnalysisInputService {
                 .firstResult();
     }
 
-    public AnalysisInput addAnalysisInputToProject(AnalysisInputFullDto analysisInputDto) {
+    public AnalysisInputFullDto addAnalysisInputToProject(AnalysisInputFullDto analysisInputDto) {
         var project = projectService.getProjectById(analysisInputDto.projectId());
         var analysisInput = new AnalysisInput();
         analysisInput.project = project;
@@ -39,6 +39,6 @@ public class AnalysisInputService {
         analysisInput.graph = analysisInputDto.graph();
         analysisInput.methods = analysisInputDto.methods();
         analysisInput.persist();
-        return analysisInput;
+        return AnalysisInput.toFullDto(analysisInput);
     }
 }

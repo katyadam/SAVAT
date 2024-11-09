@@ -10,6 +10,7 @@ import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.service.AnalysisInputService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/analysis-inputs")
@@ -23,10 +24,6 @@ public class AnalysisInputController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) {
         List<AnalysisInput> analysisInputs = analysisInputService.getProjectAnalysisInputs(projectId);
-
-        if (analysisInputs.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
 
         var dtos = analysisInputs.stream()
                 .map(AnalysisInput::toDto)

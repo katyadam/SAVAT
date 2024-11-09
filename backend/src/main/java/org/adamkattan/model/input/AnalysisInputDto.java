@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 
 public record AnalysisInputDto(
+        @JsonProperty("id") Long id,
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,

@@ -11,6 +11,8 @@ export type AnalysisInput = {
 };
 
 async function getProjectAnalysisInputs(projectId: string): Promise<AnalysisInput[]> {
+    console.log(`${ANALYSIS_INPUTS_PREFIX}/${projectId}`);
+
     const resp = await axiosInstance.get(`${ANALYSIS_INPUTS_PREFIX}/${projectId}`);
     return resp.data;
 }
