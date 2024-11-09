@@ -2,8 +2,11 @@ package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.adamkattan.model.entities.Entities;
+import org.adamkattan.model.graph.Graph;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
+import org.adamkattan.model.methods.MicroserviceNode;
 
 import java.util.List;
 
@@ -40,5 +43,20 @@ public class AnalysisInputService {
         analysisInput.methods = analysisInputDto.methods();
         analysisInput.persist();
         return AnalysisInput.toFullDto(analysisInput);
+    }
+
+    public Entities getAnalysisInputEntities(Long inputId) {
+        AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
+        return input.entities;
+    }
+
+    public Graph getAnalysisInputGraph(Long inputId) {
+        AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
+        return input.graph;
+    }
+
+    public List<MicroserviceNode> getAnalysisInputMethods(Long inputId) {
+        AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
+        return input.methods;
     }
 }

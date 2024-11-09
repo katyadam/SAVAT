@@ -12,9 +12,9 @@ const ProjectPage = () => {
   const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(id);
 
   return (
-    <div>
-      <p>{projectLoading ? <p>Loading...</p> : project?.projectName}</p>
-      <div className="container mx-auto py-10">
+    <div className="ml-5 mt-5">
+      {projectLoading ? <p>Loading...</p> : <p>{project?.projectName}</p>}
+      <div className="py-10">
         {inputsLoading ? (
           <p>Loading...</p>
         ) : (

@@ -3,14 +3,17 @@ import { FC } from "react";
 import { Button } from "../ui/button";
 
 type AnalysisInputButtonProps = {
-  text: string;
+  type: string;
+  id: number;
 };
 
-const AnalysisInputButton: FC<AnalysisInputButtonProps> = ({ text }) => {
+const AnalysisInputButton: FC<AnalysisInputButtonProps> = ({ type, id }) => {
   return (
-    <Button variant="outline">
-      <Eye />
-    </Button>
+    <a href={`/${id}/${type}`}>
+      <Button variant="outline">
+        <Eye />
+      </Button>
+    </a>
   );
 };
 

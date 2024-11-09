@@ -10,7 +10,6 @@ import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.service.AnalysisInputService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/analysis-inputs")
@@ -22,7 +21,7 @@ public class AnalysisInputController {
     @GET
     @Path("/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) {
+    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) { // TODO: move to ProjectController
         List<AnalysisInput> analysisInputs = analysisInputService.getProjectAnalysisInputs(projectId);
 
         var dtos = analysisInputs.stream()
@@ -63,6 +62,30 @@ public class AnalysisInputController {
     public Response addAnalysisInput(@Valid AnalysisInputFullDto analysisInputDto) {
         return Response.status(Response.Status.CREATED)
                 .entity(analysisInputService.addAnalysisInputToProject(analysisInputDto))
+                .build();
+    }
+
+    @GET
+    @Path("/{id}/entities")
+    @Transactional
+    public Response getAnalysisInputEntities(@PathParam("id") Long id) {
+        return Response.ok(analysisInputService.getAnalysisInputEntities(id))
+                .build();
+    }
+
+    @GET
+    @Path("/{id}/graph")
+    @Transactional
+    public Response getAnalysisInputGraph(@PathParam("id") Long id) {
+        return Response.ok(analysisInputService.getAnalysisInputGraph(id))
+                .build();
+    }
+
+    @GET
+    @Path("/{id}/methods")
+    @Transactional
+    public Response getAnalysisInputMethods(@PathParam("id") Long id) {
+        return Response.ok(analysisInputService.getAnalysisInputMethods(id))
                 .build();
     }
 }

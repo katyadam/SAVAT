@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import AnalysisInputButton from "./AnalysisInputButton";
+import { AnalysisInput } from "@/api/projects/analysisInputs";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -69,20 +70,32 @@ export function DataTable<TData, TValue>({
                   </TableCell>
                 ))}
                 <TableCell>
-                  <AnalysisInputButton text="entities" />
+                  <AnalysisInputButton
+                    type="entities"
+                    id={(row.original as AnalysisInput).id}
+                  />
                 </TableCell>
                 <TableCell>
-                  <AnalysisInputButton text="graph" />
+                  <AnalysisInputButton
+                    type="graph"
+                    id={(row.original as AnalysisInput).id}
+                  />
                 </TableCell>
                 <TableCell>
-                  <AnalysisInputButton text="methods" />
+                  <AnalysisInputButton
+                    type="methods"
+                    id={(row.original as AnalysisInput).id}
+                  />
                 </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+              <TableCell
+                colSpan={columns.length + 3}
+                className="h-24 text-center"
+              >
+                No analysis inputs.
               </TableCell>
             </TableRow>
           )}
