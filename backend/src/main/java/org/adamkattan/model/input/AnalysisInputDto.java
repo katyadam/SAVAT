@@ -8,6 +8,6 @@ public record AnalysisInputDto(
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,
-        @JsonProperty("createdAt") LocalDateTim e createdAt
+        @JsonProperty("createdAt") LocalDateTime createdAt
 ) {
 }
