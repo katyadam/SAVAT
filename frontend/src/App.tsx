@@ -1,3 +1,11 @@
+import { RouterProvider } from "react-router-dom";
+import SidebarLayout from "./layouts/SidebarLayout";
+import router from "./routes";
+
 export default function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <SidebarLayout>
+      <RouterProvider router={router} />
+    </SidebarLayout>
+  );
 }
