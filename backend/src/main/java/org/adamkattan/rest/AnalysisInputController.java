@@ -7,7 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.input.CreateAnalysisInputDto;
+import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.service.AnalysisInputService;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class AnalysisInputController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(AnalysisInput.toDto(latestInput)).build();
+        return Response.ok(AnalysisInput.toFullDto(latestInput)).build();
     }
 
     @GET
@@ -57,13 +57,13 @@ public class AnalysisInputController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(AnalysisInput.toDto(latestInput)).build();
+        return Response.ok(AnalysisInput.toFullDto(latestInput)).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addAnalysisInput(@Valid CreateAnalysisInputDto analysisInputDto) {
+    public Response addAnalysisInput(@Valid AnalysisInputFullDto analysisInputDto) {
         return Response.status(Response.Status.CREATED)
                 .entity(analysisInputService.addAnalysisInputToProject(analysisInputDto))
                 .build();

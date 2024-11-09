@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.input.CreateAnalysisInputDto;
+import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.output.ChangedMethodsOutput;
 import org.adamkattan.model.output.DifferenceOutput;
@@ -27,7 +27,7 @@ public class AnalysisOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response isDifferentThenLast(@Valid CreateAnalysisInputDto analysisInputDto) {
+    public Response isDifferentThenLast(@Valid AnalysisInputFullDto analysisInputDto) {
         Optional<PlainDifferenceOutput> plainDifference = differenceService.isDifferent(analysisInputDto);
 
         return Response.ok()
@@ -40,8 +40,8 @@ public class AnalysisOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response jsonDiff(@Valid CreateAnalysisInputDto analysisInputDto, @PathParam("type") DifferenceType type) {
-        DifferenceOutput output = differenceService.getJsonDifference(analysisInputDto, type);
+    public Response jsonDiff(@Valid AnalysisInputFullDto analysisInputFullDto, @PathParam("type") DifferenceType type) {
+        DifferenceOutput output = differenceService.getJsonDifference(analysisInputFullDto, type);
         return Response.ok(output).build();
     }
 

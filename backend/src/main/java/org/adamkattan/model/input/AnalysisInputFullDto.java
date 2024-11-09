@@ -8,7 +8,7 @@ import org.adamkattan.model.methods.MicroserviceNode;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record AnalysisInputDto(
+public record AnalysisInputFullDto(
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,

@@ -2,13 +2,11 @@ package org.adamkattan.rest;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.project.CreateProjectDto;
+import org.adamkattan.model.project.Project;
 import org.adamkattan.service.ProjectService;
 
 @Path("/projects")
@@ -23,13 +21,23 @@ public class ProjectController {
     @Transactional
     public Response createProject(CreateProjectDto projectDto) {
         return Response.status(Response.Status.CREATED)
-                .entity(projectService.createProject(projectDto))
+                .entity(Project.toDto(projectService.createProject(projectDto)))
                 .build();
     }
 
-    @Path("/")
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProject(@PathParam("id") Long id) {
+        return Response.ok(Project.toDto(projectService.getProjectById(id)))
+                .build();
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProjects() {
-        return Response.ok(projectService.getAllProjects()).build();
+        return Response.ok(projectService.getAllProjects())
+                .build();
     }
 }

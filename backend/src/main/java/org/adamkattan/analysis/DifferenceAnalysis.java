@@ -6,7 +6,7 @@ import com.github.difflib.text.DiffRow;
 import com.github.difflib.text.DiffRowGenerator;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.adamkattan.model.input.CreateAnalysisInputDto;
+import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.output.PlainDifferenceOutput;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class DifferenceAnalysis {
         this.diffRowGenerator = diffRowGenerator;
     }
 
-    public Optional<PlainDifferenceOutput> isDifferent(CreateAnalysisInputDto newInput, CreateAnalysisInputDto oldInput) {
+    public Optional<PlainDifferenceOutput> isDifferent(AnalysisInputFullDto newInput, AnalysisInputFullDto oldInput) {
         if (!newInput.projectId().equals(oldInput.projectId())) {
             return Optional.empty();
         }

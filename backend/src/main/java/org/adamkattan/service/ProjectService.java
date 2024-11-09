@@ -3,6 +3,7 @@ package org.adamkattan.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.adamkattan.model.project.CreateProjectDto;
 import org.adamkattan.model.project.Project;
+import org.adamkattan.model.project.ProjectDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,10 @@ public class ProjectService {
         return project;
     }
 
-    public List<Project> getAllProjects() {
-        return Project.listAll();
+    public List<ProjectDto> getAllProjects() {
+        return Project.<Project>listAll().stream()
+                .map(Project::toDto)
+                .toList();
     }
 
 }

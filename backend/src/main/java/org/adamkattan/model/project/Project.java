@@ -23,6 +23,13 @@ public class Project extends PanacheEntity {
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 
+    public static ProjectDto toDto(Project project) {
+        return new ProjectDto(
+                project.id,
+                project.projectName
+        );
+    }
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
