@@ -1,6 +1,6 @@
 "use client";
 
-import { AnalysisInput } from "@/api/projects/analysisInputs";
+import { AnalysisInput } from "@/api/analysisInputs";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<AnalysisInput>[] = [

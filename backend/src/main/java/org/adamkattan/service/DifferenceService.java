@@ -7,7 +7,6 @@ import org.adamkattan.analysis.DifferenceAnalysis;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
-import org.adamkattan.model.methods.ProjectMethodsInputDto;
 import org.adamkattan.model.methods.MicroserviceMethodNode;
 import org.adamkattan.model.methods.MicroserviceNode;
 import org.adamkattan.model.output.ChangedMethodsOutput;
@@ -47,12 +46,12 @@ public class DifferenceService {
 
     public ChangedMethodsOutput getChangedMethodsLatest(Long projectId, MethodsInputDto input) {
         var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(projectId);
-        return computeChangedMethods(input.methods(), latestInput.methods);
+        return computeChangedMethods(input.microservices(), latestInput.methods);
     }
 
     public Optional<ChangedMethodsOutput> getChangedMethods(Long srcId, MethodsInputDto dest) {
         List<MicroserviceNode> srcMethods = analysisInputService.getAnalysisInputMethods(srcId);
-        return Optional.of(computeChangedMethods(srcMethods, dest.methods()));
+        return Optional.of(computeChangedMethods(srcMethods, dest.microservices()));
     }
 
     private ChangedMethodsOutput computeChangedMethods(List<MicroserviceNode> src, List<MicroserviceNode> dest) {

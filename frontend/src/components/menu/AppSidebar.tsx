@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useProjects } from "@/hooks/useProject";
+import { Project } from "@/api/projects";
 
 export function AppSidebar() {
   const { data: projects, isLoading, error } = useProjects();
@@ -24,7 +25,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Projects</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {projects?.map((project) => (
+              {projects?.map((project: Project) => (
                 <SidebarMenuItem key={project.id}>
                   <SidebarMenuButton asChild>
                     <a href={`/${project.id}`} className="flex justify-between">

@@ -1,4 +1,4 @@
-import { MicroserviceNode } from "@/api/projects/analysisInputs";
+import { MicroserviceNode } from "@/api/analysisInputs";
 import { FC, useState } from "react";
 import MicroserviceRow from "./MicroserviceRow";
 import MethodsList from "./MethodsList";
@@ -7,10 +7,14 @@ import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
 
 type MethodsPanelProps = {
+  analysisInputId: string;
   microservices: MicroserviceNode[];
 };
 
-const MethodsPanel: FC<MethodsPanelProps> = ({ microservices }) => {
+const MethodsPanel: FC<MethodsPanelProps> = ({
+  analysisInputId,
+  microservices,
+}) => {
   const [selectedMicroservice, setSelectedMicroservice] =
     useState<MicroserviceNode | null>(null);
 
@@ -53,8 +57,11 @@ const MethodsPanel: FC<MethodsPanelProps> = ({ microservices }) => {
               onClick={handleCompareClick}
               className="z-30 bg-black opacity-50 fixed top-0 left-0 w-full h-full"
             ></button>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg z-50 text-center">
-              <CompareForm microservices={microservices} />
+            <div className="w-3/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg z-50 text-center">
+              <CompareForm
+                analysisInputId={analysisInputId}
+                microservices={microservices}
+              />
             </div>
           </>
         )}

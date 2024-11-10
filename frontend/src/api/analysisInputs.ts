@@ -1,4 +1,4 @@
-import { axiosInstance } from "../config";
+import { axiosInstance } from "./config";
 
 const ANALYSIS_INPUTS_PREFIX = "/analysis-inputs"
 

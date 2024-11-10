@@ -1,4 +1,4 @@
-import { MicroserviceNode } from "@/api/projects/analysisInputs";
+import { MicroserviceNode } from "@/api/analysisInputs";
 import { ArrowRight } from "lucide-react";
 import { FC } from "react";
 import { Button } from "../ui/button";

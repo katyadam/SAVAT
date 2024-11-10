@@ -11,7 +11,7 @@ const MethodsPage = () => {
   return (
     <>
       {microservices && !isLoading && (
-        <MethodsPanel microservices={microservices} />
+        <MethodsPanel analysisInputId={id} microservices={microservices} />
       )}
     </>
   );

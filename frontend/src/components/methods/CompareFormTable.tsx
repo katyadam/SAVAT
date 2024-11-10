@@ -32,7 +32,7 @@ export function CompareFormTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border min-w-80">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

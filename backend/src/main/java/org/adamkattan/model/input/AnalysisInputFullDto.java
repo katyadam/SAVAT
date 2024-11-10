@@ -14,7 +14,7 @@ public record AnalysisInputFullDto(
         @JsonProperty("commitHash") String commitHash,
         @JsonProperty("entities") Entities entities,
         @JsonProperty("graph") Graph graph,
-        @JsonProperty("methods") List<MicroserviceNode> methods,
+        @JsonProperty("microservices") List<MicroserviceNode> methods,
         @JsonProperty("createdAt") LocalDateTime createdAt
 ) {
 }

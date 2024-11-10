@@ -1,4 +1,4 @@
-import { MicroserviceMethodNode } from "@/api/projects/analysisInputs";
+import { MicroserviceMethodNode } from "@/api/analysisInputs";
 import { FC } from "react";
 import MethodRow from "./MethodRow";
 
