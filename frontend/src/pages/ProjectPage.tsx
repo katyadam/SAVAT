@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/analysis-inputs/AnalysisInputsTable";
+import { AnalysisInputsTable } from "@/components/analysis-inputs/AnalysisInputsTable";
 import { columns } from "@/components/analysis-inputs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
 import { useProject } from "@/hooks/useProject";
@@ -12,13 +12,13 @@ const ProjectPage = () => {
   const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(id);
 
   return (
-    <div className="ml-5 mt-5">
+    <div className="m-5">
       {projectLoading ? <p>Loading...</p> : <p>{project?.projectName}</p>}
       <div className="py-10">
         {inputsLoading ? (
           <p>Loading...</p>
         ) : (
-          <DataTable columns={columns} data={inputs!} />
+          <AnalysisInputsTable columns={columns} data={inputs!} />
         )}
       </div>
     </div>

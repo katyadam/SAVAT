@@ -9,11 +9,11 @@ const MethodsPage = () => {
   const { data: microservices, isLoading } = useMethod(id);
 
   return (
-    <div>
+    <>
       {microservices && !isLoading && (
         <MethodsPanel microservices={microservices} />
       )}
-    </div>
+    </>
   );
 };
 

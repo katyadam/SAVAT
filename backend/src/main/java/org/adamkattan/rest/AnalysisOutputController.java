@@ -45,13 +45,25 @@ public class AnalysisOutputController {
         return Response.ok(output).build();
     }
 
-    @POST
-    @Path("/methods-diff")
+    @PUT
+    @Path("/{analysisInputId}/methods-diff")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response methodsDiff(@Valid MethodsInputDto methodsInputDto) {
-        ChangedMethodsOutput output = differenceService.getChangedMethods(methodsInputDto);
+    public Response methodsDiff(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("analysisInputId") Long srcId) {
+        Optional<ChangedMethodsOutput> output = differenceService.getChangedMethods(srcId, methodsInputDtoDest);
+        if (output.isEmpty())
+            return Response.status(Response.Status.CONFLICT).build();
+        return Response.ok(output).build();
+    }
+
+    @PUT
+    @Path("/methods-diff/latest/{projectId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response methodsDiffLatest(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("projectId") Long projectId) {
+        ChangedMethodsOutput output = differenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
         return Response.ok(output).build();
     }
 }

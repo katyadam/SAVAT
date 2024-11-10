@@ -7,11 +7,18 @@ import org.adamkattan.analysis.DifferenceAnalysis;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
+import org.adamkattan.model.methods.ProjectMethodsInputDto;
 import org.adamkattan.model.methods.MicroserviceMethodNode;
 import org.adamkattan.model.methods.MicroserviceNode;
-import org.adamkattan.model.output.*;
+import org.adamkattan.model.output.ChangedMethodsOutput;
+import org.adamkattan.model.output.DifferenceOutput;
+import org.adamkattan.model.output.DifferenceType;
+import org.adamkattan.model.output.PlainDifferenceOutput;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -38,9 +45,14 @@ public class DifferenceService {
         return computeDifference(input, chosenInput, type);
     }
 
-    public ChangedMethodsOutput getChangedMethods(MethodsInputDto input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
+    public ChangedMethodsOutput getChangedMethodsLatest(Long projectId, MethodsInputDto input) {
+        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(projectId);
         return computeChangedMethods(input.methods(), latestInput.methods);
+    }
+
+    public Optional<ChangedMethodsOutput> getChangedMethods(Long srcId, MethodsInputDto dest) {
+        List<MicroserviceNode> srcMethods = analysisInputService.getAnalysisInputMethods(srcId);
+        return Optional.of(computeChangedMethods(srcMethods, dest.methods()));
     }
 
     private ChangedMethodsOutput computeChangedMethods(List<MicroserviceNode> src, List<MicroserviceNode> dest) {

@@ -1,4 +1,4 @@
-import { ArrowBigRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import {
   Sidebar,
@@ -29,7 +29,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <a href={`/${project.id}`} className="flex justify-between">
                       <span>{project.projectName}</span>
-                      <ArrowBigRight size={64} />
+                      <ArrowRight size={64} />
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

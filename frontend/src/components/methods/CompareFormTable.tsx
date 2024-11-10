@@ -15,15 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import AnalysisInputButton from "./AnalysisInputButton";
-import { AnalysisInput } from "@/api/projects/analysisInputs";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function AnalysisInputsTable<TData, TValue>({
+export function CompareFormTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -51,9 +49,6 @@ export function AnalysisInputsTable<TData, TValue>({
                   </TableHead>
                 );
               })}
-              <TableHead>Entities</TableHead>
-              <TableHead>Graph</TableHead>
-              <TableHead>Methods</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -69,24 +64,6 @@ export function AnalysisInputsTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                <TableCell>
-                  <AnalysisInputButton
-                    type="entities"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
-                <TableCell>
-                  <AnalysisInputButton
-                    type="graph"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
-                <TableCell>
-                  <AnalysisInputButton
-                    type="methods"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
               </TableRow>
             ))
           ) : (
@@ -95,7 +72,7 @@ export function AnalysisInputsTable<TData, TValue>({
                 colSpan={columns.length + 3}
                 className="h-24 text-center"
               >
-                No analysis inputs.
+                No microservices.
               </TableCell>
             </TableRow>
           )}
