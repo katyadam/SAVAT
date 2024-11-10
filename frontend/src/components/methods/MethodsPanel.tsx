@@ -5,6 +5,8 @@ import MethodsList from "./MethodsList";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
+import { CompareMethodsResponse } from "@/api/analysisOutputs";
+import Overlay from "../ui/Overlay";
 
 type MethodsPanelProps = {
   analysisInputId: string;
@@ -18,15 +20,34 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
   const [selectedMicroservice, setSelectedMicroservice] =
     useState<MicroserviceNode | null>(null);
 
+  const [selectedChangedMicroservice, setSelectedChangedMicroservice] =
+    useState<MicroserviceNode | null>(null);
+
   const [compareUp, setCompareUp] = useState<boolean>(false);
+
+  const [compareResponse, setCompareResponse] =
+    useState<CompareMethodsResponse | null>(null);
 
   const handleMicroserviceClick = (ms: MicroserviceNode) => {
     if (ms.name === selectedMicroservice?.name) setSelectedMicroservice(null);
     else setSelectedMicroservice(ms);
   };
 
+  const handleChangedMicroserviceClick = (ms: MicroserviceNode) => {
+    if (ms.name === selectedChangedMicroservice?.name) {
+      setSelectedChangedMicroservice(null);
+    } else {
+      setSelectedChangedMicroservice(ms);
+    }
+  };
+
   const handleCompareClick = () => {
     setCompareUp(!compareUp);
+  };
+
+  const handleCompareResponse = (resp: CompareMethodsResponse) => {
+    setCompareResponse(resp);
+    setCompareUp(false);
   };
 
   return (
@@ -47,25 +68,50 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
             />
           ))}
         </div>
-
         {selectedMicroservice && (
-          <MethodsList methods={selectedMicroservice.methods} />
-        )}
-        {compareUp && (
-          <>
-            <button
-              onClick={handleCompareClick}
-              className="z-30 bg-black opacity-50 fixed top-0 left-0 w-full h-full"
-            ></button>
-            <div className="w-3/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg z-50 text-center">
-              <CompareForm
-                analysisInputId={analysisInputId}
-                microservices={microservices}
-              />
-            </div>
-          </>
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl">{selectedMicroservice.name}</h1>
+            <MethodsList methods={selectedMicroservice.methods} />
+          </div>
         )}
       </div>
+
+      {compareUp && (
+        <Overlay closeFunc={handleCompareClick} width="3/4">
+          <CompareForm
+            analysisInputId={analysisInputId}
+            microservices={microservices}
+            respFunc={handleCompareResponse}
+          />
+        </Overlay>
+      )}
+      {compareResponse && (
+        <Overlay
+          closeFunc={() => {
+            setCompareResponse(null);
+            setSelectedChangedMicroservice(null);
+          }}
+          width="5/6"
+        >
+          <div className="flex flex-row items-center">
+            <div className="flex flex-col gap-2">
+              {compareResponse.changedMs.map((ms) => (
+                <MicroserviceRow
+                  key={ms.name}
+                  ms={ms}
+                  onClick={handleChangedMicroserviceClick}
+                />
+              ))}
+            </div>
+            {selectedChangedMicroservice && (
+              <div className="flex flex-col items-center">
+                <h1 className="text-2xl">{selectedChangedMicroservice.name}</h1>
+                <MethodsList methods={selectedChangedMicroservice.methods} />
+              </div>
+            )}
+          </div>
+        </Overlay>
+      )}
     </div>
   );
 };

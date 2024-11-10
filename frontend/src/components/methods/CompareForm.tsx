@@ -8,15 +8,18 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useCompareMethods } from "@/hooks/useAnalysisOutput";
 import { useMediaQuery } from "react-responsive";
+import { CompareMethodsResponse } from "@/api/analysisOutputs";
 
 type CompareFormProps = {
   analysisInputId: string;
   microservices: MicroserviceNode[];
+  respFunc: (resp: CompareMethodsResponse) => void;
 };
 
 const CompareForm: FC<CompareFormProps> = ({
   analysisInputId,
   microservices,
+  respFunc,
 }) => {
   const { mutateAsync } = useCompareMethods(analysisInputId);
   const [jsonInput, setJsonInput] = useState<string>("");
@@ -36,6 +39,8 @@ const CompareForm: FC<CompareFormProps> = ({
 
       const res = await mutateAsync(parsedData);
       console.log(res);
+
+      respFunc(res);
     } catch (error) {
       console.error("Failed to parse JSON input:", error);
       alert("Invalid JSON input. Please ensure it is correctly formatted.");

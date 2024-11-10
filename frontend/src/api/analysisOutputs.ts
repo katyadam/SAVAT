@@ -9,7 +9,7 @@ export type CompareMethodsRequest = {
 }
 
 export type CompareMethodsResponse = {
-    microservices: MicroserviceNode[]
+    changedMs: MicroserviceNode[]
 }
 
 async function compareMethods(
