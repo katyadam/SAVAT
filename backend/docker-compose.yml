@@ -1,0 +1,29 @@
+services:
+  database:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cia
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      DB_KIND: postgresql
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_URL: jdbc:postgresql://database:5432/cia
+      DB_GENERATION: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+volumes:
+  db_data:
