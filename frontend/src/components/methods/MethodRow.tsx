@@ -1,5 +1,11 @@
 import { MicroserviceMethodNode } from "@/api/analysisInputs";
 import { FC } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type MethodRowProps = {
   method: MicroserviceMethodNode;
@@ -7,10 +13,18 @@ type MethodRowProps = {
 
 const MethodRow: FC<MethodRowProps> = ({ method }) => {
   return (
-    <div className="flex flex-col justify-between px-3 py-2 border-2 ml-4 m-2 rounded-md hover:bg-slate-50 cursor-pointer">
-      <p>{method.name}</p>
-      <p>{method.bytecodeHash}</p>
-    </div>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button className="px-3 py-2 text-right border-2 ml-4 m-2 rounded-md hover:bg-slate-50 cursor-zoom-in">
+            <p>{method.name}</p>
+          </button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{method.bytecodeHash}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 

@@ -8,9 +8,11 @@ type MethodsListProps = {
 
 const MethodsList: FC<MethodsListProps> = ({ methods }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {methods.map((method) => (
-        <MethodRow method={method} />
+        <div className="flex justify-end">
+          <MethodRow method={method} />
+        </div>
       ))}
     </div>
   );

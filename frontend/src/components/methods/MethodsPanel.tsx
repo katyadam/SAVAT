@@ -105,7 +105,6 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
             </div>
             {selectedChangedMicroservice && (
               <div className="flex flex-col items-center">
-                <h1 className="text-2xl">{selectedChangedMicroservice.name}</h1>
                 <MethodsList methods={selectedChangedMicroservice.methods} />
               </div>
             )}

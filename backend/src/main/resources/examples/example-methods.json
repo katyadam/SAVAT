@@ -3,11 +3,15 @@
     "name": "order-service",
     "methods": [
       {
-        "name": "getOrder",
+        "name": "int waitorder.entity.WaitListOrderVO.hashCode()",
+        "bytecodeHash": "9a48d46fd6b71b61f619b3509a7b026d309469b223c56094d0d42c70c1d93c44"
+      },
+      {
+        "name": "Object getOrder(Long)",
         "bytecodeHash": "8d1865bd647c076749233fa03b80b1af1f6aac4e3f3d452b92461ff796c58a7c"
       },
       {
-        "name": "createOrder",
+        "name": "void createOrder(CreateOrderDto)",
         "bytecodeHash": "41dsa55bd647c076749233fa03b80b1af1f6aac4e3f3d452b92461ff796c7c445"
       }
     ]
@@ -16,11 +20,11 @@
     "name": "food-service",
     "methods": [
       {
-        "name": "getDish",
+        "name": "Object getDish(Long)",
         "bytecodeHash": "jhs651fh45ash785fs42h3D54hdf65h4sh1sfhdh1fh7d8f6h1dfgh11dfd6ghh78d"
       },
       {
-        "name": "updateDishParams",
+        "name": "void updateDishParams(Long, Object)",
         "bytecodeHash": "4nash981gh98f4hs5hg98f6h4dg98g6g1a5sdgdsg654dg1s6f5hg7f4j64k64k946o"
       }
     ]
