@@ -49,10 +49,10 @@
   ],
   "links": [
     {
-      "source": "ts-order",
-      "target": "ts-common",
-      "msSource": "ts-food-delivery-service",
-      "msTarget": "ts-common",
+      "source": "Assurance",
+      "target": "Order",
+      "msSource": "ts-common",
+      "msTarget": "ts-order",
       "sourceMultiplicity": "0..*",
       "targetMultiplicity": "0"
     }

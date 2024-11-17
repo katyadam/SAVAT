@@ -1,4 +1,3 @@
-import { MicroserviceMethodNode } from "@/api/analysisInputs";
 import { FC } from "react";
 import {
   Tooltip,
@@ -6,6 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { MicroserviceMethodNode } from "@/api/methods";
 
 type MethodRowProps = {
   method: MicroserviceMethodNode;

@@ -1,4 +1,3 @@
-import { MicroserviceNode } from "@/api/analysisInputs";
 import { FC, useState } from "react";
 import { CompareFormTable } from "./CompareFormTable";
 import { columns } from "./Columns";
@@ -9,6 +8,7 @@ import { Button } from "../ui/button";
 import { useCompareMethods } from "@/hooks/useAnalysisOutput";
 import { useMediaQuery } from "react-responsive";
 import { CompareMethodsResponse } from "@/api/analysisOutputs";
+import { MicroserviceNode } from "@/api/methods";
 
 type CompareFormProps = {
   analysisInputId: string;

@@ -1,4 +1,3 @@
-import { MicroserviceNode } from "@/api/analysisInputs";
 import { FC, useState } from "react";
 import MicroserviceRow from "./MicroserviceRow";
 import MethodsList from "./MethodsList";
@@ -7,6 +6,7 @@ import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
 import { CompareMethodsResponse } from "@/api/analysisOutputs";
 import Overlay from "../ui/Overlay";
+import { MicroserviceNode } from "@/api/methods";
 
 type MethodsPanelProps = {
   analysisInputId: string;

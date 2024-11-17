@@ -1,9 +1,9 @@
-import AnalysisInputApi from "@/api/analysisInputs";
+import MethodsApi from "@/api/methods";
 import { useQuery } from "@tanstack/react-query"
 
-export const useMethod = (analysisInputId: string) => {
+export const useMethods = (analysisInputId: string) => {
     return useQuery({
-        queryKey: ["method", analysisInputId],
-        queryFn: () => AnalysisInputApi.getAnalysisInputMethods(analysisInputId)
+        queryKey: ["methods", analysisInputId],
+        queryFn: () => MethodsApi.getMethods(analysisInputId)
     });
 }
