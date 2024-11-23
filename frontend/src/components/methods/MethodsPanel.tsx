@@ -1,4 +1,3 @@
-import { MicroserviceNode } from "@/api/analysisInputs";
 import { FC, useState } from "react";
 import MicroserviceRow from "./MicroserviceRow";
 import MethodsList from "./MethodsList";
@@ -7,6 +6,7 @@ import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
 import { CompareMethodsResponse } from "@/api/analysisOutputs";
 import Overlay from "../ui/Overlay";
+import { MicroserviceNode } from "@/api/methods";
 
 type MethodsPanelProps = {
   analysisInputId: string;
@@ -105,7 +105,6 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
             </div>
             {selectedChangedMicroservice && (
               <div className="flex flex-col items-center">
-                <h1 className="text-2xl">{selectedChangedMicroservice.name}</h1>
                 <MethodsList methods={selectedChangedMicroservice.methods} />
               </div>
             )}

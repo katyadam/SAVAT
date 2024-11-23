@@ -1,12 +1,12 @@
 import MethodsPanel from "@/components/methods/MethodsPanel";
-import { useMethod } from "@/hooks/useMethod";
+import { useMethods } from "@/hooks/useMethod";
 import { useParams } from "react-router-dom";
 
 const MethodsPage = () => {
   const { id } = useParams();
   if (!id) return <p>Error... Incorrect ID</p>;
 
-  const { data: microservices, isLoading } = useMethod(id);
+  const { data: microservices, isLoading } = useMethods(id);
 
   return (
     <>

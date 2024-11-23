@@ -1,5 +1,5 @@
-import { MicroserviceNode } from "@/api/analysisInputs";
 import AnalysisOutputApi from "@/api/analysisOutputs";
+import { MicroserviceNode } from "@/api/methods";
 import { useMutation } from "@tanstack/react-query"
 
 export const useCompareMethods = (analysisInputId: string) => {
