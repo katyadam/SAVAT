@@ -1,5 +1,7 @@
 package org.adamkattan.analysis;
 
+import org.adamkattan.model.entities.ChangedEntityLink;
+import org.adamkattan.model.entities.ChangedEntityLinkType;
 import org.adamkattan.model.entities.EntityLink;
 import org.adamkattan.model.output.ChangedEntitiesLinksOutput;
 
@@ -15,9 +17,7 @@ public class EntitiesDifferenceAnalysis {
     public static ChangedEntitiesLinksOutput getLinksDifference(List<EntityLink> src, List<EntityLink> dest) {
         Map<LinkKey, EntityLink> srcMap = transformToMap(src);
         Map<LinkKey, EntityLink> destMap = transformToMap(dest);
-        List<EntityLink> addedLinks = new ArrayList<>();
-        List<EntityLink> removedLinks = new ArrayList<>();
-        List<EntityLink> modifiedLinks = new ArrayList<>();
+        List<ChangedEntityLink> changedLinks = new ArrayList<>();
         for (EntityLink link : src) {
             var key = new LinkKey(
                     link.source(),
@@ -26,12 +26,12 @@ public class EntitiesDifferenceAnalysis {
                     link.msTarget()
             );
             if (!destMap.containsKey(key)) {
-                removedLinks.add(link);
+                changedLinks.add(new ChangedEntityLink(link, ChangedEntityLinkType.REMOVED));
                 continue;
             }
             var destVal = destMap.get(key);
             if (!destVal.equals(link)) {
-                modifiedLinks.add(destVal);
+                changedLinks.add(new ChangedEntityLink(destVal, ChangedEntityLinkType.MODIFIED));
             }
         }
         for (EntityLink link : dest) {
@@ -42,10 +42,12 @@ public class EntitiesDifferenceAnalysis {
                     link.msTarget()
             );
             if (!srcMap.containsKey(key)) {
-                addedLinks.add(link);
+                changedLinks.add(new ChangedEntityLink(link, ChangedEntityLinkType.ADDED));
+            } else {
+                changedLinks.add(new ChangedEntityLink(link, ChangedEntityLinkType.SAME));
             }
         }
-        return new ChangedEntitiesLinksOutput(addedLinks, removedLinks, modifiedLinks);
+        return new ChangedEntitiesLinksOutput(changedLinks);
     }
 
     private static Map<LinkKey, EntityLink> transformToMap(List<EntityLink> links) {
