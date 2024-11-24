@@ -1,12 +1,8 @@
-import { MicroserviceNode } from "./analysisInputs";
 import { axiosInstance } from "./config";
+import { ChangedEntityLink, EntityLink } from "./entities";
+import { MicroserviceNode } from "./methods";
 
 const ANALYSIS_OUTPUTS_PREFIX = "/analysis-outputs"
-
-export type CompareMethodsRequest = {
-    analysisInputId: string,
-    microservices: MicroserviceNode[]
-}
 
 export type CompareMethodsResponse = {
     changedMs: MicroserviceNode[]
@@ -22,8 +18,23 @@ async function compareMethods(
     return resp.data;
 }
 
+export type CompareEntitiesLinksResponse = {
+    links: ChangedEntityLink[]
+}
+
+async function compareEntitiesLinks(
+    analysisInputId: string,
+    links: EntityLink[]
+): Promise<CompareEntitiesLinksResponse> {
+    const resp = await axiosInstance.put(`${ANALYSIS_OUTPUTS_PREFIX}/${analysisInputId}/entities-links-diff`, {
+        links: links
+    })
+    return resp.data;
+}
+
 const AnalysisOutputApi = {
     compareMethods,
+    compareEntitiesLinks
 };
 
 export default AnalysisOutputApi;

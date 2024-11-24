@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { ForceGraph3D } from "react-force-graph";
-import { GraphData, GraphNode } from "@/api/entities";
+import { GraphData, EntityNode } from "@/api/entities";
 
 type RenderGraphProps = {
-  onNodeClick: (node: GraphNode) => void;
+  onNodeClick: (node: EntityNode) => void;
   entities: GraphData | undefined;
 };
 

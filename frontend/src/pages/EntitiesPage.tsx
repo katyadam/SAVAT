@@ -1,4 +1,4 @@
-import { Field, GraphNode } from "@/api/entities";
+import { EntityField, EntityNode } from "@/api/entities";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";
 import RenderGraph from "@/components/entities/RenderGraph";
@@ -18,8 +18,8 @@ const EntitiesPage = () => {
 
   const { id } = useParams();
   if (!id) return <p>Error... Incorrect ID</p>;
-  const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
-  const handleNodeClick = (node: GraphNode): void => {
+  const [selectedNode, setSelectedNode] = useState<EntityNode | null>(null);
+  const handleNodeClick = (node: EntityNode): void => {
     if (node === selectedNode) {
       setSelectedNode(null);
       setSelectedField(null);
@@ -28,9 +28,9 @@ const EntitiesPage = () => {
     }
   };
 
-  const [selectedField, setSelectedField] = useState<Field | null>(null);
+  const [selectedField, setSelectedField] = useState<EntityField | null>(null);
 
-  const handleFieldClick = (field: Field) => {
+  const handleFieldClick = (field: EntityField) => {
     if (selectedField === field) {
       setSelectedField(null);
     } else {

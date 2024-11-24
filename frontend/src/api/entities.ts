@@ -5,7 +5,7 @@ export type FieldAnnotation = {
     annotation: string;
 }
 
-export type Field = {
+export type EntityField = {
     fieldName: string;
     fieldFullName: string;
     fieldType: string;
@@ -15,14 +15,14 @@ export type Field = {
     isCollection: boolean;
 }
 
-export type GraphNode = {
+export type EntityNode = {
     msName: string;
     nodeName: string;
     nodeFullName: string;
-    fields: Field[];
+    fields: EntityField[];
 }
 
-export type Link = {
+export type EntityLink = {
     source: string;
     target: string;
     msSource: string;
@@ -31,9 +31,18 @@ export type Link = {
     targetMultiplicity: string;
 }
 
+export type ChangedEntityLink = {
+    link: EntityLink,
+    type: ChangedEntityLinkType
+}
+
+export enum ChangedEntityLinkType {
+    SAME, ADDED, REMOVED, MODIFIED
+}
+
 export type GraphData = {
-    nodes: GraphNode[];
-    links: Link[];
+    nodes: EntityNode[];
+    links: EntityLink[];
 }
 
 async function getEntities(id: string): Promise<GraphData> {
