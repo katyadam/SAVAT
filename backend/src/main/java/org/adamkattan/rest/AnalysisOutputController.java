@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.analysis.EntitiesDifferenceAnalysis;
 import org.adamkattan.model.entities.EntitiesLinksInputDto;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
@@ -76,10 +75,10 @@ public class AnalysisOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response entitiesLinkDiff(
-            @Valid EntitiesLinksInputDto methodsInputDtoDest,
+            @Valid EntitiesLinksInputDto entitiesLinksInputDto,
             @PathParam("analysisInputId") Long srcId
     ) {
-        ChangedEntitiesLinksOutput output = entitiesDifferenceService.getChangedEntitiesLinks(methodsInputDtoDest, srcId);
+        ChangedEntitiesLinksOutput output = entitiesDifferenceService.getChangedEntitiesLinks(entitiesLinksInputDto, srcId);
         return Response.ok(output).build();
     }
 }

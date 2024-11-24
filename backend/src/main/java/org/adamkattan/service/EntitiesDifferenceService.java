@@ -1,11 +1,13 @@
 package org.adamkattan.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.analysis.EntitiesDifferenceAnalysis;
 import org.adamkattan.model.entities.Entities;
 import org.adamkattan.model.entities.EntitiesLinksInputDto;
 import org.adamkattan.model.output.ChangedEntitiesLinksOutput;
 
+@ApplicationScoped
 public class EntitiesDifferenceService {
 
     @Inject

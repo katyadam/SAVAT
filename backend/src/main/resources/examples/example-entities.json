@@ -45,6 +45,18 @@
           "isCollection": false
         }
       ]
+    },
+    {
+      "msName": "ts-ticket",
+      "nodeName": "Ticket",
+      "nodeFullName": "Ticket - Full name",
+      "fields": []
+    },
+    {
+      "msName": "ts-train",
+      "nodeName": "Train",
+      "nodeFullName": "Train - Full name",
+      "fields": []
     }
   ],
   "links": [
@@ -53,6 +65,30 @@
       "target": "Order",
       "msSource": "ts-common",
       "msTarget": "ts-order",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Ticket",
+      "target": "Train",
+      "msSource": "ts-ticket",
+      "msTarget": "ts-train",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Assurance",
+      "target": "Train",
+      "msSource": "ts-common",
+      "msTarget": "ts-train",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Order",
+      "target": "Ticket",
+      "msSource": "ts-order",
+      "msTarget": "ts-ticket",
       "sourceMultiplicity": "0..*",
       "targetMultiplicity": "0"
     }
