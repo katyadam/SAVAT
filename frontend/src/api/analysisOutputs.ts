@@ -19,7 +19,7 @@ async function compareMethods(
 }
 
 export type CompareEntitiesLinksResponse = {
-    links: ChangedEntityLink[]
+    changedLinks: ChangedEntityLink[]
 }
 
 async function compareEntitiesLinks(

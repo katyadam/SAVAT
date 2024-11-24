@@ -43,7 +43,10 @@ public class EntitiesDifferenceAnalysis {
             );
             if (!srcMap.containsKey(key)) {
                 changedLinks.add(new ChangedEntityLink(link, ChangedEntityLinkType.ADDED));
-            } else {
+                continue;
+            }
+            var srcVal = srcMap.get(key);
+            if (srcVal.equals(link)) {
                 changedLinks.add(new ChangedEntityLink(link, ChangedEntityLinkType.SAME));
             }
         }
