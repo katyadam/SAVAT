@@ -1,8 +1,5 @@
 package org.adamkattan.model.entities;
 
-import lombok.Getter;
-
-@Getter
 public class ChangedEntityLink {
     private final String source;
     private final String target;
@@ -20,5 +17,33 @@ public class ChangedEntityLink {
         this.sourceMultiplicity = link.sourceMultiplicity();
         this.targetMultiplicity = link.targetMultiplicity();
         this.type = type;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public String getMsSource() {
+        return msSource;
+    }
+
+    public String getMsTarget() {
+        return msTarget;
+    }
+
+    public String getSourceMultiplicity() {
+        return sourceMultiplicity;
+    }
+
+    public Integer getTargetMultiplicity() {
+        return targetMultiplicity;
+    }
+
+    public ChangedEntityLinkType getType() {
+        return type;
     }
 }

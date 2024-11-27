@@ -1,0 +1,34 @@
+[
+  {
+    "source": "Ticket",
+    "target": "Train",
+    "msSource": "ts-ticket",
+    "msTarget": "ts-train",
+    "sourceMultiplicity": "0..*",
+    "targetMultiplicity": "0"
+  },
+  {
+    "source": "Assurance",
+    "target": "Train",
+    "msSource": "ts-common",
+    "msTarget": "ts-train",
+    "sourceMultiplicity": "0..*",
+    "targetMultiplicity": "0"
+  },
+  {
+    "source": "Order",
+    "target": "Ticket",
+    "msSource": "ts-order",
+    "msTarget": "ts-ticket",
+    "sourceMultiplicity": "0..*",
+    "targetMultiplicity": "1"
+  },
+  {
+    "source": "Order",
+    "target": "Train",
+    "msSource": "ts-order",
+    "msTarget": "ts-train",
+    "sourceMultiplicity": "0..*",
+    "targetMultiplicity": "1"
+  }
+]
