@@ -1,5 +1,6 @@
 package org.adamkattan.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.methods.MicroserviceNode;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 import static org.adamkattan.analysis.MethodsDifferenceAnalysis.computeChangedMethods;
 
+@ApplicationScoped
 public class MethodsDifferenceService {
 
     @Inject
