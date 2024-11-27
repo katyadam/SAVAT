@@ -12,6 +12,7 @@ import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.output.*;
 import org.adamkattan.service.DifferenceService;
 import org.adamkattan.service.EntitiesDifferenceService;
+import org.adamkattan.service.MethodsDifferenceService;
 
 import java.util.Optional;
 
@@ -23,6 +24,9 @@ public class AnalysisOutputController {
 
     @Inject
     EntitiesDifferenceService entitiesDifferenceService;
+
+    @Inject
+    MethodsDifferenceService methodsDifferenceService;
 
     @POST
     @Path("/plain-diff")
@@ -53,7 +57,7 @@ public class AnalysisOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response methodsDiff(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("analysisInputId") Long srcId) {
-        Optional<ChangedMethodsOutput> output = differenceService.getChangedMethods(srcId, methodsInputDtoDest);
+        Optional<ChangedMethodsOutput> output = methodsDifferenceService.getChangedMethods(srcId, methodsInputDtoDest);
         if (output.isEmpty())
             return Response.status(Response.Status.CONFLICT).build();
         return Response.ok(output).build();
@@ -65,7 +69,7 @@ public class AnalysisOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response methodsDiffLatest(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("projectId") Long projectId) {
-        ChangedMethodsOutput output = differenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
+        ChangedMethodsOutput output = methodsDifferenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
         return Response.ok(output).build();
     }
 
