@@ -6,13 +6,13 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.adamkattan.model.entities.EntitiesLinksInputDto;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
-import org.adamkattan.model.output.ChangedMethodsOutput;
-import org.adamkattan.model.output.DifferenceOutput;
-import org.adamkattan.model.output.DifferenceType;
-import org.adamkattan.model.output.PlainDifferenceOutput;
+import org.adamkattan.model.output.*;
 import org.adamkattan.service.DifferenceService;
+import org.adamkattan.service.EntitiesDifferenceService;
+import org.adamkattan.service.MethodsDifferenceService;
 
 import java.util.Optional;
 
@@ -21,6 +21,12 @@ public class AnalysisOutputController {
 
     @Inject
     DifferenceService differenceService;
+
+    @Inject
+    EntitiesDifferenceService entitiesDifferenceService;
+
+    @Inject
+    MethodsDifferenceService methodsDifferenceService;
 
     @POST
     @Path("/plain-diff")
@@ -51,7 +57,7 @@ public class AnalysisOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response methodsDiff(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("analysisInputId") Long srcId) {
-        Optional<ChangedMethodsOutput> output = differenceService.getChangedMethods(srcId, methodsInputDtoDest);
+        Optional<ChangedMethodsOutput> output = methodsDifferenceService.getChangedMethods(srcId, methodsInputDtoDest);
         if (output.isEmpty())
             return Response.status(Response.Status.CONFLICT).build();
         return Response.ok(output).build();
@@ -63,7 +69,20 @@ public class AnalysisOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response methodsDiffLatest(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("projectId") Long projectId) {
-        ChangedMethodsOutput output = differenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
+        ChangedMethodsOutput output = methodsDifferenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
+        return Response.ok(output).build();
+    }
+
+    @PUT
+    @Path("/{analysisInputId}/entities-links-diff")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response entitiesLinkDiff(
+            @Valid EntitiesLinksInputDto entitiesLinksInputDto,
+            @PathParam("analysisInputId") Long srcId
+    ) {
+        ChangedEntitiesLinksOutput output = entitiesDifferenceService.getChangedEntitiesLinks(entitiesLinksInputDto, srcId);
         return Response.ok(output).build();
     }
 }

@@ -1,10 +1,10 @@
-import { Field, GraphNode } from "@/api/entities";
+import { EntityField, EntityNode } from "@/api/entities";
 import { FC } from "react";
 import { Button } from "../ui/button";
 
 type EntitiesDetailProps = {
-  entity: GraphNode;
-  handleFieldClick: (field: Field) => void;
+  entity: EntityNode;
+  handleFieldClick: (field: EntityField) => void;
 };
 
 const EntityDetail: FC<EntitiesDetailProps> = ({

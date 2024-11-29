@@ -51,14 +51,18 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-10 m-5">
+    <div className="flex flex-col gap-10">
       <div className="w-full">
-        <Button onClick={handleCompareClick} variant="outline">
+        <Button
+          className="mx-5 mt-2"
+          onClick={handleCompareClick}
+          variant="outline"
+        >
           Compare
         </Button>
         <Separator className="mt-2" />
       </div>
-      <div className="flex flex-row justify-between gap-5">
+      <div className="flex flex-row justify-between gap-5 m-5">
         <div className="flex flex-col gap-2">
           {microservices.map((ms) => (
             <MicroserviceRow

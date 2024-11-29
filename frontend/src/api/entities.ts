@@ -1,3 +1,4 @@
+import { log } from "console";
 import { ANALYSIS_INPUTS_PREFIX } from "./analysisInputs";
 import { axiosInstance } from "./config";
 
@@ -5,7 +6,7 @@ export type FieldAnnotation = {
     annotation: string;
 }
 
-export type Field = {
+export type EntityField = {
     fieldName: string;
     fieldFullName: string;
     fieldType: string;
@@ -15,14 +16,14 @@ export type Field = {
     isCollection: boolean;
 }
 
-export type GraphNode = {
+export type EntityNode = {
     msName: string;
     nodeName: string;
     nodeFullName: string;
-    fields: Field[];
+    fields: EntityField[];
 }
 
-export type Link = {
+export type EntityLink = {
     source: string;
     target: string;
     msSource: string;
@@ -31,9 +32,22 @@ export type Link = {
     targetMultiplicity: string;
 }
 
+export type ChangedEntityLink = EntityLink & {
+    type: ChangedEntityLinkType;
+};
+
+export enum ChangedEntityLinkType {
+    SAME, ADDED, REMOVED, MODIFIED
+}
+
 export type GraphData = {
-    nodes: GraphNode[];
-    links: Link[];
+    nodes: EntityNode[];
+    links: EntityLink[];
+}
+
+export type GraphDataChangedLinks = {
+    nodes: EntityNode[];
+    links: ChangedEntityLink[];
 }
 
 async function getEntities(id: string): Promise<GraphData> {
@@ -41,8 +55,25 @@ async function getEntities(id: string): Promise<GraphData> {
     return resp.data;
 }
 
+const getChangedColor = (type: string): string => {
+    switch (type) {
+        case "SAME":
+            return "black";
+        case "ADDED":
+            return "green";
+        case "REMOVED":
+            return "red";
+        case "MODIFIED":
+            return "blue";
+        default:
+            return "white";
+    }
+};
+
+
 const EntitiesApi = {
     getEntities,
+    getChangedColor
 };
 
 export default EntitiesApi;
