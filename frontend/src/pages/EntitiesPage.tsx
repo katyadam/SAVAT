@@ -3,9 +3,9 @@ import { CompareEntitiesLinksResponse } from "@/api/outputs/types";
 import CompareForm from "@/components/entities/CompareForm";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";
+import Navbar from "@/components/entities/Navbar";
 import RenderCompareGraph from "@/components/entities/RenderCompareGraph";
 import RenderGraph from "@/components/entities/RenderGraph";
-import { Button } from "@/components/ui/button";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useEntities } from "@/hooks/useEntity";
@@ -59,16 +59,9 @@ const EntitiesPage = () => {
 
   return (
     <div>
-      <div className="w-full">
-        <Button
-          onClick={() => setCompareUp(true)}
-          className="mx-5 mt-2"
-          variant="outline"
-        >
-          Compare
-        </Button>
-        <Separator className="mt-2" />
-      </div>
+      <Navbar compareBtnClick={() => setCompareUp(true)} />
+      <Separator className="mt-2" />
+
       <RenderGraph onNodeClick={handleNodeClick} entities={entities} />
       {selectedNode && (
         <Overlay width="5/6" closeFunc={closeOverlay}>
