@@ -1,6 +1,6 @@
+import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
 import { ForceGraph3D } from "react-force-graph";
-import { GraphData, EntityNode } from "@/api/entities";
 
 type RenderGraphProps = {
   onNodeClick: (node: EntityNode) => void;

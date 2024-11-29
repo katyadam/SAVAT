@@ -1,6 +1,6 @@
-import { EntityField, EntityNode } from "@/api/entities";
 import { FC } from "react";
 import { Button } from "../ui/button";
+import { EntityField, EntityNode } from "@/api/entities/types";
 
 type EntitiesDetailProps = {
   entity: EntityNode;

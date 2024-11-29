@@ -1,4 +1,4 @@
-import EntitiesApi from "@/api/entities";
+import EntitiesApi from "@/api/entities/entities";
 import { useQuery } from "@tanstack/react-query"
 
 export const useEntities = (analysisInputId: string) => {

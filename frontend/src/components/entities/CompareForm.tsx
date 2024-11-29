@@ -1,10 +1,10 @@
-import { EntityLink } from "@/api/entities";
 import { FC, useState } from "react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { useCompareEntitiesLinks } from "@/hooks/useAnalysisOutput";
 import { Button } from "../ui/button";
-import { CompareEntitiesLinksResponse } from "@/api/analysisOutputs";
+import { EntityLink } from "@/api/entities/types";
+import { CompareEntitiesLinksResponse } from "@/api/outputs/types";
 
 type CompareFormType = {
   analysisInputId: string;

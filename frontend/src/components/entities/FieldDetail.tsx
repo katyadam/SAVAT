@@ -1,4 +1,4 @@
-import { EntityField } from "@/api/entities";
+import { EntityField } from "@/api/entities/types";
 import { FC } from "react";
 
 type FieldDetailProps = {

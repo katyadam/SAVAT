@@ -1,11 +1,7 @@
-import { axiosInstance } from "./config";
+import { axiosInstance } from "../config";
+import { Project } from "./types";
 
 const PROJECTS_PREFIX = "/projects"
-
-export type Project = {
-    id: number,
-    projectName: string
-};
 
 async function getAllProjects(): Promise<Project[]> {
     const resp = await axiosInstance.get(PROJECTS_PREFIX);

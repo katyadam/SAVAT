@@ -1,6 +1,6 @@
 import { FC } from "react";
 import MethodRow from "./MethodRow";
-import { MicroserviceMethodNode } from "@/api/methods";
+import { MicroserviceMethodNode } from "@/api/methods/types";
 
 type MethodsListProps = {
   methods: MicroserviceMethodNode[];

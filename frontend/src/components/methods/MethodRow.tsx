@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { MicroserviceMethodNode } from "@/api/methods";
+import { MicroserviceMethodNode } from "@/api/methods/types";
 
 type MethodRowProps = {
   method: MicroserviceMethodNode;

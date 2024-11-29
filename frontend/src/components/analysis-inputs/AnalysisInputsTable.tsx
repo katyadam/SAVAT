@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import AnalysisInputButton from "./AnalysisInputButton";
-import { AnalysisInput } from "@/api/analysisInputs";
+import { AnalysisInput } from "@/api/inputs/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

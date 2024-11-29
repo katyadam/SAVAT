@@ -1,12 +1,9 @@
-import { axiosInstance } from "./config";
-import { ChangedEntityLink, EntityLink } from "./entities";
-import { MicroserviceNode } from "./methods";
+import { axiosInstance } from "../config";
+import { EntityLink } from "../entities/types";
+import { MicroserviceNode } from "../methods/types";
+import { CompareMethodsResponse, CompareEntitiesLinksResponse } from "./types";
 
 const ANALYSIS_OUTPUTS_PREFIX = "/analysis-outputs"
-
-export type CompareMethodsResponse = {
-    changedMs: MicroserviceNode[]
-}
 
 async function compareMethods(
     analysisInputId: string,
@@ -16,10 +13,6 @@ async function compareMethods(
         microservices: microservices
     })
     return resp.data;
-}
-
-export type CompareEntitiesLinksResponse = {
-    changedLinks: ChangedEntityLink[]
 }
 
 async function compareEntitiesLinks(

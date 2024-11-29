@@ -7,8 +7,8 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useCompareMethods } from "@/hooks/useAnalysisOutput";
 import { useMediaQuery } from "react-responsive";
-import { CompareMethodsResponse } from "@/api/analysisOutputs";
-import { MicroserviceNode } from "@/api/methods";
+import { MicroserviceNode } from "@/api/methods/types";
+import { CompareMethodsResponse } from "@/api/outputs/types";
 
 type CompareFormProps = {
   analysisInputId: string;
