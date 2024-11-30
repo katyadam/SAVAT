@@ -17,8 +17,6 @@ export type EntityNode = {
     nodeName: string;
     nodeFullName: string;
     fields: EntityField[];
-    x: number,
-    y: number
 }
 
 export type EntityLink = {

@@ -10,31 +10,29 @@ export const linkCanvasObject = (
 
   ctx.strokeStyle = "red"; // Color of the link
 
-  const midX = source.x + (target.x - source.x) * 0.5 * globalScale;
-  const midY = source.y + (target.y - source.y) * 0.5 * globalScale;
   // Drawing link
   ctx.beginPath();
   ctx.moveTo(source.x, source.y);
-  ctx.lineTo(midX, midY);
+  ctx.lineTo(target.x, target.y);
   ctx.stroke();
 
-  //   const arrowSize = 10 / globalScale;
+  const arrowSize = 10 / globalScale;
 
-  //   // Calculate the angle of the link
-  //   const angle = Math.atan2(target.y - source.y, target.x - source.x);
+  // Calculate the angle of the link
+  const angle = Math.atan2(target.y - source.y, target.x - source.x);
 
-  //   ctx.strokeStyle = "black";
-  //   // Draw the arrowhead
-  //   ctx.beginPath();
-  //   ctx.moveTo(target.x, target.y);
-  //   ctx.lineTo(
-  //     target.x - arrowSize * Math.cos(angle - Math.PI / 6),
-  //     target.y - arrowSize * Math.sin(angle - Math.PI / 6)
-  //   );
-  //   ctx.moveTo(target.x, target.y);
-  //   ctx.lineTo(
-  //     target.x - arrowSize * Math.cos(angle + Math.PI / 6),
-  //     target.y - arrowSize * Math.sin(angle + Math.PI / 6)
-  //   );
-  //   ctx.stroke(); // Apply the arrowhead stroke
+  ctx.strokeStyle = "black";
+  // Draw the arrowhead
+  ctx.beginPath();
+  ctx.moveTo(target.x, target.y);
+  ctx.lineTo(
+    target.x - arrowSize * Math.cos(angle - Math.PI / 6),
+    target.y - arrowSize * Math.sin(angle - Math.PI / 6)
+  );
+  ctx.moveTo(target.x, target.y);
+  ctx.lineTo(
+    target.x - arrowSize * Math.cos(angle + Math.PI / 6),
+    target.y - arrowSize * Math.sin(angle + Math.PI / 6)
+  );
+  ctx.stroke(); // Apply the arrowhead stroke
 };

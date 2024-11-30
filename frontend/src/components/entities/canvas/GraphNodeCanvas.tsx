@@ -6,7 +6,9 @@ export const nodeCanvasObject = (
   globalScale: number
 ) => {
   const label = `Microservice: ${node.msName},Entity: ${node.nodeName},Entity - Full Name: ${node.nodeFullName}`;
-  const fontSize = 14 / (globalScale * 1.2);
+  const fontSize = 8;
+  console.log(globalScale);
+
   ctx.font = `${fontSize}px Sans-Serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
