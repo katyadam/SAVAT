@@ -1,43 +1,32 @@
 import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
-import { ForceGraph3D } from "react-force-graph";
+import BasicGraph from "./graphs/BasicGraph";
+import { RenderType } from "./types";
+import EntityDetailsGraph from "./graphs/EntityDetailsGraph";
+import DomainViewGraph from "./graphs/DomainViewGraph";
 
 type RenderGraphProps = {
   onNodeClick: (node: EntityNode) => void;
   entities: GraphData | undefined;
+  renderType: RenderType | null;
 };
 
-const RenderGraph: FC<RenderGraphProps> = ({ onNodeClick, entities }) => {
-  return entities ? (
-    <ForceGraph3D
-      graphData={entities}
-      nodeLabel={(node) =>
-        `<p 
-            style="font-size: 14px; color: #333; background-color: #f0f0f0; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-            ${node.msName}: ${node.nodeName}
-        </p>`
-      }
-      linkDirectionalParticles={1}
-      linkLabel={(link) =>
-        `<p 
-            style="font-size: 14px; color: #333; background-color: #baf0ff; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-            ${link.msSource} -> ${link.msTarget}
-        </p>`
-      }
-      nodeId="nodeName"
-      backgroundColor="white"
-      nodeColor={() => "black"}
-      linkColor={() => "black"}
-      linkDirectionalParticleColor={() => "red"}
-      linkWidth={5}
-      linkDirectionalParticleWidth={5}
-      linkDirectionalArrowLength={5}
-      linkDirectionalParticleSpeed={0.02}
-      onNodeClick={onNodeClick}
-    />
-  ) : (
-    <div>Loading graph...</div>
-  );
+const RenderGraph: FC<RenderGraphProps> = ({
+  onNodeClick,
+  entities,
+  renderType,
+}) => {
+  if (!entities) return <div>Loading graph...</div>;
+  switch (renderType) {
+    case RenderType.BASIC_GRAPH:
+      return <BasicGraph entities={entities} onNodeClick={onNodeClick} />;
+    case RenderType.ENTITY_DETAILS:
+      return <EntityDetailsGraph entities={entities} />;
+    case RenderType.DOMAIN_VIEW:
+      return <DomainViewGraph entities={entities} />;
+    default:
+      break;
+  }
 };
 
 export default RenderGraph;

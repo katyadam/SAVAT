@@ -6,6 +6,7 @@ import FieldDetail from "@/components/entities/FieldDetail";
 import Navbar from "@/components/entities/Navbar";
 import RenderCompareGraph from "@/components/entities/RenderCompareGraph";
 import RenderGraph from "@/components/entities/RenderGraph";
+import { RenderType } from "@/components/entities/types";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useEntities } from "@/hooks/useEntity";
@@ -25,6 +26,9 @@ const EntitiesPage = () => {
   if (!id) return <p>Error... Incorrect ID</p>;
   const [selectedNode, setSelectedNode] = useState<EntityNode | null>(null);
   const [selectedField, setSelectedField] = useState<EntityField | null>(null);
+  const [selectedRenderType, setSelectedRenderType] = useState<RenderType>(
+    RenderType.BASIC_GRAPH
+  );
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [compareResponse, setCompareResponse] =
     useState<CompareEntitiesLinksResponse | null>(null);
@@ -59,10 +63,21 @@ const EntitiesPage = () => {
 
   return (
     <div>
-      <Navbar compareBtnClick={() => setCompareUp(true)} />
+      {/* Whole navigation */}
+      <Navbar
+        setSelectedRenderType={setSelectedRenderType}
+        compareBtnClick={() => setCompareUp(true)}
+      />
       <Separator className="mt-2" />
 
-      <RenderGraph onNodeClick={handleNodeClick} entities={entities} />
+      {/* Rendered graph */}
+      <RenderGraph
+        onNodeClick={handleNodeClick}
+        entities={entities}
+        renderType={selectedRenderType}
+      />
+
+      {/* Displayed views based on state of the webpage */}
       {selectedNode && (
         <Overlay width="5/6" closeFunc={closeOverlay}>
           <div className="flex justify-between">
