@@ -24,7 +24,11 @@ const RenderGraph: FC<RenderGraphProps> = ({
     case RenderType.BASIC_GRAPH:
       return <BasicGraph entities={entities} onNodeClick={onNodeClick} />;
     case RenderType.ENTITY_DETAILS:
-      return <EntityDetailsGraph entities={entities} />;
+      return (
+        <div className="h-1/2">
+          <EntityDetailsGraph entities={entities} />;
+        </div>
+      );
     case RenderType.DOMAIN_VIEW:
       return <DomainViewGraph entities={entities} />;
     default:

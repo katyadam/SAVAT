@@ -89,8 +89,10 @@
 }
 #app-root,
 .sigma-container {
+  width: 100vw;
+  height: 100vh;
   background: white;
-  position: absolute;
+  position: relative;
   inset: 0;
 }
 .controls {

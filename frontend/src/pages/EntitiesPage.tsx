@@ -64,15 +64,11 @@ const EntitiesPage = () => {
 
   return (
     <div>
-      {!selectedNode && !compareUp && !compareResponse && (
-        <div className="z-50 relative top-0 left-0">
-          <Navbar
-            setSelectedRenderType={setSelectedRenderType}
-            compareBtnClick={() => setCompareUp(true)}
-          />
-          <Separator className="mt-2" />
-        </div>
-      )}
+      <Navbar
+        setSelectedRenderType={setSelectedRenderType}
+        compareBtnClick={() => setCompareUp(true)}
+      />
+      <Separator className="mt-2" />
       {/* Rendered graph */}
       <RenderGraph
         onNodeClick={handleNodeClick}
