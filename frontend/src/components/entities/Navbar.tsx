@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { RenderType } from "./types";
+import { Switch } from "@/components/ui/switch";
 
 type NavbarType = {
   compareBtnClick: (val: boolean) => void;
@@ -43,13 +44,18 @@ const Navbar: FC<NavbarType> = ({
           </SelectItem>
         </SelectContent>
       </Select>
-      <Button
-        onClick={() => isolatedNodesBtnClick()}
-        className="mx-5"
-        variant="outline"
-      >
-        Show/Hide Isolated Nodes
-      </Button>
+      <div className="flex flex-col items-center mx-5">
+        <label
+          htmlFor="isolatedNodesSwitch"
+          className="text-gray-500 mb-1" // Slightly grey and space below label
+        >
+          Show all nodes
+        </label>
+        <Switch
+          id="isolatedNodesSwitch"
+          onCheckedChange={isolatedNodesBtnClick}
+        />
+      </div>
     </div>
   );
 };
