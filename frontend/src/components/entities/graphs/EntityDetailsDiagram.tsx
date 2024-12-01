@@ -1,16 +1,18 @@
-import React, { useEffect, useRef } from "react";
-import Cytoscape, { CoseLayoutOptions, ElementsDefinition } from "cytoscape";
+import { FC, useEffect, useRef } from "react";
+import Cytoscape, { ElementsDefinition } from "cytoscape";
 import { GraphData, EntityNode, EntityLink } from "@/api/entities/types";
 
 import cytoscape from "cytoscape";
 import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
 
-interface EntityDetailsDiagramProps {
+type EntityDetailsDiagramType = {
   graphData: GraphData;
-}
+  showIsolatedNodes: boolean;
+};
 
-const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
+const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
   graphData,
+  showIsolatedNodes,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   cytoscape.use(fcose);
@@ -33,11 +35,10 @@ const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
     const linkedNodeNames = new Set<string>();
 
     links.forEach((link) => {
-      linkedNodeNames.add(link.source.nodeName);
-      linkedNodeNames.add(link.target.nodeName);
+      linkedNodeNames.add(link.source);
+      linkedNodeNames.add(link.target);
     });
-    return nodes;
-    // return nodes.filter((node) => linkedNodeNames.has(node.nodeName));
+    return nodes.filter((node) => linkedNodeNames.has(node.nodeName));
   };
 
   useEffect(() => {
@@ -48,17 +49,19 @@ const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
       );
 
       const elements: ElementsDefinition = {
-        nodes: visibleNodes.map((node: EntityNode) => ({
-          data: {
-            id: node.nodeName,
-            label: formatNodeLabel(node),
-          },
-          group: "nodes",
-        })),
+        nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
+          (node: EntityNode) => ({
+            data: {
+              id: node.nodeName,
+              label: formatNodeLabel(node),
+            },
+            group: "nodes",
+          })
+        ),
         edges: graphData.links.map((link: EntityLink) => ({
           data: {
-            source: link.source.nodeName,
-            target: link.target.nodeName,
+            source: link.source,
+            target: link.target,
           },
           group: "edges",
         })),
@@ -67,6 +70,7 @@ const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
         name: "fcose",
         animate: true,
         fit: true,
+        animationDuration: 0,
       };
       const cy = Cytoscape({
         container: cyRef.current,
@@ -109,12 +113,10 @@ const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
       cy.on("tap", "node", (event) => {
         const node = event.target;
 
-        // Get the current zoom level and increase it
         const currentZoom = cy.zoom();
-        const zoomIncrement = 0.2; // Increase zoom by this amount
+        const zoomIncrement = 0.2;
         const newZoom = currentZoom + zoomIncrement;
 
-        // Zoom in and center the graph on the clicked node
         cy.zoom({
           level: newZoom,
           renderedPosition: node.renderedPosition(),
@@ -125,7 +127,7 @@ const EntityDetailsDiagram: React.FC<EntityDetailsDiagramProps> = ({
         cy.destroy();
       };
     }
-  }, [graphData]);
+  }, [graphData, showIsolatedNodes]);
 
   return <div ref={cyRef} className="w-[90%] h-[90%]" />;
 };

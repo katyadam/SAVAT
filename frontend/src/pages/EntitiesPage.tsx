@@ -32,6 +32,7 @@ const EntitiesPage = () => {
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [compareResponse, setCompareResponse] =
     useState<CompareEntitiesLinksResponse | null>(null);
+  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
   const handleNodeClick = (node: EntityNode): void => {
     if (node === selectedNode) {
       setSelectedNode(null);
@@ -60,12 +61,13 @@ const EntitiesPage = () => {
     setSelectedNode(null);
     setSelectedField(null);
   };
-
+  console.log(entities);
   return (
     <div className="h-screen w-screen">
       <Navbar
         setSelectedRenderType={setSelectedRenderType}
         compareBtnClick={() => setCompareUp(true)}
+        isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
       />
       <Separator className="mt-2" />
       {/* Rendered graph */}
@@ -73,6 +75,7 @@ const EntitiesPage = () => {
         onNodeClick={handleNodeClick}
         entities={entities}
         renderType={selectedRenderType}
+        showIsolatedNodes={showIsolatedNodes}
       />
       {/* Displayed views based on state of the webpage */}
       {selectedNode && (

@@ -1,39 +1,145 @@
-import { EntityNode, GraphData } from "@/api/entities/types";
-import { FC } from "react";
-import { ForceGraph2D, ForceGraph3D } from "react-force-graph";
+import { FC, useEffect, useRef, useState } from "react";
+import Cytoscape, { ElementsDefinition } from "cytoscape";
+import { GraphData, EntityNode, EntityLink } from "@/api/entities/types";
+
+import cytoscape from "cytoscape";
+import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
+import { getMicroservicesColors } from "../generators/colorGenerator";
 
 type BasicGraphType = {
   onNodeClick: (node: EntityNode) => void;
-  entities: GraphData;
+  graphData: GraphData;
+  showIsolatedNodes: boolean;
 };
 
-const BasicGraph: FC<BasicGraphType> = ({ entities, onNodeClick }) => {
-  return (
-    <ForceGraph2D
-      graphData={entities}
-      nodeLabel={(node) =>
-        `<p
-          style="font-size: 14px; color: #333; background-color: #f0f0f0; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-          ${node.msName}: ${node.nodeName}
-        </p>`
-      }
-      linkLabel={(link) =>
-        `<p 
-          style="font-size: 14px; color: #333; background-color: #baf0ff; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-          ${link.msSource} -> ${link.msTarget}
-        </p>`
-      }
-      nodeId="nodeName"
-      backgroundColor="white"
-      nodeColor={() => "black"}
-      linkColor={() => "black"}
-      linkDirectionalParticleWidth={5}
-      linkDirectionalArrowLength={10}
-      linkDirectionalArrowRelPos={100}
-      onNodeClick={onNodeClick}
-      nodeRelSize={5}
-    />
+const BasicGraph: FC<BasicGraphType> = ({
+  graphData,
+  onNodeClick,
+  showIsolatedNodes,
+}) => {
+  const cyRef = useRef<HTMLDivElement | null>(null);
+  const [msColors, setMsColors] = useState<Map<string, string>>(
+    getMicroservicesColors(graphData.nodes)
   );
+
+  cytoscape.use(fcose);
+
+  const getNonIsolatedNodes = (nodes: EntityNode[], links: EntityLink[]) => {
+    const linkedNodeNames = new Set<string>();
+
+    links.forEach((link) => {
+      linkedNodeNames.add(link.source);
+      linkedNodeNames.add(link.target);
+    });
+    return nodes.filter((node) => linkedNodeNames.has(node.nodeName));
+  };
+
+  useEffect(() => {
+    setMsColors(getMicroservicesColors(graphData.nodes));
+  }, [graphData]);
+
+  useEffect(() => {
+    if (cyRef.current) {
+      const visibleNodes = getNonIsolatedNodes(
+        graphData.nodes,
+        graphData.links
+      );
+
+      const elements: ElementsDefinition = {
+        nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
+          (node: EntityNode) => ({
+            data: {
+              id: node.nodeName,
+              label: node.nodeName, // Ensure label is set correctly
+            },
+            group: "nodes",
+            style: {
+              "background-color": msColors.get(node.msName),
+            },
+          })
+        ),
+        edges: graphData.links.map((link: EntityLink) => ({
+          data: {
+            source: link.source,
+            target: link.target,
+          },
+          group: "edges",
+        })),
+      };
+
+      const layoutOptions: FcoseLayoutOptions = {
+        name: "fcose",
+        animate: true,
+        fit: true,
+        animationDuration: 0,
+        nodeSeparation: 80,
+        tilingPaddingHorizontal: 80,
+        tilingPaddingVertical: 20,
+      };
+
+      const cy = Cytoscape({
+        container: cyRef.current,
+        elements,
+        style: [
+          {
+            selector: "node",
+            style: {
+              shape: "round-octagon",
+              width: "30",
+              height: "30",
+              label: "data(label)",
+              "text-valign": "top",
+              "text-halign": "center",
+              color: "black",
+              "font-size": "12px",
+            },
+          },
+          {
+            selector: "edge",
+            style: {
+              width: 5,
+              "line-color": "#808080",
+              "curve-style": "bezier",
+              "target-arrow-color": "#808080",
+              "target-arrow-shape": "triangle",
+            },
+          },
+        ],
+        layout: layoutOptions,
+      });
+
+      cy.on("tap", "node", (event) => {
+        const node = event.target;
+
+        const currentZoom = cy.zoom();
+        const zoomIncrement = 0.2;
+        const newZoom = currentZoom + zoomIncrement;
+
+        cy.zoom({
+          level: newZoom,
+          renderedPosition: node.renderedPosition(),
+        });
+      });
+
+      cy.on("cxttap", "node", (event) => {
+        const nodeData = event.target.data();
+        const res = graphData.nodes.find(
+          (node) => node.nodeName == nodeData.id
+        );
+        if (!res) {
+          alert("This node doesn't exist!");
+        } else {
+          onNodeClick(res);
+        }
+      });
+
+      return () => {
+        cy.destroy();
+      };
+    }
+  }, [graphData, showIsolatedNodes]);
+
+  return <div ref={cyRef} className="w-[90%] h-[90%]" />;
 };
 
 export default BasicGraph;

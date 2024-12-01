@@ -10,22 +10,34 @@ type RenderGraphProps = {
   onNodeClick: (node: EntityNode) => void;
   entities: GraphData | undefined;
   renderType: RenderType | null;
+  showIsolatedNodes: boolean;
 };
 
 const RenderGraph: FC<RenderGraphProps> = ({
   onNodeClick,
   entities,
   renderType,
+  showIsolatedNodes,
 }) => {
   if (!entities) return <div>Loading graph...</div>;
-  // entities = large;
+  entities = large;
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
-      return <BasicGraph entities={entities} onNodeClick={onNodeClick} />;
+      return (
+        <BasicGraph
+          graphData={entities}
+          onNodeClick={onNodeClick}
+          showIsolatedNodes={showIsolatedNodes}
+        />
+      );
     case RenderType.ENTITY_DETAILS:
-      return <EntityDetailsDiagram graphData={entities} />;
+      return (
+        <EntityDetailsDiagram
+          graphData={entities}
+          showIsolatedNodes={showIsolatedNodes}
+        />
+      );
 
-    case RenderType.DOMAIN_VIEW:
     default:
       break;
   }

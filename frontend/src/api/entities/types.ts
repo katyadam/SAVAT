@@ -20,8 +20,8 @@ export type EntityNode = {
 }
 
 export type EntityLink = {
-    source: EntityNode;
-    target: EntityNode;
+    source: string;
+    target: string;
     msSource: string;
     msTarget: string;
     sourceMultiplicity: string;

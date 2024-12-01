@@ -30,9 +30,9 @@ const EntityDetail: FC<EntitiesDetailProps> = ({
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-col flex-1">
         <h1 className="text-4xl font-bold mb-4">Fields</h1>
-        <div className="space-y-2">
+        <div className="space-y-2 overflow-y-auto max-h-80">
           {entity.fields.length > 0 ? (
             entity.fields.map((field) => (
               <div key={field.fieldFullName}>

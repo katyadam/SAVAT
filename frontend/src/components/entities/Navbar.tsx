@@ -11,10 +11,15 @@ import { RenderType } from "./types";
 
 type NavbarType = {
   compareBtnClick: (val: boolean) => void;
+  isolatedNodesBtnClick: () => void;
   setSelectedRenderType: (selectedRenderType: RenderType) => void;
 };
 
-const Navbar: FC<NavbarType> = ({ compareBtnClick, setSelectedRenderType }) => {
+const Navbar: FC<NavbarType> = ({
+  compareBtnClick,
+  setSelectedRenderType,
+  isolatedNodesBtnClick,
+}) => {
   return (
     <div className="flex flex-row justify-start items-center w-full">
       <Button
@@ -36,9 +41,15 @@ const Navbar: FC<NavbarType> = ({ compareBtnClick, setSelectedRenderType }) => {
           <SelectItem value={RenderType.ENTITY_DETAILS}>
             Entity details
           </SelectItem>
-          <SelectItem value={RenderType.DOMAIN_VIEW}>Domain view</SelectItem>
         </SelectContent>
       </Select>
+      <Button
+        onClick={() => isolatedNodesBtnClick()}
+        className="mx-5"
+        variant="outline"
+      >
+        Show/Hide Isolated Nodes
+      </Button>
     </div>
   );
 };
