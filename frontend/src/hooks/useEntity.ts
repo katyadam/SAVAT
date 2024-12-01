@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 
 export const useEntities = (analysisInputId: string) => {
     return useQuery({
-        queryKey: ["entities", analysisInputId],
+        queryKey: [],
         queryFn: () => EntitiesApi.getEntities(analysisInputId)
     });
 }

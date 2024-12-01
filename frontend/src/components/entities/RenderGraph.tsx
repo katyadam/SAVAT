@@ -2,10 +2,9 @@ import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
 import BasicGraph from "./graphs/BasicGraph";
 import { RenderType } from "./types";
-import EntityDetailsGraph from "./graphs/EntityDetailsGraph";
-import DomainViewGraph from "./graphs/DomainViewGraph";
-
 import large from "./testData.json";
+
+import EntityDetailsDiagram from "./graphs/EntityDetailsDiagram";
 
 type RenderGraphProps = {
   onNodeClick: (node: EntityNode) => void;
@@ -19,18 +18,14 @@ const RenderGraph: FC<RenderGraphProps> = ({
   renderType,
 }) => {
   if (!entities) return <div>Loading graph...</div>;
-  entities = large;
+  // entities = large;
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
       return <BasicGraph entities={entities} onNodeClick={onNodeClick} />;
     case RenderType.ENTITY_DETAILS:
-      return (
-        <div className="h-1/2">
-          <EntityDetailsGraph entities={entities} />;
-        </div>
-      );
+      return <EntityDetailsDiagram graphData={entities} />;
+
     case RenderType.DOMAIN_VIEW:
-      return <DomainViewGraph entities={entities} />;
     default:
       break;
   }

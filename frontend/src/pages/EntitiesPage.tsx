@@ -55,7 +55,6 @@ const EntitiesPage = () => {
   };
 
   const { data: entities, isLoading } = useEntities(id);
-  console.log(entities);
   if (isLoading) return <p>Loading...</p>;
   const closeOverlay = () => {
     setSelectedNode(null);
@@ -63,7 +62,7 @@ const EntitiesPage = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen w-screen">
       <Navbar
         setSelectedRenderType={setSelectedRenderType}
         compareBtnClick={() => setCompareUp(true)}

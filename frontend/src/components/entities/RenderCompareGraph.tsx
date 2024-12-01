@@ -8,8 +8,6 @@ type RenderCompareGraphType = {
 };
 
 const RenderCompareGraph: FC<RenderCompareGraphType> = ({ entities }) => {
-  console.log(entities);
-
   return entities ? (
     <ForceGraph3D
       graphData={entities}
