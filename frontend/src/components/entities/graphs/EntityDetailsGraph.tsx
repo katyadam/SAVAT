@@ -27,8 +27,7 @@ const EntityDetailsGraph: FC<EntityDetailsGraphType> = ({ entities }) => {
       labelGridCellSize: 60,
       labelRenderedSizeThreshold: 15,
       labelFont: "Lato, sans-serif",
-      zIndex: true,
-      allowInvalidContainer: true,
+      zIndex: false,
     }),
     []
   );
@@ -73,13 +72,11 @@ const EntityDetailsGraph: FC<EntityDetailsGraphType> = ({ entities }) => {
     requestAnimationFrame(() => setDataReady(true));
   }, []);
 
+  if (!entities) return <div>Loading...</div>;
+
   return (
-    <div id="app-root" className={"show-contents"}>
-      <SigmaContainer
-        graph={graph}
-        settings={sigmaSettings}
-        className="react-sigma"
-      >
+    <div>
+      <SigmaContainer graph={graph} settings={sigmaSettings}>
         {/* your content */}
       </SigmaContainer>
     </div>

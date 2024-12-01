@@ -64,20 +64,21 @@ const EntitiesPage = () => {
 
   return (
     <div>
-      {/* Whole navigation */}
-      <Navbar
-        setSelectedRenderType={setSelectedRenderType}
-        compareBtnClick={() => setCompareUp(true)}
-      />
-      <Separator className="mt-2" />
-
+      {!selectedNode && !compareUp && !compareResponse && (
+        <div className="z-50 relative top-0 left-0">
+          <Navbar
+            setSelectedRenderType={setSelectedRenderType}
+            compareBtnClick={() => setCompareUp(true)}
+          />
+          <Separator className="mt-2" />
+        </div>
+      )}
       {/* Rendered graph */}
       <RenderGraph
         onNodeClick={handleNodeClick}
         entities={entities}
         renderType={selectedRenderType}
       />
-
       {/* Displayed views based on state of the webpage */}
       {selectedNode && (
         <Overlay width="5/6" closeFunc={closeOverlay}>
