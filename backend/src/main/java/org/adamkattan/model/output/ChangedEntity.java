@@ -28,7 +28,7 @@ public class ChangedEntity extends PanacheEntity {
 
     public static ChangedEntityDto toDto(ChangedEntity changedEntity) {
         return new ChangedEntityDto(
-                changedEntity.analysisInput.id,
+                changedEntity.id,
                 changedEntity.changedLinks,
                 changedEntity.createdAt
         );

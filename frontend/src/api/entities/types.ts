@@ -45,3 +45,9 @@ export type GraphDataChangedLinks = {
     nodes: EntityNode[];
     links: ChangedEntityLink[];
 }
+
+export type EntitiesDiff = {
+    id: number;
+    changedLinks: ChangedEntityLink[];
+    createdAt: string;
+}

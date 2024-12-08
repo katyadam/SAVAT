@@ -30,7 +30,6 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
       const res = await mutateAsync(parsedData);
 
       respFunc(res);
-      console.log("Successfuly fetched: " + res);
     } catch (error) {
       console.error("Failed to parse JSON input:", error);
       alert("Invalid JSON input. Please ensure it is correctly formatted.");

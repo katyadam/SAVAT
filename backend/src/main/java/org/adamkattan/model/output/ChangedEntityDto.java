@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ChangedEntityDto(
-        @JsonProperty("analysisInputId") Long analysisInputId,
+        @JsonProperty("id") Long id,
         @JsonProperty("changedLinks") List<ChangedEntityLink> changedLinks,
         @JsonProperty("createdAt") LocalDateTime createdAt
 ) {
