@@ -16,6 +16,10 @@ public class AnalysisInputService {
     @Inject
     ProjectService projectService;
 
+    public AnalysisInput getAnalysisInputById(Long id) {
+        return AnalysisInput.find("id", id).firstResult();
+    }
+
     public List<AnalysisInput> getProjectAnalysisInputs(Long projectId) {
         return AnalysisInput.find("project.id", projectId).list();
     }

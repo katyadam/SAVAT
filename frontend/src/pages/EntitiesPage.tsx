@@ -3,8 +3,8 @@ import { CompareEntitiesLinksResponse } from "@/api/outputs/types";
 import CompareForm from "@/components/entities/CompareForm";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";
+import ComparedGraph from "@/components/entities/graphs/ComparedGraph";
 import Navbar from "@/components/entities/Navbar";
-import RenderCompareGraph from "@/components/entities/RenderCompareGraph";
 import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
 import Overlay from "@/components/ui/Overlay";
@@ -61,7 +61,7 @@ const EntitiesPage = () => {
     setSelectedNode(null);
     setSelectedField(null);
   };
-  console.log(entities);
+  console.log(compareResponse);
   return (
     <div className="h-screen w-screen">
       <Navbar
@@ -97,11 +97,12 @@ const EntitiesPage = () => {
       {compareResponse && entities && (
         <Overlay width="5/6" closeFunc={() => setCompareResponse(null)}>
           <div>
-            <RenderCompareGraph
-              entities={{
+            <ComparedGraph
+              graphData={{
                 nodes: entities.nodes,
                 links: compareResponse.changedLinks,
               }}
+              onNodeClick={handleNodeClick}
             />
           </div>
         </Overlay>

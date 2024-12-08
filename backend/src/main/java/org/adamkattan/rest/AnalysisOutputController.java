@@ -6,12 +6,13 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.entities.EntitiesLinksInputDto;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.methods.MethodsInputDto;
-import org.adamkattan.model.output.*;
+import org.adamkattan.model.output.ChangedMethodsOutput;
+import org.adamkattan.model.output.DifferenceOutput;
+import org.adamkattan.model.output.DifferenceType;
+import org.adamkattan.model.output.PlainDifferenceOutput;
 import org.adamkattan.service.DifferenceService;
-import org.adamkattan.service.EntitiesDifferenceService;
 import org.adamkattan.service.MethodsDifferenceService;
 
 import java.util.Optional;
@@ -21,9 +22,6 @@ public class AnalysisOutputController {
 
     @Inject
     DifferenceService differenceService;
-
-    @Inject
-    EntitiesDifferenceService entitiesDifferenceService;
 
     @Inject
     MethodsDifferenceService methodsDifferenceService;
@@ -70,19 +68,6 @@ public class AnalysisOutputController {
     @Transactional
     public Response methodsDiffLatest(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("projectId") Long projectId) {
         ChangedMethodsOutput output = methodsDifferenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
-        return Response.ok(output).build();
-    }
-
-    @PUT
-    @Path("/{analysisInputId}/entities-links-diff")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response entitiesLinkDiff(
-            @Valid EntitiesLinksInputDto entitiesLinksInputDto,
-            @PathParam("analysisInputId") Long srcId
-    ) {
-        ChangedEntitiesLinksOutput output = entitiesDifferenceService.getChangedEntitiesLinks(entitiesLinksInputDto, srcId);
         return Response.ok(output).build();
     }
 }

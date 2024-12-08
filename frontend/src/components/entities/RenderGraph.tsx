@@ -20,7 +20,7 @@ const RenderGraph: FC<RenderGraphProps> = ({
   showIsolatedNodes,
 }) => {
   if (!entities) return <div>Loading graph...</div>;
-  entities = large;
+  // entities = large;
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
       return (

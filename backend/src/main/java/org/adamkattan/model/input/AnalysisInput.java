@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.entities.Entities;
 import org.adamkattan.model.graph.Graph;
 import org.adamkattan.model.methods.MicroserviceNode;
+import org.adamkattan.model.output.ChangedEntity;
 import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -40,6 +41,10 @@ public class AnalysisInput extends PanacheEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "methods")
     public List<MicroserviceNode> methods;
+
+    @OneToMany(mappedBy = "analysisInput", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(nullable = false, name = "changed_entities")
+    public List<ChangedEntity> changedEntities;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
