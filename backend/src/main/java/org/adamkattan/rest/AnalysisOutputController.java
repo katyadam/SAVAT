@@ -7,13 +7,10 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.input.AnalysisInputFullDto;
-import org.adamkattan.model.methods.MethodsInputDto;
-import org.adamkattan.model.output.ChangedMethodsOutput;
 import org.adamkattan.model.output.DifferenceOutput;
 import org.adamkattan.model.output.DifferenceType;
 import org.adamkattan.model.output.PlainDifferenceOutput;
 import org.adamkattan.service.DifferenceService;
-import org.adamkattan.service.MethodsDifferenceService;
 
 import java.util.Optional;
 
@@ -22,9 +19,6 @@ public class AnalysisOutputController {
 
     @Inject
     DifferenceService differenceService;
-
-    @Inject
-    MethodsDifferenceService methodsDifferenceService;
 
     @POST
     @Path("/plain-diff")
@@ -46,28 +40,6 @@ public class AnalysisOutputController {
     @Transactional
     public Response jsonDiff(@Valid AnalysisInputFullDto analysisInputFullDto, @PathParam("type") DifferenceType type) {
         DifferenceOutput output = differenceService.getJsonDifference(analysisInputFullDto, type);
-        return Response.ok(output).build();
-    }
-
-    @PUT
-    @Path("/{analysisInputId}/methods-diff")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response methodsDiff(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("analysisInputId") Long srcId) {
-        Optional<ChangedMethodsOutput> output = methodsDifferenceService.getChangedMethods(srcId, methodsInputDtoDest);
-        if (output.isEmpty())
-            return Response.status(Response.Status.CONFLICT).build();
-        return Response.ok(output).build();
-    }
-
-    @PUT
-    @Path("/methods-diff/latest/{projectId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response methodsDiffLatest(@Valid MethodsInputDto methodsInputDtoDest, @PathParam("projectId") Long projectId) {
-        ChangedMethodsOutput output = methodsDifferenceService.getChangedMethodsLatest(projectId, methodsInputDtoDest);
         return Response.ok(output).build();
     }
 }

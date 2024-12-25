@@ -6,7 +6,7 @@ import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
 import Overlay from "../ui/Overlay";
 import { MicroserviceNode } from "@/api/methods/types";
-import { CompareMethodsResponse } from "@/api/outputs/types";
+import { CompareMethodsResponse } from "@/api/methods/types";
 
 type MethodsPanelProps = {
   analysisInputId: string;

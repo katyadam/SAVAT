@@ -4,7 +4,7 @@ import { Textarea } from "../ui/textarea";
 import { useCompareEntitiesLinks } from "@/hooks/useAnalysisOutput";
 import { Button } from "../ui/button";
 import { EntityLink } from "@/api/entities/types";
-import { CompareEntitiesLinksResponse } from "@/api/outputs/types";
+import { CompareEntitiesLinksResponse } from "@/api/entities/types";
 
 type CompareFormType = {
   analysisInputId: string;

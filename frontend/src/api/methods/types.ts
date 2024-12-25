@@ -7,3 +7,6 @@ export type MicroserviceNode = {
     name: string,
     methods: MicroserviceMethodNode[]
 }
+export type CompareMethodsResponse = {
+    changedMs: MicroserviceNode[]
+}

@@ -1,5 +1,5 @@
 import { EntityNode, EntityField } from "@/api/entities/types";
-import { CompareEntitiesLinksResponse } from "@/api/outputs/types";
+import { CompareEntitiesLinksResponse } from "@/api/entities/types";
 import CompareForm from "@/components/entities/CompareForm";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";

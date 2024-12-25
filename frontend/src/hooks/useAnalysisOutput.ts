@@ -1,14 +1,14 @@
 import EntitiesApi from "@/api/entities/entities";
 import { EntityLink } from "@/api/entities/types";
+import MethodsApi from "@/api/methods/methods";
 import { MicroserviceNode } from "@/api/methods/types";
-import AnalysisOutputApi from "@/api/outputs/analysisOutputs";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const useCompareMethods = (analysisInputId: string) => {
     return useMutation({
         mutationKey: ["compareMethods"],
         mutationFn: (microservices: MicroserviceNode[]) =>
-            AnalysisOutputApi.compareMethods(analysisInputId, microservices)
+            MethodsApi.compareMethods(analysisInputId, microservices)
     })
 }
 

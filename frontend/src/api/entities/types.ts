@@ -51,3 +51,6 @@ export type EntitiesDiff = {
     changedLinks: ChangedEntityLink[];
     createdAt: string;
 }
+export type CompareEntitiesLinksResponse = {
+    changedLinks: ChangedEntityLink[]
+}

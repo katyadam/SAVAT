@@ -1,7 +1,7 @@
 import { ANALYSIS_INPUTS_PREFIX } from "../inputs/analysisInputs";
 import { axiosInstance } from "../config";
 import { EntitiesDiff, EntityLink, GraphData } from "./types";
-import { CompareEntitiesLinksResponse } from "../outputs/types";
+import { CompareEntitiesLinksResponse } from "./types";
 
 export const ENTITIES_COMPARE_PREFIX = "/entities"
 
