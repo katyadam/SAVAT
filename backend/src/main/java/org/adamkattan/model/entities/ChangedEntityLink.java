@@ -7,8 +7,8 @@ public record ChangedEntityLink(
         String msTarget,
         String sourceMultiplicity,
         Integer targetMultiplicity,
-        ChangedEntityLinkType type) {
-
+        ChangedEntityLinkType type
+) {
     public ChangedEntityLink(EntityLink link, ChangedEntityLinkType type) {
         this(
                 link.source(),
