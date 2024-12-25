@@ -85,8 +85,8 @@ const BasicGraph: FC<BasicGraphType> = ({
             selector: "node",
             style: {
               shape: "round-octagon",
-              width: "30",
-              height: "30",
+              width: "20",
+              height: "20",
               label: "data(label)",
               "text-valign": "top",
               "text-halign": "center",
@@ -139,7 +139,7 @@ const BasicGraph: FC<BasicGraphType> = ({
     }
   }, [graphData, showIsolatedNodes]);
 
-  return <div ref={cyRef} className="w-[90%] h-[90%]" />;
+  return <div ref={cyRef} className="w-full h-[90%]" />;
 };
 
 export default BasicGraph;

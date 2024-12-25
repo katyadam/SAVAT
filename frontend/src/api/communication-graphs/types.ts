@@ -26,3 +26,20 @@ export type CommGraphLinkRequest = {
     msName: string;
     restCallInClassName: string;
 };
+
+export type CommGraphDiff = {
+    nodes: CommGraphNode[];
+    links: ChangedCommGraphLink[];
+}
+
+export type ChangedCommGraphLink = CommGraphLink & {
+    type: ChangedCommGraphLinkType;
+};
+
+export enum ChangedCommGraphLinkType {
+    SAME, ADDED, REMOVED, MODIFIED
+}
+
+export type CompareCommGraphLinksResponse = {
+    changedLinks: ChangedCommGraphLink[]
+}

@@ -81,6 +81,16 @@ const Graph: FC<GraphType> = ({ graph }) => {
         layout: layoutOptions,
       });
 
+      cy.on("layoutstop", () => {
+        cy.nodes().forEach((node) => {
+          const position = node.position();
+          node.position({
+            x: position.x - 20,
+            y: position.y - 10,
+          });
+        });
+      });
+
       cy.on("tap", "node", (event) => {
         const node = event.target;
 
@@ -100,7 +110,7 @@ const Graph: FC<GraphType> = ({ graph }) => {
     }
   }, [graph]);
 
-  return <div ref={cyRef} className="w-[90%] h-[90%]" />;
+  return <div ref={cyRef} className="w-full h-[90%]" />;
 };
 
 export default Graph;

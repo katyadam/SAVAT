@@ -33,7 +33,7 @@ async function getEntitiesDiff(id: string | null): Promise<EntitiesDiff> {
 const getChangedColor = (type: string): string => {
     switch (type) {
         case "SAME":
-            return "black";
+            return "light-grey";
         case "ADDED":
             return "green";
         case "REMOVED":
