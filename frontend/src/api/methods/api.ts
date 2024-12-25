@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config"
-import { ANALYSIS_INPUTS_PREFIX } from "../inputs/analysisInputs"
+import { ANALYSIS_INPUTS_PREFIX } from "../inputs/api"
 import { CompareMethodsResponse } from "./types";
 import { MicroserviceNode } from "./types";
 

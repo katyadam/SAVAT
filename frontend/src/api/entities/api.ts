@@ -1,4 +1,4 @@
-import { ANALYSIS_INPUTS_PREFIX } from "../inputs/analysisInputs";
+import { ANALYSIS_INPUTS_PREFIX } from "../inputs/api";
 import { axiosInstance } from "../config";
 import { EntitiesDiff, EntityLink, GraphData } from "./types";
 import { CompareEntitiesLinksResponse } from "./types";
@@ -29,8 +29,6 @@ async function getEntitiesDiff(id: string | null): Promise<EntitiesDiff> {
     const resp = await axiosInstance.get(`${ENTITIES_COMPARE_PREFIX}/${id}`)
     return resp.data;
 }
-
-
 
 const getChangedColor = (type: string): string => {
     switch (type) {

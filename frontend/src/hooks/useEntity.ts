@@ -1,4 +1,4 @@
-import EntitiesApi from "@/api/entities/entities";
+import EntitiesApi from "@/api/entities/api";
 import { EntitiesDiff } from "@/api/entities/types";
 import { useQuery, UseQueryResult } from "@tanstack/react-query"
 

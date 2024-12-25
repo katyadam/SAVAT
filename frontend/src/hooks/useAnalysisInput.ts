@@ -1,4 +1,4 @@
-import AnalysisInputApi from "@/api/inputs/analysisInputs";
+import AnalysisInputApi from "@/api/inputs/api";
 import { useQuery } from "@tanstack/react-query"
 
 export const useAnalysisInputs = (projectId: string) => {

@@ -1,6 +1,6 @@
-import EntitiesApi from "@/api/entities/entities";
+import EntitiesApi from "@/api/entities/api";
 import { EntityLink } from "@/api/entities/types";
-import MethodsApi from "@/api/methods/methods";
+import MethodsApi from "@/api/methods/api";
 import { MicroserviceNode } from "@/api/methods/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 

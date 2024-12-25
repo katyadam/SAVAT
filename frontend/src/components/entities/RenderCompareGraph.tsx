@@ -1,4 +1,4 @@
-import EntitiesApi from "@/api/entities/entities";
+import EntitiesApi from "@/api/entities/api";
 import { GraphDataChangedLinks } from "@/api/entities/types";
 import { FC } from "react";
 import { ForceGraph3D } from "react-force-graph";

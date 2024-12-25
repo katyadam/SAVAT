@@ -9,7 +9,7 @@ import {
 } from "@/api/entities/types";
 import { useEntitiesDiff } from "@/hooks/useEntity";
 import { getMicroservicesColors } from "../generators/colorGenerator";
-import EntitiesApi from "@/api/entities/entities";
+import EntitiesApi from "@/api/entities/api";
 
 type EntitiesDiffGraphType = {
   onNodeClick: (node: EntityNode) => void;

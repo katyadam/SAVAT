@@ -1,4 +1,4 @@
-import MethodsApi from "@/api/methods/methods";
+import MethodsApi from "@/api/methods/api";
 import { useQuery } from "@tanstack/react-query"
 
 export const useMethods = (analysisInputId: string) => {
