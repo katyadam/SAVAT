@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.model.methods.MethodsInputDto;
 import org.adamkattan.model.methods.MicroserviceNode;
-import org.adamkattan.model.output.ChangedMethodsOutput;
+import org.adamkattan.model.methods.compare.ChangedMethodsOutput;
 
 import java.util.List;
 import java.util.Optional;

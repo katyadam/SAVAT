@@ -1,5 +1,5 @@
-import { AnalysisInputsTable } from "@/components/analysis-inputs/AnalysisInputsTable";
-import { columns } from "@/components/analysis-inputs/Columns";
+import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
+import { columns } from "@/components/inputs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
 import { useProject } from "@/hooks/useProject";
 import { useParams } from "react-router-dom";

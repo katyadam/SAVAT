@@ -1,7 +1,5 @@
-import EntitiesApi, {
-  ChangedEntityLinkType,
-  GraphDataChangedLinks,
-} from "@/api/entities";
+import EntitiesApi from "@/api/entities/api";
+import { GraphDataChangedLinks } from "@/api/entities/types";
 import { FC } from "react";
 import { ForceGraph3D } from "react-force-graph";
 
@@ -10,8 +8,6 @@ type RenderCompareGraphType = {
 };
 
 const RenderCompareGraph: FC<RenderCompareGraphType> = ({ entities }) => {
-  console.log(entities);
-
   return entities ? (
     <ForceGraph3D
       graphData={entities}

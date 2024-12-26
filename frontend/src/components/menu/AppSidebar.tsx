@@ -11,7 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useProjects } from "@/hooks/useProject";
-import { Project } from "@/api/projects";
+import { Project } from "@/api/projects/types";
 
 export function AppSidebar() {
   const { data: projects, isLoading, error } = useProjects();

@@ -4,9 +4,9 @@ import MethodsList from "./MethodsList";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import CompareForm from "./CompareForm";
-import { CompareMethodsResponse } from "@/api/analysisOutputs";
 import Overlay from "../ui/Overlay";
-import { MicroserviceNode } from "@/api/methods";
+import { MicroserviceNode } from "@/api/methods/types";
+import { CompareMethodsResponse } from "@/api/methods/types";
 
 type MethodsPanelProps = {
   analysisInputId: string;

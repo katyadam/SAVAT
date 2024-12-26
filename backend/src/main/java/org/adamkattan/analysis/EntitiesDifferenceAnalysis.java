@@ -1,9 +1,9 @@
 package org.adamkattan.analysis;
 
-import org.adamkattan.model.entities.ChangedEntityLink;
-import org.adamkattan.model.entities.ChangedEntityLinkType;
+import org.adamkattan.model.entities.compare.ChangedEntityLink;
+import org.adamkattan.model.entities.compare.ChangedEntityLinkType;
 import org.adamkattan.model.entities.EntityLink;
-import org.adamkattan.model.output.ChangedEntitiesLinksOutput;
+import org.adamkattan.model.entities.compare.ChangedEntitiesLinksOutput;
 
 import java.util.ArrayList;
 import java.util.List;

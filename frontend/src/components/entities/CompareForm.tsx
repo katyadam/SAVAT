@@ -1,10 +1,10 @@
-import { EntityLink } from "@/api/entities";
 import { FC, useState } from "react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useCompareEntitiesLinks } from "@/hooks/useAnalysisOutput";
+import { useCompareEntitiesLinks } from "@/hooks/useCompare";
 import { Button } from "../ui/button";
-import { CompareEntitiesLinksResponse } from "@/api/analysisOutputs";
+import { EntityLink } from "@/api/entities/types";
+import { CompareEntitiesLinksResponse } from "@/api/entities/types";
 
 type CompareFormType = {
   analysisInputId: string;
@@ -30,7 +30,6 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
       const res = await mutateAsync(parsedData);
 
       respFunc(res);
-      console.log("Successfuly fetched: " + res);
     } catch (error) {
       console.error("Failed to parse JSON input:", error);
       alert("Invalid JSON input. Please ensure it is correctly formatted.");

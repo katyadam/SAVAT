@@ -2,7 +2,7 @@ package org.adamkattan.analysis;
 
 import org.adamkattan.model.methods.MicroserviceMethodNode;
 import org.adamkattan.model.methods.MicroserviceNode;
-import org.adamkattan.model.output.ChangedMethodsOutput;
+import org.adamkattan.model.methods.compare.ChangedMethodsOutput;
 
 import java.util.ArrayList;
 import java.util.List;
