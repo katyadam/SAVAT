@@ -19,7 +19,6 @@ public class EntitiesOutputController {
     @Inject
     EntitiesDifferenceService entitiesDifferenceService;
 
-
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,7 +34,7 @@ public class EntitiesOutputController {
     @Path("/analysis-input/{analysisInputId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getAnalysisInputEntitiesOutputs(@PathParam("analysisInputId") Long analysisInputId) {
+    public Response getChangedEntities(@PathParam("analysisInputId") Long analysisInputId) {
         List<ChangedEntity> changedEntities = entitiesDifferenceService.getChangedEntities(analysisInputId);
         return Response.ok(
                 changedEntities.stream()
