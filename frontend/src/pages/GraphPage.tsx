@@ -22,15 +22,17 @@ const GraphPage = () => {
 
   const { data: graph, isLoading, error } = useCommGraph(id);
   const [compareUp, setCompareUp] = useState<boolean>(false);
-  const [compareResponse, setCompareResponse] =
-    useState<CompareCommGraphLinksResponse | null>(null);
+  const [selectedCommGraphDiff, setSelectedCommGraphDiff] = useState<
+    string | null
+  >(null);
+  const [showComparisons, setShowComparisons] = useState<boolean>(false);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: Unable to fetch entity data.</p>;
 
   const handleCompareResponse = (resp: CompareCommGraphLinksResponse) => {
     console.log(resp);
-    setCompareResponse(resp);
+    alert("Comparison done. Proceed to 'Show differences'"); // TODO: Toast
     setCompareUp(false);
   };
 
@@ -38,13 +40,14 @@ const GraphPage = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (graph) {
-      if (compareResponse) {
+      if (showComparisons) {
         return (
           <DiffGraph
             graphDiff={{
-              nodes: graph?.nodes,
-              links: compareResponse.changedLinks,
+              nodes: graph.nodes,
+              links: [],
             }}
+            commGraphDiffId={selectedCommGraphDiff}
           />
         );
       }
@@ -54,7 +57,13 @@ const GraphPage = () => {
 
   return (
     <div className="h-screen w-screen">
-      <Navbar compareBtnClick={() => setCompareUp(true)} analysisInputId={id} />
+      <Navbar
+        compareBtnClick={() => setCompareUp(true)}
+        analysisInputId={id}
+        setSelectedCommGraphDiff={setSelectedCommGraphDiff}
+        setShowComparisons={setShowComparisons}
+        showComparisons={showComparisons}
+      />
       <Separator className="mt-2" />
       {renderContent()}
       {compareUp && (

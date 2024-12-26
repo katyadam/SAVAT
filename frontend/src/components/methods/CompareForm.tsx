@@ -5,7 +5,7 @@ import { ArrowLeftRight, ArrowUpDown } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { useCompareMethods } from "@/hooks/useAnalysisOutput";
+import { useCompareMethods } from "@/hooks/useCompare";
 import { useMediaQuery } from "react-responsive";
 import { MicroserviceNode } from "@/api/methods/types";
 import { CompareMethodsResponse } from "@/api/methods/types";

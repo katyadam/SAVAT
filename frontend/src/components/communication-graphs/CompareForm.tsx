@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useCompareCommGraphLinks } from "@/hooks/useAnalysisOutput";
+import { useCompareCommGraphLinks } from "@/hooks/useCompare";
 import { Button } from "../ui/button";
 import {
   CommGraphLink,

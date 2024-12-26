@@ -9,7 +9,6 @@ import {
 } from "@/api/entities/types";
 import { useEntitiesDiff } from "@/hooks/useEntity";
 import { getMicroservicesColors } from "../generators/colorGenerator";
-import EntitiesApi from "@/api/entities/api";
 import { getChangedColor } from "@/api/utils";
 
 type EntitiesDiffGraphType = {

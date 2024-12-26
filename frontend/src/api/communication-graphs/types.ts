@@ -27,17 +27,23 @@ export type CommGraphLinkRequest = {
     restCallInClassName: string;
 };
 
-export type CommGraphDiff = {
-    nodes: CommGraphNode[];
-    links: ChangedCommGraphLink[];
-}
-
 export type ChangedCommGraphLink = CommGraphLink & {
     type: ChangedCommGraphLinkType;
 };
 
 export enum ChangedCommGraphLinkType {
     SAME, ADDED, REMOVED, MODIFIED
+}
+
+export type CommGraphWithChangedLinks = {
+    nodes: CommGraphNode[];
+    links: ChangedCommGraphLink[];
+}
+
+export type CommGraphDiff = {
+    id: number;
+    changedLinks: ChangedCommGraphLink[];
+    createdAt: string;
 }
 
 export type CompareCommGraphLinksResponse = {

@@ -4,21 +4,29 @@ import cytoscape from "cytoscape";
 import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
 import {
   ChangedCommGraphLink,
-  CommGraphDiff,
   CommGraphNode,
+  CommGraphWithChangedLinks,
 } from "@/api/communication-graphs/types";
 import { getChangedColor } from "@/api/utils";
+import { useCommGraphDiff } from "@/hooks/useCommGraph";
 
 type DiffGraphType = {
-  graphDiff: CommGraphDiff;
+  graphDiff: CommGraphWithChangedLinks;
+  commGraphDiffId: string | null;
 };
 
-const DiffGraph: FC<DiffGraphType> = ({ graphDiff }) => {
+const DiffGraph: FC<DiffGraphType> = ({ graphDiff, commGraphDiffId }) => {
+  if (!commGraphDiffId || commGraphDiffId === "None") return <></>;
+
+  const { data: commGraphDiff, isLoading } = useCommGraphDiff(commGraphDiffId);
+
   const cyRef = useRef<HTMLDivElement | null>(null);
 
   cytoscape.use(fcose);
 
   useEffect(() => {
+    if (!cyRef.current || isLoading || !commGraphDiff) return;
+
     const elements: ElementsDefinition = {
       nodes: graphDiff.nodes.map((node: CommGraphNode) => ({
         data: {
@@ -30,7 +38,7 @@ const DiffGraph: FC<DiffGraphType> = ({ graphDiff }) => {
           "background-color": "blue",
         },
       })),
-      edges: graphDiff.links.map((link: ChangedCommGraphLink) => ({
+      edges: commGraphDiff.changedLinks.map((link: ChangedCommGraphLink) => ({
         data: {
           source: link.source,
           target: link.target,
@@ -97,7 +105,7 @@ const DiffGraph: FC<DiffGraphType> = ({ graphDiff }) => {
     return () => {
       cy.destroy();
     };
-  }, [graphDiff]);
+  }, [graphDiff, commGraphDiff, isLoading]);
 
   return <div ref={cyRef} className="w-full h-[90%]" />;
 };
