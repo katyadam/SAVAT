@@ -9,6 +9,7 @@ import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
 import { useEntities } from "@/hooks/useEntity";
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
@@ -38,6 +39,8 @@ const EntitiesPage = () => {
 
   const { data: entities, isLoading, error } = useEntities(id);
 
+  const { toast } = useToast();
+
   const handleNodeClick = useCallback(
     (node: EntityNode): void => {
       if (node === selectedNode) {
@@ -56,7 +59,10 @@ const EntitiesPage = () => {
 
   const handleCompareResponse = (resp: CompareEntitiesLinksResponse) => {
     console.log(resp);
-    alert("Comparison done. Proceed to 'Show differences'");
+    toast({
+      title: "Comparison done",
+      description: "Proceed to comparison",
+    });
     setCompareUp(false);
   };
 

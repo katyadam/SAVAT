@@ -5,6 +5,7 @@ import Graph from "@/components/communication-graphs/graphs/Graph";
 import Navbar from "@/components/communication-graphs/Navbar";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
 import { useCommGraph } from "@/hooks/useCommGraph";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -27,12 +28,17 @@ const GraphPage = () => {
   >(null);
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
 
+  const { toast } = useToast();
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: Unable to fetch entity data.</p>;
 
   const handleCompareResponse = (resp: CompareCommGraphLinksResponse) => {
     console.log(resp);
-    alert("Comparison done. Proceed to 'Show differences'"); // TODO: Toast
+    toast({
+      title: "Comparison done",
+      description: "Proceed to comparison",
+    });
     setCompareUp(false);
   };
 
