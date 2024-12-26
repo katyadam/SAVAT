@@ -7,8 +7,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.entities.EntitiesLinksInputDto;
-import org.adamkattan.model.output.ChangedEntitiesLinksOutput;
-import org.adamkattan.model.output.ChangedEntity;
+import org.adamkattan.model.entities.compare.ChangedEntitiesLinksOutput;
+import org.adamkattan.model.entities.compare.ChangedEntity;
 import org.adamkattan.service.EntitiesDifferenceService;
 
 import java.util.List;

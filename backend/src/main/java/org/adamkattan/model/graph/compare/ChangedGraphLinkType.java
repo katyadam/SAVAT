@@ -1,4 +1,4 @@
-package org.adamkattan.model.graph;
+package org.adamkattan.model.graph.compare;
 
 public enum ChangedGraphLinkType {
     SAME,

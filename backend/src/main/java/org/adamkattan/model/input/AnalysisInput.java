@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.entities.Entities;
 import org.adamkattan.model.graph.Graph;
 import org.adamkattan.model.methods.MicroserviceNode;
-import org.adamkattan.model.output.ChangedEntity;
+import org.adamkattan.model.entities.compare.ChangedEntity;
 import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

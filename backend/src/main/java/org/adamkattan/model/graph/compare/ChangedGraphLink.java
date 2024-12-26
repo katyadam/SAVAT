@@ -1,4 +1,7 @@
-package org.adamkattan.model.graph;
+package org.adamkattan.model.graph.compare;
+
+import org.adamkattan.model.graph.GraphLink;
+import org.adamkattan.model.graph.GraphLinkRequest;
 
 import java.util.List;
 

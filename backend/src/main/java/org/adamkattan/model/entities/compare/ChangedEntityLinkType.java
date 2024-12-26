@@ -1,4 +1,4 @@
-package org.adamkattan.model.entities;
+package org.adamkattan.model.entities.compare;
 
 public enum ChangedEntityLinkType {
     SAME,

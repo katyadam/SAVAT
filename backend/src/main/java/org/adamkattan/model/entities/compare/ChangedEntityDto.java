@@ -1,7 +1,6 @@
-package org.adamkattan.model.output;
+package org.adamkattan.model.entities.compare;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.adamkattan.model.entities.ChangedEntityLink;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,9 +1,9 @@
 package org.adamkattan.analysis;
 
-import org.adamkattan.model.graph.ChangedGraphLink;
-import org.adamkattan.model.graph.ChangedGraphLinkType;
+import org.adamkattan.model.graph.compare.ChangedGraphLink;
+import org.adamkattan.model.graph.compare.ChangedGraphLinkType;
 import org.adamkattan.model.graph.GraphLink;
-import org.adamkattan.model.output.ChangedGraphLinksOutput;
+import org.adamkattan.model.graph.compare.ChangedGraphLinksOutput;
 
 import java.util.ArrayList;
 import java.util.List;

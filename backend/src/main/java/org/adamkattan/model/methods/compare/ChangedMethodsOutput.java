@@ -1,4 +1,4 @@
-package org.adamkattan.model.output;
+package org.adamkattan.model.methods.compare;
 
 import org.adamkattan.model.methods.MicroserviceNode;
 

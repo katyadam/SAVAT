@@ -1,6 +1,4 @@
-package org.adamkattan.model.output;
-
-import org.adamkattan.model.entities.ChangedEntityLink;
+package org.adamkattan.model.entities.compare;
 
 import java.util.List;
 

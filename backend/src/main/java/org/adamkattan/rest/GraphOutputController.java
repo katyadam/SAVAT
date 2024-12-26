@@ -7,7 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.graph.GraphLinksInputDto;
-import org.adamkattan.model.output.ChangedGraphLinksOutput;
+import org.adamkattan.model.graph.compare.ChangedGraphLinksOutput;
 import org.adamkattan.service.GraphDifferenceService;
 
 @Path("/graph")

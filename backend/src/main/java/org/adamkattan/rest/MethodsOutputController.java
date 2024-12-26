@@ -7,7 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.methods.MethodsInputDto;
-import org.adamkattan.model.output.ChangedMethodsOutput;
+import org.adamkattan.model.methods.compare.ChangedMethodsOutput;
 import org.adamkattan.service.MethodsDifferenceService;
 
 import java.util.Optional;

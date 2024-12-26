@@ -1,8 +1,7 @@
-package org.adamkattan.model.output;
+package org.adamkattan.model.entities.compare;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.adamkattan.model.entities.ChangedEntityLink;
 import org.adamkattan.model.input.AnalysisInput;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

@@ -1,6 +1,4 @@
-package org.adamkattan.model.output;
-
-import org.adamkattan.model.graph.ChangedGraphLink;
+package org.adamkattan.model.graph.compare;
 
 import java.util.List;
 

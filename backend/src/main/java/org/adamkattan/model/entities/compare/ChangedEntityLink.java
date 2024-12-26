@@ -1,4 +1,6 @@
-package org.adamkattan.model.entities;
+package org.adamkattan.model.entities.compare;
+
+import org.adamkattan.model.entities.EntityLink;
 
 public record ChangedEntityLink(
         String source,

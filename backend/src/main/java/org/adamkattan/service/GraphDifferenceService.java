@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import org.adamkattan.analysis.GraphDifferenceAnalysis;
 import org.adamkattan.model.graph.GraphLinksInputDto;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.output.ChangedGraphLinksOutput;
+import org.adamkattan.model.graph.compare.ChangedGraphLinksOutput;
 
 @ApplicationScoped
 public class GraphDifferenceService {

@@ -5,8 +5,8 @@ import jakarta.inject.Inject;
 import org.adamkattan.analysis.EntitiesDifferenceAnalysis;
 import org.adamkattan.model.entities.EntitiesLinksInputDto;
 import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.output.ChangedEntitiesLinksOutput;
-import org.adamkattan.model.output.ChangedEntity;
+import org.adamkattan.model.entities.compare.ChangedEntitiesLinksOutput;
+import org.adamkattan.model.entities.compare.ChangedEntity;
 
 import java.util.List;
 
