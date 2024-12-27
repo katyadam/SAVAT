@@ -7,6 +7,7 @@ import CompareForm from "./CompareForm";
 import Overlay from "../ui/Overlay";
 import { MicroserviceNode } from "@/api/methods/types";
 import { CompareMethodsResponse } from "@/api/methods/types";
+import MethodsTable from "./MethodsTable";
 
 type MethodsPanelProps = {
   analysisInputId: string;
@@ -17,9 +18,6 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
   analysisInputId,
   microservices,
 }) => {
-  const [selectedMicroservice, setSelectedMicroservice] =
-    useState<MicroserviceNode | null>(null);
-
   const [selectedChangedMicroservice, setSelectedChangedMicroservice] =
     useState<MicroserviceNode | null>(null);
 
@@ -27,11 +25,6 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
 
   const [compareResponse, setCompareResponse] =
     useState<CompareMethodsResponse | null>(null);
-
-  const handleMicroserviceClick = (ms: MicroserviceNode) => {
-    if (ms.name === selectedMicroservice?.name) setSelectedMicroservice(null);
-    else setSelectedMicroservice(ms);
-  };
 
   const handleChangedMicroserviceClick = (ms: MicroserviceNode) => {
     if (ms.name === selectedChangedMicroservice?.name) {
@@ -63,21 +56,15 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
         <Separator className="mt-2" />
       </div>
       <div className="flex flex-row justify-between gap-5 m-5">
-        <div className="flex flex-col gap-2">
-          {microservices.map((ms) => (
-            <MicroserviceRow
-              key={ms.name}
-              ms={ms}
-              onClick={handleMicroserviceClick}
-            />
-          ))}
-        </div>
-        {selectedMicroservice && (
-          <div className="flex flex-col items-center">
-            <h1 className="text-2xl">{selectedMicroservice.name}</h1>
-            <MethodsList methods={selectedMicroservice.methods} />
-          </div>
-        )}
+        <MethodsTable
+          data={microservices.flatMap((ms) =>
+            ms.methods.map((method) => ({
+              name: method.name,
+              bytecodeHash: method.bytecodeHash,
+              microservice: ms.name,
+            }))
+          )}
+        />
       </div>
 
       {compareUp && (
