@@ -19,7 +19,7 @@ public class AnalysisInputController {
     AnalysisInputService analysisInputService;
 
     @GET
-    @Path("/{projectId}")
+    @Path("/{projectId}") // TODO: should be /project/{projectId}
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) { // TODO: move to ProjectController
         List<AnalysisInput> analysisInputs = analysisInputService.getProjectAnalysisInputs(projectId);

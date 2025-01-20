@@ -24,7 +24,6 @@ public class ChangedEntity extends PanacheEntity {
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 
-
     public static ChangedEntityDto toDto(ChangedEntity changedEntity) {
         return new ChangedEntityDto(
                 changedEntity.id,

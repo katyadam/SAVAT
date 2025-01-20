@@ -3,6 +3,7 @@ package org.adamkattan.model.project;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.input.AnalysisInput;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,10 @@ public class Project extends PanacheEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "inputs")
     public List<AnalysisInput> inputs;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(nullable = false, name = "call_graph_inputs")
+    public List<CallGraphInput> callGraphInputs;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
