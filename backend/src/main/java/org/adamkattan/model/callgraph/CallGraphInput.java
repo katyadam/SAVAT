@@ -37,6 +37,7 @@ public class CallGraphInput extends PanacheEntity {
 
     public static CallGraphInputDto toDto(CallGraphInput input) {
         return new CallGraphInputDto(
+                input.id,
                 input.project.id,
                 input.version,
                 input.commitHash,

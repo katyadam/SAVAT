@@ -35,7 +35,7 @@ public class CallGraphInputController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCallGraphInputById(@PathParam("call-graph-input-id") Long callGraphInputId) {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
-        return Response.ok(callGraphInput).build();
+        return Response.ok(CallGraphInput.toDto(callGraphInput)).build();
     }
 
     @POST

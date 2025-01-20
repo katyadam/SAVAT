@@ -1,0 +1,2226 @@
+{
+  "projectId": 1,
+  "version": "2099.99",
+  "commitHash": "123abc",
+  "callGraph": {
+    "methods": [
+      {
+        "id": 0,
+        "name": "<clinit>",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "void",
+        "display": "a.c.ABIC.<clinit>",
+        "flags": "s",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.<clinit>"
+      },
+      {
+        "id": 1,
+        "name": "addConfig",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.addConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addConfig"
+      },
+      {
+        "id": 2,
+        "name": "addContacts",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.addContacts",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addContacts"
+      },
+      {
+        "id": 3,
+        "name": "addPrice",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.addPrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addPrice"
+      },
+      {
+        "id": 4,
+        "name": "addStation",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.addStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addStation"
+      },
+      {
+        "id": 5,
+        "name": "addTrain",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.addTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addTrain"
+      },
+      {
+        "id": 6,
+        "name": "deleteConfig",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.deleteConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs/{name}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteConfig"
+      },
+      {
+        "id": 7,
+        "name": "deleteContacts",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.deleteContacts",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts/{contactsId}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteContacts"
+      },
+      {
+        "id": 8,
+        "name": "deletePrice",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.deletePrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices/{pricesId}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deletePrice"
+      },
+      {
+        "id": 9,
+        "name": "deleteStation",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.deleteStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations/{id}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteStation"
+      },
+      {
+        "id": 10,
+        "name": "deleteTrain",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.deleteTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains/{id}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteTrain"
+      },
+      {
+        "id": 11,
+        "name": "getAllConfigs",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.getAllConfigs",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllConfigs"
+      },
+      {
+        "id": 12,
+        "name": "getAllContacts",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.getAllContacts",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllContacts"
+      },
+      {
+        "id": 13,
+        "name": "getAllPrices",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.getAllPrices",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllPrices"
+      },
+      {
+        "id": 14,
+        "name": "getAllStations",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.getAllStations",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllStations"
+      },
+      {
+        "id": 15,
+        "name": "getAllTrains",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.getAllTrains",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllTrains"
+      },
+      {
+        "id": 16,
+        "name": "home",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "java.lang.String",
+        "display": "a.c.ABIC.home",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/welcome",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.home"
+      },
+      {
+        "id": 17,
+        "name": "modifyConfig",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.modifyConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyConfig"
+      },
+      {
+        "id": 18,
+        "name": "modifyContacts",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.modifyContacts",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyContacts"
+      },
+      {
+        "id": 19,
+        "name": "modifyPrice",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.modifyPrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyPrice"
+      },
+      {
+        "id": 20,
+        "name": "modifyStation",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.modifyStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyStation"
+      },
+      {
+        "id": 21,
+        "name": "modifyTrain",
+        "type": "adminbasic.controller.AdminBasicInfoController",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "a.c.ABIC.modifyTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyTrain"
+      },
+      {
+        "id": 22,
+        "name": "<clinit>",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "void",
+        "display": "a.s.ABISI.<clinit>",
+        "flags": "s",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.<clinit>"
+      },
+      {
+        "id": 10651,
+        "name": "getServiceUrl",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "java.lang.String",
+        "display": "a.s.ABISI.getServiceUrl",
+        "flags": "P",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl"
+      },
+      {
+        "id": 39252,
+        "name": "addConfig",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.addConfig",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.addConfig"
+      },
+      {
+        "id": 39256,
+        "name": "addContact",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.addContact",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.addContact"
+      },
+      {
+        "id": 39257,
+        "name": "getId",
+        "type": "adminbasic.entity.PriceInfo",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "a.e.PI.getId",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.entity.PriceInfo.getId"
+      },
+      {
+        "id": 39258,
+        "name": "addPrice",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.addPrice",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.addPrice"
+      },
+      {
+        "id": 39260,
+        "name": "addStation",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.addStation",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.addStation"
+      },
+      {
+        "id": 39262,
+        "name": "addTrain",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.addTrain",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.addTrain"
+      },
+      {
+        "id": 39263,
+        "name": "deleteConfig",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.deleteConfig",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.deleteConfig"
+      },
+      {
+        "id": 39264,
+        "name": "deleteContact",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.deleteContact",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.deleteContact"
+      },
+      {
+        "id": 39265,
+        "name": "deletePrice",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.deletePrice",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.deletePrice"
+      },
+      {
+        "id": 39266,
+        "name": "deleteStation",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.deleteStation",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.deleteStation"
+      },
+      {
+        "id": 39267,
+        "name": "deleteTrain",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.deleteTrain",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.deleteTrain"
+      },
+      {
+        "id": 39270,
+        "name": "getAllConfigs",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.getAllConfigs",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.getAllConfigs"
+      },
+      {
+        "id": 7271,
+        "name": "addConfig",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.addConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addConfig"
+      },
+      {
+        "id": 39271,
+        "name": "getAllContacts",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.getAllContacts",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.getAllContacts"
+      },
+      {
+        "id": 39272,
+        "name": "getAllPrices",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.getAllPrices",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.getAllPrices"
+      },
+      {
+        "id": 7273,
+        "name": "addContact",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.addContact",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addContact"
+      },
+      {
+        "id": 39273,
+        "name": "getAllStations",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.getAllStations",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.getAllStations"
+      },
+      {
+        "id": 7274,
+        "name": "addPrice",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.addPrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addPrice"
+      },
+      {
+        "id": 39274,
+        "name": "getAllTrains",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.getAllTrains",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.getAllTrains"
+      },
+      {
+        "id": 7275,
+        "name": "addStation",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.addStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addStation"
+      },
+      {
+        "id": 39275,
+        "name": "modifyConfig",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.modifyConfig",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.modifyConfig"
+      },
+      {
+        "id": 7276,
+        "name": "addTrain",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.addTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addTrain"
+      },
+      {
+        "id": 39276,
+        "name": "modifyContact",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.modifyContact",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.modifyContact"
+      },
+      {
+        "id": 7277,
+        "name": "deleteConfig",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.deleteConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig"
+      },
+      {
+        "id": 39277,
+        "name": "modifyPrice",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.modifyPrice",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.modifyPrice"
+      },
+      {
+        "id": 7278,
+        "name": "deleteContact",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.deleteContact",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteContact"
+      },
+      {
+        "id": 39278,
+        "name": "modifyStation",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.modifyStation",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.modifyStation"
+      },
+      {
+        "id": 7279,
+        "name": "deletePrice",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.deletePrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deletePrice"
+      },
+      {
+        "id": 39279,
+        "name": "modifyTrain",
+        "type": "adminbasic.service.AdminBasicInfoService",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABIS.modifyTrain",
+        "flags": "pa",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoService.modifyTrain"
+      },
+      {
+        "id": 7280,
+        "name": "deleteStation",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.deleteStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteStation"
+      },
+      {
+        "id": 7281,
+        "name": "deleteTrain",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.deleteTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain"
+      },
+      {
+        "id": 7285,
+        "name": "getAllConfigs",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.getAllConfigs",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs"
+      },
+      {
+        "id": 7286,
+        "name": "getAllContacts",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.getAllContacts",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts"
+      },
+      {
+        "id": 7287,
+        "name": "getAllPrices",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.getAllPrices",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices"
+      },
+      {
+        "id": 7288,
+        "name": "getAllStations",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.getAllStations",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllStations"
+      },
+      {
+        "id": 7289,
+        "name": "getAllTrains",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.getAllTrains",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains"
+      },
+      {
+        "id": 7290,
+        "name": "modifyConfig",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Config",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.modifyConfig",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig"
+      },
+      {
+        "id": 7291,
+        "name": "modifyContact",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.modifyContact",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyContact"
+      },
+      {
+        "id": 7292,
+        "name": "modifyPrice",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "adminbasic.entity.PriceInfo",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.modifyPrice",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice"
+      },
+      {
+        "id": 7293,
+        "name": "modifyStation",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.Station",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.modifyStation",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyStation"
+      },
+      {
+        "id": 7294,
+        "name": "modifyTrain",
+        "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+        "parameters": [
+          "edu.fudan.common.entity.TrainType",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "a.s.ABISI.modifyTrain",
+        "flags": "p",
+        "microservice": "ts-admin-basic-info-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain"
+      },
+      {
+        "id": 40576,
+        "name": "delete",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.delete",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.delete"
+      },
+      {
+        "id": 40577,
+        "name": "deleteById",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "void",
+        "display": "c.r.CR.deleteById",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.deleteById"
+      },
+      {
+        "id": 1922,
+        "name": "<clinit>",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "void",
+        "display": "c.c.CC.<clinit>",
+        "flags": "s",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.<clinit>"
+      },
+      {
+        "id": 40578,
+        "name": "findById",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "java.util.Optional",
+        "display": "c.r.CR.findById",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.findById"
+      },
+      {
+        "id": 1923,
+        "name": "createNewContacts",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.ResponseEntity",
+        "display": "c.c.CC.createNewContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.createNewContacts"
+      },
+      {
+        "id": 1924,
+        "name": "createNewContactsAdmin",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.createNewContactsAdmin",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts/admin",
+        "httpMethod": "POST",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.createNewContactsAdmin"
+      },
+      {
+        "id": 1925,
+        "name": "deleteContacts",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.deleteContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts/{contactsId}",
+        "httpMethod": "DELETE",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.deleteContacts"
+      },
+      {
+        "id": 1926,
+        "name": "findContactsByAccountId",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.findContactsByAccountId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts/account/{accountId}",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.findContactsByAccountId"
+      },
+      {
+        "id": 40582,
+        "name": "findContactsByAccountId",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.findContactsByAccountId",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.findContactsByAccountId"
+      },
+      {
+        "id": 1927,
+        "name": "getAllContacts",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.getAllContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.getAllContacts"
+      },
+      {
+        "id": 40583,
+        "name": "findByAccountId",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "java.util.ArrayList",
+        "display": "c.r.CR.findByAccountId",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.findByAccountId"
+      },
+      {
+        "id": 1928,
+        "name": "getContactsByContactsId",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.getContactsByContactsId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts/{id}",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.getContactsByContactsId"
+      },
+      {
+        "id": 40584,
+        "name": "getAllContacts",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.getAllContacts",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.getAllContacts"
+      },
+      {
+        "id": 1929,
+        "name": "home",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.c.CC.home",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts/welcome",
+        "httpMethod": "GET",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.home"
+      },
+      {
+        "id": 40585,
+        "name": "findAll",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.util.ArrayList",
+        "display": "c.r.CR.findAll",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.findAll"
+      },
+      {
+        "id": 1930,
+        "name": "modifyContacts",
+        "type": "contacts.controller.ContactsController",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "org.springframework.http.HttpEntity",
+        "display": "c.c.CC.modifyContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": "api/v1/contactservice/contacts",
+        "httpMethod": "PUT",
+        "endpointMethod": true,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.controller.ContactsController.modifyContacts"
+      },
+      {
+        "id": 40586,
+        "name": "findContactsById",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.findContactsById",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.findContactsById"
+      },
+      {
+        "id": 1931,
+        "name": "values",
+        "type": "contacts.entity.DocumentType",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "contacts.entity.DocumentType[]",
+        "display": "c.e.DT.values",
+        "flags": "ps",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.DocumentType.values"
+      },
+      {
+        "id": 40587,
+        "name": "modify",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.modify",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.modify"
+      },
+      {
+        "id": 1932,
+        "name": "<clinit>",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "void",
+        "display": "c.s.CSI.<clinit>",
+        "flags": "s",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.<clinit>"
+      },
+      {
+        "id": 40588,
+        "name": "getName",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.e.C.getName",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getName"
+      },
+      {
+        "id": 40589,
+        "name": "setName",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "void",
+        "display": "c.e.C.setName",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.setName"
+      },
+      {
+        "id": 40590,
+        "name": "setDocumentType",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "int"
+        ],
+        "returnType": "void",
+        "display": "c.e.C.setDocumentType",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.setDocumentType"
+      },
+      {
+        "id": 40591,
+        "name": "setDocumentNumber",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "void",
+        "display": "c.e.C.setDocumentNumber",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.setDocumentNumber"
+      },
+      {
+        "id": 40592,
+        "name": "getPhoneNumber",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.e.C.getPhoneNumber",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getPhoneNumber"
+      },
+      {
+        "id": 40593,
+        "name": "setPhoneNumber",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "void",
+        "display": "c.e.C.setPhoneNumber",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.setPhoneNumber"
+      },
+      {
+        "id": 8152,
+        "name": "create",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.create",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.create"
+      },
+      {
+        "id": 8155,
+        "name": "createContacts",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.createContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.createContacts"
+      },
+      {
+        "id": 8156,
+        "name": "delete",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.delete",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.delete"
+      },
+      {
+        "id": 8161,
+        "name": "findContactsByAccountId",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.findContactsByAccountId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.findContactsByAccountId"
+      },
+      {
+        "id": 8162,
+        "name": "getAllContacts",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.getAllContacts",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.getAllContacts"
+      },
+      {
+        "id": 8163,
+        "name": "findContactsById",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "java.lang.String",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.findContactsById",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.findContactsById"
+      },
+      {
+        "id": 8164,
+        "name": "modify",
+        "type": "contacts.service.ContactsServiceImpl",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CSI.modify",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsServiceImpl.modify"
+      },
+      {
+        "id": 40566,
+        "name": "create",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.create",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.create"
+      },
+      {
+        "id": 40567,
+        "name": "getAccountId",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.e.C.getAccountId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getAccountId"
+      },
+      {
+        "id": 40568,
+        "name": "getDocumentNumber",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.e.C.getDocumentNumber",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getDocumentNumber"
+      },
+      {
+        "id": 40569,
+        "name": "getDocumentType",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "int",
+        "display": "c.e.C.getDocumentType",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getDocumentType"
+      },
+      {
+        "id": 40570,
+        "name": "findByAccountIdAndDocumentTypeAndDocumentType",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "java.lang.String",
+          "java.lang.String",
+          "int"
+        ],
+        "returnType": "contacts.entity.Contacts",
+        "display": "c.r.CR.findByAccountIdAndDocumentTypeAndDocumentType",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.findByAccountIdAndDocumentTypeAndDocumentType"
+      },
+      {
+        "id": 40571,
+        "name": "getId",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "empty"
+        ],
+        "returnType": "java.lang.String",
+        "display": "c.e.C.getId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.getId"
+      },
+      {
+        "id": 40573,
+        "name": "save",
+        "type": "contacts.repository.ContactsRepository",
+        "parameters": [
+          "java.lang.Object"
+        ],
+        "returnType": "java.lang.Object",
+        "display": "c.r.CR.save",
+        "flags": "pby",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.repository.ContactsRepository.save"
+      },
+      {
+        "id": 40574,
+        "name": "setId",
+        "type": "contacts.entity.Contacts",
+        "parameters": [
+          "java.lang.String"
+        ],
+        "returnType": "void",
+        "display": "c.e.C.setId",
+        "flags": "p",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.entity.Contacts.setId"
+      },
+      {
+        "id": 40575,
+        "name": "createContacts",
+        "type": "contacts.service.ContactsService",
+        "parameters": [
+          "contacts.entity.Contacts",
+          "org.springframework.http.HttpHeaders"
+        ],
+        "returnType": "edu.fudan.common.util.Response",
+        "display": "c.s.CS.createContacts",
+        "flags": "pa",
+        "microservice": "ts-contacts-service",
+        "endpointURI": null,
+        "httpMethod": null,
+        "endpointMethod": false,
+        "entryPoint": false,
+        "methodSignature": "ts-contacts-service/contacts.service.ContactsService.createContacts"
+      }
+    ],
+    "calls": [
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addConfig",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addContacts",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addContact",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addPrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addPrice",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addStation",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.addTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addTrain",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteContacts",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteContact",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deletePrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deletePrice",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteStation",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.deleteTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllConfigs",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllContacts",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllPrices",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllStations",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllStations",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.getAllTrains",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyContacts",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyContact",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyPrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyStation",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.controller.AdminBasicInfoController.modifyTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addContact",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addPrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteContact",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deletePrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllStations",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyContact",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyStation",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain",
+        "target": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.createNewContacts",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.create",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.createNewContactsAdmin",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.createContacts",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.deleteContacts",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.delete",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.findContactsByAccountId",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.findContactsByAccountId",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.getAllContacts",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.getAllContacts",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.getContactsByContactsId",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.findContactsById",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.controller.ContactsController.modifyContacts",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.modify",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-contacts-service/contacts.service.ContactsServiceImpl.modify",
+        "target": "ts-contacts-service/contacts.service.ContactsServiceImpl.findContactsById",
+        "isInterserviceLink": false,
+        "httpMethod": null
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.getAllContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "GET"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addContact",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.createNewContactsAdmin",
+        "isInterserviceLink": true,
+        "httpMethod": "POST"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.addConfig",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.createNewContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "POST"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyContact",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.modifyContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "PUT"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.deleteContact",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.deleteContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "DELETE"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.modifyContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "PUT"
+      },
+      {
+        "source": "ts-admin-basic-info-service/adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs",
+        "target": "ts-contacts-service/contacts.controller.ContactsController.getAllContacts",
+        "isInterserviceLink": true,
+        "httpMethod": "GET"
+      }
+    ]
+  },
+  "createdAt": "2022-03-10T12:15:50"
+}
