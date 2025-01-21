@@ -46,6 +46,16 @@ public class CallGraphInput extends PanacheEntity {
         );
     }
 
+    public static CallGraphInputSimpleDto toSimpleDto(CallGraphInput input) {
+        return new CallGraphInputSimpleDto(
+                input.id,
+                input.project.id,
+                input.version,
+                input.commitHash,
+                input.createdAt
+        );
+    }
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

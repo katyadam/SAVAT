@@ -28,7 +28,10 @@ export function AppSidebar() {
               {projects?.map((project: Project) => (
                 <SidebarMenuItem key={project.id}>
                   <SidebarMenuButton asChild>
-                    <a href={`/${project.id}`} className="flex justify-between">
+                    <a
+                      href={`/project/${project.id}`}
+                      className="flex justify-between"
+                    >
                       <span>{project.projectName}</span>
                       <ArrowRight size={64} />
                     </a>

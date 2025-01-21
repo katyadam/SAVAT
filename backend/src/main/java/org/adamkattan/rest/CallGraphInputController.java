@@ -25,7 +25,7 @@ public class CallGraphInputController {
         List<CallGraphInput> projectCallGraphInputs = callGraphInputService.getProjectCallGraphInputs(projectId);
 
         var dtos = projectCallGraphInputs.stream()
-                .map(CallGraphInput::toDto)
+                .map(CallGraphInput::toSimpleDto)
                 .toList();
         return Response.ok(dtos).build();
     }

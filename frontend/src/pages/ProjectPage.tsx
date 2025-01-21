@@ -1,6 +1,9 @@
+import { CallGraphInputsTable } from "@/components/callgraphs/CallGraphInputsTable";
 import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
 import { columns } from "@/components/inputs/Columns";
+import { callGraphInputsColumns } from "@/components/callgraphs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
+import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
 import { useProject } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useState } from "react";
@@ -13,6 +16,8 @@ const ProjectPage = () => {
 
   const { data: project, isLoading: projectLoading } = useProject(id);
   const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(id);
+  const { data: callGraphInputs, isLoading: callGraphInputsLoading } =
+    useProjectCallGraphInputs(id);
 
   return (
     <div className="m-5">
@@ -56,7 +61,14 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="callgraphs">
-          <p>TODO: Callgraphs visualization</p>
+          {callGraphInputsLoading ? (
+            <p>Loading call graph inputs...</p>
+          ) : (
+            <CallGraphInputsTable
+              columns={callGraphInputsColumns}
+              data={callGraphInputs!}
+            />
+          )}
         </TabsContent>
       </Tabs>
     </div>

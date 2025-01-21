@@ -1,4 +1,5 @@
 import ProjectLayout from "@/layouts/ProjectLayout";
+import CallGraphPage from "@/pages/CallGraphPage";
 import EntitiesPage from "@/pages/EntitiesPage";
 import Error from "@/pages/Error";
 import GraphPage from "@/pages/GraphPage";
@@ -8,20 +9,24 @@ import { RouteObject } from "react-router-dom";
 
 const projectRoutes: RouteObject[] = [
   {
-    path: ":id",
+    path: "project/:id",
     Component: ProjectPage,
   },
   {
-    path: ":id/entities",
+    path: "analysis-input/:id/entities",
     Component: EntitiesPage,
   },
   {
-    path: ":id/graph",
+    path: "analysis-input/:id/graph",
     Component: GraphPage,
   },
   {
-    path: ":id/methods",
+    path: "analysis-input/:id/methods",
     Component: MethodsPage,
+  },
+  {
+    path: "call-graph-input/:id",
+    Component: CallGraphPage,
   },
 ];
 

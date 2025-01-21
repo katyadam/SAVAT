@@ -9,7 +9,7 @@ type AnalysisInputButtonProps = {
 
 const AnalysisInputButton: FC<AnalysisInputButtonProps> = ({ type, id }) => {
   return (
-    <a href={`/${id}/${type}`}>
+    <a href={`/analysis-input/${id}/${type}`}>
       <Button variant="outline">
         <Eye />
       </Button>
