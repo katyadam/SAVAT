@@ -112,8 +112,6 @@ export const columns: ColumnDef<Method>[] = [
               Copy Full Bytecode Hash
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
