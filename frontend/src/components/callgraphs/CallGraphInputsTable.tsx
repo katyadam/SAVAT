@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/table";
 import { Eye } from "lucide-react";
 import { Button } from "../ui/button";
-import { CallGraphInput, CallGraphInputSimple } from "@/api/callgraphs/types";
+import { CallGraphInputSimple } from "@/api/callgraphs/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -28,10 +28,12 @@ export function CallGraphInputsTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const microserviceFilter = (): boolean => false;
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    filterFns: { microserviceFilter },
   });
 
   return (
