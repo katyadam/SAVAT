@@ -54,6 +54,8 @@ export function CallGraphInputsTable<TData, TValue>({
                   </TableHead>
                 );
               })}
+              <TableHead>Call Graph</TableHead>
+              <TableHead>Methods</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -69,9 +71,20 @@ export function CallGraphInputsTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                <TableCell className="text-end">
+                <TableCell>
                   <a
                     href={`/call-graph-input/${
+                      (row.original as CallGraphInputSimple).id
+                    }`}
+                  >
+                    <Button variant="outline">
+                      <Eye />
+                    </Button>
+                  </a>
+                </TableCell>
+                <TableCell>
+                  <a
+                    href={`/call-graph-input/methods/${
                       (row.original as CallGraphInputSimple).id
                     }`}
                   >

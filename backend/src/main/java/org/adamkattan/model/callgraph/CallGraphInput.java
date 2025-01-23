@@ -3,10 +3,6 @@ package org.adamkattan.model.callgraph;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.adamkattan.model.entities.Entities;
-import org.adamkattan.model.input.AnalysisInput;
-import org.adamkattan.model.input.AnalysisInputDto;
-import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -37,7 +33,6 @@ public class CallGraphInput extends PanacheEntity {
 
     public static CallGraphInputDto toDto(CallGraphInput input) {
         return new CallGraphInputDto(
-                input.id,
                 input.project.id,
                 input.version,
                 input.commitHash,

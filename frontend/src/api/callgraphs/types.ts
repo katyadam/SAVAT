@@ -11,7 +11,8 @@ export type CallGraphMethod = {
     returnType: string;
     display: string;
     flags: string;
-    msName: string;
+    bytecodeHash: string;
+    microservice: string;
     endpointURI: string;
     httpMethod: string;
     isInterserviceMethod: boolean;
@@ -22,7 +23,7 @@ export type CallGraphMethod = {
 export type CallGraphCall = {
     source: string;
     target: string;
-    isInterserviceCall: boolean;
+    isInterserviceLink: boolean;
     httpMethod: string
 }
 

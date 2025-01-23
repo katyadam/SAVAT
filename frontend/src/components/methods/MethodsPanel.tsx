@@ -1,51 +1,41 @@
 import { FC, useState } from "react";
-import MicroserviceRow from "./MicroserviceRow";
-import MethodsList from "./MethodsList";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import CompareForm from "./CompareForm";
-import Overlay from "../ui/Overlay";
 import { MicroserviceNode } from "@/api/methods/types";
-import { CompareMethodsResponse } from "@/api/methods/types";
 import MethodsTable from "./MethodsTable";
+import { CallGraphMethod } from "@/api/callgraphs/types";
 
 type MethodsPanelProps = {
-  analysisInputId: string;
-  microservices: MicroserviceNode[];
+  methods: CallGraphMethod[];
 };
 
-const MethodsPanel: FC<MethodsPanelProps> = ({
-  analysisInputId,
-  microservices,
-}) => {
+const MethodsPanel: FC<MethodsPanelProps> = ({ methods }) => {
   const [selectedChangedMicroservice, setSelectedChangedMicroservice] =
     useState<MicroserviceNode | null>(null);
 
   const [compareUp, setCompareUp] = useState<boolean>(false);
 
-  const [compareResponse, setCompareResponse] =
-    useState<CompareMethodsResponse | null>(null);
+  // const [compareResponse, setCompareResponse] =
+  //   useState<CompareMethodsResponse | null>(null);
 
-  const handleChangedMicroserviceClick = (ms: MicroserviceNode) => {
-    if (ms.name === selectedChangedMicroservice?.name) {
-      setSelectedChangedMicroservice(null);
-    } else {
-      setSelectedChangedMicroservice(ms);
-    }
-  };
+  // const handleChangedMicroserviceClick = (ms: MicroserviceNode) => {
+  //   if (ms.name === selectedChangedMicroservice?.name) {
+  //     setSelectedChangedMicroservice(null);
+  //   } else {
+  //     setSelectedChangedMicroservice(ms);
+  //   }
+  // };
 
-  const handleCompareClick = () => {
-    setCompareUp(!compareUp);
-  };
+  // const handleCompareClick = () => {
+  //   setCompareUp(!compareUp);
+  // };
 
-  const handleCompareResponse = (resp: CompareMethodsResponse) => {
-    setCompareResponse(resp);
-    setCompareUp(false);
-  };
+  // const handleCompareResponse = (resp: CompareMethodsResponse) => {
+  //   setCompareResponse(resp);
+  //   setCompareUp(false);
+  // };
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="w-full">
+      {/* <div className="w-full">
         <Button
           className="mx-5 mt-2"
           onClick={handleCompareClick}
@@ -54,20 +44,18 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
           Compare
         </Button>
         <Separator className="mt-2" />
-      </div>
+      </div> */}
       <div className="flex flex-row justify-between gap-5 m-5">
         <MethodsTable
-          data={microservices.flatMap((ms) =>
-            ms.methods.map((method) => ({
-              name: method.name,
-              bytecodeHash: method.bytecodeHash,
-              microservice: ms.name,
-            }))
-          )}
+          data={methods.map((method) => ({
+            name: method.name,
+            bytecodeHash: method.bytecodeHash,
+            microservice: method.microservice,
+          }))}
         />
       </div>
 
-      {compareUp && (
+      {/* {compareUp && (
         <Overlay closeFunc={handleCompareClick} width="3/4">
           <CompareForm
             analysisInputId={analysisInputId}
@@ -101,7 +89,7 @@ const MethodsPanel: FC<MethodsPanelProps> = ({
             )}
           </div>
         </Overlay>
-      )}
+      )} */}
     </div>
   );
 };

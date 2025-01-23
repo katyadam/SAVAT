@@ -1,17 +1,17 @@
 import MethodsPanel from "@/components/methods/MethodsPanel";
-import { useMethods } from "@/hooks/useMethod";
+import { useCallGraphInput } from "@/hooks/useCallGraph";
 import { useParams } from "react-router-dom";
 
 const MethodsPage = () => {
   const { id } = useParams();
   if (!id) return <p>Error... Incorrect ID</p>;
 
-  const { data: microservices, isLoading } = useMethods(id);
+  const { data: callGraphInput, isLoading } = useCallGraphInput(id);
 
   return (
     <>
-      {microservices && !isLoading && (
-        <MethodsPanel analysisInputId={id} microservices={microservices} />
+      {callGraphInput && !isLoading && (
+        <MethodsPanel methods={callGraphInput.callGraph.methods} />
       )}
     </>
   );

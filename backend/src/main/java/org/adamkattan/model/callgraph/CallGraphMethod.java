@@ -12,6 +12,7 @@ public record CallGraphMethod(
         @JsonProperty("returnType") String returnType,
         @JsonProperty("display") String display,
         @JsonProperty("flags") String flags,
+        @JsonProperty("bytecodeHash") String bytecodeHash,
         @JsonProperty("microservice") String msName,
         @JsonProperty("endpointURI") String endpointURI,
         @JsonProperty("httpMethod") String httpMethod,

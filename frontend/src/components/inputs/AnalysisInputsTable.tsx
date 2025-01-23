@@ -55,7 +55,6 @@ export function AnalysisInputsTable<TData, TValue>({
               })}
               <TableHead>Entities</TableHead>
               <TableHead>Graph</TableHead>
-              <TableHead>Methods</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -80,12 +79,6 @@ export function AnalysisInputsTable<TData, TValue>({
                 <TableCell>
                   <AnalysisInputButton
                     type="graph"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
-                <TableCell>
-                  <AnalysisInputButton
-                    type="methods"
                     id={(row.original as AnalysisInput).id}
                   />
                 </TableCell>

@@ -25,6 +25,10 @@ const projectRoutes: RouteObject[] = [
     Component: MethodsPage,
   },
   {
+    path: "call-graph-input/methods/:id",
+    Component: MethodsPage,
+  },
+  {
     path: "call-graph-input/:id",
     Component: CallGraphPage,
   },

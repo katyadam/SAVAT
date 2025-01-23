@@ -62,25 +62,31 @@ export const columns: ColumnDef<Method>[] = [
     header: "Bytecode Hash",
     cell: ({ row }) => (
       <div className="flex items-center">
-        {`${row.getValue<string>("bytecodeHash").slice(0, 5)}...${row
-          .getValue<string>("bytecodeHash")
-          .slice(-5)}`}{" "}
-        <Button
-          variant="link"
-          onClick={() => {
-            toast({
-              title: "Copied!",
-              description: (
-                <div className="max-w-xs break-words">
-                  {row.getValue("bytecodeHash")}
-                </div>
-              ),
-            });
-            navigator.clipboard.writeText(row.getValue("bytecodeHash"));
-          }}
-        >
-          <ClipboardCopy />
-        </Button>
+        {row.getValue<string>("bytecodeHash") === "null" ? (
+          "Abstract method !"
+        ) : (
+          <>
+            {`${row.getValue<string>("bytecodeHash").slice(0, 5)}...${row
+              .getValue<string>("bytecodeHash")
+              .slice(-5)}`}
+            <Button
+              variant="link"
+              onClick={() => {
+                toast({
+                  title: "Copied!",
+                  description: (
+                    <div className="max-w-xs break-words">
+                      {row.getValue("bytecodeHash")}
+                    </div>
+                  ),
+                });
+                navigator.clipboard.writeText(row.getValue("bytecodeHash"));
+              }}
+            >
+              <ClipboardCopy />
+            </Button>
+          </>
+        )}
       </div>
     ),
   },
@@ -150,6 +156,11 @@ const MethodsTable: FC<MethodsTableType> = ({ data }) => {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    initialState: {
+      pagination: {
+        pageSize: 5,
+      },
+    },
     state: {
       sorting,
       columnFilters,
@@ -295,8 +306,8 @@ const MethodsTable: FC<MethodsTableType> = ({ data }) => {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}
         </div>
         <div className="space-x-2">
           <Button

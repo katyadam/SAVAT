@@ -1516,6 +1516,13 @@ autoprefixer@^10.4.20:
     picocolors "^1.0.1"
     postcss-value-parser "^4.2.0"
 
+avsdf-base@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/avsdf-base/-/avsdf-base-1.0.0.tgz#80c437d7d15d2bd201d9c31804e7b7a15a84781a"
+  integrity sha512-APhZNUFJwIwrLsSfE95QjobEntdUhFQgfNtC/BrYmjUpwHh5Y2fbRv8lxAlMr1hdf/CuQYsqJxK3dRzcCL77qw==
+  dependencies:
+    layout-base "^1.0.0"
+
 axios@^1.7.7:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"
@@ -1821,6 +1828,14 @@ csstype@^3.0.2:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
+
+cytoscape-cise@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cytoscape-cise/-/cytoscape-cise-2.0.0.tgz#42bf6405b93d56eff39d78c6811fd2a0ca36962a"
+  integrity sha512-LDhoJk1Iuruyhd/jVqwnXGm9X5nD5DMlonSjwLKem/3o/zE3BRyUonBsydekWK7XzxBVytRNc5BIniGWxyMc3g==
+  dependencies:
+    avsdf-base "^1.0.0"
+    cose-base "^2.2.0"
 
 cytoscape-fcose@^2.2.0:
   version "2.2.0"
@@ -2798,6 +2813,11 @@ keyv@^4.5.4:
   integrity sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==
   dependencies:
     json-buffer "3.0.1"
+
+layout-base@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/layout-base/-/layout-base-1.0.2.tgz#1291e296883c322a9dd4c5dd82063721b53e26e2"
+  integrity sha512-8h2oVEZNktL4BH2JCOI90iD1yXwL6iNW7KcCKT2QZgQJR2vbqDsldCTPRU9NifTCqHZci57XvQQ15YTu+sTYPg==
 
 layout-base@^2.0.0:
   version "2.0.1"
