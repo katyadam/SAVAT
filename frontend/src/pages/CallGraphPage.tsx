@@ -1,8 +1,9 @@
+import { getMicroservicesColors } from "@/components/callgraphs/generators/colorGenerator";
 import Graph from "@/components/callgraphs/graphs/Graph";
 import Navbar from "@/components/callgraphs/Navbar";
 import { Separator } from "@/components/ui/separator";
 import { useCallGraphInput } from "@/hooks/useCallGraph";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const CallGraphPage = () => {
@@ -17,15 +18,22 @@ const CallGraphPage = () => {
 
   const { data: callGraph, isLoading, error } = useCallGraphInput(id);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
+  const [msColors, setMsColors] = useState<Map<string, string> | null>();
+
+  useEffect(() => {
+    if (callGraph)
+      setMsColors(getMicroservicesColors(callGraph?.callGraph.methods));
+  }, [callGraph]);
 
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (callGraph) {
+    if (callGraph && msColors) {
       return (
         <Graph
           callGraph={callGraph.callGraph}
           showIsolatedNodes={showIsolatedNodes}
+          msColors={msColors}
         />
       );
     }
@@ -33,9 +41,12 @@ const CallGraphPage = () => {
 
   return (
     <div className="w-screen h-screen">
-      <Navbar
-        isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
-      />
+      {msColors && (
+        <Navbar
+          isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
+          msColorsLegend={msColors}
+        />
+      )}
       <Separator className="mt-2" />
       {renderContent()}
     </div>

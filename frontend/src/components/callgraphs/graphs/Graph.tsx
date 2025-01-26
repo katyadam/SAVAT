@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef } from "react";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
@@ -9,19 +9,15 @@ import {
   CallGraphCall,
   CallGraphMethod,
 } from "@/api/callgraphs/types";
-import { getMicroservicesColors } from "../generators/colorGenerator";
 
 type GraphType = {
   callGraph: CallGraph;
   showIsolatedNodes: boolean;
+  msColors: Map<string, string>;
 };
 
-const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes }) => {
+const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-
-  const [msColors, setMsColors] = useState<Map<string, string>>(
-    getMicroservicesColors(callGraph.methods)
-  );
 
   const getNonIsolatedNodes = (
     nodes: CallGraphMethod[],
@@ -38,10 +34,6 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes }) => {
   };
 
   cytoscape.use(cise);
-
-  useEffect(() => {
-    setMsColors(getMicroservicesColors(callGraph.methods));
-  }, [callGraph]);
 
   useEffect(() => {
     console.log(callGraph);
@@ -68,6 +60,7 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes }) => {
           data: {
             source: call.source,
             target: call.target,
+            label: call.httpMethod,
           },
           group: "edges",
           style: {
@@ -118,6 +111,9 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes }) => {
               "curve-style": "bezier",
               "target-arrow-color": "#808080",
               "target-arrow-shape": "triangle",
+              label: "data(label)",
+              "text-rotation": "autorotate",
+              "text-margin-y": -10,
             },
           },
         ],
