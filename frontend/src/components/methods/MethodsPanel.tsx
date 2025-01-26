@@ -5,9 +5,10 @@ import { CallGraphMethod } from "@/api/callgraphs/types";
 
 type MethodsPanelProps = {
   methods: CallGraphMethod[];
+  callGraphInputId: string;
 };
 
-const MethodsPanel: FC<MethodsPanelProps> = ({ methods }) => {
+const MethodsPanel: FC<MethodsPanelProps> = ({ methods, callGraphInputId }) => {
   const [selectedChangedMicroservice, setSelectedChangedMicroservice] =
     useState<MicroserviceNode | null>(null);
 
@@ -46,13 +47,7 @@ const MethodsPanel: FC<MethodsPanelProps> = ({ methods }) => {
         <Separator className="mt-2" />
       </div> */}
       <div className="flex flex-row justify-between gap-5 m-5">
-        <MethodsTable
-          data={methods.map((method) => ({
-            name: method.name,
-            bytecodeHash: method.bytecodeHash,
-            microservice: method.microservice,
-          }))}
-        />
+        <MethodsTable data={methods} callGraphInputId={callGraphInputId} />
       </div>
 
       {/* {compareUp && (

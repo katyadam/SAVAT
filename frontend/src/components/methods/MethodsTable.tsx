@@ -14,7 +14,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown, MoreHorizontal, X, ClipboardCopy } from "lucide-react";
+import {
+  ChevronDown,
+  MoreHorizontal,
+  X,
+  ClipboardCopy,
+  Eye,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,21 +43,18 @@ import {
 } from "@/components/ui/table";
 import { FC } from "react";
 import { toast } from "@/hooks/use-toast";
+import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { useNavigate } from "react-router-dom";
+import { CallGraphMethod } from "@/api/callgraphs/types";
 
 // so that static analysis won't yell at me :(
 declare module "@tanstack/react-table" {
   interface FilterFns {
-    microserviceFilter: FilterFn<Method>;
+    microserviceFilter: FilterFn<CallGraphMethod>;
   }
 }
 
-export type Method = {
-  name: string;
-  bytecodeHash: string;
-  microservice: string;
-};
-
-export const columns: ColumnDef<Method>[] = [
+export const columns: ColumnDef<CallGraphMethod>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -126,12 +129,15 @@ export const columns: ColumnDef<Method>[] = [
 ];
 
 type MethodsTableType = {
-  data: Method[];
+  data: CallGraphMethod[];
+  callGraphInputId: string;
 };
 
-const MethodsTable: FC<MethodsTableType> = ({ data }) => {
+const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
   const [isFilterMsOpen, setIsFilterMsOpen] = React.useState(false);
   const [isFilterCollsOpen, setIsFilterCollsOpen] = React.useState(false);
+  const { callGraphLookupDispatch } = useCallGraphLookup();
+  const navigate = useNavigate();
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -190,6 +196,11 @@ const MethodsTable: FC<MethodsTableType> = ({ data }) => {
       }
       return newSet;
     });
+  };
+
+  const handleMethodLookup = (methodId: string) => {
+    callGraphLookupDispatch({ type: "LOOKUP_METHOD", payload: methodId });
+    navigate(`/call-graph-input/${callGraphInputId}`);
   };
 
   return (
@@ -289,6 +300,16 @@ const MethodsTable: FC<MethodsTableType> = ({ data }) => {
                       )}
                     </TableCell>
                   ))}
+                  <TableCell>
+                    <Button
+                      onClick={() =>
+                        handleMethodLookup(row.original.methodSignature)
+                      }
+                      variant="outline"
+                    >
+                      <Eye />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (

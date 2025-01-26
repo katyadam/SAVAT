@@ -7,11 +7,14 @@ const MethodsPage = () => {
   if (!id) return <p>Error... Incorrect ID</p>;
 
   const { data: callGraphInput, isLoading } = useCallGraphInput(id);
-
+  // TODO: use only ID, call useCallGraphInput(id) in MethodsTable
   return (
     <>
       {callGraphInput && !isLoading && (
-        <MethodsPanel methods={callGraphInput.callGraph.methods} />
+        <MethodsPanel
+          methods={callGraphInput.callGraph.methods}
+          callGraphInputId={id}
+        />
       )}
     </>
   );

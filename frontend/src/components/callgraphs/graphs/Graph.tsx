@@ -10,6 +10,7 @@ import {
 } from "@/api/callgraphs/types";
 import cytoscape from "cytoscape";
 import ContextMenu from "../ContextMenu";
+import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
 
 type GraphType = {
   callGraph: CallGraph;
@@ -34,6 +35,9 @@ const Graph: FC<GraphType> = ({
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
+  const { callGraphLookupState, callGraphLookupDispatch } =
+    useCallGraphLookup();
+
   const getNonIsolatedNodes = (
     nodes: CallGraphMethod[],
     links: CallGraphCall[]
@@ -55,7 +59,6 @@ const Graph: FC<GraphType> = ({
         callGraph.methods,
         callGraph.calls
       );
-      console.log(showIsolatedNodes);
       const elements: ElementsDefinition = {
         nodes: (showIsolatedNodes ? callGraph.methods : visibleNodes)
           .filter((method) => method.bytecodeHash !== "null")
@@ -130,6 +133,14 @@ const Graph: FC<GraphType> = ({
               "text-margin-y": -10,
             },
           },
+          {
+            selector: "node.highlighted",
+            style: {
+              "border-width": 4,
+              "border-color": "#FFD700",
+              "background-color": "#FFFF00",
+            },
+          },
         ],
         layout: layoutOptions,
       });
@@ -167,6 +178,22 @@ const Graph: FC<GraphType> = ({
       };
     }
   }, [callGraph, showIsolatedNodes]);
+
+  useEffect(() => {
+    if (cy && callGraphLookupState.method) {
+      const node = cy.getElementById(callGraphLookupState.method);
+      if (node && node.length > 0) {
+        cy.zoom({
+          level: 2,
+          position: node.position(),
+        });
+
+        cy.elements().removeClass("highlighted");
+        node.addClass("highlighted");
+      }
+      callGraphLookupDispatch({ type: "REMOVE_LOOKUP" });
+    }
+  }, [callGraphLookupState.method, cy]);
 
   // Close the context menu when clicking outside of it
   useEffect(() => {
