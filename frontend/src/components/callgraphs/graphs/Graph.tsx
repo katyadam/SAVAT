@@ -13,14 +13,20 @@ import ContextMenu from "../ContextMenu";
 
 type GraphType = {
   callGraph: CallGraph;
+  methodsMap: Map<string, CallGraphMethod>;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
 };
 
-const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
+const Graph: FC<GraphType> = ({
+  callGraph,
+  methodsMap,
+  showIsolatedNodes,
+  msColors,
+}) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const contextMenuRef = useRef<HTMLDivElement | null>(null); // Ref to the ContextMenu div
-  const [nodeInfo, setNodeInfo] = useState<string | null>(null);
+  const contextMenuRef = useRef<HTMLDivElement | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [contextMenuPosition, setContextMenuPosition] = useState<{
     x: number;
     y: number;
@@ -144,13 +150,13 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
       cyInstance.on("cxttap", "node", (event) => {
         const node = event.target;
         const nodePosition = node.renderedPosition();
+        console.log(node.data("id"));
 
         setContextMenuPosition({
           x: nodePosition.x + 10,
           y: nodePosition.y + 10,
         });
-
-        setNodeInfo(`Node: ${node.data("label")}`);
+        setSelectedMethod(node.data("id"));
 
         setIsContextMenuOpen(true);
       });
@@ -195,6 +201,7 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
         cy.userZoomingEnabled(true);
         cy.boxSelectionEnabled(true);
         cy.panningEnabled(true);
+        cy.zoomingEnabled(true);
       }
     }
   }, [isContextMenuOpen, cy]);
@@ -213,7 +220,10 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
               zIndex: 20,
             }}
           >
-            <ContextMenu />
+            <ContextMenu
+              selectedMethod={selectedMethod}
+              methodsMap={methodsMap}
+            />
           </div>,
           cyRef.current!
         )}
