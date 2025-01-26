@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
+// @ts-ignore
 import cise, { CiseLayoutOptions } from "cytoscape-cise";
 import {
   CallGraph,
@@ -12,14 +13,29 @@ import { getMicroservicesColors } from "../generators/colorGenerator";
 
 type GraphType = {
   callGraph: CallGraph;
+  showIsolatedNodes: boolean;
 };
 
-const Graph: FC<GraphType> = ({ callGraph }) => {
+const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
 
   const [msColors, setMsColors] = useState<Map<string, string>>(
     getMicroservicesColors(callGraph.methods)
   );
+
+  const getNonIsolatedNodes = (
+    nodes: CallGraphMethod[],
+    links: CallGraphCall[]
+  ): CallGraphMethod[] => {
+    // TODO: extract node types and make this function general
+    const linkedNodeNames = new Set<string>();
+
+    links.forEach((link) => {
+      linkedNodeNames.add(link.source);
+      linkedNodeNames.add(link.target);
+    });
+    return nodes.filter((node) => linkedNodeNames.has(node.methodSignature));
+  };
 
   cytoscape.use(cise);
 
@@ -28,10 +44,14 @@ const Graph: FC<GraphType> = ({ callGraph }) => {
   }, [callGraph]);
 
   useEffect(() => {
-    console.log(callGraph.methods);
+    console.log(callGraph);
     if (cyRef.current) {
+      const visibleNodes = getNonIsolatedNodes(
+        callGraph.methods,
+        callGraph.calls
+      );
       const elements: ElementsDefinition = {
-        nodes: callGraph.methods
+        nodes: (showIsolatedNodes ? visibleNodes : callGraph.methods)
           .filter((method) => method.bytecodeHash !== "null") // these methods dont have any calls
           .map((method: CallGraphMethod) => ({
             data: {
@@ -51,8 +71,8 @@ const Graph: FC<GraphType> = ({ callGraph }) => {
           },
           group: "edges",
           style: {
-            "line-color": call.isInterserviceLink ? "#ff4d4d" : "#4CAF50",
-            "target-arrow-color": call.isInterserviceLink
+            "line-color": call.isInterserviceCall ? "#ff4d4d" : "#4CAF50",
+            "target-arrow-color": call.isInterserviceCall
               ? "#ff4d4d"
               : "#4CAF50",
           },
@@ -63,13 +83,13 @@ const Graph: FC<GraphType> = ({ callGraph }) => {
         name: "cise",
         fit: true,
         clusters: (node: any) => node.data("id").split("/")[0],
-        nodeSeparation: 50,
-        padding: 30,
+        nodeSeparation: 30,
+        padding: 10,
         clustering: true,
         nodeDimensionsIncludeLabels: true,
         maxIterations: 10000,
-        clusterThreshold: 0.8,
-        gravity: 1,
+        clusterThreshold: 0.1,
+        gravity: 0.5,
         direction: "horizontal",
       };
 
@@ -121,9 +141,9 @@ const Graph: FC<GraphType> = ({ callGraph }) => {
         cy.destroy();
       };
     }
-  }, [callGraph]);
+  }, [callGraph, showIsolatedNodes]);
 
-  return <div ref={cyRef} className="w-full h-[90%]" />;
+  return <div ref={cyRef} className="w-full h-full" />;
 };
 
 export default Graph;

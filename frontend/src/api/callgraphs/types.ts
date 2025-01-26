@@ -23,7 +23,7 @@ export type CallGraphMethod = {
 export type CallGraphCall = {
     source: string;
     target: string;
-    isInterserviceLink: boolean;
+    isInterserviceCall: boolean;
     httpMethod: string
 }
 
