@@ -15,7 +15,7 @@ export type CallGraphMethod = {
     microservice: string;
     endpointURI: string;
     httpMethod: string;
-    isInterserviceMethod: boolean;
+    endpointMethod: boolean;
     isEntryPoint: boolean;
     methodSignature: string;
 };

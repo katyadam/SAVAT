@@ -1,6 +1,6 @@
 "use client";
 
-import { CallGraphInput, CallGraphInputSimple } from "@/api/callgraphs/types";
+import { CallGraphInputSimple } from "@/api/callgraphs/types";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const callGraphInputsColumns: ColumnDef<CallGraphInputSimple>[] = [

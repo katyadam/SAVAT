@@ -55,8 +55,9 @@ const Graph: FC<GraphType> = ({
         callGraph.methods,
         callGraph.calls
       );
+      console.log(showIsolatedNodes);
       const elements: ElementsDefinition = {
-        nodes: (showIsolatedNodes ? visibleNodes : callGraph.methods)
+        nodes: (showIsolatedNodes ? callGraph.methods : visibleNodes)
           .filter((method) => method.bytecodeHash !== "null")
           .map((method: CallGraphMethod) => ({
             data: {
