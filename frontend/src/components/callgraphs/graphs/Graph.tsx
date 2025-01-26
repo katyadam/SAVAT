@@ -1,7 +1,6 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
-
-import cytoscape from "cytoscape";
 // @ts-ignore
 import cise, { CiseLayoutOptions } from "cytoscape-cise";
 import {
@@ -9,6 +8,8 @@ import {
   CallGraphCall,
   CallGraphMethod,
 } from "@/api/callgraphs/types";
+import cytoscape from "cytoscape";
+import ContextMenu from "../ContextMenu";
 
 type GraphType = {
   callGraph: CallGraph;
@@ -18,12 +19,19 @@ type GraphType = {
 
 const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
+  const contextMenuRef = useRef<HTMLDivElement | null>(null); // Ref to the ContextMenu div
+  const [nodeInfo, setNodeInfo] = useState<string | null>(null);
+  const [contextMenuPosition, setContextMenuPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+  const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
   const getNonIsolatedNodes = (
     nodes: CallGraphMethod[],
     links: CallGraphCall[]
   ): CallGraphMethod[] => {
-    // TODO: extract node types and make this function general
     const linkedNodeNames = new Set<string>();
 
     links.forEach((link) => {
@@ -36,7 +44,6 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
   cytoscape.use(cise);
 
   useEffect(() => {
-    console.log(callGraph);
     if (cyRef.current) {
       const visibleNodes = getNonIsolatedNodes(
         callGraph.methods,
@@ -44,7 +51,7 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
       );
       const elements: ElementsDefinition = {
         nodes: (showIsolatedNodes ? visibleNodes : callGraph.methods)
-          .filter((method) => method.bytecodeHash !== "null") // these methods dont have any calls
+          .filter((method) => method.bytecodeHash !== "null")
           .map((method: CallGraphMethod) => ({
             data: {
               id: method.methodSignature,
@@ -86,7 +93,7 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
         direction: "horizontal",
       };
 
-      const cy = Cytoscape({
+      const cyInstance = Cytoscape({
         container: cyRef.current,
         elements,
         style: [
@@ -120,26 +127,98 @@ const Graph: FC<GraphType> = ({ callGraph, showIsolatedNodes, msColors }) => {
         layout: layoutOptions,
       });
 
-      cy.on("tap", "node", (event) => {
-        const node = event.target;
+      setCy(cyInstance);
 
-        const currentZoom = cy.zoom();
+      cyInstance.on("tap", "node", (event) => {
+        const node = event.target;
+        const currentZoom = cyInstance.zoom();
         const zoomIncrement = 0.2;
         const newZoom = currentZoom + zoomIncrement;
 
-        cy.zoom({
+        cyInstance.zoom({
           level: newZoom,
           renderedPosition: node.renderedPosition(),
         });
       });
 
+      cyInstance.on("cxttap", "node", (event) => {
+        const node = event.target;
+        const nodePosition = node.renderedPosition();
+
+        setContextMenuPosition({
+          x: nodePosition.x + 10,
+          y: nodePosition.y + 10,
+        });
+
+        setNodeInfo(`Node: ${node.data("label")}`);
+
+        setIsContextMenuOpen(true);
+      });
+
       return () => {
-        cy.destroy();
+        cyInstance.destroy();
       };
     }
   }, [callGraph, showIsolatedNodes]);
 
-  return <div ref={cyRef} className="w-full h-full" />;
+  // Close the context menu when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        contextMenuRef.current &&
+        !contextMenuRef.current.contains(event.target as Node)
+      ) {
+        // If the click is outside the context menu, hide it
+        setIsContextMenuOpen(false);
+      }
+    };
+
+    // Add event listener to the document
+    document.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (cy) {
+      if (isContextMenuOpen) {
+        cy.userPanningEnabled(false);
+        cy.userZoomingEnabled(false);
+        cy.boxSelectionEnabled(false);
+        cy.panningEnabled(false);
+        cy.zoomingEnabled(false);
+      } else {
+        cy.userPanningEnabled(true);
+        cy.userZoomingEnabled(true);
+        cy.boxSelectionEnabled(true);
+        cy.panningEnabled(true);
+      }
+    }
+  }, [isContextMenuOpen, cy]);
+
+  return (
+    <div ref={cyRef} className="w-full h-full relative z-0">
+      {contextMenuPosition &&
+        isContextMenuOpen &&
+        ReactDOM.createPortal(
+          <div
+            ref={contextMenuRef}
+            style={{
+              position: "absolute",
+              left: `${contextMenuPosition.x}px`,
+              top: `${contextMenuPosition.y}px`,
+              zIndex: 20,
+            }}
+          >
+            <ContextMenu />
+          </div>,
+          cyRef.current!
+        )}
+    </div>
+  );
 };
 
 export default Graph;
