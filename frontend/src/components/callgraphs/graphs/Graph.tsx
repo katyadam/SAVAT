@@ -149,18 +149,6 @@ const Graph: FC<GraphType> = ({
 
       cyInstance.on("tap", "node", (event) => {
         const node = event.target;
-        const currentZoom = cyInstance.zoom();
-        const zoomIncrement = 0.2;
-        const newZoom = currentZoom + zoomIncrement;
-
-        cyInstance.zoom({
-          level: newZoom,
-          renderedPosition: node.renderedPosition(),
-        });
-      });
-
-      cyInstance.on("cxttap", "node", (event) => {
-        const node = event.target;
         const nodePosition = node.renderedPosition();
         console.log(node.data("id"));
 
@@ -195,45 +183,6 @@ const Graph: FC<GraphType> = ({
     }
   }, [callGraphLookupState.method, cy]);
 
-  // Close the context menu when clicking outside of it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        contextMenuRef.current &&
-        !contextMenuRef.current.contains(event.target as Node)
-      ) {
-        // If the click is outside the context menu, hide it
-        setIsContextMenuOpen(false);
-      }
-    };
-
-    // Add event listener to the document
-    document.addEventListener("click", handleClickOutside);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (cy) {
-      if (isContextMenuOpen) {
-        cy.userPanningEnabled(false);
-        cy.userZoomingEnabled(false);
-        cy.boxSelectionEnabled(false);
-        cy.panningEnabled(false);
-        cy.zoomingEnabled(false);
-      } else {
-        cy.userPanningEnabled(true);
-        cy.userZoomingEnabled(true);
-        cy.boxSelectionEnabled(true);
-        cy.panningEnabled(true);
-        cy.zoomingEnabled(true);
-      }
-    }
-  }, [isContextMenuOpen, cy]);
-
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">
       {contextMenuPosition &&
@@ -243,14 +192,15 @@ const Graph: FC<GraphType> = ({
             ref={contextMenuRef}
             style={{
               position: "absolute",
-              left: `${contextMenuPosition.x}px`,
-              top: `${contextMenuPosition.y}px`,
+              left: `0px`,
+              top: `0px`,
               zIndex: 20,
             }}
           >
             <ContextMenu
               selectedMethod={selectedMethod}
               methodsMap={methodsMap}
+              close={() => setIsContextMenuOpen(false)}
             />
           </div>,
           cyRef.current!

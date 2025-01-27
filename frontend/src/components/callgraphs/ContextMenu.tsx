@@ -8,16 +8,27 @@ import {
 } from "../ui/card";
 import { CallGraphMethod } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
-import { CircleEllipsis, ClipboardCopy, Info } from "lucide-react";
+import {
+  ArrowUpLeft,
+  CircleEllipsis,
+  ClipboardCopy,
+  Info,
+  X,
+} from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
 
 type ContextMenuType = {
   selectedMethod: string | null;
   methodsMap: Map<string, CallGraphMethod>;
+  close: (arg0: boolean) => void;
 };
 
-const ContextMenu: FC<ContextMenuType> = ({ selectedMethod, methodsMap }) => {
+const ContextMenu: FC<ContextMenuType> = ({
+  selectedMethod,
+  methodsMap,
+  close,
+}) => {
   const [method, setMethod] = useState<CallGraphMethod | null>(null);
   const [showMethodDetails, setShowMethodDetails] = useState<boolean>(false);
 
@@ -26,74 +37,87 @@ const ContextMenu: FC<ContextMenuType> = ({ selectedMethod, methodsMap }) => {
       setMethod(methodsMap.get(selectedMethod)!);
     }
   }, [selectedMethod, methodsMap]);
-  console.log(method);
+
   return method ? (
-    <Card>
+    <Card className="border-t-transparent border-l-transparent shadow-none rounded-none">
       <CardHeader>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between items-center">
           <CardTitle className="mr-10">{method.name}</CardTitle>
-          {showMethodDetails ? (
-            <CircleEllipsis
-              className="cursor-pointer"
-              onClick={(event) => {
-                event.stopPropagation();
-                setShowMethodDetails(false);
-              }}
-            />
-          ) : (
-            <Info
-              className="cursor-pointer"
-              onClick={(event) => {
-                event.stopPropagation();
-                setShowMethodDetails(true);
-              }}
-            />
-          )}
+          <div className="flex gap-2">
+            {showMethodDetails ? (
+              <CircleEllipsis
+                className="cursor-pointer"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setShowMethodDetails(false);
+                }}
+              />
+            ) : (
+              <Info
+                className="cursor-pointer"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setShowMethodDetails(true);
+                }}
+              />
+            )}
+          </div>
+          <X
+            className="cursor-pointer text-red-500 absolute bottom-1 right-1"
+            onClick={() => close(false)}
+          />
         </div>
         <CardDescription>{method.microservice}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2 justify-between">
         {showMethodDetails ? (
           <>
-            <div className="flex items-center">
-              {`${method.bytecodeHash.slice(
-                0,
-                5
-              )}...${method.bytecodeHash.slice(-5)}`}
-              <Button
-                variant="link"
-                onClick={() => {
-                  toast({
-                    title: "Copied!",
-                    description: (
-                      <div className="max-w-xs break-words">
-                        {method.bytecodeHash}
-                      </div>
-                    ),
-                  });
-                  navigator.clipboard.writeText(method.bytecodeHash);
-                }}
-              >
-                <ClipboardCopy />
-              </Button>
-            </div>
-            <ContextMenuInfo
-              label="Is Entrypoint"
-              value={method.isEntryPoint ? "Yes" : "No"}
-            />
-            <ContextMenuInfo label="Flags" value={method.flags} />
-            <ContextMenuInfo label="Parameters" value={method.parameters} />
-            <ContextMenuInfo label="Return type" value={method.returnType} />
+            <ContextMenuInfo label="Bytecode Hash">
+              <div className="flex items-center">
+                {`${method.bytecodeHash.slice(
+                  0,
+                  5
+                )}...${method.bytecodeHash.slice(-5)}`}
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    toast({
+                      title: "Copied!",
+                      description: (
+                        <div className="max-w-xs break-words">
+                          {method.bytecodeHash}
+                        </div>
+                      ),
+                    });
+                    navigator.clipboard.writeText(method.bytecodeHash);
+                  }}
+                >
+                  <ClipboardCopy />
+                </Button>
+              </div>
+            </ContextMenuInfo>
+            <ContextMenuInfo label="Is Entrypoint">
+              <p>{method.isEntryPoint ? "Yes" : "No"}</p>
+            </ContextMenuInfo>
+            <ContextMenuInfo label="Flags">
+              <p>{method.flags}</p>
+            </ContextMenuInfo>
+            <ContextMenuInfo label="Parameters">
+              {method.parameters.map((param, index) => (
+                <p key={index}>{param}</p>
+              ))}
+            </ContextMenuInfo>
+            <ContextMenuInfo label="Return type">
+              <p>{method.returnType}</p>
+            </ContextMenuInfo>
             {method.endpointMethod && (
               <>
-                <ContextMenuInfo
-                  label="Endpoint URI"
-                  value={method.endpointURI}
-                />
-                <ContextMenuInfo
-                  label="HTTP Method"
-                  value={method.httpMethod}
-                />
+                <ContextMenuInfo label="Endpoint URI">
+                  <p>{method.endpointURI}</p>
+                </ContextMenuInfo>
+                <ContextMenuInfo label="HTTP Method">
+                  <p>{method.httpMethod}</p>
+                </ContextMenuInfo>
               </>
             )}
           </>
