@@ -1,13 +1,16 @@
 package org.adamkattan.rest;
 
+import io.smallrye.common.annotation.Blocking;
+import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.callgraph.CallGraphInput;
-import org.adamkattan.model.callgraph.CallGraphInputDto;
+import org.adamkattan.model.callgraph.*;
+import org.adamkattan.model.callgraph.algorithms.MethodReachability;
 import org.adamkattan.service.CallGraphInputService;
 
 import java.util.List;
@@ -36,6 +39,20 @@ public class CallGraphInputController {
     public Response getCallGraphInputById(@PathParam("call-graph-input-id") Long callGraphInputId) {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
         return Response.ok(CallGraphInput.toDto(callGraphInput)).build();
+    }
+
+    @POST
+    @Path("/{call-graph-input-id}/method-reachability")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Blocking
+    public Uni<CallGraph> computeMethodReachability(
+            @PathParam("call-graph-input-id") Long callGraphInputId,
+            @Valid CallGraphMethodKey callGraphMethodKey
+    ) {
+        CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
+        return Uni.createFrom().item(() -> MethodReachability.compute(callGraphInput.callGraph, callGraphMethodKey))
+                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 
     @POST

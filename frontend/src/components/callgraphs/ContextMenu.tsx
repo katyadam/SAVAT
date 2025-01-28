@@ -8,13 +8,7 @@ import {
 } from "../ui/card";
 import { CallGraphMethod } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
-import {
-  ArrowUpLeft,
-  CircleEllipsis,
-  ClipboardCopy,
-  Info,
-  X,
-} from "lucide-react";
+import { CircleEllipsis, ClipboardCopy, Info, X } from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
 

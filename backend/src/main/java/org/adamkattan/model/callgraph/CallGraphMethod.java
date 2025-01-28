@@ -8,7 +8,7 @@ public record CallGraphMethod(
         @JsonProperty("id") Long id,
         @JsonProperty("name") String name,
         @JsonProperty("type") String classPath,
-        @JsonProperty("parameters") List<String> parameters, //TODO
+        @JsonProperty("parameters") List<String> parameters,
         @JsonProperty("returnType") String returnType,
         @JsonProperty("display") String display,
         @JsonProperty("flags") String flags,
