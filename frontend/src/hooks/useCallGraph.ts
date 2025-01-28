@@ -1,5 +1,5 @@
 import CallGraphsApi from "@/api/callgraphs/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useCallGraphInput = (callGraphId: string) => {
     return useQuery({
@@ -13,4 +13,11 @@ export const useProjectCallGraphInputs = (projectId: string) => {
         queryKey: ["callgraphs", projectId],
         queryFn: () => CallGraphsApi.getCallGraphInputsByProjectId(projectId)
     });
+}
+
+export const useMethodReachability = (callGraphInputId: string) => {
+    return useMutation({
+        mutationKey: ["method-reachability", callGraphInputId],
+        mutationFn: (payload: string) => CallGraphsApi.computeMethodReachability(callGraphInputId, payload)
+    })
 }

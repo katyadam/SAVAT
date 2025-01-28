@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { Switch } from "../ui/switch";
-import { Eye } from "lucide-react";
+import { Eye, X } from "lucide-react";
 import LegendTable from "./LegendTable";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
 
 type NavbarType = {
   isolatedNodesBtnClick: () => void;
@@ -20,6 +21,14 @@ const Navbar: FC<NavbarType> = ({ isolatedNodesBtnClick, msColorsLegend }) => {
           id="isolatedNodesSwitch"
           onCheckedChange={isolatedNodesBtnClick}
         />
+      </div>
+      <div className="flex flex-col items-center mx-5">
+        <label htmlFor="isolatedNodesSwitch" className="text-gray-500 mb-1">
+          Remove Reachability analysis
+        </label>
+        <Button variant="ghost">
+          <X />
+        </Button>
       </div>
 
       <div>

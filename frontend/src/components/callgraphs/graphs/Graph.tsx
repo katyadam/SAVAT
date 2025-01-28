@@ -17,6 +17,7 @@ type GraphType = {
   methodsMap: Map<string, CallGraphMethod>;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
+  callGraphInputId: string;
 };
 
 const Graph: FC<GraphType> = ({
@@ -24,6 +25,7 @@ const Graph: FC<GraphType> = ({
   methodsMap,
   showIsolatedNodes,
   msColors,
+  callGraphInputId,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -34,9 +36,11 @@ const Graph: FC<GraphType> = ({
   } | null>(null);
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
-
   const { callGraphLookupState, callGraphLookupDispatch } =
     useCallGraphLookup();
+
+  const [methodReachabilityCG, setMethodReachabilityCG] =
+    useState<CallGraph | null>(null);
 
   const getNonIsolatedNodes = (
     nodes: CallGraphMethod[],
@@ -75,6 +79,7 @@ const Graph: FC<GraphType> = ({
           })),
         edges: callGraph.calls.map((call: CallGraphCall) => ({
           data: {
+            id: `${call.source}__${call.target}`,
             source: call.source,
             target: call.target,
             label: call.httpMethod,
@@ -85,6 +90,7 @@ const Graph: FC<GraphType> = ({
             "target-arrow-color": call.isInterserviceCall
               ? "#ff4d4d"
               : "#4CAF50",
+            "line-style": call.isInterserviceCall ? "dashed" : "solid",
           },
         })),
       };
@@ -167,6 +173,7 @@ const Graph: FC<GraphType> = ({
     }
   }, [callGraph, showIsolatedNodes]);
 
+  // highlighting method after lookup through methods table
   useEffect(() => {
     if (cy && callGraphLookupState.method) {
       const node = cy.getElementById(callGraphLookupState.method);
@@ -182,6 +189,31 @@ const Graph: FC<GraphType> = ({
       callGraphLookupDispatch({ type: "REMOVE_LOOKUP" });
     }
   }, [callGraphLookupState.method, cy]);
+
+  // highlighting methods and edges after reachability analysis of specific method
+  useEffect(() => {
+    if (cy && methodReachabilityCG) {
+      methodReachabilityCG.methods.forEach((method) => {
+        const node = cy.getElementById(method.methodSignature);
+        if (node) {
+          node.style({
+            "border-width": 3,
+            "border-color": "#FFD700",
+          });
+        }
+      });
+
+      methodReachabilityCG.calls.forEach((call) => {
+        const edge = cy.getElementById(`${call.source}__${call.target}`);
+        if (edge) {
+          edge.style({
+            "line-color": "#FFD700",
+            "target-arrow-color": "#FFD700",
+          });
+        }
+      });
+    }
+  }, [methodReachabilityCG, cy]);
 
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">
@@ -201,6 +233,8 @@ const Graph: FC<GraphType> = ({
               selectedMethod={selectedMethod}
               methodsMap={methodsMap}
               close={() => setIsContextMenuOpen(false)}
+              callGraphInputId={callGraphInputId}
+              setMethodReachabilityCG={setMethodReachabilityCG}
             />
           </div>,
           cyRef.current!

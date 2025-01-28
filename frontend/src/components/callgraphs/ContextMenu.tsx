@@ -6,25 +6,42 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { CallGraphMethod } from "@/api/callgraphs/types";
+import { CallGraph, CallGraphMethod } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
 import { CircleEllipsis, ClipboardCopy, Info, X } from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
+import { useMethodReachability } from "@/hooks/useCallGraph";
 
 type ContextMenuType = {
   selectedMethod: string | null;
   methodsMap: Map<string, CallGraphMethod>;
   close: (arg0: boolean) => void;
+  callGraphInputId: string;
+  setMethodReachabilityCG: (arg0: CallGraph) => void;
 };
 
 const ContextMenu: FC<ContextMenuType> = ({
   selectedMethod,
   methodsMap,
   close,
+  callGraphInputId,
+  setMethodReachabilityCG,
 }) => {
   const [method, setMethod] = useState<CallGraphMethod | null>(null);
   const [showMethodDetails, setShowMethodDetails] = useState<boolean>(false);
+
+  const { mutateAsync } = useMethodReachability(callGraphInputId);
+
+  const handleDisplayReachability = async (methodSignature: string | null) => {
+    if (methodSignature) {
+      const methodReachabilityCG = await mutateAsync(methodSignature);
+      console.log("Successfully retrieved: " + methodReachabilityCG);
+      setMethodReachabilityCG(methodReachabilityCG);
+    } else {
+      console.error("methodSignature is null!");
+    }
+  };
 
   useEffect(() => {
     if (selectedMethod && methodsMap.has(selectedMethod)) {
@@ -120,7 +137,11 @@ const ContextMenu: FC<ContextMenuType> = ({
             <Button variant="ghost" className="py-1.5 text-sm font-semibold">
               <p className="text-left">Highlight Adjacents</p>
             </Button>
-            <Button variant="ghost" className="py-1.5 text-sm font-semibold">
+            <Button
+              onClick={() => handleDisplayReachability(selectedMethod)}
+              variant="ghost"
+              className="py-1.5 text-sm font-semibold"
+            >
               <p className="text-left">Display Reachability</p>
             </Button>
           </>

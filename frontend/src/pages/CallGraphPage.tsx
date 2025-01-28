@@ -39,12 +39,15 @@ const CallGraphPage = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (callGraph && msColors && callGraphMethodsMap) {
+      console.log(callGraph);
+
       return (
         <Graph
           callGraph={callGraph.callGraph}
           methodsMap={callGraphMethodsMap}
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
+          callGraphInputId={id}
         />
       );
     }
