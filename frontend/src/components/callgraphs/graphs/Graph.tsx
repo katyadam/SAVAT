@@ -18,6 +18,7 @@ type GraphType = {
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
   callGraphInputId: string;
+  msToHighlight: string | null;
 };
 
 const Graph: FC<GraphType> = ({
@@ -26,6 +27,7 @@ const Graph: FC<GraphType> = ({
   showIsolatedNodes,
   msColors,
   callGraphInputId,
+  msToHighlight,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -190,9 +192,12 @@ const Graph: FC<GraphType> = ({
     }
   }, [callGraphLookupState.method, cy]);
 
-  // highlighting methods and edges after reachability analysis of specific method
+  // highlighting methods and calls after reachability analysis of specific method
   useEffect(() => {
-    if (cy && methodReachabilityCG) {
+    if (!cy) return;
+
+    if (methodReachabilityCG) {
+      // Apply highlighting
       methodReachabilityCG.methods.forEach((method) => {
         const node = cy.getElementById(method.methodSignature);
         if (node) {
@@ -214,6 +219,30 @@ const Graph: FC<GraphType> = ({
       });
     }
   }, [methodReachabilityCG, cy]);
+
+  // highlighting microservice's methods after clicking on specific microservice in "legend"
+  useEffect(() => {
+    if (cy && msToHighlight) {
+      const highlightedNodes = cy.collection();
+
+      callGraph.methods
+        .filter((method) => method.microservice === msToHighlight)
+        .forEach((method) => {
+          const node = cy.getElementById(method.methodSignature);
+          if (node.nonempty()) {
+            node.style({
+              "border-width": 5,
+              "border-color": "#FFD700",
+            });
+            highlightedNodes.merge(node);
+          }
+        });
+
+      if (highlightedNodes.nonempty()) {
+        cy.fit(highlightedNodes, 50);
+      }
+    }
+  }, [msToHighlight, cy]);
 
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">

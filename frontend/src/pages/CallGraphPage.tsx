@@ -25,6 +25,7 @@ const CallGraphPage = () => {
   > | null>(null);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
   const [msColors, setMsColors] = useState<Map<string, string> | null>();
+  const [msToHighlight, setMsToHighlight] = useState<string | null>(null);
 
   useEffect(() => {
     if (callGraph) {
@@ -39,8 +40,6 @@ const CallGraphPage = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (callGraph && msColors && callGraphMethodsMap) {
-      console.log(callGraph);
-
       return (
         <Graph
           callGraph={callGraph.callGraph}
@@ -48,6 +47,7 @@ const CallGraphPage = () => {
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
           callGraphInputId={id}
+          msToHighlight={msToHighlight}
         />
       );
     }
@@ -59,6 +59,7 @@ const CallGraphPage = () => {
         <Navbar
           isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
           msColorsLegend={msColors}
+          setMsToHighlight={setMsToHighlight}
         />
       )}
       <Separator className="mt-2" />

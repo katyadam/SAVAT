@@ -7,17 +7,23 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { Highlighter } from "lucide-react";
 
 type LegendTableType = {
   msColorsLegend: Map<string, string>;
+  setMsToHighlight: (ms: string) => void;
 };
 
-const LegendTable: FC<LegendTableType> = ({ msColorsLegend }) => {
+const LegendTable: FC<LegendTableType> = ({
+  msColorsLegend,
+  setMsToHighlight,
+}) => {
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Microservice</TableHead>
+          <TableHead>Color</TableHead>
           <TableHead>Color</TableHead>
         </TableRow>
       </TableHeader>
@@ -31,6 +37,9 @@ const LegendTable: FC<LegendTableType> = ({ msColorsLegend }) => {
                 style={{ backgroundColor: color }}
               />
               {color}
+            </TableCell>
+            <TableCell className="cursor-pointer">
+              <Highlighter onClick={() => setMsToHighlight(name)} />
             </TableCell>
           </TableRow>
         ))}
