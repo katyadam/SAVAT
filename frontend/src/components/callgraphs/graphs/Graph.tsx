@@ -65,6 +65,12 @@ const Graph: FC<GraphType> = ({
         callGraph.methods,
         callGraph.calls
       );
+      const nodeSet = new Set(
+        (showIsolatedNodes ? callGraph.methods : visibleNodes)
+          .filter((method) => method.bytecodeHash !== "null")
+          .map((method) => method.methodSignature) // Collect valid method signatures
+      );
+
       const elements: ElementsDefinition = {
         nodes: (showIsolatedNodes ? callGraph.methods : visibleNodes)
           .filter((method) => method.bytecodeHash !== "null")
@@ -79,22 +85,28 @@ const Graph: FC<GraphType> = ({
               "background-color": msColors.get(method.microservice),
             },
           })),
-        edges: callGraph.calls.map((call: CallGraphCall) => ({
-          data: {
-            id: `${call.source}__${call.target}`,
-            source: call.source,
-            target: call.target,
-            label: call.httpMethod,
-          },
-          group: "edges",
-          style: {
-            "line-color": call.isInterserviceCall ? "#ff4d4d" : "#4CAF50",
-            "target-arrow-color": call.isInterserviceCall
-              ? "#ff4d4d"
-              : "#4CAF50",
-            "line-style": call.isInterserviceCall ? "dashed" : "solid",
-          },
-        })),
+
+        edges: callGraph.calls
+          .filter(
+            (call: CallGraphCall) =>
+              nodeSet.has(call.source) && nodeSet.has(call.target)
+          ) // Filter invalid edges
+          .map((call: CallGraphCall) => ({
+            data: {
+              id: `${call.source}__${call.target}`,
+              source: call.source,
+              target: call.target,
+              label: call.httpMethod,
+            },
+            group: "edges",
+            style: {
+              "line-color": call.isInterserviceCall ? "#ff4d4d" : "#4CAF50",
+              "target-arrow-color": call.isInterserviceCall
+                ? "#ff4d4d"
+                : "#4CAF50",
+              "line-style": call.isInterserviceCall ? "dashed" : "solid",
+            },
+          })),
       };
 
       const layoutOptions: CiseLayoutOptions = {
