@@ -3,6 +3,7 @@ import { indexCallGraphMethods } from "@/api/callgraphs/utils";
 import { getMicroservicesColors } from "@/components/callgraphs/generators/colorGenerator";
 import Graph from "@/components/callgraphs/graphs/Graph";
 import Navbar from "@/components/callgraphs/Navbar";
+import Loading from "@/components/loading/Loading";
 import { Separator } from "@/components/ui/separator";
 import { useCallGraphInput } from "@/hooks/useCallGraph";
 import React, { useEffect, useState } from "react";
@@ -37,9 +38,8 @@ const CallGraphPage = () => {
   }, [callGraph]);
 
   const renderContent = () => {
-    if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (callGraph && msColors && callGraphMethodsMap) {
+    if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
       return (
         <Graph
           callGraph={callGraph.callGraph}
@@ -51,6 +51,7 @@ const CallGraphPage = () => {
         />
       );
     }
+    return <Loading />;
   };
 
   return (

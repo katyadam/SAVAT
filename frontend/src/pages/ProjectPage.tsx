@@ -8,6 +8,7 @@ import { useProject } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "@/components/loading/Loading";
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const ProjectPage = () => {
   return (
     <div className="m-5">
       {projectLoading ? (
-        <p>Loading...</p>
+        <Loading overlay={false} />
       ) : (
         <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
       )}
@@ -54,7 +55,7 @@ const ProjectPage = () => {
 
         <TabsContent value="components">
           {inputsLoading ? (
-            <p>Loading inputs...</p>
+            <Loading overlay={false} />
           ) : (
             <AnalysisInputsTable columns={columns} data={inputs!} />
           )}
