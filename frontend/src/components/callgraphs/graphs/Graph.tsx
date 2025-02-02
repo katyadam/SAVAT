@@ -117,8 +117,7 @@ const Graph: FC<GraphType> = ({
         padding: 10,
         clustering: true,
         nodeDimensionsIncludeLabels: true,
-        maxIterations: 10000,
-        clusterThreshold: 0.1,
+        maxIterations: 100,
         gravity: 0.5,
         direction: "horizontal",
       };
