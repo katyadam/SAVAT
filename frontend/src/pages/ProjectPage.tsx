@@ -6,13 +6,20 @@ import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
 import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
 import { useProject } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
 
 const ProjectPage = () => {
   const { id } = useParams();
-  const [activeTab, setActive] = useState<string>("components");
+  const [activeTab, setActive] = useState<string>(
+    localStorage.getItem("activeTab") || "components"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("activeTab", activeTab);
+  }, [activeTab]);
+
   if (!id) return <p>Error invalid ID...</p>;
 
   const { data: project, isLoading: projectLoading } = useProject(id);
@@ -29,7 +36,7 @@ const ProjectPage = () => {
       )}
 
       <Tabs
-        defaultValue="components"
+        defaultValue={activeTab}
         onValueChange={(value) => setActive(value)}
       >
         <TabsList className="flex flex-row py-2 text-center border-gray-300">
