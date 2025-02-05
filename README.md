@@ -10,7 +10,14 @@ This project is part of a bachelor thesis that is trying to use known change imp
 - create .env out of env.example
 
 ```shell script
-chmod +x run-dev.sh && ./run-dev.sh
+# create postgres database
+docker run --name cia-pg -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=cia -p 5432:5432 -d postgres
+
+# start backend
+cd backend && ./mvnw clean package -DskipTests && ./mvnw compile quarkus:dev
+
+# start frontend
+cd frontend && yarn install && yarn dev
 ```
 
 After successfully running the project in DEV mode, you can access its Swagger UI at <http://localhost:8080/q/swagger-ui/>.
