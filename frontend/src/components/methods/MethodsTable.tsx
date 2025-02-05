@@ -46,8 +46,14 @@ import { toast } from "@/hooks/use-toast";
 import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
 import { useNavigate } from "react-router-dom";
 import { CallGraphMethod } from "@/api/callgraphs/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-// so that static analysis won't yell at me :(
 declare module "@tanstack/react-table" {
   interface FilterFns {
     microserviceFilter: FilterFn<CallGraphMethod>;
@@ -58,7 +64,7 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
+    cell: ({ row }) => <div>{row.getValue("name")}</div>,
   },
   {
     accessorKey: "bytecodeHash",
@@ -96,7 +102,7 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
   {
     accessorKey: "microservice",
     header: "Microservice",
-    cell: ({ row }) => <div className="">{row.getValue("microservice")}</div>,
+    cell: ({ row }) => <div>{row.getValue("microservice")}</div>,
     filterFn: "microserviceFilter",
   },
   {
@@ -146,11 +152,13 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [pageSize, setPageSize] = React.useState(5);
 
   const uniqueMicroservices = new Set(data.map((item) => item.microservice));
 
   const [selectedMicroservices, setSelectedMicroservices] =
     React.useState<Set<string>>(uniqueMicroservices);
+
   const table = useReactTable({
     data,
     columns,
@@ -164,7 +172,7 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
     onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: pageSize,
       },
     },
     state: {
@@ -229,9 +237,7 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
               <DropdownMenuCheckboxItem
                 key={service}
                 checked={selectedMicroservices.has(service)}
-                onCheckedChange={() => {
-                  toggleMicroserviceSelection(service);
-                }}
+                onCheckedChange={() => toggleMicroserviceSelection(service)}
                 onSelect={(e) => e.preventDefault()}
               >
                 {service}
@@ -325,10 +331,33 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+          <div>
+            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
+          </div>
+          <div className="flex flex-col items-center">
+            <label htmlFor="page-size-select">Items per page:</label>
+            <Select
+              value={String(pageSize)}
+              onValueChange={(value) => {
+                const newPageSize = Number(value);
+                setPageSize(newPageSize);
+                table.setPageSize(newPageSize);
+              }}
+            >
+              <SelectTrigger className="rounded-md border">
+                <SelectValue placeholder="Select items per page" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="5">5</SelectItem>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="15">15</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="space-x-2">
           <Button
@@ -352,4 +381,5 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
     </div>
   );
 };
+
 export default MethodsTable;

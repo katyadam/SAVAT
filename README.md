@@ -7,7 +7,7 @@ This project is part of a bachelor thesis that is trying to use known change imp
 ### DEV
 
 - served at http://localhost:5173
-- create .env out of env.example
+- in frontend directory create .env out of env.dev
 
 ```shell script
 # create postgres database
@@ -27,6 +27,7 @@ Or its UI part at <http://localhost:8000>
 ### DOCKER-COMPOSE
 
 - served at http://localhost
+- in frontend directory create .env out of env.prod
 
 ```shell script
 docker-compose up -d
