@@ -1,5 +1,4 @@
-import { FC, useState } from "react";
-import { MicroserviceNode } from "@/api/methods/types";
+import { FC } from "react";
 import MethodsTable from "./MethodsTable";
 import { CallGraphMethod } from "@/api/callgraphs/types";
 
@@ -9,11 +8,6 @@ type MethodsPanelProps = {
 };
 
 const MethodsPanel: FC<MethodsPanelProps> = ({ methods, callGraphInputId }) => {
-  const [selectedChangedMicroservice, setSelectedChangedMicroservice] =
-    useState<MicroserviceNode | null>(null);
-
-  const [compareUp, setCompareUp] = useState<boolean>(false);
-
   // const [compareResponse, setCompareResponse] =
   //   useState<CompareMethodsResponse | null>(null);
 

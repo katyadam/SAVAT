@@ -1,5 +1,5 @@
-import EntitiesApi from "@/api/entities/api";
 import { GraphDataChangedLinks } from "@/api/entities/types";
+import { getChangedColor } from "@/api/utils";
 import { FC } from "react";
 import { ForceGraph3D } from "react-force-graph";
 
@@ -27,7 +27,7 @@ const RenderCompareGraph: FC<RenderCompareGraphType> = ({ entities }) => {
       nodeId="nodeName"
       backgroundColor="white"
       nodeColor={() => "black"}
-      linkColor={(link) => EntitiesApi.getChangedColor(link.type.toString())}
+      linkColor={(link) => getChangedColor(link.type.toString())}
       linkDirectionalParticleColor={() => "red"}
       linkWidth={5}
       linkDirectionalParticleWidth={5}

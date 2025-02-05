@@ -2,7 +2,6 @@ import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
 import BasicGraph from "./graphs/BasicGraph";
 import { RenderType } from "./types";
-import large from "./testData.json";
 
 import EntityDetailsDiagram from "./graphs/EntityDetailsDiagram";
 
@@ -20,7 +19,6 @@ const RenderGraph: FC<RenderGraphProps> = ({
   showIsolatedNodes,
 }) => {
   if (!entities) return <div>Loading graph...</div>;
-  // entities = large;
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
       return (
