@@ -12,11 +12,18 @@ import {
 } from "@/components/ui/sidebar";
 import { useProjects } from "@/hooks/useProject";
 import { Project } from "@/api/projects/types";
+import { Button } from "../ui/button";
 
 export function AppSidebar() {
   const { data: projects, isLoading, error } = useProjects();
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <div>Error loading projects.</div>;
+
+  const handleNavigation = (projectId: number) => {
+    localStorage.setItem("selectedProjectId", projectId.toString());
+    window.location.href = `/project/${projectId}`;
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -28,13 +35,17 @@ export function AppSidebar() {
               {projects?.map((project: Project) => (
                 <SidebarMenuItem key={project.id}>
                   <SidebarMenuButton asChild>
-                    <a
-                      href={`/project/${project.id}`}
-                      className="flex justify-between"
+                    <Button
+                      className={`flex justify-between ${
+                        localStorage.getItem("selectedProjectId") ===
+                          project.id.toString() && "font-bold bg-gray-200"
+                      }`}
+                      onClick={() => handleNavigation(project.id)}
+                      variant={"ghost"}
                     >
                       <span>{project.projectName}</span>
                       <ArrowRight size={64} />
-                    </a>
+                    </Button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

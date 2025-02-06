@@ -14,22 +14,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ChevronDown,
-  MoreHorizontal,
-  X,
-  ClipboardCopy,
-  Eye,
-} from "lucide-react";
+import { ChevronDown, X, ClipboardCopy, Eye } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -53,6 +44,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 declare module "@tanstack/react-table" {
   interface FilterFns {
@@ -62,9 +59,44 @@ declare module "@tanstack/react-table" {
 
 export const columns: ColumnDef<CallGraphMethod>[] = [
   {
+    accessorKey: "returnType",
+    header: "Return Type",
+    cell: ({ row }) => (
+      <Tooltip>
+        <TooltipTrigger>
+          {(row.getValue("returnType") as string).split(".").pop()}
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{row.getValue("returnType") as string}</p>
+        </TooltipContent>
+      </Tooltip>
+    ),
+  },
+  {
     accessorKey: "name",
     header: "Name",
     cell: ({ row }) => <div>{row.getValue("name")}</div>,
+  },
+  {
+    accessorKey: "parameters",
+    header: "Method Arguments",
+    cell: ({ row }) => {
+      const parameters = row.getValue("parameters") as string[]; // Cast to string[]
+      return (
+        <div>
+          {parameters.map((param, index) => (
+            <p>
+              <Tooltip key={index}>
+                <TooltipTrigger>{param.split(".").pop()}</TooltipTrigger>
+                <TooltipContent>
+                  <p>{param}</p>
+                </TooltipContent>
+              </Tooltip>
+            </p>
+          ))}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "bytecodeHash",
@@ -100,37 +132,29 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
     ),
   },
   {
+    accessorKey: "type",
+    header: "Parent Class",
+    cell: ({ row }) => (
+      <Tooltip>
+        <TooltipTrigger>
+          {(row.getValue("type") as string).split(".").pop()}
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{row.getValue("type") as string}</p>
+        </TooltipContent>
+      </Tooltip>
+    ),
+  },
+  {
     accessorKey: "microservice",
     header: "Microservice",
     cell: ({ row }) => <div>{row.getValue("microservice")}</div>,
     filterFn: "microserviceFilter",
   },
   {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const method = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(method.bytecodeHash)}
-            >
-              Copy Full Bytecode Hash
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    accessorKey: "httpMethod",
+    header: "HTTP Method",
+    cell: ({ row }) => <div>{row.getValue("httpMethod") as string}</div>,
   },
 ];
 
@@ -210,12 +234,11 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
     callGraphLookupDispatch({ type: "LOOKUP_METHOD", payload: methodId });
     navigate(`/call-graph-input/${callGraphInputId}`);
   };
-
   return (
     <div className="w-full">
       <div className="flex items-center py-4 gap-5">
         <Input
-          placeholder="Filter methods..."
+          placeholder="Filter methods by their names..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -274,62 +297,64 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
         </DropdownMenu>
       </div>
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
+        <TooltipProvider>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
                   ))}
-                  <TableCell>
-                    <Button
-                      onClick={() =>
-                        handleMethodLookup(row.original.methodSignature)
-                      }
-                      variant="outline"
-                    >
-                      <Eye />
-                    </Button>
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                    <TableCell>
+                      <Button
+                        onClick={() =>
+                          handleMethodLookup(row.original.methodSignature)
+                        }
+                        variant="outline"
+                      >
+                        <Eye />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              )}
+            </TableBody>
+          </Table>
+        </TooltipProvider>
       </div>
       <div className="flex items-center justify-between space-x-2 py-4">
         <div className="flex flex-col gap-2 text-sm text-muted-foreground">
@@ -337,7 +362,7 @@ const MethodsTable: FC<MethodsTableType> = ({ data, callGraphInputId }) => {
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-1">
             <label htmlFor="page-size-select">Items per page:</label>
             <Select
               value={String(pageSize)}

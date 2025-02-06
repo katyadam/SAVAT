@@ -134,9 +134,6 @@ const ContextMenu: FC<ContextMenuType> = ({
           </>
         ) : (
           <>
-            <Button variant="ghost" className="py-1.5 text-sm font-semibold">
-              <p className="text-left">Highlight Adjacents</p>
-            </Button>
             <Button
               onClick={() => handleDisplayReachability(selectedMethod)}
               variant="ghost"
