@@ -56,11 +56,12 @@ const CallGraphPage = () => {
 
   return (
     <div className="w-screen h-screen">
-      {msColors && (
+      {msColors && callGraph && (
         <Navbar
           isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
           msColorsLegend={msColors}
           setMsToHighlight={setMsToHighlight}
+          methods={callGraph.callGraph.methods}
         />
       )}
       <Separator className="mt-2" />

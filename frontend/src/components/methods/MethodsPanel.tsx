@@ -1,6 +1,6 @@
 import { FC } from "react";
-import MethodsTable from "./MethodsTable";
 import { CallGraphMethod } from "@/api/callgraphs/types";
+import { MethodsTable } from "./table/MethodsTable";
 
 type MethodsPanelProps = {
   methods: CallGraphMethod[];

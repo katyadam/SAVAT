@@ -13,11 +13,12 @@ import {
 import { useProjects } from "@/hooks/useProject";
 import { Project } from "@/api/projects/types";
 import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
 
 export function AppSidebar() {
   const { data: projects, isLoading, error } = useProjects();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Skeleton className="w-[300px] h-screen" />;
   if (error) return <div>Error loading projects.</div>;
 
   const handleNavigation = (projectId: number) => {
