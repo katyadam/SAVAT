@@ -169,8 +169,6 @@ const Graph: FC<GraphType> = ({
       cyInstance.on("tap", "node", (event) => {
         const node = event.target;
         const nodePosition = node.renderedPosition();
-        console.log(node.data("id"));
-
         setContextMenuPosition({
           x: nodePosition.x + 10,
           y: nodePosition.y + 10,
@@ -191,9 +189,9 @@ const Graph: FC<GraphType> = ({
     if (cy && callGraphLookupState.method) {
       const node = cy.getElementById(callGraphLookupState.method);
       if (node && node.length > 0) {
-        cy.zoom({
-          level: 2,
-          position: node.position(),
+        cy.animate({
+          fit: { padding: 300, eles: node },
+          duration: 500,
         });
 
         cy.elements().removeClass("highlighted");

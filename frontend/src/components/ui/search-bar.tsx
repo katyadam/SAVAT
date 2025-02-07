@@ -12,6 +12,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { cn } from "@/lib/utils";
 import { CallGraphMethod } from "@/api/callgraphs/types";
+import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
 
 type SearchBarProps = {
   data: { key: string; value: CallGraphMethod }[];
@@ -23,6 +24,7 @@ const SearchBar: FC<SearchBarProps> = ({ data, setSelected }) => {
   const [selectedMethod, setSelectedMethod] = useState<CallGraphMethod | null>(
     null
   );
+  const { callGraphLookupDispatch } = useCallGraphLookup();
   const [query, setQuery] = useState<string>("");
 
   const filteredData = data.filter((item) =>
@@ -65,6 +67,10 @@ const SearchBar: FC<SearchBarProps> = ({ data, setSelected }) => {
                   onSelect={() => {
                     setSelectedMethod(item.value);
                     setSelected(item.value);
+                    callGraphLookupDispatch({
+                      payload: item.key,
+                      type: "LOOKUP_METHOD",
+                    });
                     setOpen(false);
                   }}
                 >
@@ -77,13 +83,12 @@ const SearchBar: FC<SearchBarProps> = ({ data, setSelected }) => {
                         : "opacity-0"
                     )}
                   />
-                  <div className="flex flex-col">
+                  <div className="flex flex-col border-b-2 w-full p-2 cursor-pointer">
+                    <p className="text-lg">{item.value.name}</p>
                     <p className="font-semibold ">Return Type</p>
                     <p className="text-xs text-gray-500">
                       {item.value.returnType}
                     </p>
-                    <p className="font-semibold">Method Name</p>
-                    <p className="text-xs text-gray-500">{item.value.name}</p>
                     <div className="flex flex-col">
                       <p className="font-semibold">Parameters</p>
                       {item.value.parameters.map((param, index) => (
