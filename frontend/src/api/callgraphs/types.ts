@@ -6,7 +6,7 @@ export type CallGraph = {
 export type CallGraphMethod = {
     id: number;
     name: string;
-    classPath: string;
+    type: string;
     parameters: string[];
     returnType: string;
     display: string;

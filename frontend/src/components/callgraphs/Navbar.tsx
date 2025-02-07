@@ -3,8 +3,8 @@ import { Switch } from "../ui/switch";
 import { Eye, RefreshCw } from "lucide-react";
 import LegendTable from "./LegendTable";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { AutoComplete } from "../ui/autocomplete";
 import { CallGraphMethod } from "@/api/callgraphs/types";
+import SearchBar from "../ui/search-bar";
 
 type NavbarType = {
   isolatedNodesBtnClick: () => void;
@@ -19,38 +19,34 @@ const Navbar: FC<NavbarType> = ({
   setMsToHighlight,
   methods,
 }) => {
-  const [searchValue, setSearchValue] = useState<{
-    value: string;
-    label: string;
-  }>();
+  const [selectedMethod, setSelectedMethod] = useState<CallGraphMethod | null>(
+    null
+  );
+  console.log(selectedMethod);
   return (
     <div className="flex flex-row ml-5 gap-4 justify-start items-center w-full h-12">
-      <AutoComplete
-        options={methods.map((method) => ({
-          value: method.methodSignature,
-          label: method.name,
+      <SearchBar
+        data={methods.map((method) => ({
+          key: method.methodSignature,
+          value: method,
         }))}
-        emptyMessage="Method not found!"
-        onValueChange={setSearchValue}
-        placeholder="Search for method..."
+        setSelected={setSelectedMethod}
       />
-      <div>
-        <Popover modal={false}>
-          <PopoverTrigger>
-            <button className="flex flex-col items-center mx-5 cursor-pointer">
-              <label className="text-gray-500 mb-1">Legend</label>
-              <Eye />
-            </button>
-          </PopoverTrigger>
+      <Popover modal={false}>
+        <PopoverTrigger>
+          <button className="flex flex-col items-center mx-5 cursor-pointer">
+            <label className="text-gray-500 mb-1">Legend</label>
+            <Eye />
+          </button>
+        </PopoverTrigger>
 
-          <PopoverContent className="w-full">
-            <LegendTable
-              msColorsLegend={msColorsLegend}
-              setMsToHighlight={setMsToHighlight}
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
+        <PopoverContent className="w-full">
+          <LegendTable
+            msColorsLegend={msColorsLegend}
+            setMsToHighlight={setMsToHighlight}
+          />
+        </PopoverContent>
+      </Popover>
       <div className="flex flex-col items-center mx-5">
         <label htmlFor="isolatedNodesSwitch" className="text-gray-500 mb-1">
           Show all nodes
