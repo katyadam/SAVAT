@@ -12,3 +12,14 @@ export const getChangedColor = (type: string): string => {
             return "white";
     }
 };
+
+export function getCommonDateString(): string {
+    return new Date(Date.now()).toLocaleString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+}

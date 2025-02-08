@@ -9,6 +9,16 @@ import { useCallGraphInput } from "@/hooks/useCallGraph";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+export type Action = {
+  id: number;
+  methodIds: string[];
+  calls: {
+    callId: string;
+    isInterservice: boolean;
+  }[];
+  timestamp: string;
+};
+
 const CallGraphPage = () => {
   React.useEffect(() => {
     document.body.classList.add("overflow-hidden");
@@ -37,6 +47,9 @@ const CallGraphPage = () => {
     }
   }, [callGraph]);
 
+  const [actionsStorage, setActionsStorage] = useState<Action[]>([]);
+  const [removedAction, setRemovedAction] = useState<Action | null>(null);
+
   const renderContent = () => {
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
@@ -48,6 +61,9 @@ const CallGraphPage = () => {
           msColors={msColors}
           callGraphInputId={id}
           msToHighlight={msToHighlight}
+          setActionsStorage={setActionsStorage}
+          actionsStorage={actionsStorage}
+          actionToRemove={removedAction}
         />
       );
     }
@@ -62,6 +78,9 @@ const CallGraphPage = () => {
           msColorsLegend={msColors}
           setMsToHighlight={setMsToHighlight}
           methods={callGraph.callGraph.methods}
+          setActionsStorage={setActionsStorage}
+          actionsStorage={actionsStorage}
+          setRemovedAction={setRemovedAction}
         />
       )}
       <Separator className="mt-2" />

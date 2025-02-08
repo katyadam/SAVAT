@@ -16,10 +16,9 @@ import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
 
 type SearchBarProps = {
   data: { key: string; value: CallGraphMethod }[];
-  setSelected: (value: CallGraphMethod) => void;
 };
 
-const SearchBar: FC<SearchBarProps> = ({ data, setSelected }) => {
+const SearchBar: FC<SearchBarProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<CallGraphMethod | null>(
     null
@@ -66,7 +65,6 @@ const SearchBar: FC<SearchBarProps> = ({ data, setSelected }) => {
                   value={item.value.methodSignature}
                   onSelect={() => {
                     setSelectedMethod(item.value);
-                    setSelected(item.value);
                     callGraphLookupDispatch({
                       payload: item.key,
                       type: "LOOKUP_METHOD",

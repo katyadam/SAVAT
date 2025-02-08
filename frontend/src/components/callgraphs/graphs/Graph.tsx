@@ -11,6 +11,13 @@ import {
 import cytoscape from "cytoscape";
 import ContextMenu from "../ContextMenu";
 import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { Action } from "@/pages/CallGraphPage";
+import {
+  useHighlightMethod,
+  useHighlightMicroservice,
+  useHighlightReachability,
+  useRemoveAction,
+} from "@/hooks/useGraphEffects";
 
 type GraphType = {
   callGraph: CallGraph;
@@ -19,6 +26,9 @@ type GraphType = {
   msColors: Map<string, string>;
   callGraphInputId: string;
   msToHighlight: string | null;
+  setActionsStorage: (actionStorage: Action[]) => void;
+  actionsStorage: Action[];
+  actionToRemove: Action | null;
 };
 
 const Graph: FC<GraphType> = ({
@@ -28,6 +38,9 @@ const Graph: FC<GraphType> = ({
   msColors,
   callGraphInputId,
   msToHighlight,
+  setActionsStorage,
+  actionsStorage,
+  actionToRemove,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -36,6 +49,7 @@ const Graph: FC<GraphType> = ({
     x: number;
     y: number;
   } | null>(null);
+
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
   const { callGraphLookupState, callGraphLookupDispatch } =
@@ -160,6 +174,13 @@ const Graph: FC<GraphType> = ({
               "background-color": "#FFFF00",
             },
           },
+          {
+            selector: "edge.highlighted",
+            style: {
+              "line-color": "#FFD700",
+              "target-arrow-color": "#FFD700",
+            },
+          },
         ],
         layout: layoutOptions,
       });
@@ -185,74 +206,30 @@ const Graph: FC<GraphType> = ({
   }, [callGraph, showIsolatedNodes]);
 
   // highlighting method after lookup through methods table
-  useEffect(() => {
-    if (cy && callGraphLookupState.method) {
-      const node = cy.getElementById(callGraphLookupState.method);
-      if (node && node.length > 0) {
-        cy.animate({
-          fit: { padding: 300, eles: node },
-          duration: 500,
-        });
+  useHighlightMethod(
+    cy,
+    callGraphLookupState.method,
+    actionsStorage,
+    setActionsStorage,
+    () => callGraphLookupDispatch({ type: "REMOVE_LOOKUP" })
+  );
 
-        cy.elements().removeClass("highlighted");
-        node.addClass("highlighted");
-      }
-      callGraphLookupDispatch({ type: "REMOVE_LOOKUP" });
-    }
-  }, [callGraphLookupState.method, cy]);
+  useHighlightReachability(
+    cy,
+    methodReachabilityCG,
+    actionsStorage,
+    setActionsStorage
+  );
 
-  // highlighting methods and calls after reachability analysis of specific method
-  useEffect(() => {
-    if (!cy) return;
+  useHighlightMicroservice(
+    cy,
+    msToHighlight,
+    callGraph,
+    actionsStorage,
+    setActionsStorage
+  );
 
-    if (methodReachabilityCG) {
-      // Apply highlighting
-      methodReachabilityCG.methods.forEach((method) => {
-        const node = cy.getElementById(method.methodSignature);
-        if (node) {
-          node.style({
-            "border-width": 3,
-            "border-color": "#FFD700",
-          });
-        }
-      });
-
-      methodReachabilityCG.calls.forEach((call) => {
-        const edge = cy.getElementById(`${call.source}__${call.target}`);
-        if (edge) {
-          edge.style({
-            "line-color": "#FFD700",
-            "target-arrow-color": "#FFD700",
-          });
-        }
-      });
-    }
-  }, [methodReachabilityCG, cy]);
-
-  // highlighting microservice's methods after clicking on specific microservice in "legend"
-  useEffect(() => {
-    if (cy && msToHighlight) {
-      const highlightedNodes = cy.collection();
-
-      callGraph.methods
-        .filter((method) => method.microservice === msToHighlight)
-        .forEach((method) => {
-          const node = cy.getElementById(method.methodSignature);
-          if (node.nonempty()) {
-            node.style({
-              "border-width": 5,
-              "border-color": "#FFD700",
-            });
-            highlightedNodes.merge(node);
-          }
-        });
-
-      if (highlightedNodes.nonempty()) {
-        cy.fit(highlightedNodes, 50);
-      }
-    }
-  }, [msToHighlight, cy]);
-
+  useRemoveAction(cy, actionToRemove);
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">
       {contextMenuPosition &&
