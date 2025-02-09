@@ -9,9 +9,17 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
+import ImportExport, {
+  FileOperation,
+} from "@/components/projects/ImportExport";
+import Overlay from "@/components/ui/Overlay";
+import ProjectsImportDialog from "@/components/projects/ProjectsImportDialog";
+import ProjectsExportDialog from "@/components/projects/ProjectsExportDialog";
 
 const ProjectPage = () => {
   const { id } = useParams();
+  const [importExportDialogUp, showImportExportDialog] =
+    useState<FileOperation | null>(null);
   const [activeTab, setActive] = useState<string>(
     localStorage.getItem("activeTab") || "components"
   );
@@ -29,11 +37,14 @@ const ProjectPage = () => {
 
   return (
     <div className="m-5">
-      {projectLoading ? (
-        <Loading overlay={false} />
-      ) : (
-        <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
-      )}
+      <div className="flex flex-row justify-between">
+        {projectLoading ? (
+          <Loading overlay={false} />
+        ) : (
+          <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
+        )}
+        <ImportExport showImportExportDialog={showImportExportDialog} />
+      </div>
 
       <Tabs
         defaultValue={activeTab}
@@ -70,7 +81,7 @@ const ProjectPage = () => {
 
         <TabsContent value="callgraphs">
           {callGraphInputsLoading ? (
-            <p>Loading call graph inputs...</p>
+            <Loading overlay={false} />
           ) : (
             <CallGraphInputsTable
               columns={callGraphInputsColumns}
@@ -79,6 +90,16 @@ const ProjectPage = () => {
           )}
         </TabsContent>
       </Tabs>
+      {importExportDialogUp != null && (
+        <Overlay width="w-1/2" closeFunc={() => showImportExportDialog(null)}>
+          {importExportDialogUp == FileOperation.IMPORT && (
+            <ProjectsImportDialog projectId={id} />
+          )}
+          {importExportDialogUp == FileOperation.EXPORT && (
+            <ProjectsExportDialog />
+          )}
+        </Overlay>
+      )}
     </div>
   );
 };

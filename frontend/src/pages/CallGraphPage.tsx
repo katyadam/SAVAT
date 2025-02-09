@@ -51,7 +51,7 @@ const CallGraphPage = () => {
   const [removedAction, setRemovedAction] = useState<Action | null>(null);
 
   const renderContent = () => {
-    if (error) return <p>Error: Unable to fetch entity data.</p>;
+    if (error) return <p>Error: Unable to fetch call graph inputs.</p>;
     if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
       return (
         <Graph

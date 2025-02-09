@@ -21,3 +21,4 @@ export const useMethodReachability = (callGraphInputId: string) => {
         mutationFn: (payload: string) => CallGraphsApi.computeMethodReachability(callGraphInputId, payload)
     })
 }
+

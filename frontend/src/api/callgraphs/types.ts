@@ -37,3 +37,4 @@ export type CallGraphInput = {
 }
 
 export type CallGraphInputSimple = Omit<CallGraphInput, 'callGraph'>;
+export type CreateCallGraphInput = Omit<CallGraphInput, 'createdAt' | 'id'>

@@ -1,5 +1,6 @@
+import CallGraphsApi from "@/api/callgraphs/api";
 import ProjectApi from "@/api/projects/api";
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const useProjects = () => {
     return useQuery({
@@ -13,4 +14,14 @@ export const useProject = (id: string) => {
         queryKey: ["project", id],
         queryFn: () => ProjectApi.getProjectById(id),
     });
+}
+
+export const useCallGraphInputCreate = (projectId: string) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: CallGraphsApi.createCallGraphInput,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["callgraphs", projectId] })
+        }
+    })
 }
