@@ -59,7 +59,7 @@ public class AnalysisInputController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response addAnalysisInput(@Valid AnalysisInputFullDto analysisInputDto) {
+    public Response createAnalysisInput(@Valid AnalysisInputFullDto analysisInputDto) {
         return Response.status(Response.Status.CREATED)
                 .entity(analysisInputService.addAnalysisInputToProject(analysisInputDto))
                 .build();
@@ -78,14 +78,6 @@ public class AnalysisInputController {
     @Transactional
     public Response getAnalysisInputGraph(@PathParam("id") Long id) {
         return Response.ok(analysisInputService.getAnalysisInputGraph(id))
-                .build();
-    }
-
-    @GET
-    @Path("/{id}/methods")
-    @Transactional
-    public Response getAnalysisInputMethods(@PathParam("id") Long id) {
-        return Response.ok(analysisInputService.getAnalysisInputMethods(id))
                 .build();
     }
 }

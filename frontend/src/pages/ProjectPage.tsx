@@ -13,8 +13,8 @@ import ImportExport, {
   FileOperation,
 } from "@/components/projects/ImportExport";
 import Overlay from "@/components/ui/Overlay";
-import ProjectsImportDialog from "@/components/projects/ProjectsImportDialog";
-import ProjectsExportDialog from "@/components/projects/ProjectsExportDialog";
+import CallGraphInputImportDialog from "@/components/projects/CallGraphInputImportDIalog";
+import AnalysisInputImportDialog from "@/components/projects/AnalysisInputImportDialog";
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -92,12 +92,20 @@ const ProjectPage = () => {
       </Tabs>
       {importExportDialogUp != null && (
         <Overlay width="w-1/2" closeFunc={() => showImportExportDialog(null)}>
-          {importExportDialogUp == FileOperation.IMPORT && (
-            <ProjectsImportDialog projectId={id} />
-          )}
-          {importExportDialogUp == FileOperation.EXPORT && (
-            <ProjectsExportDialog />
-          )}
+          {importExportDialogUp == FileOperation.IMPORT &&
+            activeTab === "callgraphs" && (
+              <CallGraphInputImportDialog
+                projectId={id}
+                closeDialog={() => showImportExportDialog(null)}
+              />
+            )}
+          {importExportDialogUp == FileOperation.IMPORT &&
+            activeTab === "components" && (
+              <AnalysisInputImportDialog
+                projectId={id}
+                closeDialog={() => showImportExportDialog(null)}
+              />
+            )}
         </Overlay>
       )}
     </div>

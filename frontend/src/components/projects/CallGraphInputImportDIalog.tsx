@@ -6,10 +6,13 @@ import { Input } from "../ui/input";
 import { Upload } from "lucide-react";
 import { Button } from "../ui/button";
 import { useCallGraphInputCreate } from "@/hooks/useProject";
-import { CreateCallGraphInput } from "@/api/callgraphs/types";
+import { CallGraph, CreateCallGraphInput } from "@/api/callgraphs/types";
+import { useToast } from "@/hooks/use-toast";
+import { exampleCallGraph } from "./JsonExamples";
 
 type ProjectsImportDialogType = {
   projectId: string;
+  closeDialog: () => void;
 };
 
 type CallGraphInputWithParsing = Omit<
@@ -18,54 +21,40 @@ type CallGraphInputWithParsing = Omit<
 > & {
   callGraph: string;
 };
-const ProjectsImportDialog: FC<ProjectsImportDialogType> = ({ projectId }) => {
-  const exampleJson = `{
-    "methods": [
-      {
-        "id": 0,
-        "name": "string",
-        "type": "string",
-        "parameters": [
-          "string"
-        ],
-        "returnType": "string",
-        "display": "string",
-        "flags": "string",
-        "bytecodeHash": "string",
-        "microservice": "string",
-        "endpointURI": "string",
-        "httpMethod": "string",
-        "endpointMethod": true,
-        "entryPoint": true,
-        "methodSignature": "string"
-      }
-    ],
-    "calls": [
-      {
-        "source": "string",
-        "target": "string",
-        "isInterserviceCall": true,
-        "httpMethod": "string"
-      }
-    ]
-  }`;
 
+const CallGraphInputImportDialog: FC<ProjectsImportDialogType> = ({
+  projectId,
+  closeDialog,
+}) => {
   const { register, handleSubmit, setError } =
     useForm<CallGraphInputWithParsing>();
   const { mutateAsync } = useCallGraphInputCreate(projectId);
+  const { toast } = useToast();
 
   const onSubmit = async (data: CallGraphInputWithParsing) => {
     try {
-      const parsedCallGraph = JSON.parse(data.callGraph);
-      await mutateAsync({
-        projectId: parseInt(projectId),
-        version: data.version,
-        commitHash: data.commitHash,
-        callGraph: parsedCallGraph,
-      });
+      const parsedCallGraph: CallGraph = JSON.parse(data.callGraph);
+      if (parsedCallGraph.methods.length == 0) {
+        toast({
+          title: "Empty call graph!",
+          description: "Every call graph has atleast 1 method!",
+        });
+      } else {
+        await mutateAsync({
+          projectId: parseInt(projectId),
+          version: data.version,
+          commitHash: data.commitHash,
+          callGraph: parsedCallGraph,
+        });
+        closeDialog();
+      }
     } catch (error) {
-      console.error("Error importing call graph:", error);
       setError("callGraph", { type: "manual", message: "Invalid JSON format" });
+      toast({
+        title: "Error occured, unable to import your input!",
+        description: "Try again",
+        variant: "destructive",
+      });
     }
   };
 
@@ -86,10 +75,10 @@ const ProjectsImportDialog: FC<ProjectsImportDialogType> = ({ projectId }) => {
       </div>
 
       <div className="w-full text-left">
-        <Label htmlFor="jsonCallgraph">JSON Callgraph</Label>
+        <Label htmlFor="jsonCallgraph">Callgraph</Label>
         <Textarea
           className="min-h-64"
-          placeholder={exampleJson}
+          placeholder={exampleCallGraph}
           id="jsonCallgraph"
           rows={15}
           {...register("callGraph")}
@@ -102,4 +91,4 @@ const ProjectsImportDialog: FC<ProjectsImportDialogType> = ({ projectId }) => {
   );
 };
 
-export default ProjectsImportDialog;
+export default CallGraphInputImportDialog;

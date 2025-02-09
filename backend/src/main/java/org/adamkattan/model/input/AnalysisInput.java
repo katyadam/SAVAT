@@ -39,10 +39,6 @@ public class AnalysisInput extends PanacheEntity {
     @Column(nullable = false, columnDefinition = "jsonb", name = "graph")
     public Graph graph;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(nullable = false, columnDefinition = "jsonb", name = "methods")
-    public List<MicroserviceNode> methods;
-
     @OneToMany(mappedBy = "analysisInput", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "changed_entities")
     public List<ChangedEntity> changedEntities;
@@ -61,7 +57,6 @@ public class AnalysisInput extends PanacheEntity {
                 input.commitHash,
                 input.entities,
                 input.graph,
-                input.methods,
                 input.createdAt
         );
     }

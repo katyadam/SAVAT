@@ -23,25 +23,6 @@ public class DifferenceAnalysis {
         this.diffRowGenerator = diffRowGenerator;
     }
 
-    public Optional<PlainDifferenceOutput> isDifferent(AnalysisInputFullDto newInput, AnalysisInputFullDto oldInput) {
-        if (!newInput.projectId().equals(oldInput.projectId())) {
-            return Optional.empty();
-        }
-
-        boolean areSame = compare(newInput.entities(), oldInput.entities()) &&
-                compare(newInput.graph(), oldInput.graph()) &&
-                compare(newInput.methods(), oldInput.methods());
-        var result = new PlainDifferenceOutput(
-                newInput.projectId(),
-                newInput.version(),
-                oldInput.version(),
-                newInput.commitHash(),
-                oldInput.commitHash(),
-                !areSame
-        );
-        return Optional.of(result);
-    }
-
     private <T> boolean compare(T newEntities, T oldEntities) {
         try {
             String newJson = objectMapper.writeValueAsString(newEntities);

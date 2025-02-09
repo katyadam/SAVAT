@@ -1,14 +1,9 @@
 import { axiosInstance } from "../config"
-import { ANALYSIS_INPUTS_PREFIX } from "../inputs/api"
 import { CompareMethodsResponse } from "./types";
 import { MicroserviceNode } from "./types";
 
 export const METHODS_COMPARE_PREFIX = "/methods"
 
-async function getMethods(id: string): Promise<MicroserviceNode[]> {
-    const resp = await axiosInstance.get(`${ANALYSIS_INPUTS_PREFIX}/${id}/methods`)
-    return resp.data;
-}
 
 async function compareMethods(
     analysisInputId: string,
@@ -21,7 +16,6 @@ async function compareMethods(
 }
 
 const MethodsApi = {
-    getMethods,
     compareMethods
 };
 

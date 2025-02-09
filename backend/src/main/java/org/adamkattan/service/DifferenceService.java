@@ -21,12 +21,6 @@ public class DifferenceService {
     @Inject
     DifferenceAnalysis differenceAnalysis;
 
-
-    public Optional<PlainDifferenceOutput> isDifferent(AnalysisInputFullDto input) {
-        var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
-        return differenceAnalysis.isDifferent(input, AnalysisInput.toFullDto(latestInput));
-    }
-
     public DifferenceOutput getJsonDifference(AnalysisInputFullDto input, DifferenceType type) {
         var latestInput = analysisInputService.getProjectLatestAnalysisInputByTimestamp(input.projectId());
         return computeDifference(input, AnalysisInput.toFullDto(latestInput), type);
@@ -41,7 +35,6 @@ public class DifferenceService {
         var diffRows = switch (type) {
             case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.entities(), dest.entities());
             case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.graph(), dest.graph());
-            case DifferenceType.METHODS -> differenceAnalysis.getDifferenceRows(src.methods(), dest.methods());
         };
         StringBuilder oldJson = new StringBuilder();
         StringBuilder newJson = new StringBuilder();

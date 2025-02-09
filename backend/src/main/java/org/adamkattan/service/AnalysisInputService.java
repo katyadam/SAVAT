@@ -44,7 +44,6 @@ public class AnalysisInputService {
         analysisInput.commitHash = analysisInputDto.commitHash();
         analysisInput.entities = analysisInputDto.entities();
         analysisInput.graph = analysisInputDto.graph();
-        analysisInput.methods = analysisInputDto.methods();
         analysisInput.persist();
         return AnalysisInput.toFullDto(analysisInput);
     }
@@ -57,10 +56,5 @@ public class AnalysisInputService {
     public Graph getAnalysisInputGraph(Long inputId) {
         AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
         return input.graph;
-    }
-
-    public List<MicroserviceNode> getAnalysisInputMethods(Long inputId) {
-        AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
-        return input.methods;
     }
 }

@@ -34,12 +34,10 @@ async function computeMethodReachability(callGraphInputId: string, methodSignatu
 }
 
 async function createCallGraphInput(input: CreateCallGraphInput) {
-    console.log(input)
     const resp = await axiosInstance.post(CALL_GRAPH_INPUTS_COMPARE_PREFIX, {
         ...input,
         createdAt: new Date().toISOString() // .slice(0, 19);
     });
-    console.log(resp);
     return resp;
 }
 
