@@ -50,6 +50,8 @@ const CallGraphPage = () => {
   const [actionsStorage, setActionsStorage] = useState<Action[]>([]);
   const [removedAction, setRemovedAction] = useState<Action | null>(null);
 
+  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+
   const renderContent = () => {
     if (error) return <p>Error: Unable to fetch call graph inputs.</p>;
     if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
@@ -64,6 +66,8 @@ const CallGraphPage = () => {
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           actionToRemove={removedAction}
+          isContextMenuOpen={isContextMenuOpen}
+          setIsContextMenuOpen={setIsContextMenuOpen}
         />
       );
     }
@@ -81,6 +85,7 @@ const CallGraphPage = () => {
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           setRemovedAction={setRemovedAction}
+          closeContextMenu={() => setIsContextMenuOpen(false)}
         />
       )}
       <Separator className="mt-2" />

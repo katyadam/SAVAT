@@ -29,6 +29,8 @@ type GraphType = {
   setActionsStorage: (actionStorage: Action[]) => void;
   actionsStorage: Action[];
   actionToRemove: Action | null;
+  isContextMenuOpen: boolean;
+  setIsContextMenuOpen: (arg: boolean) => void;
 };
 
 const Graph: FC<GraphType> = ({
@@ -41,6 +43,8 @@ const Graph: FC<GraphType> = ({
   setActionsStorage,
   actionsStorage,
   actionToRemove,
+  isContextMenuOpen,
+  setIsContextMenuOpen,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -50,7 +54,6 @@ const Graph: FC<GraphType> = ({
     y: number;
   } | null>(null);
 
-  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
   const { callGraphLookupState, callGraphLookupDispatch } =
     useCallGraphLookup();
@@ -91,13 +94,11 @@ const Graph: FC<GraphType> = ({
           .map((method: CallGraphMethod) => ({
             data: {
               id: method.methodSignature,
-              label: method.name,
+              label: method.name || "Unnamed",
               parent: method.microservice,
+              microservice: method.microservice,
             },
             group: "nodes",
-            style: {
-              "background-color": msColors.get(method.microservice),
-            },
           })),
 
         edges: callGraph.calls
@@ -110,16 +111,10 @@ const Graph: FC<GraphType> = ({
               id: `${call.source}__${call.target}`,
               source: call.source,
               target: call.target,
-              label: call.httpMethod,
+              label: call.httpMethod || "",
+              isInterserviceCall: call.isInterserviceCall ? "true" : "false",
             },
             group: "edges",
-            style: {
-              "line-color": call.isInterserviceCall ? "#ff4d4d" : "#4CAF50",
-              "target-arrow-color": call.isInterserviceCall
-                ? "#ff4d4d"
-                : "#4CAF50",
-              "line-style": call.isInterserviceCall ? "dashed" : "solid",
-            },
           })),
       };
 
@@ -154,6 +149,13 @@ const Graph: FC<GraphType> = ({
             },
           },
           {
+            selector: "node[microservice]",
+            style: {
+              "background-color": (ele) =>
+                msColors.get(ele.data("microservice")) || "#808080",
+            },
+          },
+          {
             selector: "edge",
             style: {
               width: 5,
@@ -167,11 +169,26 @@ const Graph: FC<GraphType> = ({
             },
           },
           {
+            selector: "edge[isInterserviceCall = 'true']",
+            style: {
+              "line-color": "#ff4d4d",
+              "target-arrow-color": "#ff4d4d",
+              "line-style": "dashed",
+            },
+          },
+          {
+            selector: "edge[isInterserviceCall = 'false']",
+            style: {
+              "line-color": "#4CAF50",
+              "target-arrow-color": "#4CAF50",
+              "line-style": "solid",
+            },
+          },
+          {
             selector: "node.highlighted",
             style: {
               "border-width": 4,
               "border-color": "#FFD700",
-              "background-color": "#FFFF00",
             },
           },
           {
@@ -199,13 +216,14 @@ const Graph: FC<GraphType> = ({
         setIsContextMenuOpen(true);
       });
 
+      setActionsStorage([]);
+
       return () => {
         cyInstance.destroy();
       };
     }
   }, [callGraph, showIsolatedNodes]);
 
-  // highlighting method after lookup through methods table
   useHighlightMethod(
     cy,
     callGraphLookupState.method,
@@ -230,6 +248,7 @@ const Graph: FC<GraphType> = ({
   );
 
   useRemoveAction(cy, actionToRemove);
+
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">
       {contextMenuPosition &&

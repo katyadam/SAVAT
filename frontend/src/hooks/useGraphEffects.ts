@@ -34,7 +34,7 @@ export const useHighlightMethod = (
             }
             removeLookup();
         }
-    }, [method, cy]);
+    }, [method]);
 };
 
 export const useHighlightReachability = (
@@ -78,7 +78,7 @@ export const useHighlightReachability = (
 
             setActionsStorage([...actionsStorage, actionToStore]);
         }
-    }, [methodReachabilityCG, cy]);
+    }, [methodReachabilityCG]);
 };
 
 export const useHighlightMicroservice = (
@@ -114,7 +114,7 @@ export const useHighlightMicroservice = (
                 cy.fit(highlightedNodes, 50);
             }
         }
-    }, [msToHighlight, cy]);
+    }, [msToHighlight]);
 };
 
 export const useRemoveAction = (cy: Cytoscape.Core | null, actionToRemove: Action | null) => {

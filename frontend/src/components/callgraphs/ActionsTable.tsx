@@ -22,6 +22,7 @@ const ActionsTable: FC<ActionsTableType> = ({
   setRemovedAction,
 }) => {
   const handleRemove = (actionId: number) => {
+    console.log(actionsStorage);
     const actionToRemove = actionsStorage.find(
       (action) => action.id == actionId
     );
@@ -31,6 +32,7 @@ const ActionsTable: FC<ActionsTableType> = ({
         actionsStorage.filter((action) => action.id != actionId)
       );
     }
+    console.log(actionsStorage);
   };
 
   return (
