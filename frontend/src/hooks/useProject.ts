@@ -17,6 +17,16 @@ export const useProject = (id: string) => {
     });
 }
 
+export const useCreateProject = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: ProjectApi.createProject,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["projects"] })
+        }
+    })
+}
+
 export const useCallGraphInputCreate = (projectId: string) => {
     const queryClient = useQueryClient();
     return useMutation({

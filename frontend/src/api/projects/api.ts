@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { Project } from "./types";
+import { CreateProject, Project } from "./types";
 
 const PROJECTS_PREFIX = "/projects"
 
@@ -13,9 +13,15 @@ async function getProjectById(id: string): Promise<Project> {
     return resp.data;
 }
 
+async function createProject(project: CreateProject) {
+    const resp = await axiosInstance.post(PROJECTS_PREFIX, project);
+    return resp.data;
+}
+
 const ProjectApi = {
     getAllProjects,
-    getProjectById
+    getProjectById,
+    createProject
 };
 
 export default ProjectApi;

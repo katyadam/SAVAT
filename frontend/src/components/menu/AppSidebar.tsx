@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PlusCircle } from "lucide-react";
 
 import {
   Sidebar,
@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/sidebar";
 import { useProjects } from "@/hooks/useProject";
 import { Project } from "@/api/projects/types";
-import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 
-export function AppSidebar() {
+type AppSidebarType = {
+  openCreateProjectDialog: () => void;
+};
+
+export function AppSidebar({ openCreateProjectDialog }: AppSidebarType) {
   const { data: projects, isLoading, error } = useProjects();
 
   if (isLoading) return <Skeleton className="w-[300px] h-screen" />;
@@ -27,26 +30,31 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar className="flex" collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Projects</SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupLabel className="flex justify-between items-center">
+            <p>Projects</p>
+            <button
+              className="cursor-pointer"
+              onClick={openCreateProjectDialog}
+            >
+              <PlusCircle size={32} />
+            </button>
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="mt-3">
             <SidebarMenu>
               {projects?.map((project: Project) => (
                 <SidebarMenuItem key={project.id}>
-                  <SidebarMenuButton asChild>
-                    <Button
-                      className={`flex justify-between ${
-                        localStorage.getItem("selectedProjectId") ===
-                          project.id.toString() && "font-bold bg-gray-200"
-                      }`}
-                      onClick={() => handleNavigation(project.id)}
-                      variant={"ghost"}
-                    >
-                      <span>{project.projectName}</span>
-                      <ArrowRight size={64} />
-                    </Button>
+                  <SidebarMenuButton
+                    className={`flex justify-between ${
+                      localStorage.getItem("selectedProjectId") ===
+                        project.id.toString() && "font-bold bg-gray-200"
+                    }`}
+                    onClick={() => handleNavigation(project.id)}
+                  >
+                    <span>{project.projectName}</span>
+                    <ArrowRight size={64} />
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
