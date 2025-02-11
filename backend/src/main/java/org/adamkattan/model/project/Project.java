@@ -26,11 +26,6 @@ public class Project extends PanacheEntity {
     @Column(nullable = false, name = "call_graph_inputs")
     public List<CallGraphInput> callGraphInputs;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Column(nullable = false, name = "changed_call_graph_inputs")
-    public List<ChangedCallGraphInput> changedCallGraphInputs;
-
-
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 

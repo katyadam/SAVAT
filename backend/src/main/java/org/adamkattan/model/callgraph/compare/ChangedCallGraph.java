@@ -7,8 +7,8 @@ import org.adamkattan.model.callgraph.CallGraphMethod;
 import java.util.List;
 
 public record ChangedCallGraph(
-        @JsonProperty("changedMethods") ChangedCallGraphMethod changedMethods,
-        @JsonProperty("dependencyMethods") CallGraphMethod dependencyMethods,
+        @JsonProperty("changedMethods") List<ChangedCallGraphMethod> changedMethods,
+        @JsonProperty("dependencyMethods") List<CallGraphMethod> dependencyMethods,
         @JsonProperty("calls") List<CallGraphCall> calls
 ) {
 }

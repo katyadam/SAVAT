@@ -35,4 +35,11 @@ public record CallGraph(
                 .filter(call -> call.source().equals(methodKey.methodSignature()))
                 .toList();
     }
+
+    @JsonIgnore
+    public List<CallGraphCall> getMethodCalledByCalls(CallGraphMethodKey methodKey) {
+        return this.calls().stream()
+                .filter(call -> call.target().equals(methodKey.methodSignature()))
+                .toList();
+    }
 }

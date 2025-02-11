@@ -9,17 +9,26 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.callgraph.*;
+import org.adamkattan.model.callgraph.CallGraph;
+import org.adamkattan.model.callgraph.CallGraphInput;
+import org.adamkattan.model.callgraph.CallGraphInputDto;
+import org.adamkattan.model.callgraph.CallGraphMethodKey;
 import org.adamkattan.model.callgraph.algorithms.MethodReachability;
+import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
+import org.adamkattan.model.callgraph.compare.ChangedCallGraphInputDto;
+import org.adamkattan.service.CallGraphDifferenceService;
 import org.adamkattan.service.CallGraphInputService;
 
 import java.util.List;
 
 @Path("/call-graph-inputs")
-public class CallGraphInputController {
+public class CallGraphController {
 
     @Inject
     CallGraphInputService callGraphInputService;
+
+    @Inject
+    CallGraphDifferenceService differenceService;
 
     @GET
     @Path("/project/{projectId}")
@@ -52,6 +61,23 @@ public class CallGraphInputController {
     ) {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
         return Uni.createFrom().item(() -> MethodReachability.compute(callGraphInput.callGraph, callGraphMethodKey))
+                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
+    }
+
+    @POST
+    @Path("/change-impact-analysis")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Blocking
+    @Transactional
+    public Uni<ChangedCallGraph> changeImpactAnalysis(
+            @Valid ChangedCallGraphInputDto changedCallGraphInputDto
+    ) {
+        return Uni.createFrom().item(
+                        () -> differenceService.saveChangedCallGraph(
+                                changedCallGraphInputDto.sourceCallGraphInputId(),
+                                changedCallGraphInputDto.targetCallGraphInputId())
+                )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 

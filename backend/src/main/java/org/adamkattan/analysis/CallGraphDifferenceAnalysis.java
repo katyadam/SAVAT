@@ -1,40 +1,69 @@
 package org.adamkattan.analysis;
 
+import org.adamkattan.model.callgraph.CallGraph;
+import org.adamkattan.model.callgraph.CallGraphCall;
 import org.adamkattan.model.callgraph.CallGraphMethod;
 import org.adamkattan.model.callgraph.CallGraphMethodKey;
+import org.adamkattan.model.callgraph.algorithms.MethodDependency;
+import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraphMethod;
 import org.adamkattan.model.callgraph.compare.TypeOfChange;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
+
 
 public class CallGraphDifferenceAnalysis {
 
-    public static void getDifference() {
+    public static ChangedCallGraph changeImpactAnalysis(CallGraph sourceCallGraph, CallGraph targetCallGraph) {
+        Map<CallGraphMethodKey, CallGraphMethod> sourceMethodsMap = sourceCallGraph.getMethodsMap();
 
+        Map<CallGraphMethodKey, ChangedCallGraphMethod> changedMethodsMap = getChangedMethodsMap(
+                sourceMethodsMap, targetCallGraph.getMethodsMap()
+        );
+
+        Set<CallGraphMethod> dependencyGraphMethods = new HashSet<>();
+        Set<CallGraphCall> dependencyGraphCalls = new HashSet<>();
+        changedMethodsMap.forEach((key, value) -> {
+            CallGraph dependencyGraph = MethodDependency.getDependencyGraph(sourceCallGraph, key, sourceMethodsMap);
+            dependencyGraphMethods.addAll(dependencyGraph.methods());
+            dependencyGraphCalls.addAll(dependencyGraph.calls());
+        });
+
+        return new ChangedCallGraph(
+                new ArrayList<>(changedMethodsMap.values()),
+                new ArrayList<>(dependencyGraphMethods),
+                new ArrayList<>(dependencyGraphCalls)
+        );
     }
 
-    private static List<ChangedCallGraphMethod> computeChangedMethods(
+    private static Map<CallGraphMethodKey, ChangedCallGraphMethod> getChangedMethodsMap(
             Map<CallGraphMethodKey, CallGraphMethod> sourceMethods,
             Map<CallGraphMethodKey, CallGraphMethod> targetMethods
     ) {
-        List<ChangedCallGraphMethod> changedMethods = new ArrayList<>();
+        Map<CallGraphMethodKey, ChangedCallGraphMethod> changedMethods = new HashMap<>();
 
         sourceMethods.forEach((key, value) -> {
             if (!targetMethods.containsKey(key)) {
-                changedMethods.add(new ChangedCallGraphMethod(value, TypeOfChange.ADDED));
+                changedMethods.put(
+                        new CallGraphMethodKey(value.methodSignature()),
+                        new ChangedCallGraphMethod(value, TypeOfChange.ADDED)
+                );
             }
             String targetBytecodeHash = targetMethods.get(key).bytecodeHash();
             if (!targetBytecodeHash.equals(value.bytecodeHash())) {
-                changedMethods.add(new ChangedCallGraphMethod(value, TypeOfChange.MODIFIED));
+                changedMethods.put(
+                        new CallGraphMethodKey(value.methodSignature()),
+                        new ChangedCallGraphMethod(value, TypeOfChange.MODIFIED)
+                );
             }
         });
 
         targetMethods.forEach((key, value) -> {
             if (!sourceMethods.containsKey(key)) {
-                changedMethods.add(new ChangedCallGraphMethod(value, TypeOfChange.REMOVED));
+                changedMethods.put(
+                        new CallGraphMethodKey(value.methodSignature()),
+                        new ChangedCallGraphMethod(value, TypeOfChange.REMOVED)
+                );
             }
         });
 
