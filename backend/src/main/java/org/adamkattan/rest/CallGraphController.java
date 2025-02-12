@@ -14,9 +14,6 @@ import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.CallGraphInputDto;
 import org.adamkattan.model.callgraph.CallGraphMethodKey;
 import org.adamkattan.model.callgraph.algorithms.MethodReachability;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraphInputDto;
-import org.adamkattan.service.CallGraphDifferenceService;
 import org.adamkattan.service.CallGraphInputService;
 
 import java.util.List;
@@ -26,9 +23,6 @@ public class CallGraphController {
 
     @Inject
     CallGraphInputService callGraphInputService;
-
-    @Inject
-    CallGraphDifferenceService differenceService;
 
     @GET
     @Path("/project/{projectId}")
@@ -43,41 +37,24 @@ public class CallGraphController {
     }
 
     @GET
-    @Path("/{call-graph-input-id}")
+    @Path("/{callGraphInputId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCallGraphInputById(@PathParam("call-graph-input-id") Long callGraphInputId) {
+    public Response getCallGraphInputById(@PathParam("callGraphInputId") Long callGraphInputId) {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
         return Response.ok(CallGraphInput.toDto(callGraphInput)).build();
     }
 
     @POST
-    @Path("/{call-graph-input-id}/method-reachability")
+    @Path("/{callGraphInputId}/method-reachability")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Blocking
     public Uni<CallGraph> computeMethodReachability(
-            @PathParam("call-graph-input-id") Long callGraphInputId,
+            @PathParam("callGraphInputId") Long callGraphInputId,
             @Valid CallGraphMethodKey callGraphMethodKey
     ) {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
         return Uni.createFrom().item(() -> MethodReachability.compute(callGraphInput.callGraph, callGraphMethodKey))
-                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
-    }
-
-    @POST
-    @Path("/change-impact-analysis")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Blocking
-    @Transactional
-    public Uni<ChangedCallGraph> changeImpactAnalysis(
-            @Valid ChangedCallGraphInputDto changedCallGraphInputDto
-    ) {
-        return Uni.createFrom().item(
-                        () -> differenceService.saveChangedCallGraph(
-                                changedCallGraphInputDto.sourceCallGraphInputId(),
-                                changedCallGraphInputDto.targetCallGraphInputId())
-                )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 

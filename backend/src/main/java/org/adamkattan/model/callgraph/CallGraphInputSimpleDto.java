@@ -11,4 +11,12 @@ public record CallGraphInputSimpleDto(
         @JsonProperty("commitHash") String commitHash,
         @JsonProperty("createdAt") LocalDateTime createdAt
 ) {
+    public CallGraphInputSimpleDto(CallGraphInput input) {
+        this(
+                input.id,
+                input.project.id,
+                input.version,
+                input.commitHash,
+                input.createdAt);
+    }
 }
