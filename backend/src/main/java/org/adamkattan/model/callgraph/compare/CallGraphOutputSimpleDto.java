@@ -5,7 +5,7 @@ import org.adamkattan.model.callgraph.CallGraphInputSimpleDto;
 
 import java.time.LocalDateTime;
 
-public record ChangedCallGraphInputSimpleDto(
+public record CallGraphOutputSimpleDto(
         @JsonProperty("sourceInput") CallGraphInputSimpleDto sourceInput,
         @JsonProperty("targetInput") CallGraphInputSimpleDto targetInput,
         @JsonProperty("createdAt") LocalDateTime createdAt

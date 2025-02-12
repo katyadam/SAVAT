@@ -10,9 +10,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraphInput;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraphInputRequest;
-import org.adamkattan.service.CallGraphAnalysisService;
+import org.adamkattan.model.callgraph.compare.CallGraphOutput;
+import org.adamkattan.model.callgraph.compare.CallGraphOutputRequest;
+import org.adamkattan.service.CallGraphOutputService;
 import org.adamkattan.service.CallGraphDifferenceService;
 
 import java.util.List;
@@ -24,16 +24,16 @@ public class CallGraphOutputController {
     CallGraphDifferenceService differenceService;
 
     @Inject
-    CallGraphAnalysisService callGraphAnalysisService;
+    CallGraphOutputService callGraphOutputService;
 
     @GET
     @Path("/project/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProjectOutputs(@PathParam("projectId") Long projectId) {
-        List<ChangedCallGraphInput> outputs = callGraphAnalysisService.getAllProjectOutputs(projectId);
+        List<CallGraphOutput> outputs = callGraphOutputService.getAllProjectOutputs(projectId);
 
         return Response.ok(outputs.stream()
-                .map(ChangedCallGraphInput::toSimpleDto)
+                .map(CallGraphOutput::toSimpleDto)
         ).build();
     }
 
@@ -41,7 +41,7 @@ public class CallGraphOutputController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getChangedCallGraphById(@PathParam("id") Long id) {
-        ChangedCallGraphInput output = callGraphAnalysisService.getChangedCallGraphInputById(id);
+        CallGraphOutput output = callGraphOutputService.getCallGraphOutputById(id);
 
         return Response.ok(output.changedCallGraph).build();
     }
@@ -54,12 +54,12 @@ public class CallGraphOutputController {
     @Blocking
     @Transactional
     public Uni<ChangedCallGraph> changeImpactAnalysis(
-            @Valid ChangedCallGraphInputRequest changedCallGraphInputRequest
+            @Valid CallGraphOutputRequest callGraphOutputRequest
     ) {
         return Uni.createFrom().item(
                         () -> differenceService.saveChangedCallGraph(
-                                changedCallGraphInputRequest.sourceCallGraphInputId(),
-                                changedCallGraphInputRequest.targetCallGraphInputId())
+                                callGraphOutputRequest.sourceCallGraphInputId(),
+                                callGraphOutputRequest.targetCallGraphInputId())
                 )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }

@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import org.adamkattan.analysis.CallGraphDifferenceAnalysis;
 import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraphInput;
+import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 
 @ApplicationScoped
 public class CallGraphDifferenceService {
@@ -21,11 +21,11 @@ public class CallGraphDifferenceService {
                 targetCallGraphInput.callGraph
         );
 
-        ChangedCallGraphInput changedCallGraphInput = new ChangedCallGraphInput();
-        changedCallGraphInput.changedCallGraph = changedCallGraph;
-        changedCallGraphInput.sourceCallGraphInput = sourceCallGraphInput;
-        changedCallGraphInput.targetCallGraphInput = targetCallGraphInput;
-        changedCallGraphInput.persist();
+        CallGraphOutput callGraphOutput = new CallGraphOutput();
+        callGraphOutput.changedCallGraph = changedCallGraph;
+        callGraphOutput.sourceCallGraphInput = sourceCallGraphInput;
+        callGraphOutput.targetCallGraphInput = targetCallGraphInput;
+        callGraphOutput.persist();
 
         return changedCallGraph;
     }

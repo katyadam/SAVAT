@@ -10,8 +10,8 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "changed_call_graph_input")
-public class ChangedCallGraphInput extends PanacheEntity {
+@Table(name = "call_graph_output")
+public class CallGraphOutput extends PanacheEntity {
 
     @ManyToOne
     @JoinColumn(name = "source_call_graph_input_id", nullable = false)
@@ -25,8 +25,8 @@ public class ChangedCallGraphInput extends PanacheEntity {
     @Column(nullable = false, columnDefinition = "jsonb", name = "changed_call_graph")
     public ChangedCallGraph changedCallGraph;
 
-    public static ChangedCallGraphInputSimpleDto toSimpleDto(ChangedCallGraphInput input) {
-        return new ChangedCallGraphInputSimpleDto(
+    public static CallGraphOutputSimpleDto toSimpleDto(CallGraphOutput input) {
+        return new CallGraphOutputSimpleDto(
                 new CallGraphInputSimpleDto(input.sourceCallGraphInput),
                 new CallGraphInputSimpleDto(input.targetCallGraphInput),
                 input.createdAt

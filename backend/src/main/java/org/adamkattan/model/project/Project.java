@@ -4,7 +4,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.callgraph.CallGraphInput;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraphInput;
 import org.adamkattan.model.input.AnalysisInput;
 
 import java.time.LocalDateTime;
