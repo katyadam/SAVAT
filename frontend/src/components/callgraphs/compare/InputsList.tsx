@@ -19,11 +19,17 @@ import { CallGraphInputSimple } from "@/api/callgraphs/types";
 type InputsListType = {
   projectId: string;
   inputsToOmit: Set<number>;
+  setSelectedInput: (inputId: number) => void;
 };
 
-const InputsList: FC<InputsListType> = ({ projectId, inputsToOmit }) => {
+const InputsList: FC<InputsListType> = ({
+  projectId,
+  inputsToOmit,
+  setSelectedInput,
+}) => {
   const { data: callGraphInputs, isLoading } =
     useProjectCallGraphInputs(projectId);
+  //   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   if (!callGraphInputs || isLoading) {
     return <p>Wait for analysis inputs to load...</p>;
