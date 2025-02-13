@@ -8,6 +8,10 @@ import { TabsTrigger } from "@radix-ui/react-tabs";
 import { CallGraphOutputsTable } from "./CallGraphOutputsTable";
 import { callGraphOutputsColumns } from "./OutputsColumns";
 import { useProjectsCallGraphOutputs } from "@/hooks/useCallGraphOutput";
+import { Diff } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Overlay from "../ui/Overlay";
+import CompareDialog from "./compare/CompareDialog";
 
 type CallGraphsTabType = {
   projectId: string;
@@ -21,51 +25,73 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
     useProjectsCallGraphOutputs(projectId);
 
   const [activeTab, setActive] = useState<string>("inputs");
+  const [openCompareDialog, setOpenCompareDialog] = useState<boolean>(false);
 
   return (
-    <Tabs defaultValue={activeTab} onValueChange={(value) => setActive(value)}>
-      <TabsList className="text-center bg-white">
-        <TabsTrigger
-          value="inputs"
-          className={
-            "py-2 px-4 rounded-tl-md transition-all duration-200 focus:outline-none" +
-            (activeTab === "inputs" ? " bg-gray-300" : "")
-          }
-        >
-          Inputs
-        </TabsTrigger>
-        <TabsTrigger
-          value="analysis-outputs"
-          className={
-            "py-2 px-4 rounded-tr-md transition-all duration-200 focus:outline-none" +
-            (activeTab === "analysis-outputs" ? " bg-gray-300" : "")
-          }
-        >
-          Analysis Outputs
-        </TabsTrigger>
-      </TabsList>
+    <>
+      <Tabs
+        defaultValue={activeTab}
+        onValueChange={(value) => setActive(value)}
+      >
+        <TabsList className="text-center bg-white text-black">
+          <TabsTrigger
+            value="inputs"
+            className={
+              "py-2 px-4 rounded-tl-md transition-all duration-200 focus:outline-none" +
+              (activeTab === "inputs" ? " bg-gray-300" : "")
+            }
+          >
+            Inputs
+          </TabsTrigger>
+          <TabsTrigger
+            value="analysis-outputs"
+            className={
+              "py-2 px-4 rounded-tr-md transition-all duration-200 focus:outline-none" +
+              (activeTab === "analysis-outputs" ? " bg-gray-300" : "")
+            }
+          >
+            Analysis Outputs
+          </TabsTrigger>
+          <Tooltip>
+            <TooltipTrigger>
+              <Diff
+                onClick={() => setOpenCompareDialog(true)}
+                className="cursor-pointer ml-5"
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Compare Inputs</p>
+            </TooltipContent>
+          </Tooltip>
+        </TabsList>
 
-      <TabsContent className="mt-0" value="inputs">
-        {callGraphInputsLoading ? (
-          <Loading />
-        ) : (
-          <CallGraphInputsTable
-            columns={callGraphInputsColumns}
-            data={callGraphInputs!}
-          />
-        )}
-      </TabsContent>
-      <TabsContent className="mt-0" value="analysis-outputs">
-        {callGraphOutputsLoading ? (
-          <Loading />
-        ) : (
-          <CallGraphOutputsTable
-            columns={callGraphOutputsColumns}
-            data={callGraphOutputs!}
-          />
-        )}
-      </TabsContent>
-    </Tabs>
+        <TabsContent className="mt-0" value="inputs">
+          {callGraphInputsLoading ? (
+            <Loading />
+          ) : (
+            <CallGraphInputsTable
+              columns={callGraphInputsColumns}
+              data={callGraphInputs!}
+            />
+          )}
+        </TabsContent>
+        <TabsContent className="mt-0" value="analysis-outputs">
+          {callGraphOutputsLoading ? (
+            <Loading />
+          ) : (
+            <CallGraphOutputsTable
+              columns={callGraphOutputsColumns}
+              data={callGraphOutputs!}
+            />
+          )}
+        </TabsContent>
+      </Tabs>
+      {openCompareDialog && (
+        <Overlay width="w-1/2" closeFunc={() => setOpenCompareDialog(false)}>
+          <CompareDialog projectId={projectId} />
+        </Overlay>
+      )}
+    </>
   );
 };
 
