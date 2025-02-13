@@ -7,6 +7,8 @@ import {
   CallGraph,
   CallGraphCall,
   CallGraphMethod,
+  GenericCallGraph,
+  TypeOfChange,
 } from "@/api/callgraphs/types";
 import cytoscape from "cytoscape";
 import ContextMenu from "../ContextMenu";
@@ -21,7 +23,7 @@ import {
 import { getCyInstance } from "./CytoscapeInstance";
 
 type GraphType = {
-  callGraph: CallGraph;
+  callGraph: GenericCallGraph;
   methodsMap: Map<string, CallGraphMethod>;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
@@ -92,12 +94,16 @@ const Graph: FC<GraphType> = ({
       const elements: ElementsDefinition = {
         nodes: (showIsolatedNodes ? callGraph.methods : visibleNodes)
           .filter((method) => method.bytecodeHash !== "null")
-          .map((method: CallGraphMethod) => ({
+          .map((method) => ({
             data: {
               id: method.methodSignature,
               label: method.name || "Unnamed",
               parent: method.microservice,
               microservice: method.microservice,
+              typeOfChange:
+                "typeOfChange" in method
+                  ? (method.typeOfChange as TypeOfChange)
+                  : TypeOfChange.NONE,
             },
             group: "nodes",
           })),
@@ -118,7 +124,7 @@ const Graph: FC<GraphType> = ({
             group: "edges",
           })),
       };
-
+      console.log(elements);
       const cyInstance = getCyInstance(cyRef, elements, msColors);
 
       setCy(cyInstance);

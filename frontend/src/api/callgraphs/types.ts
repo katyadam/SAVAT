@@ -64,3 +64,5 @@ export type ChangedCallGraph = {
     methods: ChangedCallGraphMethod[],
     calls: CallGraphCall[]
 }
+
+export type GenericCallGraph = ChangedCallGraph | CallGraph

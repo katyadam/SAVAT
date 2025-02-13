@@ -83,6 +83,9 @@ const ContextMenu: FC<ContextMenuType> = ({
       <CardContent className="flex flex-col gap-2 justify-between">
         {showMethodDetails ? (
           <>
+            <ContextMenuInfo label="Class">
+              <p>{method.type}</p>
+            </ContextMenuInfo>
             <ContextMenuInfo label="Bytecode Hash">
               <div className="flex items-center">
                 {`${method.bytecodeHash.slice(

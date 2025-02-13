@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { Action } from "./CallGraphPage";
 import { Separator } from "@/components/ui/separator";
 import Loading from "@/components/loading/Loading";
+import Navbar from "@/components/callgraphs/Navbar";
 
 const CallGraphOutputPage = () => {
   useEffect(() => {
@@ -63,18 +64,18 @@ const CallGraphOutputPage = () => {
 
   return (
     <div className="w-screen h-screen">
-      {/* {msColors && changedCallGraph && (
+      {msColors && changedCallGraph && (
         <Navbar
-          isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
+          isolatedNodesBtnClick={null}
           msColorsLegend={msColors}
           setMsToHighlight={setMsToHighlight}
-          methods={callGraph.callGraph.methods}
+          methods={changedCallGraph.methods}
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           setRemovedAction={setRemovedAction}
           closeContextMenu={() => setIsContextMenuOpen(false)}
         />
-      )} */}
+      )}
       <Separator className="mt-2" />
       {renderContent()}
     </div>

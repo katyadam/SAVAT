@@ -45,6 +45,29 @@ export const getCyInstance = (
                 },
             },
             {
+                selector: "node[typeOfChange = 'ADDED']",
+                style: {
+                    "border-width": 4,
+                    "border-color": "#00FF00",
+                    "border-style": "dashed"
+                }
+            },
+            {
+                selector: "node[typeOfChange = 'MODIFIED']",
+                style: {
+                    "border-width": 4,
+                    "border-color": "#0000FF",
+                    "border-style": "dashed"
+                }
+            },
+            {
+                selector: "node[typeOfChange = 'REMOVED']",
+                style: {
+                    "background-color": "#FF0000",
+                    "border-style": "dashed"
+                }
+            },
+            {
                 selector: "edge",
                 style: {
                     width: 5,

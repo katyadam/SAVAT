@@ -10,7 +10,7 @@ export const callGraphOutputsColumns: ColumnDef<CallGraphOutputSimple>[] = [
       return (
         <a
           className="block group hover:text-blue-400"
-          href={`/call-graph-input/${source.id}`}
+          href={`/call-graph-input/${source.id}/call-graph`}
         >
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
@@ -40,7 +40,7 @@ export const callGraphOutputsColumns: ColumnDef<CallGraphOutputSimple>[] = [
       return (
         <a
           className="block group hover:text-blue-400"
-          href={`/call-graph-input/${target.id}`}
+          href={`/call-graph-input/${target.id}/call-graph`}
         >
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">

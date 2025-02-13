@@ -9,7 +9,7 @@ import { Action } from "@/pages/CallGraphPage";
 import ActionsTable from "./ActionsTable";
 
 type NavbarType = {
-  isolatedNodesBtnClick: () => void;
+  isolatedNodesBtnClick: (() => void) | null;
   msColorsLegend: Map<string, string>;
   setMsToHighlight: (ms: string) => void;
   methods: CallGraphMethod[];
@@ -72,18 +72,20 @@ const Navbar: FC<NavbarType> = ({
           />
         </PopoverContent>
       </Popover>
-      <div className="flex flex-col items-center mx-5">
-        <label htmlFor="isolatedNodesSwitch" className="text-gray-500 mb-1">
-          Show all nodes
-        </label>
-        <Switch
-          id="isolatedNodesSwitch"
-          onCheckedChange={() => {
-            isolatedNodesBtnClick();
-            closeContextMenu(); // prevents freezing context menu when switch between multiple nodes happens
-          }}
-        />
-      </div>
+      {isolatedNodesBtnClick && (
+        <div className="flex flex-col items-center mx-5">
+          <label htmlFor="isolatedNodesSwitch" className="text-gray-500 mb-1">
+            Show all nodes
+          </label>
+          <Switch
+            id="isolatedNodesSwitch"
+            onCheckedChange={() => {
+              isolatedNodesBtnClick();
+              closeContextMenu(); // prevents freezing context menu when switch between multiple nodes happens
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
