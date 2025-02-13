@@ -4,4 +4,5 @@ public enum TypeOfChange {
     ADDED,
     MODIFIED,
     REMOVED,
+    NONE
 }

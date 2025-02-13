@@ -1,9 +1,6 @@
-import { CallGraphInputsTable } from "@/components/callgraphs/CallGraphInputsTable";
 import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
 import { columns } from "@/components/inputs/Columns";
-import { callGraphInputsColumns } from "@/components/callgraphs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
-import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
 import { useProject } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
@@ -15,6 +12,7 @@ import ImportExport, {
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputImportDialog from "@/components/projects/CallGraphInputImportDIalog";
 import AnalysisInputImportDialog from "@/components/projects/AnalysisInputImportDialog";
+import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -32,8 +30,6 @@ const ProjectPage = () => {
 
   const { data: project, isLoading: projectLoading } = useProject(id);
   const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(id);
-  const { data: callGraphInputs, isLoading: callGraphInputsLoading } =
-    useProjectCallGraphInputs(id);
 
   return (
     <div className="m-5">
@@ -80,14 +76,7 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="callgraphs">
-          {callGraphInputsLoading ? (
-            <Loading overlay={false} />
-          ) : (
-            <CallGraphInputsTable
-              columns={callGraphInputsColumns}
-              data={callGraphInputs!}
-            />
-          )}
+          <CallGraphsTab projectId={id} />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (

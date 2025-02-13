@@ -1,4 +1,5 @@
 import ProjectLayout from "@/layouts/ProjectLayout";
+import CallGraphOutputPage from "@/pages/CallGraphOutputPage";
 import CallGraphPage from "@/pages/CallGraphPage";
 import EntitiesPage from "@/pages/EntitiesPage";
 import Error from "@/pages/Error";
@@ -25,12 +26,16 @@ const projectRoutes: RouteObject[] = [
     Component: MethodsPage,
   },
   {
-    path: "call-graph-input/methods/:id",
+    path: "call-graph-input/:id/methods",
     Component: MethodsPage,
   },
   {
-    path: "call-graph-input/:id",
+    path: "call-graph-input/:id/call-graph",
     Component: CallGraphPage,
+  },
+  {
+    path: "call-graph-output/:id/call-graph",
+    Component: CallGraphOutputPage,
   },
 ];
 

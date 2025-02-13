@@ -27,6 +27,7 @@ public class CallGraphOutput extends PanacheEntity {
 
     public static CallGraphOutputSimpleDto toSimpleDto(CallGraphOutput input) {
         return new CallGraphOutputSimpleDto(
+                input.id,
                 new CallGraphInputSimpleDto(input.sourceCallGraphInput),
                 new CallGraphInputSimpleDto(input.targetCallGraphInput),
                 input.createdAt

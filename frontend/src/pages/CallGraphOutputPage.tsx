@@ -2,24 +2,14 @@ import { CallGraphMethod } from "@/api/callgraphs/types";
 import { indexCallGraphMethods } from "@/api/callgraphs/utils";
 import { getMicroservicesColors } from "@/components/callgraphs/generators/colorGenerator";
 import Graph from "@/components/callgraphs/graphs/Graph";
-import Navbar from "@/components/callgraphs/Navbar";
-import Loading from "@/components/loading/Loading";
-import { Separator } from "@/components/ui/separator";
-import { useCallGraphInput } from "@/hooks/useCallGraph";
+import { useCallGraphOutput } from "@/hooks/useCallGraphOutput";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Action } from "./CallGraphPage";
+import { Separator } from "@/components/ui/separator";
+import Loading from "@/components/loading/Loading";
 
-export type Action = {
-  id: number;
-  methodIds: string[];
-  calls: {
-    callId: string;
-    isInterservice: boolean;
-  }[];
-  timestamp: string;
-};
-
-const CallGraphPage = () => {
+const CallGraphOutputPage = () => {
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
@@ -28,24 +18,21 @@ const CallGraphPage = () => {
   }, []);
   const { id } = useParams();
   if (!id) return <p>Error... Incorrect ID</p>;
-
-  const { data: callGraph, isLoading, error } = useCallGraphInput(id);
+  const { data: changedCallGraph, isLoading, error } = useCallGraphOutput(id);
   const [callGraphMethodsMap, setCallGraphMethodsMap] = useState<Map<
     string,
     CallGraphMethod
   > | null>(null);
-  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
+
   const [msColors, setMsColors] = useState<Map<string, string> | null>();
   const [msToHighlight, setMsToHighlight] = useState<string | null>(null);
 
   useEffect(() => {
-    if (callGraph) {
-      setMsColors(getMicroservicesColors(callGraph?.callGraph.methods));
-      setCallGraphMethodsMap(
-        indexCallGraphMethods(callGraph.callGraph.methods)
-      );
+    if (changedCallGraph) {
+      setMsColors(getMicroservicesColors(changedCallGraph.methods));
+      setCallGraphMethodsMap(indexCallGraphMethods(changedCallGraph.methods));
     }
-  }, [callGraph]);
+  }, [changedCallGraph]);
 
   const [actionsStorage, setActionsStorage] = useState<Action[]>([]);
   const [removedAction, setRemovedAction] = useState<Action | null>(null);
@@ -54,12 +41,12 @@ const CallGraphPage = () => {
 
   const renderContent = () => {
     if (error) return <p>Error: Unable to fetch call graph inputs.</p>;
-    if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
+    if (changedCallGraph && msColors && callGraphMethodsMap && !isLoading) {
       return (
         <Graph
-          callGraph={callGraph.callGraph}
+          callGraph={changedCallGraph}
           methodsMap={callGraphMethodsMap}
-          showIsolatedNodes={showIsolatedNodes}
+          showIsolatedNodes={false}
           msColors={msColors}
           callGraphInputId={id}
           msToHighlight={msToHighlight}
@@ -76,7 +63,7 @@ const CallGraphPage = () => {
 
   return (
     <div className="w-screen h-screen">
-      {msColors && callGraph && (
+      {/* {msColors && changedCallGraph && (
         <Navbar
           isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
           msColorsLegend={msColors}
@@ -87,11 +74,11 @@ const CallGraphPage = () => {
           setRemovedAction={setRemovedAction}
           closeContextMenu={() => setIsContextMenuOpen(false)}
         />
-      )}
+      )} */}
       <Separator className="mt-2" />
       {renderContent()}
     </div>
   );
 };
 
-export default CallGraphPage;
+export default CallGraphOutputPage;

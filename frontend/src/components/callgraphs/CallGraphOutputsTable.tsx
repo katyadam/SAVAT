@@ -1,12 +1,9 @@
-("use client");
-
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -14,17 +11,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Eye } from "lucide-react";
+} from "../ui/table";
+import { CallGraphOutputSimple } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
-import { CallGraphInputSimple } from "@/api/callgraphs/types";
+import { Eye } from "lucide-react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 };
 
-export function CallGraphInputsTable<TData, TValue>({
+export function CallGraphOutputsTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -55,7 +52,6 @@ export function CallGraphInputsTable<TData, TValue>({
                 );
               })}
               <TableHead>Call Graph</TableHead>
-              <TableHead>Methods</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -73,20 +69,9 @@ export function CallGraphInputsTable<TData, TValue>({
                 ))}
                 <TableCell>
                   <a
-                    href={`/call-graph-input/${
-                      (row.original as CallGraphInputSimple).id
+                    href={`/call-graph-output/${
+                      (row.original as CallGraphOutputSimple).id
                     }/call-graph`}
-                  >
-                    <Button variant="outline">
-                      <Eye />
-                    </Button>
-                  </a>
-                </TableCell>
-                <TableCell>
-                  <a
-                    href={`/call-graph-input/${
-                      (row.original as CallGraphInputSimple).id
-                    }/methods`}
                   >
                     <Button variant="outline">
                       <Eye />

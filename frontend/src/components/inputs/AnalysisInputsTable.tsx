@@ -18,10 +18,10 @@ import {
 import AnalysisInputButton from "./AnalysisInputButton";
 import { AnalysisInput } from "@/api/inputs/types";
 
-interface DataTableProps<TData, TValue> {
+type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-}
+};
 
 export function AnalysisInputsTable<TData, TValue>({
   columns,

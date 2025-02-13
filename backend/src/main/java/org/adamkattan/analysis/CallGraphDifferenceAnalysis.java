@@ -21,17 +21,19 @@ public class CallGraphDifferenceAnalysis {
                 sourceMethodsMap, targetCallGraph.getMethodsMap()
         );
 
-        Set<CallGraphMethod> dependencyGraphMethods = new HashSet<>();
+        Set<ChangedCallGraphMethod> dependencyGraphMethods = new HashSet<>();
         Set<CallGraphCall> dependencyGraphCalls = new HashSet<>();
         changedMethodsMap.forEach((key, value) -> {
-            CallGraph dependencyGraph = MethodDependency.getDependencyGraph(sourceCallGraph, key, sourceMethodsMap);
+            ChangedCallGraph dependencyGraph = MethodDependency.getDependencyGraph(sourceCallGraph, key, sourceMethodsMap);
             dependencyGraphMethods.addAll(dependencyGraph.methods());
             dependencyGraphCalls.addAll(dependencyGraph.calls());
         });
 
+        List<ChangedCallGraphMethod> allMethods = new ArrayList<>(changedMethodsMap.values());
+        allMethods.addAll(dependencyGraphMethods);
+
         return new ChangedCallGraph(
-                new ArrayList<>(changedMethodsMap.values()),
-                new ArrayList<>(dependencyGraphMethods),
+                allMethods,
                 new ArrayList<>(dependencyGraphCalls)
         );
     }

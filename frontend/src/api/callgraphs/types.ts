@@ -38,3 +38,29 @@ export type CallGraphInput = {
 
 export type CallGraphInputSimple = Omit<CallGraphInput, 'callGraph'>;
 export type CreateCallGraphInput = Omit<CallGraphInput, 'createdAt' | 'id'>
+
+
+// Call Graph Change Impact Analysis Types
+
+export type CallGraphOutputSimple = {
+    id: number,
+    sourceInput: CallGraphInputSimple,
+    targetInput: CallGraphInputSimple,
+    createdAt: string
+}
+
+export enum TypeOfChange {
+    ADDED,
+    MODIFIED,
+    REMOVED,
+    NONE
+}
+
+export type ChangedCallGraphMethod = CallGraphMethod & {
+    typeOfChange: TypeOfChange
+}
+
+export type ChangedCallGraph = {
+    methods: ChangedCallGraphMethod[],
+    calls: CallGraphCall[]
+}
