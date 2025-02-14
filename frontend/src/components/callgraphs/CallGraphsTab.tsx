@@ -87,7 +87,7 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
         </TabsContent>
       </Tabs>
       {openCompareDialog && (
-        <Overlay width="w-1/2" closeFunc={() => setOpenCompareDialog(false)}>
+        <Overlay width="w-2/3" closeFunc={() => setOpenCompareDialog(false)}>
           <CompareDialog projectId={projectId} />
         </Overlay>
       )}

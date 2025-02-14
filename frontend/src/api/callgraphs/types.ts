@@ -66,3 +66,8 @@ export type ChangedCallGraph = {
 }
 
 export type GenericCallGraph = ChangedCallGraph | CallGraph
+
+export type ChangeImpactAnalysisPayload = {
+    sourceCallGraphInputId: number,
+    targetCallGraphInputId: number
+}

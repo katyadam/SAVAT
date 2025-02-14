@@ -1,104 +1,48 @@
+import { CallGraphInputSimple } from "@/api/callgraphs/types";
 import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
 import { FC } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { CallGraphInputSimple } from "@/api/callgraphs/types";
+import InputInfoBlock from "./InputInfoBlock";
 
 type InputsListType = {
   projectId: string;
-  inputsToOmit: Set<number>;
-  setSelectedInput: (inputId: number) => void;
+  inputToOmit: CallGraphInputSimple | null;
+  selectedInput: CallGraphInputSimple | null;
+  setSelectedInput: (inputId: CallGraphInputSimple | null) => void;
 };
 
 const InputsList: FC<InputsListType> = ({
   projectId,
-  inputsToOmit,
+  inputToOmit,
+  selectedInput,
   setSelectedInput,
 }) => {
   const { data: callGraphInputs, isLoading } =
     useProjectCallGraphInputs(projectId);
-  //   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   if (!callGraphInputs || isLoading) {
     return <p>Wait for analysis inputs to load...</p>;
   }
 
-  const columns: ColumnDef<CallGraphInputSimple>[] = [
-    {
-      header: "Commit Hash",
-      accessorKey: "commitHash",
-    },
-    {
-      header: "ID",
-      accessorKey: "id",
-    },
-  ];
-
-  const microserviceFilter = (): boolean => false;
-  const table = useReactTable({
-    data: callGraphInputs.filter((input) => !inputsToOmit.has(input.id)),
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    filterFns: { microserviceFilter: microserviceFilter },
-  });
-
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </TableHead>
-              ))}
-            </TableRow>
+    <div className="max-h-[500px] min-w-[150px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+      {callGraphInputs &&
+        callGraphInputs
+          .filter((input) => inputToOmit?.id !== input.id)
+          .map((input) => (
+            <div
+              onClick={() =>
+                selectedInput?.id === input.id
+                  ? setSelectedInput(null)
+                  : setSelectedInput(input)
+              }
+              className={`
+                flex flex-col text-left border-b-2 p-2 hover:bg-slate-200 duration-100 cursor-pointer 
+                ${selectedInput?.id == input.id && "bg-slate-200"}
+                `}
+            >
+              <InputInfoBlock input={input} />
+            </div>
           ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={columns.length + 1}
-                className="h-24 text-center"
-              >
-                No analysis inputs.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
     </div>
   );
 };
