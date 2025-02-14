@@ -16,6 +16,19 @@ export const useCallGraphOutput = (id: string) => {
   });
 };
 
+export const useCallGraphOutputDelete = (projectId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["deleteOutput"],
+    mutationFn: (payload: number) =>
+      CallGraphsApi.deleteCallGraphOutput(payload),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["callGraphOutputs", projectId],
+      }),
+  });
+};
+
 export const useCallGraphChangeImpactAnalysis = (projectId: string) => {
   const queryClient = useQueryClient();
   return useMutation({

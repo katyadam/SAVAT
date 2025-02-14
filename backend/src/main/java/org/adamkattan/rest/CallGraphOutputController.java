@@ -9,11 +9,11 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutputRequest;
-import org.adamkattan.service.CallGraphOutputService;
+import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.service.CallGraphDifferenceService;
+import org.adamkattan.service.CallGraphOutputService;
 
 import java.util.List;
 
@@ -62,6 +62,16 @@ public class CallGraphOutputController {
                                 callGraphOutputRequest.targetCallGraphInputId())
                 )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteCallGraphOutputById(@PathParam("id") Long id) {
+        Long removedId = callGraphOutputService.deleteCallGraphOutputById(id);
+        return Response.ok("Removed OUTPUT with id: " + removedId)
+                .build();
     }
 
 }

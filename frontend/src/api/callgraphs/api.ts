@@ -70,6 +70,11 @@ async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload) {
     return resp.data;
 }
 
+async function deleteCallGraphOutput(id: number) {
+    const resp = await axiosInstance.delete(`${CALL_GRAPH_OUTPUTS_PREFIX}/${id}`);
+    return resp.data;
+}
+
 
 const CallGraphsApi = {
     getCallGraphInputById,
@@ -78,7 +83,8 @@ const CallGraphsApi = {
     createCallGraphInput,
     getAllProjectsCallGraphOuputs,
     getChangedCallGraphById,
-    changeImpactAnalysis
+    changeImpactAnalysis,
+    deleteCallGraphOutput
 }
 
 export default CallGraphsApi;

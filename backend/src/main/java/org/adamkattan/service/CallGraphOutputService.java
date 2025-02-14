@@ -17,4 +17,8 @@ public class CallGraphOutputService {
         return CallGraphOutput.find("id", id).firstResult();
     }
 
+    public Long deleteCallGraphOutputById(Long id) {
+        return CallGraphOutput.delete("id", id);
+    }
+
 }

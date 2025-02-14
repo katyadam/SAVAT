@@ -14,16 +14,20 @@ import {
 } from "../ui/table";
 import { CallGraphOutputSimple } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
-import { Eye } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
+import { useCallGraphOutputDelete } from "@/hooks/useCallGraphOutput";
+import { useToast } from "@/hooks/use-toast";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  projectId: string;
 };
 
 export function CallGraphOutputsTable<TData, TValue>({
   columns,
   data,
+  projectId,
 }: DataTableProps<TData, TValue>) {
   const microserviceFilter = (): boolean => false;
   const table = useReactTable({
@@ -33,8 +37,25 @@ export function CallGraphOutputsTable<TData, TValue>({
     filterFns: { microserviceFilter: microserviceFilter },
   });
 
+  const { mutateAsync } = useCallGraphOutputDelete(projectId);
+  const { toast } = useToast();
+
+  const handleOutputDelete = async (id: number) => {
+    try {
+      await mutateAsync(id);
+      toast({
+        title: "Analysis Output Removed!",
+      });
+    } catch (error) {
+      toast({
+        title: "Something BAD happened, couldn't delete analysis output!",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
-    <div className="rounded-md border h-[500px] overflow-auto">
+    <div className="rounded-md border max-h-[500px] overflow-auto">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -77,6 +98,18 @@ export function CallGraphOutputsTable<TData, TValue>({
                       <Eye />
                     </Button>
                   </a>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() =>
+                      handleOutputDelete(
+                        (row.original as CallGraphOutputSimple).id
+                      )
+                    }
+                    variant="outline"
+                  >
+                    <Trash2 className="text-red-500" />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))
