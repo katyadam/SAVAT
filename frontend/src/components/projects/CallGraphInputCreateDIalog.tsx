@@ -21,8 +21,7 @@ type CallGraphInputWithParsing = Omit<
 > & {
   callGraph: string;
 };
-
-const CallGraphInputImportDialog: FC<ProjectsImportDialogType> = ({
+const CallGraphInputCreateDialog: FC<ProjectsImportDialogType> = ({
   projectId,
   closeDialog,
 }) => {
@@ -91,4 +90,4 @@ const CallGraphInputImportDialog: FC<ProjectsImportDialogType> = ({
   );
 };
 
-export default CallGraphInputImportDialog;
+export default CallGraphInputCreateDialog;

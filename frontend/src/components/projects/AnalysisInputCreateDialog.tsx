@@ -26,7 +26,7 @@ type AnalysisInputWithoutParsing = Omit<
   graph: string;
 };
 
-const AnalysisInputImportDialog: FC<AnalysisInputImportDialogType> = ({
+const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
   projectId,
   closeDialog,
 }) => {
@@ -115,4 +115,4 @@ const AnalysisInputImportDialog: FC<AnalysisInputImportDialogType> = ({
   );
 };
 
-export default AnalysisInputImportDialog;
+export default AnalysisInputCreateDialog;

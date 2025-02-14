@@ -6,12 +6,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
-import ImportExport, {
+import CreateEntrypoint, {
   FileOperation,
-} from "@/components/projects/ImportExport";
+} from "@/components/projects/CreateEntrypoint";
 import Overlay from "@/components/ui/Overlay";
-import CallGraphInputImportDialog from "@/components/projects/CallGraphInputImportDIalog";
-import AnalysisInputImportDialog from "@/components/projects/AnalysisInputImportDialog";
+import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
+import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreateDialog";
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 
 const ProjectPage = () => {
@@ -39,7 +39,7 @@ const ProjectPage = () => {
         ) : (
           <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
         )}
-        <ImportExport showImportExportDialog={showImportExportDialog} />
+        <CreateEntrypoint showImportExportDialog={showImportExportDialog} />
       </div>
 
       <Tabs
@@ -83,14 +83,14 @@ const ProjectPage = () => {
         <Overlay width="w-1/2" closeFunc={() => showImportExportDialog(null)}>
           {importExportDialogUp == FileOperation.IMPORT &&
             activeTab === "callgraphs" && (
-              <CallGraphInputImportDialog
+              <CallGraphInputCreateDialog
                 projectId={id}
                 closeDialog={() => showImportExportDialog(null)}
               />
             )}
           {importExportDialogUp == FileOperation.IMPORT &&
             activeTab === "components" && (
-              <AnalysisInputImportDialog
+              <AnalysisInputCreateDialog
                 projectId={id}
                 closeDialog={() => showImportExportDialog(null)}
               />
