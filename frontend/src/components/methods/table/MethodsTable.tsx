@@ -1,6 +1,4 @@
 "use client";
-
-import * as React from "react";
 import {
   ColumnFiltersState,
   SortingState,
@@ -30,31 +28,33 @@ import { columns } from "./Columns";
 import { ColumnsVisibility } from "./ColumnsVisibility";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
+import { FC, useEffect, useState } from "react";
+import DynamicTableHead from "./DynamicTableHead";
 
 type MethodsTableType = {
   data: CallGraphMethod[];
   callGraphInputId: string;
 };
 
-export const MethodsTable: React.FC<MethodsTableType> = ({
+export const MethodsTable: FC<MethodsTableType> = ({
   data,
   callGraphInputId,
 }) => {
   const { callGraphLookupDispatch } = useCallGraphLookup();
   const navigate = useNavigate();
 
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [pageSize, setPageSize] = React.useState(5);
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+  const [pageSize, setPageSize] = useState(5);
 
   const uniqueMicroservices = new Set(data.map((item) => item.microservice));
   const [selectedMicroservices, setSelectedMicroservices] =
-    React.useState<Set<string>>(uniqueMicroservices);
+    useState<Set<string>>(uniqueMicroservices);
+
+  const [selectedFilterArgument, setSelectedFilterArgument] =
+    useState<string>("name");
 
   const table = useReactTable({
     data,
@@ -85,7 +85,7 @@ export const MethodsTable: React.FC<MethodsTableType> = ({
     },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     table
       .getColumn("microservice")
       ?.setFilterValue(Array.from(selectedMicroservices));
@@ -107,6 +107,7 @@ export const MethodsTable: React.FC<MethodsTableType> = ({
     callGraphLookupDispatch({ type: "LOOKUP_METHOD", payload: methodId });
     navigate(`/call-graph-input/${callGraphInputId}`);
   };
+  const searchAllowedColumns = new Set<string>(["returnType", "name", "type"]);
 
   return (
     <div className="w-full">
@@ -116,27 +117,41 @@ export const MethodsTable: React.FC<MethodsTableType> = ({
           selectedMicroservices={selectedMicroservices}
           toggleMicroserviceSelection={toggleMicroserviceSelection}
           onFilterByName={(value) =>
-            table.getColumn("name")?.setFilterValue(value)
+            table.getColumn(selectedFilterArgument)?.setFilterValue(value)
           }
         />
         <ColumnsVisibility columns={table.getAllColumns()} />
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border max-h-[440px] overflow-auto">
         <TooltipProvider>
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
+                  {headerGroup.headers.map((header) => {
+                    if (searchAllowedColumns.has(header.id))
+                      return (
+                        <DynamicTableHead
+                          header={header}
+                          selectedFilterArgument={selectedFilterArgument}
+                          setSelectedFilterArgument={setSelectedFilterArgument}
+                          table={table}
+                          key={header.id}
+                        />
+                      );
+                    else
+                      return (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                  })}
+                  <TableHead>Lookup Method</TableHead>
                 </TableRow>
               ))}
             </TableHeader>
@@ -155,7 +170,7 @@ export const MethodsTable: React.FC<MethodsTableType> = ({
                         )}
                       </TableCell>
                     ))}
-                    <TableCell>
+                    <TableCell className="text-center">
                       <Button
                         onClick={() =>
                           handleMethodLookup(row.original.methodSignature)

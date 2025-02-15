@@ -24,7 +24,7 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
         <TooltipTrigger>
           {(row.getValue("returnType") as string).split(".").pop()}
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className="bg-white p-3 rounded-md z-50">
           <p>{row.getValue("returnType") as string}</p>
         </TooltipContent>
       </Tooltip>
@@ -46,7 +46,7 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
             <p>
               <Tooltip key={index}>
                 <TooltipTrigger>{param.split(".").pop()}</TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent className="bg-white p-3 rounded-md z-50">
                   <p>{param}</p>
                 </TooltipContent>
               </Tooltip>
@@ -97,7 +97,7 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
         <TooltipTrigger>
           {(row.getValue("type") as string).split(".").pop()}
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className="bg-white p-3 rounded-md z-50">
           <p>{row.getValue("type") as string}</p>
         </TooltipContent>
       </Tooltip>
@@ -112,6 +112,6 @@ export const columns: ColumnDef<CallGraphMethod>[] = [
   {
     accessorKey: "httpMethod",
     header: "HTTP Method",
-    cell: ({ row }) => <div>{row.getValue("httpMethod") as string}</div>,
+    cell: ({ row }) => <div>{row.getValue("httpMethod")}</div>,
   },
 ];

@@ -3,6 +3,7 @@ import { CallGraph } from "@/api/callgraphs/types";
 import { getCommonDateString } from "@/api/utils";
 import { Action } from "@/pages/CallGraphPage";
 import Cytoscape from "cytoscape";
+import { CY_COLOR_NEUTRAL, CY_COLOR_RED } from "@/components/callgraphs/graphs/CytoscapeInstance";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
@@ -127,10 +128,10 @@ export const useRemoveAction = (cy: Cytoscape.Core | null, actionToRemove: Actio
             actionToRemove.calls.forEach((call) => {
                 const edge = cy.getElementById(call.callId);
                 edge.style({
-                    "line-color": call.isInterservice ? "#ff4d4d" : "#4CAF50",
+                    "line-color": call.isInterservice ? CY_COLOR_RED : CY_COLOR_NEUTRAL,
                     "target-arrow-color": call.isInterservice
-                        ? "#ff4d4d"
-                        : "#4CAF50",
+                        ? CY_COLOR_RED
+                        : CY_COLOR_NEUTRAL,
                     "line-style": call.isInterservice ? "dashed" : "solid",
                 })
             });

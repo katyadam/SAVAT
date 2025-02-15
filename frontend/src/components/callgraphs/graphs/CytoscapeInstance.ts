@@ -15,6 +15,12 @@ const layoutOptions: CiseLayoutOptions = {
     direction: "horizontal",
 };
 
+export const CY_COLOR_RED = "#FF0000"
+export const CY_COLOR_GREEN = "#00FF00"
+export const CY_COLOR_BLUE = "#0000FF"
+export const CY_COLOR_NEUTRAL = "#808080"
+export const CY_COLOR_HIGHLIGHTED = "#FFD700"
+
 export const getCyInstance = (
     cyRef: React.MutableRefObject<HTMLDivElement | null>,
     elements: ElementsDefinition,
@@ -41,14 +47,14 @@ export const getCyInstance = (
                 selector: "node[microservice]",
                 style: {
                     "background-color": (ele) =>
-                        msColors.get(ele.data("microservice")) || "#808080",
+                        msColors.get(ele.data("microservice")) || CY_COLOR_NEUTRAL,
                 },
             },
             {
                 selector: "node[typeOfChange = 'ADDED']",
                 style: {
                     "border-width": 4,
-                    "border-color": "#00FF00",
+                    "border-color": CY_COLOR_GREEN,
                     "border-style": "dashed"
                 }
             },
@@ -56,14 +62,14 @@ export const getCyInstance = (
                 selector: "node[typeOfChange = 'MODIFIED']",
                 style: {
                     "border-width": 4,
-                    "border-color": "#0000FF",
+                    "border-color": CY_COLOR_BLUE,
                     "border-style": "dashed"
                 }
             },
             {
                 selector: "node[typeOfChange = 'REMOVED']",
                 style: {
-                    "background-color": "#FF0000",
+                    "background-color": CY_COLOR_RED,
                     "border-style": "dashed"
                 }
             },
@@ -71,9 +77,9 @@ export const getCyInstance = (
                 selector: "edge",
                 style: {
                     width: 5,
-                    "line-color": "#808080",
+                    "line-color": CY_COLOR_NEUTRAL,
                     "curve-style": "bezier",
-                    "target-arrow-color": "#808080",
+                    "target-arrow-color": CY_COLOR_NEUTRAL,
                     "target-arrow-shape": "triangle",
                     label: "data(label)",
                     "text-rotation": "autorotate",
@@ -83,31 +89,23 @@ export const getCyInstance = (
             {
                 selector: "edge[isInterserviceCall = 'true']",
                 style: {
-                    "line-color": "#ff4d4d",
-                    "target-arrow-color": "#ff4d4d",
+                    "line-color": CY_COLOR_RED,
+                    "target-arrow-color": CY_COLOR_RED,
                     "line-style": "dashed",
-                },
-            },
-            {
-                selector: "edge[isInterserviceCall = 'false']",
-                style: {
-                    "line-color": "#4CAF50",
-                    "target-arrow-color": "#4CAF50",
-                    "line-style": "solid",
                 },
             },
             {
                 selector: "node.highlighted",
                 style: {
                     "border-width": 4,
-                    "border-color": "#FFD700",
+                    "border-color": CY_COLOR_HIGHLIGHTED,
                 },
             },
             {
                 selector: "edge.highlighted",
                 style: {
-                    "line-color": "#FFD700",
-                    "target-arrow-color": "#FFD700",
+                    "line-color": CY_COLOR_HIGHLIGHTED,
+                    "target-arrow-color": CY_COLOR_HIGHLIGHTED,
                 },
             },
         ],

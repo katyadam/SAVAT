@@ -124,7 +124,6 @@ const Graph: FC<GraphType> = ({
             group: "edges",
           })),
       };
-      console.log(elements);
       const cyInstance = getCyInstance(cyRef, elements, msColors);
 
       setCy(cyInstance);
