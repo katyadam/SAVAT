@@ -12,18 +12,6 @@ async function getCallGraphInputById(callGraphInputId: string): Promise<CallGrap
 
 async function getCallGraphInputsByProjectId(projectId: string): Promise<CallGraphInputSimple[]> {
     const resp = await axiosInstance.get(`${CALL_GRAPH_INPUTS_PREFIX}/project/${projectId}`)
-    resp.data.forEach((input: CallGraphInputSimple) => {
-        input.createdAt = new Intl.DateTimeFormat('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true,
-        }).format(new Date(input.createdAt));
-    });
     return resp.data;
 }
 
@@ -47,18 +35,6 @@ async function createCallGraphInput(input: CreateCallGraphInput) {
 
 async function getAllProjectsCallGraphOuputs(projectId: string): Promise<CallGraphOutputSimple[]> {
     const resp = await axiosInstance.get(`${CALL_GRAPH_OUTPUTS_PREFIX}/project/${projectId}`)
-    resp.data.forEach((input: CallGraphOutputSimple) => {
-        input.createdAt = new Intl.DateTimeFormat('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true,
-        }).format(new Date(input.createdAt));
-    })
     return resp.data;
 }
 

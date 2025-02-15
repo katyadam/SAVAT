@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { CallGraphInputsTable } from "./CallGraphInputsTable";
 import { callGraphInputsColumns } from "./InputsColumns";
 import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
@@ -24,7 +24,14 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
   const { data: callGraphOutputs, isLoading: callGraphOutputsLoading } =
     useProjectsCallGraphOutputs(projectId);
 
-  const [activeTab, setActive] = useState<string>("inputs");
+  const [activeTab, setActive] = useState<string>(
+    localStorage.getItem("callGraphsActiveTab") || "inputs"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("callGraphsActiveTab", activeTab);
+  }, [activeTab]);
+
   const [openCompareDialog, setOpenCompareDialog] = useState<boolean>(false);
 
   return (

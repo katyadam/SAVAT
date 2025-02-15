@@ -15,9 +15,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye } from "lucide-react";
+import { CalendarArrowDown, CalendarArrowUp, Eye } from "lucide-react";
 import { Button } from "../ui/button";
 import { CallGraphInputSimple } from "@/api/callgraphs/types";
+import { useMemo, useState } from "react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -29,31 +30,52 @@ export function CallGraphInputsTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const microserviceFilter = (): boolean => false;
+
+  const [sortByDate, setSortByDate] = useState<boolean>(false);
+  const sortedData = useMemo<TData[]>(() => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date((a as CallGraphInputSimple).createdAt).getTime();
+      const dateB = new Date((b as CallGraphInputSimple).createdAt).getTime();
+      return sortByDate ? dateA - dateB : dateB - dateA;
+    });
+  }, [data, sortByDate]);
+
   const table = useReactTable({
-    data,
+    data: sortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     filterFns: { microserviceFilter: microserviceFilter },
   });
-
   return (
     <div className="rounded-md border max-h-[500px] overflow-auto">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+              {headerGroup.headers.map((header) =>
+                header.id === "createdAt" ? (
+                  <TableHead
+                    key={header.id}
+                    onClick={() => setSortByDate(!sortByDate)}
+                    className="flex flex-row items-center gap-3 cursor-pointer"
+                  >
+                    <p>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </p>
+                    {sortByDate ? <CalendarArrowUp /> : <CalendarArrowDown />}
                   </TableHead>
-                );
-              })}
+                ) : (
+                  <TableHead key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </TableHead>
+                )
+              )}
               <TableHead>Call Graph</TableHead>
               <TableHead>Methods</TableHead>
             </TableRow>

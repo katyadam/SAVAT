@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/table";
 import AnalysisInputButton from "./AnalysisInputButton";
 import { AnalysisInput } from "@/api/inputs/types";
+import { useMemo, useState } from "react";
+import { CalendarArrowDown, CalendarArrowUp } from "lucide-react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -27,9 +29,18 @@ export function AnalysisInputsTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sortByDate, setSortByDate] = useState<boolean>(false);
+  const sortedData = useMemo<TData[]>(() => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date((a as AnalysisInput).createdAt).getTime();
+      const dateB = new Date((b as AnalysisInput).createdAt).getTime();
+      return sortByDate ? dateA - dateB : dateB - dateA;
+    });
+  }, [data, sortByDate]);
+
   const microserviceFilter = (): boolean => false;
   const table = useReactTable({
-    data,
+    data: sortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     filterFns: { microserviceFilter },
@@ -41,18 +52,30 @@ export function AnalysisInputsTable<TData, TValue>({
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+              {headerGroup.headers.map((header) =>
+                header.id === "createdAt" ? (
+                  <TableHead
+                    key={header.id}
+                    onClick={() => setSortByDate(!sortByDate)}
+                    className="flex flex-row items-center gap-3 cursor-pointer"
+                  >
+                    <p>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </p>
+                    {sortByDate ? <CalendarArrowUp /> : <CalendarArrowDown />}
                   </TableHead>
-                );
-              })}
+                ) : (
+                  <TableHead key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </TableHead>
+                )
+              )}
               <TableHead>Entities</TableHead>
               <TableHead>Graph</TableHead>
             </TableRow>

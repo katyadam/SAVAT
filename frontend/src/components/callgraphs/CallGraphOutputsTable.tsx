@@ -14,9 +14,10 @@ import {
 } from "../ui/table";
 import { CallGraphOutputSimple } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
-import { Eye, Trash2 } from "lucide-react";
+import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { useCallGraphOutputDelete } from "@/hooks/useCallGraphOutput";
 import { useToast } from "@/hooks/use-toast";
+import { useMemo, useState } from "react";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -29,14 +30,6 @@ export function CallGraphOutputsTable<TData, TValue>({
   data,
   projectId,
 }: DataTableProps<TData, TValue>) {
-  const microserviceFilter = (): boolean => false;
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    filterFns: { microserviceFilter: microserviceFilter },
-  });
-
   const { mutateAsync } = useCallGraphOutputDelete(projectId);
   const { toast } = useToast();
 
@@ -54,24 +47,52 @@ export function CallGraphOutputsTable<TData, TValue>({
     }
   };
 
+  const [sortByDate, setSortByDate] = useState<boolean>(false);
+  const sortedData = useMemo<TData[]>(() => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date((a as CallGraphOutputSimple).createdAt).getTime();
+      const dateB = new Date((b as CallGraphOutputSimple).createdAt).getTime();
+      return sortByDate ? dateA - dateB : dateB - dateA;
+    });
+  }, [data, sortByDate]);
+  const microserviceFilter = (): boolean => false;
+  const table = useReactTable({
+    data: sortedData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    filterFns: { microserviceFilter: microserviceFilter },
+  });
+
   return (
     <div className="rounded-md border max-h-[500px] overflow-auto">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+              {headerGroup.headers.map((header) =>
+                header.id === "createdAt" ? (
+                  <TableHead
+                    key={header.id}
+                    onClick={() => setSortByDate(!sortByDate)}
+                    className="flex flex-row items-center gap-3 cursor-pointer"
+                  >
+                    <p>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </p>
+                    {sortByDate ? <CalendarArrowUp /> : <CalendarArrowDown />}
                   </TableHead>
-                );
-              })}
+                ) : (
+                  <TableHead key={header.id}>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </TableHead>
+                )
+              )}
               <TableHead>Call Graph</TableHead>
             </TableRow>
           ))}

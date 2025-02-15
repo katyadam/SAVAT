@@ -1,6 +1,7 @@
 "use client";
 
 import { CallGraphInputSimple } from "@/api/callgraphs/types";
+import { formatCommonDateString } from "@/api/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const callGraphInputsColumns: ColumnDef<CallGraphInputSimple>[] = [
@@ -15,5 +16,6 @@ export const callGraphInputsColumns: ColumnDef<CallGraphInputSimple>[] = [
   {
     accessorKey: "createdAt",
     header: "Created At",
+    cell: ({ row }) => formatCommonDateString(row.original.createdAt),
   },
 ];
