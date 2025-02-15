@@ -7,7 +7,6 @@ import org.adamkattan.model.callgraph.CallGraphMethodKey;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraphMethod;
 import org.adamkattan.model.callgraph.compare.TypeOfChange;
-import org.antlr.v4.runtime.misc.Pair;
 
 import java.util.*;
 

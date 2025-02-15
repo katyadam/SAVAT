@@ -27,13 +27,14 @@ type GraphType = {
   methodsMap: Map<string, CallGraphMethod>;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
-  callGraphInputId: string;
+  inputId: string;
   msToHighlight: string | null;
   setActionsStorage: (actionStorage: Action[]) => void;
   actionsStorage: Action[];
   actionToRemove: Action | null;
   isContextMenuOpen: boolean;
   setIsContextMenuOpen: (arg: boolean) => void;
+  variant: "inputs" | "outputs";
 };
 
 const Graph: FC<GraphType> = ({
@@ -41,13 +42,14 @@ const Graph: FC<GraphType> = ({
   methodsMap,
   showIsolatedNodes,
   msColors,
-  callGraphInputId,
+  inputId: callGraphInputId,
   msToHighlight,
   setActionsStorage,
   actionsStorage,
   actionToRemove,
   isContextMenuOpen,
   setIsContextMenuOpen,
+  variant,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -124,8 +126,8 @@ const Graph: FC<GraphType> = ({
             group: "edges",
           })),
       };
-      const cyInstance = getCyInstance(cyRef, elements, msColors);
 
+      const cyInstance = getCyInstance(cyRef, elements, msColors);
       setCy(cyInstance);
 
       cyInstance.on("tap", "node", (event) => {
@@ -193,6 +195,7 @@ const Graph: FC<GraphType> = ({
               close={() => setIsContextMenuOpen(false)}
               callGraphInputId={callGraphInputId}
               setMethodReachabilityCG={setMethodReachabilityCG}
+              variant={variant}
             />
           </div>,
           cyRef.current!

@@ -44,7 +44,7 @@ public class CallGraphController {
         return Response.ok(CallGraphInput.toDto(callGraphInput)).build();
     }
 
-    @POST
+    @PUT
     @Path("/{callGraphInputId}/method-reachability")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

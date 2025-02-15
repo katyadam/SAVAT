@@ -19,6 +19,7 @@ type ContextMenuType = {
   close: (arg0: boolean) => void;
   callGraphInputId: string;
   setMethodReachabilityCG: (arg0: CallGraph) => void;
+  variant: "inputs" | "outputs";
 };
 
 const ContextMenu: FC<ContextMenuType> = ({
@@ -27,11 +28,12 @@ const ContextMenu: FC<ContextMenuType> = ({
   close,
   callGraphInputId,
   setMethodReachabilityCG,
+  variant,
 }) => {
   const [method, setMethod] = useState<CallGraphMethod | null>(null);
   const [showMethodDetails, setShowMethodDetails] = useState<boolean>(false);
 
-  const { mutateAsync } = useMethodReachability(callGraphInputId);
+  const { mutateAsync } = useMethodReachability(callGraphInputId, variant);
 
   const handleDisplayReachability = async (methodSignature: string | null) => {
     if (methodSignature) {

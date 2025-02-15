@@ -15,10 +15,10 @@ export const useProjectCallGraphInputs = (projectId: string) => {
     });
 }
 
-export const useMethodReachability = (callGraphInputId: string) => {
+export const useMethodReachability = (inputId: string, variant: "inputs" | "outputs") => {
     return useMutation({
-        mutationKey: ["method-reachability", callGraphInputId],
-        mutationFn: (payload: string) => CallGraphsApi.computeMethodReachability(callGraphInputId, payload)
+        mutationKey: ["method-reachability", inputId],
+        mutationFn: (payload: string) => CallGraphsApi.computeMethodReachabilityForInput(inputId, variant, payload)
     })
 }
 

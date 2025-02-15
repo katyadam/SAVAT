@@ -27,10 +27,12 @@ async function getCallGraphInputsByProjectId(projectId: string): Promise<CallGra
     return resp.data;
 }
 
-async function computeMethodReachability(callGraphInputId: string, methodSignature: string): Promise<CallGraph> {
-    const resp = await axiosInstance.post(`${CALL_GRAPH_INPUTS_PREFIX}/${callGraphInputId}/method-reachability`, {
-        methodSignature: methodSignature
-    });
+async function computeMethodReachabilityForInput(callGraphInputId: string, variant: "inputs" | "outputs", methodSignature: string): Promise<CallGraph> {
+    const resp = await axiosInstance.put(
+        `/call-graph-${variant}/${callGraphInputId}/method-reachability`,
+        {
+            methodSignature: methodSignature
+        });
 
     return resp.data;
 }
@@ -79,7 +81,7 @@ async function deleteCallGraphOutput(id: number) {
 const CallGraphsApi = {
     getCallGraphInputById,
     getCallGraphInputsByProjectId,
-    computeMethodReachability,
+    computeMethodReachabilityForInput,
     createCallGraphInput,
     getAllProjectsCallGraphOuputs,
     getChangedCallGraphById,

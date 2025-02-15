@@ -16,15 +16,16 @@ public class CallGraphDifferenceAnalysis {
 
     public static ChangedCallGraph changeImpactAnalysis(CallGraph sourceCallGraph, CallGraph targetCallGraph) {
         Map<CallGraphMethodKey, CallGraphMethod> sourceMethodsMap = sourceCallGraph.getMethodsMap();
+        Map<CallGraphMethodKey, CallGraphMethod> targetMethodsMap = targetCallGraph.getMethodsMap();
 
         Map<CallGraphMethodKey, ChangedCallGraphMethod> changedMethodsMap = getChangedMethodsMap(
-                sourceMethodsMap, targetCallGraph.getMethodsMap()
+                sourceMethodsMap, targetMethodsMap
         );
 
         Set<ChangedCallGraphMethod> dependencyGraphMethods = new HashSet<>();
         Set<CallGraphCall> dependencyGraphCalls = new HashSet<>();
         changedMethodsMap.forEach((key, value) -> {
-            ChangedCallGraph dependencyGraph = MethodDependency.getDependencyGraph(sourceCallGraph, key, sourceMethodsMap);
+            ChangedCallGraph dependencyGraph = MethodDependency.getDependencyGraph(targetCallGraph, key, targetMethodsMap);
             dependencyGraphMethods.addAll(dependencyGraph.methods());
             dependencyGraphCalls.addAll(dependencyGraph.calls());
         });

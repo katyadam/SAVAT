@@ -61,13 +61,14 @@ const CallGraphPage = () => {
           methodsMap={callGraphMethodsMap}
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
-          callGraphInputId={id}
+          inputId={id}
           msToHighlight={msToHighlight}
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           actionToRemove={removedAction}
           isContextMenuOpen={isContextMenuOpen}
           setIsContextMenuOpen={setIsContextMenuOpen}
+          variant="inputs"
         />
       );
     }

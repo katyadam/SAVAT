@@ -9,12 +9,16 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.adamkattan.model.callgraph.CallGraph;
+import org.adamkattan.model.callgraph.CallGraphMethodKey;
+import org.adamkattan.model.callgraph.algorithms.MethodReachability;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutputRequest;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.service.CallGraphDifferenceService;
 import org.adamkattan.service.CallGraphOutputService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/call-graph-outputs")
@@ -61,6 +65,26 @@ public class CallGraphOutputController {
                                 callGraphOutputRequest.sourceCallGraphInputId(),
                                 callGraphOutputRequest.targetCallGraphInputId())
                 )
+                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
+    }
+
+    @PUT
+    @Path("/{callGraphOutputId}/method-reachability")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Blocking
+    public Uni<CallGraph> computeMethodReachability(
+            @PathParam("callGraphOutputId") Long callGraphOutputId,
+            @Valid CallGraphMethodKey callGraphMethodKey
+    ) {
+        CallGraphOutput callGraphOutputById = callGraphOutputService.getCallGraphOutputById(callGraphOutputId);
+        return Uni.createFrom().item(() -> MethodReachability.compute(
+                        new CallGraph(
+                                new ArrayList<>(callGraphOutputById.changedCallGraph.methods()),
+                                callGraphOutputById.changedCallGraph.calls()
+                        ),
+                        callGraphMethodKey
+                ))
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 

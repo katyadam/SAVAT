@@ -47,15 +47,16 @@ const CallGraphOutputPage = () => {
         <Graph
           callGraph={changedCallGraph}
           methodsMap={callGraphMethodsMap}
-          showIsolatedNodes={false}
+          showIsolatedNodes={true}
           msColors={msColors}
-          callGraphInputId={id}
+          inputId={id}
           msToHighlight={msToHighlight}
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           actionToRemove={removedAction}
           isContextMenuOpen={isContextMenuOpen}
           setIsContextMenuOpen={setIsContextMenuOpen}
+          variant="outputs"
         />
       );
     }
