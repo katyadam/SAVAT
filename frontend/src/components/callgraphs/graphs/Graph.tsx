@@ -11,7 +11,7 @@ import {
   TypeOfChange,
 } from "@/api/callgraphs/types";
 import cytoscape from "cytoscape";
-import ContextMenu from "../ContextMenu";
+import ContextNodeMenu from "../context-menu/ContextNodeMenu";
 import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
 import { Action } from "@/pages/CallGraphPage";
 import {
@@ -21,10 +21,12 @@ import {
   useRemoveAction,
 } from "@/hooks/useGraphEffects";
 import { getCyInstance } from "./CytoscapeInstance";
+import ContextEdgeMenu from "../context-menu/ContextEdgeMenu";
 
 type GraphType = {
   callGraph: GenericCallGraph;
   methodsMap: Map<string, CallGraphMethod>;
+  callsMap: Map<string, CallGraphCall>;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
   inputId: string;
@@ -34,12 +36,15 @@ type GraphType = {
   actionToRemove: Action | null;
   isContextMenuOpen: boolean;
   setIsContextMenuOpen: (arg: boolean) => void;
+  isEdgeContextMenuOpen: boolean;
+  setIsEdgeContextMenuOpen: (arg: boolean) => void;
   variant: "inputs" | "outputs";
 };
 
 const Graph: FC<GraphType> = ({
   callGraph,
   methodsMap,
+  callsMap,
   showIsolatedNodes,
   msColors,
   inputId: callGraphInputId,
@@ -49,16 +54,14 @@ const Graph: FC<GraphType> = ({
   actionToRemove,
   isContextMenuOpen,
   setIsContextMenuOpen,
+  isEdgeContextMenuOpen,
+  setIsEdgeContextMenuOpen,
   variant,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<HTMLDivElement | null>(null);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-  const [contextMenuPosition, setContextMenuPosition] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
-
+  const [selectedCall, setSelectedCall] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
   const { callGraphLookupState, callGraphLookupDispatch } =
     useCallGraphLookup();
@@ -117,7 +120,7 @@ const Graph: FC<GraphType> = ({
           ) // Filter invalid edges
           .map((call: CallGraphCall) => ({
             data: {
-              id: `${call.source}__${call.target}`,
+              id: `${call.httpMethod}:${call.source}__${call.target}`,
               source: call.source,
               target: call.target,
               label: call.httpMethod || "",
@@ -132,14 +135,14 @@ const Graph: FC<GraphType> = ({
 
       cyInstance.on("tap", "node", (event) => {
         const node = event.target;
-        const nodePosition = node.renderedPosition();
-        setContextMenuPosition({
-          x: nodePosition.x + 10,
-          y: nodePosition.y + 10,
-        });
         setSelectedMethod(node.data("id"));
-
         setIsContextMenuOpen(true);
+      });
+
+      cyInstance.on("tap", "edge", (event) => {
+        const edge = event.target;
+        setSelectedCall(edge.data("id"));
+        setIsEdgeContextMenuOpen(true);
       });
 
       setActionsStorage([]);
@@ -177,8 +180,7 @@ const Graph: FC<GraphType> = ({
 
   return (
     <div ref={cyRef} className="w-full h-full relative z-0">
-      {contextMenuPosition &&
-        isContextMenuOpen &&
+      {isContextMenuOpen &&
         ReactDOM.createPortal(
           <div
             ref={contextMenuRef}
@@ -189,13 +191,32 @@ const Graph: FC<GraphType> = ({
               zIndex: 20,
             }}
           >
-            <ContextMenu
+            <ContextNodeMenu
               selectedMethod={selectedMethod}
               methodsMap={methodsMap}
               close={() => setIsContextMenuOpen(false)}
               callGraphInputId={callGraphInputId}
               setMethodReachabilityCG={setMethodReachabilityCG}
               variant={variant}
+            />
+          </div>,
+          cyRef.current!
+        )}
+      {isEdgeContextMenuOpen &&
+        ReactDOM.createPortal(
+          <div
+            ref={contextMenuRef}
+            style={{
+              position: "absolute",
+              left: `0px`,
+              top: `0px`,
+              zIndex: 20,
+            }}
+          >
+            <ContextEdgeMenu
+              callsMap={callsMap}
+              selectedCall={selectedCall}
+              close={() => setIsEdgeContextMenuOpen(false)}
             />
           </div>,
           cyRef.current!

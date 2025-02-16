@@ -5,15 +5,15 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 import { CallGraph, CallGraphMethod } from "@/api/callgraphs/types";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { CircleEllipsis, ClipboardCopy, Info, X } from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
 import { useMethodReachability } from "@/hooks/useCallGraph";
 
-type ContextMenuType = {
+type ContextNodeMenuType = {
   selectedMethod: string | null;
   methodsMap: Map<string, CallGraphMethod>;
   close: (arg0: boolean) => void;
@@ -22,7 +22,7 @@ type ContextMenuType = {
   variant: "inputs" | "outputs";
 };
 
-const ContextMenu: FC<ContextMenuType> = ({
+const ContextNodeMenu: FC<ContextNodeMenuType> = ({
   selectedMethod,
   methodsMap,
   close,
@@ -155,4 +155,4 @@ const ContextMenu: FC<ContextMenuType> = ({
   );
 };
 
-export default ContextMenu;
+export default ContextNodeMenu;

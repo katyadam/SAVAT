@@ -121,8 +121,6 @@ export const getCyInstance = (
         ...(elements.nodes && elements.nodes.length > 0 ? getNodeStyles(msColors) : []),
         ...(elements.edges && elements.edges.length > 0 ? getEdgeStyles() : [])
     ];
-    console.log(elements)
-    console.log(styles)
     return Cytoscape({
         container: cyRef.current,
         elements,

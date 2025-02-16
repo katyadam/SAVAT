@@ -1,5 +1,8 @@
-import { CallGraphMethod } from "@/api/callgraphs/types";
-import { indexCallGraphMethods } from "@/api/callgraphs/utils";
+import { CallGraphCall, CallGraphMethod } from "@/api/callgraphs/types";
+import {
+  indexCallGraphCalls,
+  indexCallGraphMethods,
+} from "@/api/callgraphs/utils";
 import { getMicroservicesColors } from "@/components/callgraphs/generators/colorGenerator";
 import Graph from "@/components/callgraphs/graphs/Graph";
 import Navbar from "@/components/callgraphs/Navbar";
@@ -34,6 +37,12 @@ const CallGraphPage = () => {
     string,
     CallGraphMethod
   > | null>(null);
+
+  const [callGraphCallsMap, setCallGraphCallsMap] = useState<Map<
+    string,
+    CallGraphCall
+  > | null>(null);
+
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
   const [msColors, setMsColors] = useState<Map<string, string> | null>();
   const [msToHighlight, setMsToHighlight] = useState<string | null>(null);
@@ -44,6 +53,7 @@ const CallGraphPage = () => {
       setCallGraphMethodsMap(
         indexCallGraphMethods(callGraph.callGraph.methods)
       );
+      setCallGraphCallsMap(indexCallGraphCalls(callGraph.callGraph.calls));
     }
   }, [callGraph]);
 
@@ -51,14 +61,22 @@ const CallGraphPage = () => {
   const [removedAction, setRemovedAction] = useState<Action | null>(null);
 
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+  const [isEdgeContextMenuOpen, setIsEdgeContextMenuOpen] = useState(false);
 
   const renderContent = () => {
     if (error) return <p>Error: Unable to fetch call graph inputs.</p>;
-    if (callGraph && msColors && callGraphMethodsMap && !isLoading) {
+    if (
+      callGraph &&
+      msColors &&
+      callGraphMethodsMap &&
+      callGraphCallsMap &&
+      !isLoading
+    ) {
       return (
         <Graph
           callGraph={callGraph.callGraph}
           methodsMap={callGraphMethodsMap}
+          callsMap={callGraphCallsMap}
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
           inputId={id}
@@ -68,6 +86,8 @@ const CallGraphPage = () => {
           actionToRemove={removedAction}
           isContextMenuOpen={isContextMenuOpen}
           setIsContextMenuOpen={setIsContextMenuOpen}
+          isEdgeContextMenuOpen={isEdgeContextMenuOpen}
+          setIsEdgeContextMenuOpen={setIsEdgeContextMenuOpen}
           variant="inputs"
         />
       );
@@ -86,7 +106,10 @@ const CallGraphPage = () => {
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           setRemovedAction={setRemovedAction}
-          closeContextMenu={() => setIsContextMenuOpen(false)}
+          closeContextMenu={() => {
+            setIsContextMenuOpen(false);
+            setIsEdgeContextMenuOpen(false);
+          }}
         />
       )}
       <Separator className="mt-2" />
