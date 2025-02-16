@@ -28,10 +28,11 @@ public class MethodDependency {
             CallGraphMethodKey current = queue.poll();
             for (var methodCall : callGraph.getMethodCalledByCalls(current)) {
                 var adjacent = new CallGraphMethodKey(methodCall.source());
-                if (!visited.contains(adjacent)) {
+                var node = methodsMap.get(adjacent);
+                if (!visited.contains(adjacent) && node != null) {
                     queue.add(adjacent);
                     visited.add(adjacent);
-                    collectedMethods.add(new ChangedCallGraphMethod(methodsMap.get(adjacent), TypeOfChange.NONE));
+                    collectedMethods.add(new ChangedCallGraphMethod(node, TypeOfChange.NONE));
                     collectedCalls.add(methodCall);
                 }
             }

@@ -62,7 +62,8 @@ const getNodeStyles = (msColors: Map<string, string>): Cytoscape.Stylesheet[] =>
         {
             selector: "node[typeOfChange = 'REMOVED']",
             style: {
-                "background-color": CY_COLOR_RED,
+                "border-width": 4,
+                "border-color": CY_COLOR_RED,
                 "border-style": "dashed"
             }
         },

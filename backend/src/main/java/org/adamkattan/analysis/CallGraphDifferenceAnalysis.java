@@ -10,6 +10,7 @@ import org.adamkattan.model.callgraph.compare.ChangedCallGraphMethod;
 import org.adamkattan.model.callgraph.compare.TypeOfChange;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class CallGraphDifferenceAnalysis {
@@ -31,8 +32,12 @@ public class CallGraphDifferenceAnalysis {
         });
 
         List<ChangedCallGraphMethod> allMethods = new ArrayList<>(changedMethodsMap.values());
-        allMethods.addAll(dependencyGraphMethods);
-
+        allMethods.addAll(
+                dependencyGraphMethods.stream()
+                        .filter(
+                                method -> !changedMethodsMap.containsKey(new CallGraphMethodKey(method.methodSignature()))
+                        ).toList()
+        );
         return new ChangedCallGraph(
                 allMethods,
                 new ArrayList<>(dependencyGraphCalls)
@@ -49,11 +54,11 @@ public class CallGraphDifferenceAnalysis {
             if (!targetMethods.containsKey(key)) {
                 changedMethods.put(
                         new CallGraphMethodKey(value.methodSignature()),
-                        new ChangedCallGraphMethod(value, TypeOfChange.ADDED)
+                        new ChangedCallGraphMethod(value, TypeOfChange.REMOVED)
                 );
             }
-            String targetBytecodeHash = targetMethods.get(key).bytecodeHash();
-            if (!targetBytecodeHash.equals(value.bytecodeHash())) {
+            CallGraphMethod callGraphMethod = targetMethods.get(key);
+            if (callGraphMethod != null && !callGraphMethod.bytecodeHash().equals(value.bytecodeHash())) {
                 changedMethods.put(
                         new CallGraphMethodKey(value.methodSignature()),
                         new ChangedCallGraphMethod(value, TypeOfChange.MODIFIED)
@@ -65,7 +70,7 @@ public class CallGraphDifferenceAnalysis {
             if (!sourceMethods.containsKey(key)) {
                 changedMethods.put(
                         new CallGraphMethodKey(value.methodSignature()),
-                        new ChangedCallGraphMethod(value, TypeOfChange.REMOVED)
+                        new ChangedCallGraphMethod(value, TypeOfChange.ADDED)
                 );
             }
         });
