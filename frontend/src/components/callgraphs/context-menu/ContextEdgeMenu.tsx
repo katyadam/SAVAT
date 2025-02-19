@@ -9,7 +9,6 @@ import {
 import { X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import ContextMenuInfo from "./ContextMenuInfo";
-import { Separator } from "@/components/ui/separator";
 
 type ContextEdgeMenuType = {
   selectedCall: string | null;

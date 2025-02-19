@@ -1,5 +1,5 @@
 import CallGraphsApi from "@/api/callgraphs/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useCallGraphInput = (callGraphId: string) => {
     return useQuery({
@@ -21,4 +21,17 @@ export const useMethodReachability = (inputId: string, variant: "inputs" | "outp
         mutationFn: (payload: string) => CallGraphsApi.computeMethodReachabilityForInput(inputId, variant, payload)
     })
 }
+
+export const useCallGraphInputDelete = (projectId: string) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationKey: ["deleteInput"],
+        mutationFn: (payload: number) =>
+            CallGraphsApi.deleteCallGraphInput(payload),
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ["callgraphs", projectId],
+            }),
+    });
+};
 

@@ -57,4 +57,8 @@ public class AnalysisInputService {
         AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
         return input.graph;
     }
+
+    public Long deleteAnalysisInputById(Long id) {
+        return AnalysisInput.delete("id", id);
+    }
 }

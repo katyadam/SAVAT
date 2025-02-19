@@ -1,5 +1,5 @@
 import AnalysisInputApi from "@/api/inputs/api";
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const useAnalysisInputs = (projectId: string) => {
     return useQuery({
@@ -7,3 +7,16 @@ export const useAnalysisInputs = (projectId: string) => {
         queryFn: () => AnalysisInputApi.getProjectAnalysisInputs(projectId)
     });
 }
+
+export const useAnalyisiInputDelete = (projectId: string) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationKey: ["deleteInput"],
+        mutationFn: (payload: number) =>
+            AnalysisInputApi.deleteAnalysisInput(payload),
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ["inputs", projectId],
+            }),
+    });
+};

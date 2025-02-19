@@ -15,20 +15,41 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CalendarArrowDown, CalendarArrowUp, Eye } from "lucide-react";
+import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { CallGraphInputSimple } from "@/api/callgraphs/types";
 import { useMemo, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useCallGraphInputDelete } from "@/hooks/useCallGraph";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  projectId: string;
 };
 
 export function CallGraphInputsTable<TData, TValue>({
   columns,
   data,
+  projectId,
 }: DataTableProps<TData, TValue>) {
+  const { mutateAsync } = useCallGraphInputDelete(projectId);
+  const { toast } = useToast();
+
+  const handleOutputDelete = async (id: number) => {
+    try {
+      await mutateAsync(id);
+      toast({
+        title: "Call Graph Input Removed!",
+      });
+    } catch (error) {
+      toast({
+        title: "Something BAD happened, couldn't delete call graph input!",
+        variant: "destructive",
+      });
+    }
+  };
+
   const microserviceFilter = (): boolean => false;
 
   const [sortByDate, setSortByDate] = useState<boolean>(false);
@@ -114,6 +135,18 @@ export function CallGraphInputsTable<TData, TValue>({
                       <Eye />
                     </Button>
                   </a>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() =>
+                      handleOutputDelete(
+                        (row.original as CallGraphInputSimple).id
+                      )
+                    }
+                    variant="outline"
+                  >
+                    <Trash2 className="text-red-500" />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))

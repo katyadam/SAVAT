@@ -24,7 +24,7 @@ const Graph: FC<GraphType> = ({ graph }) => {
         nodes: graph.nodes.map((node: CommGraphNode) => ({
           data: {
             id: node.nodeName,
-            label: node.nodeName, // Ensure label is set correctly
+            label: node.nodeName,
           },
           group: "nodes",
           style: {

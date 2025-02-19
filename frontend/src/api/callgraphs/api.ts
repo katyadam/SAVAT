@@ -33,6 +33,11 @@ async function createCallGraphInput(input: CreateCallGraphInput) {
     return resp;
 }
 
+async function deleteCallGraphInput(id: number) {
+    const resp = await axiosInstance.delete(`${CALL_GRAPH_INPUTS_PREFIX}/${id}`);
+    return resp.data;
+}
+
 async function getAllProjectsCallGraphOuputs(projectId: string): Promise<CallGraphOutputSimple[]> {
     const resp = await axiosInstance.get(`${CALL_GRAPH_OUTPUTS_PREFIX}/project/${projectId}`)
     return resp.data;
@@ -59,6 +64,7 @@ const CallGraphsApi = {
     getCallGraphInputsByProjectId,
     computeMethodReachabilityForInput,
     createCallGraphInput,
+    deleteCallGraphInput,
     getAllProjectsCallGraphOuputs,
     getChangedCallGraphById,
     changeImpactAnalysis,

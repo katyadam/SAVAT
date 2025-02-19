@@ -67,4 +67,14 @@ public class CallGraphController {
                 .build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteCallGraphInputById(@PathParam("id") Long id) {
+        Long removedId = callGraphInputService.deleteCallGraphInputById(id);
+        return Response.ok("Removed INPUT with id: " + removedId)
+                .build();
+    }
+
 }

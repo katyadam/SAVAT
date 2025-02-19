@@ -18,17 +18,39 @@ import {
 import AnalysisInputButton from "./AnalysisInputButton";
 import { AnalysisInput } from "@/api/inputs/types";
 import { useMemo, useState } from "react";
-import { CalendarArrowDown, CalendarArrowUp } from "lucide-react";
+import { CalendarArrowDown, CalendarArrowUp, Trash2 } from "lucide-react";
+import { useAnalyisiInputDelete } from "@/hooks/useAnalysisInput";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "../ui/button";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  projectId: string;
 };
 
 export function AnalysisInputsTable<TData, TValue>({
   columns,
   data,
+  projectId,
 }: DataTableProps<TData, TValue>) {
+  const { mutateAsync } = useAnalyisiInputDelete(projectId);
+  const { toast } = useToast();
+
+  const handleOutputDelete = async (id: number) => {
+    try {
+      await mutateAsync(id);
+      toast({
+        title: "Analysis Input Removed!",
+      });
+    } catch (error) {
+      toast({
+        title: "Something BAD happened, couldn't delete analysis input!",
+        variant: "destructive",
+      });
+    }
+  };
+
   const [sortByDate, setSortByDate] = useState<boolean>(false);
   const sortedData = useMemo<TData[]>(() => {
     return [...data].sort((a, b) => {
@@ -104,6 +126,16 @@ export function AnalysisInputsTable<TData, TValue>({
                     type="graph"
                     id={(row.original as AnalysisInput).id}
                   />
+                </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() =>
+                      handleOutputDelete((row.original as AnalysisInput).id)
+                    }
+                    variant="outline"
+                  >
+                    <Trash2 className="text-red-500" />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))

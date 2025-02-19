@@ -15,7 +15,7 @@ import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreate
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 
 const ProjectPage = () => {
-  const { id } = useParams();
+  const { id: projectId } = useParams();
   const [importExportDialogUp, showImportExportDialog] =
     useState<FileOperation | null>(null);
   const [activeTab, setActive] = useState<string>(
@@ -26,10 +26,11 @@ const ProjectPage = () => {
     localStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
-  if (!id) return <p>Error invalid ID...</p>;
+  if (!projectId) return <p>Error invalid ID...</p>;
 
-  const { data: project, isLoading: projectLoading } = useProject(id);
-  const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(id);
+  const { data: project, isLoading: projectLoading } = useProject(projectId);
+  const { data: inputs, isLoading: inputsLoading } =
+    useAnalysisInputs(projectId);
 
   return (
     <div className="m-5">
@@ -71,12 +72,16 @@ const ProjectPage = () => {
           {inputsLoading ? (
             <Loading overlay={false} />
           ) : (
-            <AnalysisInputsTable columns={columns} data={inputs!} />
+            <AnalysisInputsTable
+              columns={columns}
+              data={inputs!}
+              projectId={projectId}
+            />
           )}
         </TabsContent>
 
         <TabsContent value="callgraphs">
-          <CallGraphsTab projectId={id} />
+          <CallGraphsTab projectId={projectId} />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (
@@ -84,14 +89,14 @@ const ProjectPage = () => {
           {importExportDialogUp == FileOperation.IMPORT &&
             activeTab === "callgraphs" && (
               <CallGraphInputCreateDialog
-                projectId={id}
+                projectId={projectId}
                 closeDialog={() => showImportExportDialog(null)}
               />
             )}
           {importExportDialogUp == FileOperation.IMPORT &&
             activeTab === "components" && (
               <AnalysisInputCreateDialog
-                projectId={id}
+                projectId={projectId}
                 closeDialog={() => showImportExportDialog(null)}
               />
             )}

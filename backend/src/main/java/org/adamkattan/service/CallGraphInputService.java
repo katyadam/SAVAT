@@ -32,4 +32,8 @@ public class CallGraphInputService {
         return CallGraphInput.toDto(callGraphInput);
     }
 
+    public Long deleteCallGraphInputById(Long id) {
+        return CallGraphInput.delete("id", id);
+    }
+
 }

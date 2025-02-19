@@ -9,7 +9,6 @@ async function getProjectAnalysisInputs(projectId: string): Promise<AnalysisInpu
 }
 
 async function createAnalysisInput(input: CreateAnalysisInput) {
-    console.log(input);
     const resp = await axiosInstance.post(`${ANALYSIS_INPUTS_PREFIX}`, {
         ...input,
         createdAt: new Date().toISOString()
@@ -17,9 +16,15 @@ async function createAnalysisInput(input: CreateAnalysisInput) {
     return resp;
 }
 
+async function deleteAnalysisInput(id: number) {
+    const resp = await axiosInstance.delete(`${ANALYSIS_INPUTS_PREFIX}/${id}`);
+    return resp.data;
+}
+
 const AnalysisInputApi = {
     getProjectAnalysisInputs,
-    createAnalysisInput
+    createAnalysisInput,
+    deleteAnalysisInput
 };
 
 export default AnalysisInputApi;

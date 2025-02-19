@@ -80,4 +80,14 @@ public class AnalysisInputController {
         return Response.ok(analysisInputService.getAnalysisInputGraph(id))
                 .build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteAnalysisInputById(@PathParam("id") Long id) {
+        Long removedId = analysisInputService.deleteAnalysisInputById(id);
+        return Response.ok("Removed ANALYSIS INPUT with id: " + removedId)
+                .build();
+    }
 }

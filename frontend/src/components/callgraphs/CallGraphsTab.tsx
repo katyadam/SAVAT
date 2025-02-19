@@ -79,6 +79,7 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
             <CallGraphInputsTable
               columns={callGraphInputsColumns}
               data={callGraphInputs!}
+              projectId={projectId}
             />
           )}
         </TabsContent>
