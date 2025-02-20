@@ -1,57 +1,56 @@
 # Change Impact Analysis
 
-This project is part of a bachelor thesis that is trying to use known change impact analysis techniques in systems using microservices.
+This project is part of a bachelor's thesis exploring the application of established change impact analysis techniques in microservice-based systems.
 
-## Running the APP
+## Running the Application
 
-### DEV
+### Development Mode
 
-- served at http://localhost:5173
-- in frontend directory create .env out of env.dev
+- The application is served at <http://localhost:5173>.
+- In the `frontend` directory, create a `.env` file based on `env.dev`.
 
-```shell script
-# create postgres database
+```shell
+# Create a PostgreSQL database
 docker run --name cia-pg -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=cia -p 5432:5432 -d postgres
 
-# start backend
+# Start the backend
 cd backend && ./mvnw clean package -DskipTests && ./mvnw compile quarkus:dev
 
-# start frontend
+# Start the frontend
 cd frontend && yarn install && yarn dev
 ```
 
-After successfully running the project in DEV mode, you can access its Swagger UI at <http://localhost:8080/q/swagger-ui/>.
-<br>
-Or its UI part at <http://localhost:8000>
+Once the project is running in development mode, you can access:
 
-### DOCKER-COMPOSE
+- The Swagger UI: <http://localhost:8080/q/swagger-ui/>
+- The frontend UI: <http://localhost:8000>
 
-- served at http://localhost
-- in frontend directory create .env out of env.prod
+### Docker-Compose Mode
 
-```shell script
-cd backend && ./mvnw package
-docker-compose up -d # or use docker compose
+- The application is served at <http://localhost>.
+- In the `frontend` directory, create a `.env` file based on `env.prod`.
+- Then, run the following commands:
+
+```shell
+cd backend && ./mvnw clean package -DskipTests
+
+docker-compose up -d  # Alternatively, use `docker compose up -d`
 ```
 
-## Seeding
+## Seeding the Database
 
-### DEV
+Seeding initializes the database with sample data for demonstration purposes.
 
-```shell script
+### Development Mode
+
+```shell
+cd config
 python seed.py seed-config.json http://localhost:8080
 ```
 
-### DOCKER-COMPOSE
+### Docker-Compose Mode
 
-```shell script
+```shell
+cd config
 python seed.py seed-config.json http://localhost/api
 ```
-
-## Available train-ticket versions
-
-#### Small - contains 2 microservices
-
-#### Medium - contains 10 microservices
-
-#### Whole - contains all 41 microservices
