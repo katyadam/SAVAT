@@ -105,7 +105,7 @@ export const MethodsTable: FC<MethodsTableType> = ({
 
   const handleMethodLookup = (methodId: string) => {
     callGraphLookupDispatch({ type: "LOOKUP_METHOD", payload: methodId });
-    navigate(`/call-graph-input/${callGraphInputId}`);
+    navigate(`/call-graph-input/${callGraphInputId}/call-graph`);
   };
   const searchAllowedColumns = new Set<string>(["returnType", "name", "type"]);
 

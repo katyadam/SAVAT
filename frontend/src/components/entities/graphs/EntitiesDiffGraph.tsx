@@ -128,7 +128,7 @@ const EntitiesDiffGraph: FC<EntitiesDiffGraphType> = ({
   }, [graphData, entitiesDiff, isLoading, msColors]);
 
   if (isLoading || entitiesDiffId === "None") {
-    return <p>Loading graph...</p>;
+    return <></>;
   }
   return <div ref={cyRef} className="w-[90%] h-[90%]" />;
 };

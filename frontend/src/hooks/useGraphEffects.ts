@@ -35,7 +35,7 @@ export const useHighlightMethod = (
             }
             removeLookup();
         }
-    }, [method]);
+    }, [method, cy]);
 };
 
 export const useHighlightReachability = (
