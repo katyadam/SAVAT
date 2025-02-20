@@ -27,6 +27,16 @@ export const useCreateProject = () => {
     })
 }
 
+export const useDeleteProject = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: ProjectApi.deleteProject,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["projects"] })
+        }
+    })
+}
+
 export const useCallGraphInputCreate = (projectId: string) => {
     const queryClient = useQueryClient();
     return useMutation({

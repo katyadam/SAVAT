@@ -18,10 +18,16 @@ async function createProject(project: CreateProject) {
     return resp.data;
 }
 
+async function deleteProject(projectId: string) {
+    const resp = await axiosInstance.delete(`${PROJECTS_PREFIX}/${projectId}`);
+    return resp.data;
+}
+
 const ProjectApi = {
     getAllProjects,
     getProjectById,
-    createProject
+    createProject,
+    deleteProject
 };
 
 export default ProjectApi;

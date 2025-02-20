@@ -29,4 +29,8 @@ public class ProjectService {
                 .toList();
     }
 
+    public Long deleteProject(Long projectId) {
+        return Project.delete("id", projectId);
+    }
+
 }
