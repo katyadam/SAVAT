@@ -44,6 +44,7 @@ export type CreateCallGraphInput = Omit<CallGraphInput, 'createdAt' | 'id'>
 
 export type CallGraphOutputSimple = {
     id: number,
+    projectId: number,
     sourceInput: CallGraphInputSimple,
     targetInput: CallGraphInputSimple,
     createdAt: string
@@ -68,6 +69,7 @@ export type ChangedCallGraph = {
 export type GenericCallGraph = ChangedCallGraph | CallGraph
 
 export type ChangeImpactAnalysisPayload = {
+    projectId: string,
     sourceCallGraphInputId: number,
     targetCallGraphInputId: number
 }

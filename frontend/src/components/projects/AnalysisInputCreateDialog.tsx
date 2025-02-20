@@ -60,13 +60,15 @@ const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
         });
         closeDialog();
       }
-    } catch (error) {
-      setError("root", { type: "manual", message: "Invalid JSON format" });
-      toast({
-        title: "Error occured, unable to import your input!",
-        description: "Try again",
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError("root", { type: "manual", message: "Invalid JSON format" });
+        toast({
+          title: "Error occured, unable to import your input!",
+          description: "Try again",
+          variant: "destructive",
+        });
+      }
     }
   };
 

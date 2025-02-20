@@ -10,7 +10,7 @@ public class CallGraphOutputService {
 
     public List<CallGraphOutput> getAllProjectOutputs(Long projectId) {
         return CallGraphOutput
-                .find("sourceCallGraphInput.project.id", projectId).list();
+                .find("project.id", projectId).list();
     }
 
     public CallGraphOutput getCallGraphOutputById(Long id) {

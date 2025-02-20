@@ -21,8 +21,12 @@ const CallGraphOutputPage = () => {
     };
   }, []);
   const { id } = useParams();
-  if (!id) return <p>Error... Incorrect ID</p>;
-  const { data: changedCallGraph, isLoading, error } = useCallGraphOutput(id);
+  const {
+    data: changedCallGraph,
+    isLoading,
+    error,
+  } = useCallGraphOutput(id || "");
+
   const [callGraphMethodsMap, setCallGraphMethodsMap] = useState<Map<
     string,
     CallGraphMethod
@@ -51,7 +55,7 @@ const CallGraphOutputPage = () => {
   const [isEdgeContextMenuOpen, setIsEdgeContextMenuOpen] = useState(false);
 
   const renderContent = () => {
-    if (error) return <p>Error: Unable to fetch call graph inputs.</p>;
+    if (error || !id) return <p>Error: Unable to fetch call graph inputs.</p>;
     if (
       changedCallGraph &&
       msColors &&

@@ -6,13 +6,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
-import CreateEntrypoint, {
-  FileOperation,
-} from "@/components/projects/CreateEntrypoint";
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
 import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreateDialog";
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
+import { FileOperation } from "@/components/projects/types";
+import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -26,13 +25,14 @@ const ProjectPage = () => {
     localStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
-  if (!projectId) return <p>Error invalid ID...</p>;
+  const { data: project, isLoading: projectLoading } = useProject(
+    projectId || ""
+  );
+  const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(
+    projectId || ""
+  );
 
-  const { data: project, isLoading: projectLoading } = useProject(projectId);
-  const { data: inputs, isLoading: inputsLoading } =
-    useAnalysisInputs(projectId);
-
-  return (
+  return projectId ? (
     <div className="m-5">
       <div className="flex flex-row justify-between">
         {projectLoading ? (
@@ -103,6 +103,8 @@ const ProjectPage = () => {
         </Overlay>
       )}
     </div>
+  ) : (
+    <Loading />
   );
 };
 

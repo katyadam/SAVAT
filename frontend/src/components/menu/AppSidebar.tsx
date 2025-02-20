@@ -44,20 +44,21 @@ export function AppSidebar({ openCreateProjectDialog }: AppSidebarType) {
           </SidebarGroupLabel>
           <SidebarGroupContent className="mt-3">
             <SidebarMenu>
-              {projects?.map((project: Project) => (
-                <SidebarMenuItem key={project.id}>
-                  <SidebarMenuButton
-                    className={`flex justify-between ${
-                      localStorage.getItem("selectedProjectId") ===
-                        project.id.toString() && "font-bold bg-gray-200"
-                    }`}
-                    onClick={() => handleNavigation(project.id)}
-                  >
-                    <span>{project.projectName}</span>
-                    <ArrowRight size={64} />
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {projects &&
+                projects.map((project: Project) => (
+                  <SidebarMenuItem key={project.id}>
+                    <SidebarMenuButton
+                      className={`flex justify-between ${
+                        localStorage.getItem("selectedProjectId") ===
+                          project.id.toString() && "font-bold bg-gray-200"
+                      }`}
+                      onClick={() => handleNavigation(project.id)}
+                    >
+                      <span>{project.projectName}</span>
+                      <ArrowRight size={64} />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

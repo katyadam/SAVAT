@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
 import { GraphData, EntityNode, EntityLink } from "@/api/entities/types";
 
@@ -18,8 +18,10 @@ const BasicGraph: FC<BasicGraphType> = ({
   showIsolatedNodes,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const [msColors, setMsColors] = useState<Map<string, string>>(
-    getMicroservicesColors(graphData.nodes)
+
+  const msColors = useMemo(
+    () => getMicroservicesColors(graphData.nodes),
+    [graphData.nodes]
   );
 
   cytoscape.use(fcose);
@@ -33,10 +35,6 @@ const BasicGraph: FC<BasicGraphType> = ({
     });
     return nodes.filter((node) => linkedNodeNames.has(node.nodeName));
   };
-
-  useEffect(() => {
-    setMsColors(getMicroservicesColors(graphData.nodes));
-  }, [graphData]);
 
   useEffect(() => {
     if (cyRef.current) {
@@ -137,7 +135,7 @@ const BasicGraph: FC<BasicGraphType> = ({
         cy.destroy();
       };
     }
-  }, [graphData, showIsolatedNodes]);
+  }, [graphData, showIsolatedNodes, msColors]);
 
   return <div ref={cyRef} className="w-full h-[90%]" />;
 };

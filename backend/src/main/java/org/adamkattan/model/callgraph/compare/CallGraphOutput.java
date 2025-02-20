@@ -2,8 +2,9 @@ package org.adamkattan.model.callgraph.compare;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.adamkattan.model.callgraph.CallGraphInput;
+import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.callgraph.CallGraphInputSimpleDto;
+import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -14,12 +15,18 @@ import java.time.LocalDateTime;
 public class CallGraphOutput extends PanacheEntity {
 
     @ManyToOne
-    @JoinColumn(name = "source_call_graph_input_id", nullable = false)
-    public CallGraphInput sourceCallGraphInput;
+    @JoinColumn(name = "project_id")
+    public Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "target_call_graph_input_id", nullable = false)
-    public CallGraphInput targetCallGraphInput;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @NotBlank(message = "sourceCallGraphInput is required")
+    @Column(nullable = false, name = "source_call_graph_input")
+    public CallGraphInputSimpleDto sourceCallGraphInput;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @NotBlank(message = "targetCallGraphInput is required")
+    @Column(nullable = false, name = "target_call_graph_input")
+    public CallGraphInputSimpleDto targetCallGraphInput;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "changed_call_graph")
@@ -28,8 +35,9 @@ public class CallGraphOutput extends PanacheEntity {
     public static CallGraphOutputSimpleDto toSimpleDto(CallGraphOutput input) {
         return new CallGraphOutputSimpleDto(
                 input.id,
-                new CallGraphInputSimpleDto(input.sourceCallGraphInput),
-                new CallGraphInputSimpleDto(input.targetCallGraphInput),
+                input.project.id,
+                input.sourceCallGraphInput,
+                input.targetCallGraphInput,
                 input.createdAt
         );
     }

@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "projectName": "TEST",
+      "analysis-input-sources": [
+        {
+          "commitHash": "123abc",
+          "version": "1.0.0",
+          "file": "../examples/analysis-inputs/example.json"
+        },
+        {
+          "commitHash": "456def",
+          "version": "2.0.0",
+          "file": "../examples/analysis-inputs/ts-whole.json"
+        }
+      ],
+      "callgraph-sources": [
+        {
+          "commitHash": "fb7w56",
+          "version": "1.0.0",
+          "file": "../examples/callgraphs/ts-two-ms.json"
+        },
+        {
+          "commitHash": "48ad54",
+          "version": "1.0.1",
+          "file": "../examples/callgraphs/ts-two-ms-changed.json"
+        },
+        {
+          "commitHash": "6f5e84",
+          "version": "1.1.0",
+          "file": "../examples/callgraphs/ts-two-ms-more-changed.json"
+        },
+        {
+          "commitHash": "gdga85",
+          "version": "2.0.0",
+          "file": "../examples/callgraphs/ts-subset.json"
+        },
+        {
+          "commitHash": "gdga85",
+          "version": "3.0.0",
+          "file": "../examples/callgraphs/ts-whole.json"
+        }
+      ]
+    }
+  ]
+}

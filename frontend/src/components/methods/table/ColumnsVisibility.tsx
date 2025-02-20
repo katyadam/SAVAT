@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,15 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Column } from "@tanstack/react-table";
+import { FC, useState } from "react";
+import { CallGraphMethod } from "@/api/callgraphs/types";
 
 type ColumnsVisibilityProps = {
-  columns: Column<any, unknown>[];
+  columns: Column<CallGraphMethod, unknown>[];
 };
 
-export const ColumnsVisibility: React.FC<ColumnsVisibilityProps> = ({
-  columns,
-}) => {
-  const [isFilterCollsOpen, setIsFilterCollsOpen] = React.useState(false);
+export const ColumnsVisibility: FC<ColumnsVisibilityProps> = ({ columns }) => {
+  const [isFilterCollsOpen, setIsFilterCollsOpen] = useState(false);
 
   return (
     <DropdownMenu

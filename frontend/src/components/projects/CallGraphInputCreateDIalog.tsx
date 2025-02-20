@@ -47,13 +47,18 @@ const CallGraphInputCreateDialog: FC<ProjectsImportDialogType> = ({
         });
         closeDialog();
       }
-    } catch (error) {
-      setError("callGraph", { type: "manual", message: "Invalid JSON format" });
-      toast({
-        title: "Error occured, unable to import your input!",
-        description: "Try again",
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError("callGraph", {
+          type: "manual",
+          message: "Invalid JSON format",
+        });
+        toast({
+          title: "Error occured, unable to import your input!",
+          description: "Try again",
+          variant: "destructive",
+        });
+      }
     }
   };
 

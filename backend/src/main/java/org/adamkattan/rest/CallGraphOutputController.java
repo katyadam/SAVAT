@@ -33,12 +33,13 @@ public class CallGraphOutputController {
     @GET
     @Path("/project/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllProjectOutputs(@PathParam("projectId") Long projectId) {
-        List<CallGraphOutput> outputs = callGraphOutputService.getAllProjectOutputs(projectId);
+    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) { // TODO: move to ProjectController
+        List<CallGraphOutput> allProjectOutputs = callGraphOutputService.getAllProjectOutputs(projectId);
 
-        return Response.ok(outputs.stream()
+        var dtos = allProjectOutputs.stream()
                 .map(CallGraphOutput::toSimpleDto)
-        ).build();
+                .toList();
+        return Response.ok(dtos).build();
     }
 
     @GET
@@ -62,6 +63,7 @@ public class CallGraphOutputController {
     ) {
         return Uni.createFrom().item(
                         () -> differenceService.saveChangedCallGraph(
+                                callGraphOutputRequest.projectId(),
                                 callGraphOutputRequest.sourceCallGraphInputId(),
                                 callGraphOutputRequest.targetCallGraphInputId())
                 )

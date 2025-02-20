@@ -12,12 +12,10 @@ import { useCommGraphDiff } from "@/hooks/useCommGraph";
 
 type DiffGraphType = {
   graphDiff: CommGraphWithChangedLinks;
-  commGraphDiffId: string | null;
+  commGraphDiffId: string;
 };
 
 const DiffGraph: FC<DiffGraphType> = ({ graphDiff, commGraphDiffId }) => {
-  if (!commGraphDiffId || commGraphDiffId === "None") return <></>;
-
   const { data: commGraphDiff, isLoading } = useCommGraphDiff(commGraphDiffId);
 
   const cyRef = useRef<HTMLDivElement | null>(null);
@@ -107,6 +105,7 @@ const DiffGraph: FC<DiffGraphType> = ({ graphDiff, commGraphDiffId }) => {
     };
   }, [graphDiff, commGraphDiff, isLoading]);
 
+  if (commGraphDiffId === "None") return <></>;
   return <div ref={cyRef} className="w-full h-[90%]" />;
 };
 

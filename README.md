@@ -30,5 +30,28 @@ Or its UI part at <http://localhost:8000>
 - in frontend directory create .env out of env.prod
 
 ```shell script
-docker-compose up -d
+cd backend && ./mvnw package
+docker-compose up -d # or use docker compose
 ```
+
+## Seeding
+
+### DEV
+
+```shell script
+python seed.py seed-config.json http://localhost:8080
+```
+
+### DOCKER-COMPOSE
+
+```shell script
+python seed.py seed-config.json http://localhost/api
+```
+
+## Available train-ticket versions
+
+#### Small - contains 2 microservices
+
+#### Medium - contains 10 microservices
+
+#### Whole - contains all 41 microservices

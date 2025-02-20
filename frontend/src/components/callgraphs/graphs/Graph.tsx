@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
-// @ts-ignore
-import cise, { CiseLayoutOptions } from "cytoscape-cise";
+// @ts-expect-error Necessary for compatibility with cytoscape-cise
+import cise from "cytoscape-cise";
 import {
   CallGraph,
   CallGraphCall,
@@ -151,7 +151,14 @@ const Graph: FC<GraphType> = ({
         cyInstance.destroy();
       };
     }
-  }, [callGraph, showIsolatedNodes]);
+  }, [
+    callGraph,
+    showIsolatedNodes,
+    msColors,
+    setActionsStorage,
+    setIsContextMenuOpen,
+    setIsEdgeContextMenuOpen,
+  ]);
 
   useHighlightMethod(
     cy,

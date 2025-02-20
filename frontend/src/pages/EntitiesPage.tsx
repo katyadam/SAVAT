@@ -7,6 +7,7 @@ import EntitiesDiffGraph from "@/components/entities/graphs/EntitiesDiffGraph";
 import Navbar from "@/components/entities/Navbar";
 import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
+import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
@@ -23,7 +24,6 @@ const EntitiesPage = () => {
   }, []);
 
   const { id } = useParams();
-  if (!id) return <p>Error... Incorrect ID</p>;
 
   const [selectedNode, setSelectedNode] = useState<EntityNode | null>(null);
   const [selectedField, setSelectedField] = useState<EntityField | null>(null);
@@ -37,7 +37,7 @@ const EntitiesPage = () => {
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
 
-  const { data: entities, isLoading, error } = useEntities(id);
+  const { data: entities, isLoading, error } = useEntities(id || "");
 
   const { toast } = useToast();
 
@@ -74,7 +74,7 @@ const EntitiesPage = () => {
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (showComparisons && entities) {
+    if (showComparisons && entities && selectedEntitiesDiff) {
       return (
         <EntitiesDiffGraph
           graphData={{
@@ -96,7 +96,7 @@ const EntitiesPage = () => {
     );
   };
 
-  return (
+  return id ? (
     <div className="h-screen w-screen">
       <Navbar
         setSelectedRenderType={setSelectedRenderType}
@@ -135,6 +135,8 @@ const EntitiesPage = () => {
         </Overlay>
       )}
     </div>
+  ) : (
+    <Loading />
   );
 };
 

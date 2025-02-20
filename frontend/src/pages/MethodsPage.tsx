@@ -5,14 +5,13 @@ import { useParams } from "react-router-dom";
 
 const MethodsPage = () => {
   const { id } = useParams();
-  if (!id) return <p>Error... Incorrect ID</p>;
 
-  const { data: callGraphInput, isLoading } = useCallGraphInput(id);
+  const { data: callGraphInput, isLoading } = useCallGraphInput(id || "");
   if (isLoading) return <Loading overlay={false} />;
   // TODO: use only ID, call useCallGraphInput(id) in MethodsTable
   return (
     <>
-      {callGraphInput && !isLoading && (
+      {callGraphInput && !isLoading && id && (
         <MethodsPanel
           methods={callGraphInput.callGraph.methods}
           callGraphInputId={id}

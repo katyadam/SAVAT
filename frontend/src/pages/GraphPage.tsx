@@ -20,9 +20,8 @@ const GraphPage = () => {
   }, []);
 
   const { id } = useParams();
-  if (!id) return <p>Error... Incorrect ID</p>;
 
-  const { data: graph, isLoading, error } = useCommGraph(id);
+  const { data: graph, isLoading, error } = useCommGraph(id || "");
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [selectedCommGraphDiff, setSelectedCommGraphDiff] = useState<
     string | null
@@ -47,7 +46,7 @@ const GraphPage = () => {
     if (isLoading) return <Loading />;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (graph) {
-      if (showComparisons) {
+      if (showComparisons && selectedCommGraphDiff) {
         return (
           <DiffGraph
             graphDiff={{
@@ -62,7 +61,7 @@ const GraphPage = () => {
     }
   };
 
-  return (
+  return id ? (
     <div className="h-screen w-screen">
       <Navbar
         compareBtnClick={() => setCompareUp(true)}
@@ -83,6 +82,8 @@ const GraphPage = () => {
         </Overlay>
       )}
     </div>
+  ) : (
+    <Loading />
   );
 };
 

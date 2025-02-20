@@ -4,8 +4,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.adamkattan.analysis.CallGraphDifferenceAnalysis;
 import org.adamkattan.model.callgraph.CallGraphInput;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
+import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
+import org.adamkattan.model.project.Project;
 
 @ApplicationScoped
 public class CallGraphDifferenceService {
@@ -13,7 +14,11 @@ public class CallGraphDifferenceService {
     @Inject
     CallGraphInputService callGraphInputService;
 
-    public ChangedCallGraph saveChangedCallGraph(Long sourceCallGraphId, Long targetCallGraphId) {
+    @Inject
+    ProjectService projectService;
+
+    public ChangedCallGraph saveChangedCallGraph(Long projectId, Long sourceCallGraphId, Long targetCallGraphId) {
+        Project projectById = projectService.getProjectById(projectId);
         CallGraphInput sourceCallGraphInput = callGraphInputService.getCallGraphInputById(sourceCallGraphId);
         CallGraphInput targetCallGraphInput = callGraphInputService.getCallGraphInputById(targetCallGraphId);
         ChangedCallGraph changedCallGraph = CallGraphDifferenceAnalysis.changeImpactAnalysis(
@@ -23,8 +28,9 @@ public class CallGraphDifferenceService {
 
         CallGraphOutput callGraphOutput = new CallGraphOutput();
         callGraphOutput.changedCallGraph = changedCallGraph;
-        callGraphOutput.sourceCallGraphInput = sourceCallGraphInput;
-        callGraphOutput.targetCallGraphInput = targetCallGraphInput;
+        callGraphOutput.sourceCallGraphInput = CallGraphInput.toSimpleDto(sourceCallGraphInput);
+        callGraphOutput.targetCallGraphInput = CallGraphInput.toSimpleDto(targetCallGraphInput);
+        callGraphOutput.project = projectById;
         callGraphOutput.persist();
 
         return changedCallGraph;

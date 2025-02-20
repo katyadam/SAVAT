@@ -26,6 +26,7 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
     try {
       if (leftSelected && rightSelected) {
         await mutateAsync({
+          projectId: projectId,
           sourceCallGraphInputId: leftSelected.id,
           targetCallGraphInputId: rightSelected.id,
         });
@@ -39,10 +40,18 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
           variant: "destructive",
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      let errorMessage = "An unexpected error occurred";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
       toast({
-        title: "Something BAD happened!",
-        description: "Try Again!",
+        title: "Something BAD happened, couldn't compare call graphs!",
+        description: errorMessage,
         variant: "destructive",
       });
     }

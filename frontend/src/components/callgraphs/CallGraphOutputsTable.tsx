@@ -39,9 +39,18 @@ export function CallGraphOutputsTable<TData, TValue>({
       toast({
         title: "Analysis Output Removed!",
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      let errorMessage = "An unexpected error occurred";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
       toast({
-        title: "Something BAD happened, couldn't delete analysis output!",
+        title: "Something BAD happened, couldn't delete analysis input!",
+        description: errorMessage,
         variant: "destructive",
       });
     }

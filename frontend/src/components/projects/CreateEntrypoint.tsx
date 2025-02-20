@@ -1,16 +1,14 @@
 import { CirclePlus } from "lucide-react";
 import { FC } from "react";
+import { FileOperation } from "./types";
 
-export enum FileOperation {
-  IMPORT,
-  EXPORT,
-}
-
-type CreateEntrypoint = {
+type CreateEntrypointType = {
   showImportExportDialog: (which: FileOperation | null) => void;
 };
 
-const CreateEntrypoint: FC<CreateEntrypoint> = ({ showImportExportDialog }) => {
+const CreateEntrypoint: FC<CreateEntrypointType> = ({
+  showImportExportDialog,
+}) => {
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-col items-center">

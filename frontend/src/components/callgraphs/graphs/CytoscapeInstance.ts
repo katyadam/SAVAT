@@ -1,11 +1,11 @@
-// @ts-ignore
+// @ts-expect-error Necessary for compatibility with cytoscape-cise
 import { CiseLayoutOptions } from "cytoscape-cise";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
 
 const layoutOptions: CiseLayoutOptions = {
     name: "cise",
     fit: true,
-    clusters: (node: any) => node.data("id").split("/")[0],
+    clusters: (node: Cytoscape.NodeSingular) => node.data("id").split("/")[0],
     nodeSeparation: 30,
     padding: 10,
     clustering: true,

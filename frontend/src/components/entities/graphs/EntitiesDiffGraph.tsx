@@ -14,7 +14,7 @@ import { getChangedColor } from "@/api/utils";
 type EntitiesDiffGraphType = {
   onNodeClick: (node: EntityNode) => void;
   graphData: GraphDataChangedLinks;
-  entitiesDiffId: string | null;
+  entitiesDiffId: string;
 };
 
 const EntitiesDiffGraph: FC<EntitiesDiffGraphType> = ({
@@ -22,8 +22,6 @@ const EntitiesDiffGraph: FC<EntitiesDiffGraphType> = ({
   graphData,
   entitiesDiffId,
 }) => {
-  if (!entitiesDiffId || entitiesDiffId === "None") return <></>;
-
   const { data: entitiesDiff, isLoading } = useEntitiesDiff(entitiesDiffId);
   const cyRef = useRef<HTMLDivElement | null>(null);
   const [msColors, setMsColors] = useState<Map<string, string>>(
@@ -129,10 +127,9 @@ const EntitiesDiffGraph: FC<EntitiesDiffGraphType> = ({
     };
   }, [graphData, entitiesDiff, isLoading, msColors]);
 
-  if (isLoading) {
+  if (isLoading || entitiesDiffId === "None") {
     return <p>Loading graph...</p>;
   }
-
   return <div ref={cyRef} className="w-[90%] h-[90%]" />;
 };
 

@@ -1,7 +1,4 @@
 {
-  "projectId": 1,
-  "version": "1.0.0",
-  "commitHash": "abc123",
   "entities": {
     "nodes": [
       {

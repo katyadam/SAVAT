@@ -64,16 +64,13 @@ export const useHighlightReachability = (
             });
 
             methodReachabilityCG.calls.forEach((call) => {
-                const edge = cy.getElementById(`${call.source}__${call.target}`);
+                const edge = cy.getElementById(`${call.httpMethod}:${call.source}__${call.target}`);
                 if (edge) {
                     actionToStore.calls.push({
-                        callId: `${call.source}__${call.target}`,
+                        callId: `${call.httpMethod}:${call.source}__${call.target}`,
                         isInterservice: call.isInterserviceCall
                     });
-                    edge.style({
-                        "line-color": "#FFD700",
-                        "target-arrow-color": "#FFD700",
-                    });
+                    edge.addClass("highlighted")
                 }
             });
 

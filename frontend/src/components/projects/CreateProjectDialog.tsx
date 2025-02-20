@@ -19,16 +19,18 @@ const CreateProjectDialog: FC<CreateProjectDialogType> = ({ closeDialog }) => {
     try {
       await mutateAsync(data);
       closeDialog();
-    } catch (error) {
-      setError("projectName", {
-        type: "manual",
-        message: "Invalid string!",
-      });
-      toast({
-        title: "Error occured!",
-        description: "Try again",
-        variant: "destructive",
-      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError("projectName", {
+          type: "manual",
+          message: "Invalid string!",
+        });
+        toast({
+          title: "Error occured!",
+          description: "Try again",
+          variant: "destructive",
+        });
+      }
     }
   };
 
