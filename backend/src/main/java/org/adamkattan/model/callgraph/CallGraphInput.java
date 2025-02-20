@@ -36,8 +36,7 @@ public class CallGraphInput extends PanacheEntity {
                 input.project.id,
                 input.version,
                 input.commitHash,
-                input.callGraph,
-                input.createdAt
+                input.callGraph
         );
     }
 

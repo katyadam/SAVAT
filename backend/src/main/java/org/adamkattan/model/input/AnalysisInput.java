@@ -56,8 +56,7 @@ public class AnalysisInput extends PanacheEntity {
                 input.version,
                 input.commitHash,
                 input.entities,
-                input.graph,
-                input.createdAt
+                input.graph
         );
     }
 

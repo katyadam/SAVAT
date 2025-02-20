@@ -1,16 +1,11 @@
 {
-  "projectId": 1,
-  "version": "2099.99.99",
-  "commitHash": "456def",
   "callGraph": {
     "methods": [
       {
         "id": 0,
         "name": "<clinit>",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.c.ABIC.<clinit>",
         "flags": "s",
@@ -216,9 +211,7 @@
         "id": 11,
         "name": "getAllConfigs",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.ABIC.getAllConfigs",
         "flags": "p",
@@ -234,9 +227,7 @@
         "id": 12,
         "name": "getAllContacts",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.ABIC.getAllContacts",
         "flags": "p",
@@ -252,9 +243,7 @@
         "id": 13,
         "name": "getAllPrices",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.ABIC.getAllPrices",
         "flags": "p",
@@ -270,9 +259,7 @@
         "id": 14,
         "name": "getAllStations",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.ABIC.getAllStations",
         "flags": "p",
@@ -288,9 +275,7 @@
         "id": 15,
         "name": "getAllTrains",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.ABIC.getAllTrains",
         "flags": "p",
@@ -306,9 +291,7 @@
         "id": 16,
         "name": "home",
         "type": "adminbasic.controller.AdminBasicInfoController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "java.lang.String",
         "display": "a.c.ABIC.home",
         "flags": "p",
@@ -419,9 +402,7 @@
         "id": 22,
         "name": "<clinit>",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.s.ABISI.<clinit>",
         "flags": "s",
@@ -437,9 +418,7 @@
         "id": 10651,
         "name": "getServiceUrl",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.lang.String",
         "display": "a.s.ABISI.getServiceUrl",
         "flags": "P",
@@ -493,9 +472,7 @@
         "id": 39257,
         "name": "getId",
         "type": "adminbasic.entity.PriceInfo",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "a.e.PI.getId",
         "flags": "p",
@@ -663,9 +640,7 @@
         "id": 39270,
         "name": "getAllConfigs",
         "type": "adminbasic.service.AdminBasicInfoService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABIS.getAllConfigs",
         "flags": "pa",
@@ -700,9 +675,7 @@
         "id": 39271,
         "name": "getAllContacts",
         "type": "adminbasic.service.AdminBasicInfoService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABIS.getAllContacts",
         "flags": "pa",
@@ -718,9 +691,7 @@
         "id": 39272,
         "name": "getAllPrices",
         "type": "adminbasic.service.AdminBasicInfoService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABIS.getAllPrices",
         "flags": "pa",
@@ -755,9 +726,7 @@
         "id": 39273,
         "name": "getAllStations",
         "type": "adminbasic.service.AdminBasicInfoService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABIS.getAllStations",
         "flags": "pa",
@@ -792,9 +761,7 @@
         "id": 39274,
         "name": "getAllTrains",
         "type": "adminbasic.service.AdminBasicInfoService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABIS.getAllTrains",
         "flags": "pa",
@@ -1038,9 +1005,7 @@
         "id": 7285,
         "name": "getAllConfigs",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABISI.getAllConfigs",
         "flags": "p",
@@ -1056,9 +1021,7 @@
         "id": 7286,
         "name": "getAllContacts",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABISI.getAllContacts",
         "flags": "p",
@@ -1074,9 +1037,7 @@
         "id": 7287,
         "name": "getAllPrices",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABISI.getAllPrices",
         "flags": "p",
@@ -1092,9 +1053,7 @@
         "id": 7288,
         "name": "getAllStations",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABISI.getAllStations",
         "flags": "p",
@@ -1110,9 +1069,7 @@
         "id": 7289,
         "name": "getAllTrains",
         "type": "adminbasic.service.AdminBasicInfoServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.ABISI.getAllTrains",
         "flags": "p",
@@ -1223,9 +1180,7 @@
         "id": 0,
         "name": "<clinit>",
         "type": "adminorder.controller.AdminOrderController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.c.AOC.<clinit>",
         "flags": "s",
@@ -1241,9 +1196,7 @@
         "id": 7296,
         "name": "getAllOrders",
         "type": "adminorder.service.AdminOrderServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.AOSI.getAllOrders",
         "flags": "p",
@@ -1317,9 +1270,7 @@
         "id": 10658,
         "name": "getServiceUrl",
         "type": "adminorder.service.AdminOrderServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.lang.String",
         "display": "a.s.AOSI.getServiceUrl",
         "flags": "P",
@@ -1335,9 +1286,7 @@
         "id": 3,
         "name": "getAllOrders",
         "type": "adminorder.controller.AdminOrderController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.AOC.getAllOrders",
         "flags": "p",
@@ -1353,9 +1302,7 @@
         "id": 4,
         "name": "home",
         "type": "adminorder.controller.AdminOrderController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "java.lang.String",
         "display": "a.c.AOC.home",
         "flags": "p",
@@ -1390,9 +1337,7 @@
         "id": 6,
         "name": "<clinit>",
         "type": "adminorder.service.AdminOrderServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.s.AOSI.<clinit>",
         "flags": "s",
@@ -1408,9 +1353,7 @@
         "id": 10665,
         "name": "<init>",
         "type": "adminorder.service.AdminOrderServiceImpl$1",
-        "parameters": [
-          "adminorder.service.AdminOrderServiceImpl"
-        ],
+        "parameters": ["adminorder.service.AdminOrderServiceImpl"],
         "returnType": "void",
         "display": "a.s.AOSI.<init>",
         "flags": "",
@@ -1445,9 +1388,7 @@
         "id": 10669,
         "name": "<init>",
         "type": "adminorder.service.AdminOrderServiceImpl$2",
-        "parameters": [
-          "adminorder.service.AdminOrderServiceImpl"
-        ],
+        "parameters": ["adminorder.service.AdminOrderServiceImpl"],
         "returnType": "void",
         "display": "a.s.AOSI.<init>",
         "flags": "",
@@ -1483,9 +1424,7 @@
         "id": 39285,
         "name": "getAllOrders",
         "type": "adminorder.service.AdminOrderService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.AOS.getAllOrders",
         "flags": "pa",
@@ -1559,9 +1498,7 @@
         "id": 0,
         "name": "<clinit>",
         "type": "adminuser.controller.AdminUserController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.c.AUC.<clinit>",
         "flags": "s",
@@ -1596,9 +1533,7 @@
         "id": 39265,
         "name": "getAllUsers",
         "type": "adminuser.service.AdminUserService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.AUS.getAllUsers",
         "flags": "pa",
@@ -1633,9 +1568,7 @@
         "id": 3,
         "name": "getAllUsers",
         "type": "adminuser.controller.AdminUserController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "a.c.AUC.getAllUsers",
         "flags": "p",
@@ -1651,9 +1584,7 @@
         "id": 7267,
         "name": "getAllUsers",
         "type": "adminuser.service.AdminUserServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "a.s.AUSI.getAllUsers",
         "flags": "p",
@@ -1688,9 +1619,7 @@
         "id": 4,
         "name": "home",
         "type": "adminuser.controller.AdminUserController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "java.lang.String",
         "display": "a.c.AUC.home",
         "flags": "p",
@@ -1744,9 +1673,7 @@
         "id": 10629,
         "name": "getServiceUrl",
         "type": "adminuser.service.AdminUserServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.lang.String",
         "display": "a.s.AUSI.getServiceUrl",
         "flags": "P",
@@ -1762,9 +1689,7 @@
         "id": 6,
         "name": "<clinit>",
         "type": "adminuser.service.AdminUserServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "a.s.AUSI.<clinit>",
         "flags": "s",
@@ -1780,9 +1705,7 @@
         "id": 10630,
         "name": "<init>",
         "type": "adminuser.service.AdminUserServiceImpl$2",
-        "parameters": [
-          "adminuser.service.AdminUserServiceImpl"
-        ],
+        "parameters": ["adminuser.service.AdminUserServiceImpl"],
         "returnType": "void",
         "display": "a.s.AUSI.<init>",
         "flags": "",
@@ -1798,9 +1721,7 @@
         "id": 10642,
         "name": "<init>",
         "type": "adminuser.service.AdminUserServiceImpl$1",
-        "parameters": [
-          "adminuser.service.AdminUserServiceImpl"
-        ],
+        "parameters": ["adminuser.service.AdminUserServiceImpl"],
         "returnType": "void",
         "display": "a.s.AUSI.<init>",
         "flags": "",
@@ -1835,9 +1756,7 @@
         "id": 39254,
         "name": "toString",
         "type": "adminuser.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "a.d.UD.toString",
         "flags": "p",
@@ -1872,9 +1791,7 @@
         "id": 39228,
         "name": "getUserName",
         "type": "adminuser.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "a.d.UD.getUserName",
         "flags": "p",
@@ -2004,9 +1921,7 @@
         "id": 12168,
         "name": "getServiceUrl",
         "type": "fdse.microservice.service.BasicServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.lang.String",
         "display": "f.m.s.BSI.getServiceUrl",
         "flags": "P",
@@ -2041,9 +1956,7 @@
         "id": 2155,
         "name": "<clinit>",
         "type": "fdse.microservice.controller.BasicController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "f.m.c.BC.<clinit>",
         "flags": "s",
@@ -2059,9 +1972,7 @@
         "id": 15627,
         "name": "<init>",
         "type": "fdse.microservice.service.BasicServiceImpl$1",
-        "parameters": [
-          "fdse.microservice.service.BasicServiceImpl"
-        ],
+        "parameters": ["fdse.microservice.service.BasicServiceImpl"],
         "returnType": "void",
         "display": "f.m.s.BSI.<init>",
         "flags": "",
@@ -2077,9 +1988,7 @@
         "id": 2156,
         "name": "home",
         "type": "fdse.microservice.controller.BasicController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "java.lang.String",
         "display": "f.m.c.BC.home",
         "flags": "p",
@@ -2171,9 +2080,7 @@
         "id": 2160,
         "name": "<clinit>",
         "type": "fdse.microservice.service.BasicServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "f.m.s.BSI.<clinit>",
         "flags": "s",
@@ -2342,9 +2249,7 @@
         "id": 1925,
         "name": "<clinit>",
         "type": "food.controller.StationFoodController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "f.c.SFC.<clinit>",
         "flags": "s",
@@ -2360,9 +2265,7 @@
         "id": 1926,
         "name": "getAllFoodStores",
         "type": "food.controller.StationFoodController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "f.c.SFC.getAllFoodStores",
         "flags": "p",
@@ -2378,9 +2281,7 @@
         "id": 40550,
         "name": "listFoodStores",
         "type": "food.service.StationFoodService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFS.listFoodStores",
         "flags": "pa",
@@ -2415,9 +2316,7 @@
         "id": 40551,
         "name": "findAll",
         "type": "food.repository.StationFoodRepository",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.util.List",
         "display": "f.r.SFR.findAll",
         "flags": "pa",
@@ -2433,9 +2332,7 @@
         "id": 1928,
         "name": "getFoodStoresByStationNames",
         "type": "food.controller.StationFoodController",
-        "parameters": [
-          "java.util.List"
-        ],
+        "parameters": ["java.util.List"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "f.c.SFC.getFoodStoresByStationNames",
         "flags": "p",
@@ -2470,9 +2367,7 @@
         "id": 1930,
         "name": "home",
         "type": "food.controller.StationFoodController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "f.c.SFC.home",
         "flags": "p",
@@ -2488,9 +2383,7 @@
         "id": 40554,
         "name": "getStaionFoodStoreById",
         "type": "food.service.StationFoodService",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFS.getStaionFoodStoreById",
         "flags": "pa",
@@ -2506,9 +2399,7 @@
         "id": 1931,
         "name": "<clinit>",
         "type": "food.init.InitData",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "f.i.ID.<clinit>",
         "flags": "s",
@@ -2524,9 +2415,7 @@
         "id": 40555,
         "name": "findById",
         "type": "food.repository.StationFoodRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.util.Optional",
         "display": "f.r.SFR.findById",
         "flags": "pa",
@@ -2542,9 +2431,7 @@
         "id": 1932,
         "name": "<clinit>",
         "type": "food.service.StationFoodServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "f.s.SFSI.<clinit>",
         "flags": "s",
@@ -2560,9 +2447,7 @@
         "id": 40556,
         "name": "getFoodStoresByStationNames",
         "type": "food.service.StationFoodService",
-        "parameters": [
-          "java.util.List"
-        ],
+        "parameters": ["java.util.List"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFS.getFoodStoresByStationNames",
         "flags": "pa",
@@ -2578,9 +2463,7 @@
         "id": 40557,
         "name": "findByStationNameIn",
         "type": "food.repository.StationFoodRepository",
-        "parameters": [
-          "java.util.List"
-        ],
+        "parameters": ["java.util.List"],
         "returnType": "java.util.List",
         "display": "f.r.SFR.findByStationNameIn",
         "flags": "pa",
@@ -2615,9 +2498,7 @@
         "id": 40560,
         "name": "findByStationName",
         "type": "food.repository.StationFoodRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.util.List",
         "display": "f.r.SFR.findByStationName",
         "flags": "pa",
@@ -2633,9 +2514,7 @@
         "id": 8150,
         "name": "listFoodStores",
         "type": "food.service.StationFoodServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFSI.listFoodStores",
         "flags": "p",
@@ -2651,9 +2530,7 @@
         "id": 8152,
         "name": "getStaionFoodStoreById",
         "type": "food.service.StationFoodServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFSI.getStaionFoodStoreById",
         "flags": "p",
@@ -2669,9 +2546,7 @@
         "id": 8153,
         "name": "getFoodStoresByStationNames",
         "type": "food.service.StationFoodServiceImpl",
-        "parameters": [
-          "java.util.List"
-        ],
+        "parameters": ["java.util.List"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "f.s.SFSI.getFoodStoresByStationNames",
         "flags": "p",
@@ -2706,9 +2581,7 @@
         "id": 13952,
         "name": "builder",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "user.dto.AuthDto$AuthDtoBuilder",
         "display": "u.d.AD.builder",
         "flags": "ps",
@@ -2724,9 +2597,7 @@
         "id": 13953,
         "name": "userId",
         "type": "user.dto.AuthDto$AuthDtoBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.dto.AuthDto$AuthDtoBuilder",
         "display": "u.d.ADADB.userId",
         "flags": "p",
@@ -2742,9 +2613,7 @@
         "id": 13954,
         "name": "userName",
         "type": "user.dto.AuthDto$AuthDtoBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.dto.AuthDto$AuthDtoBuilder",
         "display": "u.d.ADADB.userName",
         "flags": "p",
@@ -2760,9 +2629,7 @@
         "id": 13955,
         "name": "password",
         "type": "user.dto.AuthDto$AuthDtoBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.dto.AuthDto$AuthDtoBuilder",
         "display": "u.d.ADADB.password",
         "flags": "p",
@@ -2778,9 +2645,7 @@
         "id": 13956,
         "name": "build",
         "type": "user.dto.AuthDto$AuthDtoBuilder",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "user.dto.AuthDto",
         "display": "u.d.ADADB.build",
         "flags": "p",
@@ -2796,9 +2661,7 @@
         "id": 13957,
         "name": "createDefaultAuthUser",
         "type": "user.service.impl.UserServiceImpl",
-        "parameters": [
-          "user.dto.AuthDto"
-        ],
+        "parameters": ["user.dto.AuthDto"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "u.s.i.USI.createDefaultAuthUser",
         "flags": "P",
@@ -2814,9 +2677,7 @@
         "id": 17549,
         "name": "getServiceUrl",
         "type": "user.service.impl.UserServiceImpl",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.lang.String",
         "display": "u.s.i.USI.getServiceUrl",
         "flags": "P",
@@ -2895,9 +2756,7 @@
         "id": 10645,
         "name": "getAllUsers",
         "type": "user.service.impl.UserServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "u.s.i.USI.getAllUsers",
         "flags": "p",
@@ -2951,9 +2810,7 @@
         "id": 17560,
         "name": "<init>",
         "type": "user.service.impl.UserServiceImpl$1",
-        "parameters": [
-          "user.service.impl.UserServiceImpl"
-        ],
+        "parameters": ["user.service.impl.UserServiceImpl"],
         "returnType": "void",
         "display": "u.s.i.USI.<init>",
         "flags": "",
@@ -3007,9 +2864,7 @@
         "id": 10652,
         "name": "canEqual",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "java.lang.Object"
-        ],
+        "parameters": ["java.lang.Object"],
         "returnType": "boolean",
         "display": "u.d.AD.canEqual",
         "flags": "d",
@@ -3025,9 +2880,7 @@
         "id": 10653,
         "name": "getUserId",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.AD.getUserId",
         "flags": "p",
@@ -3043,9 +2896,7 @@
         "id": 10654,
         "name": "getUserName",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.AD.getUserName",
         "flags": "p",
@@ -3061,9 +2912,7 @@
         "id": 10655,
         "name": "getPassword",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.AD.getPassword",
         "flags": "p",
@@ -3079,9 +2928,7 @@
         "id": 10656,
         "name": "canEqual",
         "type": "user.entity.User",
-        "parameters": [
-          "java.lang.Object"
-        ],
+        "parameters": ["java.lang.Object"],
         "returnType": "boolean",
         "display": "u.e.U.canEqual",
         "flags": "d",
@@ -3097,9 +2944,7 @@
         "id": 10657,
         "name": "getGender",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.e.U.getGender",
         "flags": "p",
@@ -3115,9 +2960,7 @@
         "id": 10658,
         "name": "getDocumentType",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.e.U.getDocumentType",
         "flags": "p",
@@ -3133,9 +2976,7 @@
         "id": 10659,
         "name": "getUserId",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.getUserId",
         "flags": "p",
@@ -3151,9 +2992,7 @@
         "id": 10660,
         "name": "getUserName",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.getUserName",
         "flags": "p",
@@ -3169,9 +3008,7 @@
         "id": 10661,
         "name": "getPassword",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.getPassword",
         "flags": "p",
@@ -3187,9 +3024,7 @@
         "id": 10662,
         "name": "getDocumentNum",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.getDocumentNum",
         "flags": "p",
@@ -3205,9 +3040,7 @@
         "id": 10663,
         "name": "getEmail",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.getEmail",
         "flags": "p",
@@ -3242,9 +3075,7 @@
         "id": 42302,
         "name": "findByUserId",
         "type": "user.repository.UserRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User",
         "display": "u.r.UR.findByUserId",
         "flags": "pa",
@@ -3260,9 +3091,7 @@
         "id": 42306,
         "name": "deleteByUserId",
         "type": "user.repository.UserRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "u.r.UR.deleteByUserId",
         "flags": "pa",
@@ -3278,9 +3107,7 @@
         "id": 42310,
         "name": "getAllUsers",
         "type": "user.service.UserService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "u.s.US.getAllUsers",
         "flags": "pa",
@@ -3296,9 +3123,7 @@
         "id": 42311,
         "name": "findAll",
         "type": "user.repository.UserRepository",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.util.List",
         "display": "u.r.UR.findAll",
         "flags": "pa",
@@ -3352,9 +3177,7 @@
         "id": 42315,
         "name": "findByUserName",
         "type": "user.repository.UserRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User",
         "display": "u.r.UR.findByUserName",
         "flags": "pa",
@@ -3370,9 +3193,7 @@
         "id": 42316,
         "name": "getUserName",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.getUserName",
         "flags": "p",
@@ -3407,9 +3228,7 @@
         "id": 42318,
         "name": "getUserId",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.getUserId",
         "flags": "p",
@@ -3425,9 +3244,7 @@
         "id": 42319,
         "name": "getPassword",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.getPassword",
         "flags": "p",
@@ -3443,9 +3260,7 @@
         "id": 42320,
         "name": "getGender",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.d.UD.getGender",
         "flags": "p",
@@ -3461,9 +3276,7 @@
         "id": 42321,
         "name": "getDocumentType",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.d.UD.getDocumentType",
         "flags": "p",
@@ -3479,9 +3292,7 @@
         "id": 42322,
         "name": "getDocumentNum",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.getDocumentNum",
         "flags": "p",
@@ -3497,9 +3308,7 @@
         "id": 42323,
         "name": "getEmail",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.getEmail",
         "flags": "p",
@@ -3534,9 +3343,7 @@
         "id": 42331,
         "name": "toString",
         "type": "user.dto.UserDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.UD.toString",
         "flags": "p",
@@ -3552,9 +3359,7 @@
         "id": 7265,
         "name": "<clinit>",
         "type": "user.controller.UserController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "u.c.UC.<clinit>",
         "flags": "s",
@@ -3589,9 +3394,7 @@
         "id": 7267,
         "name": "getAllUser",
         "type": "user.controller.UserController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.ResponseEntity",
         "display": "u.c.UC.getAllUser",
         "flags": "p",
@@ -3664,9 +3467,7 @@
         "id": 7271,
         "name": "testHello",
         "type": "user.controller.UserController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.c.UC.testHello",
         "flags": "p",
@@ -3701,9 +3502,7 @@
         "id": 7273,
         "name": "toString",
         "type": "user.dto.AuthDto$AuthDtoBuilder",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.ADADB.toString",
         "flags": "p",
@@ -3719,9 +3518,7 @@
         "id": 7274,
         "name": "equals",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "java.lang.Object"
-        ],
+        "parameters": ["java.lang.Object"],
         "returnType": "boolean",
         "display": "u.d.AD.equals",
         "flags": "p",
@@ -3737,9 +3534,7 @@
         "id": 7275,
         "name": "hashCode",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.d.AD.hashCode",
         "flags": "p",
@@ -3774,9 +3569,7 @@
         "id": 7276,
         "name": "toString",
         "type": "user.dto.AuthDto",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.d.AD.toString",
         "flags": "p",
@@ -3792,9 +3585,7 @@
         "id": 7277,
         "name": "values",
         "type": "user.dto.Gender",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "user.dto.Gender[]",
         "display": "u.d.G.values",
         "flags": "ps",
@@ -3810,9 +3601,7 @@
         "id": 7278,
         "name": "toString",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.UUB.toString",
         "flags": "p",
@@ -3828,9 +3617,7 @@
         "id": 7279,
         "name": "equals",
         "type": "user.entity.User",
-        "parameters": [
-          "java.lang.Object"
-        ],
+        "parameters": ["java.lang.Object"],
         "returnType": "boolean",
         "display": "u.e.U.equals",
         "flags": "p",
@@ -3846,9 +3633,7 @@
         "id": 7280,
         "name": "hashCode",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "u.e.U.hashCode",
         "flags": "p",
@@ -3864,9 +3649,7 @@
         "id": 7281,
         "name": "toString",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "u.e.U.toString",
         "flags": "p",
@@ -3882,9 +3665,7 @@
         "id": 7282,
         "name": "<clinit>",
         "type": "user.service.impl.UserServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "u.s.i.USI.<clinit>",
         "flags": "s",
@@ -3900,9 +3681,7 @@
         "id": 13943,
         "name": "builder",
         "type": "user.entity.User",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.U.builder",
         "flags": "ps",
@@ -3918,9 +3697,7 @@
         "id": 13944,
         "name": "userId",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.userId",
         "flags": "p",
@@ -3936,9 +3713,7 @@
         "id": 13945,
         "name": "userName",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.userName",
         "flags": "p",
@@ -3954,9 +3729,7 @@
         "id": 13946,
         "name": "password",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.password",
         "flags": "p",
@@ -3972,9 +3745,7 @@
         "id": 13947,
         "name": "gender",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "int"
-        ],
+        "parameters": ["int"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.gender",
         "flags": "p",
@@ -3990,9 +3761,7 @@
         "id": 13948,
         "name": "documentType",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "int"
-        ],
+        "parameters": ["int"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.documentType",
         "flags": "p",
@@ -4008,9 +3777,7 @@
         "id": 13949,
         "name": "documentNum",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.documentNum",
         "flags": "p",
@@ -4026,9 +3793,7 @@
         "id": 13950,
         "name": "email",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "user.entity.User$UserBuilder",
         "display": "u.e.UUB.email",
         "flags": "p",
@@ -4044,9 +3809,7 @@
         "id": 13951,
         "name": "build",
         "type": "user.entity.User$UserBuilder",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "user.entity.User",
         "display": "u.e.UUB.build",
         "flags": "p",
@@ -4081,9 +3844,7 @@
         "id": 40577,
         "name": "deleteById",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "c.r.CR.deleteById",
         "flags": "pa",
@@ -4099,9 +3860,7 @@
         "id": 1922,
         "name": "<clinit>",
         "type": "contacts.controller.ContactsController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "c.c.CC.<clinit>",
         "flags": "s",
@@ -4117,9 +3876,7 @@
         "id": 40578,
         "name": "findById",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.util.Optional",
         "display": "c.r.CR.findById",
         "flags": "pa",
@@ -4230,9 +3987,7 @@
         "id": 1927,
         "name": "getAllContacts",
         "type": "contacts.controller.ContactsController",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "org.springframework.http.HttpEntity",
         "display": "c.c.CC.getAllContacts",
         "flags": "p",
@@ -4248,9 +4003,7 @@
         "id": 40583,
         "name": "findByAccountId",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "java.util.ArrayList",
         "display": "c.r.CR.findByAccountId",
         "flags": "pa",
@@ -4285,9 +4038,7 @@
         "id": 40584,
         "name": "getAllContacts",
         "type": "contacts.service.ContactsService",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "c.s.CS.getAllContacts",
         "flags": "pa",
@@ -4303,9 +4054,7 @@
         "id": 1929,
         "name": "home",
         "type": "contacts.controller.ContactsController",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.c.CC.home",
         "flags": "p",
@@ -4321,9 +4070,7 @@
         "id": 40585,
         "name": "findAll",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.util.ArrayList",
         "display": "c.r.CR.findAll",
         "flags": "pa",
@@ -4377,9 +4124,7 @@
         "id": 1931,
         "name": "values",
         "type": "contacts.entity.DocumentType",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "contacts.entity.DocumentType[]",
         "display": "c.e.DT.values",
         "flags": "ps",
@@ -4414,9 +4159,7 @@
         "id": 1932,
         "name": "<clinit>",
         "type": "contacts.service.ContactsServiceImpl",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "void",
         "display": "c.s.CSI.<clinit>",
         "flags": "s",
@@ -4432,9 +4175,7 @@
         "id": 40588,
         "name": "getName",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.e.C.getName",
         "flags": "p",
@@ -4450,9 +4191,7 @@
         "id": 40589,
         "name": "setName",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "c.e.C.setName",
         "flags": "p",
@@ -4468,9 +4207,7 @@
         "id": 40590,
         "name": "setDocumentType",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "int"
-        ],
+        "parameters": ["int"],
         "returnType": "void",
         "display": "c.e.C.setDocumentType",
         "flags": "p",
@@ -4486,9 +4223,7 @@
         "id": 40591,
         "name": "setDocumentNumber",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "c.e.C.setDocumentNumber",
         "flags": "p",
@@ -4504,9 +4239,7 @@
         "id": 40592,
         "name": "getPhoneNumber",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.e.C.getPhoneNumber",
         "flags": "p",
@@ -4522,9 +4255,7 @@
         "id": 40593,
         "name": "setPhoneNumber",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "c.e.C.setPhoneNumber",
         "flags": "p",
@@ -4616,9 +4347,7 @@
         "id": 8162,
         "name": "getAllContacts",
         "type": "contacts.service.ContactsServiceImpl",
-        "parameters": [
-          "org.springframework.http.HttpHeaders"
-        ],
+        "parameters": ["org.springframework.http.HttpHeaders"],
         "returnType": "edu.fudan.common.util.Response",
         "display": "c.s.CSI.getAllContacts",
         "flags": "p",
@@ -4691,9 +4420,7 @@
         "id": 40567,
         "name": "getAccountId",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.e.C.getAccountId",
         "flags": "p",
@@ -4709,9 +4436,7 @@
         "id": 40568,
         "name": "getDocumentNumber",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.e.C.getDocumentNumber",
         "flags": "p",
@@ -4727,9 +4452,7 @@
         "id": 40569,
         "name": "getDocumentType",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "int",
         "display": "c.e.C.getDocumentType",
         "flags": "p",
@@ -4745,11 +4468,7 @@
         "id": 40570,
         "name": "findByAccountIdAndDocumentTypeAndDocumentType",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "java.lang.String",
-          "java.lang.String",
-          "int"
-        ],
+        "parameters": ["java.lang.String", "java.lang.String", "int"],
         "returnType": "contacts.entity.Contacts",
         "display": "c.r.CR.findByAccountIdAndDocumentTypeAndDocumentType",
         "flags": "pa",
@@ -4765,9 +4484,7 @@
         "id": 40571,
         "name": "getId",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "empty"
-        ],
+        "parameters": ["empty"],
         "returnType": "java.lang.String",
         "display": "c.e.C.getId",
         "flags": "p",
@@ -4783,9 +4500,7 @@
         "id": 40573,
         "name": "save",
         "type": "contacts.repository.ContactsRepository",
-        "parameters": [
-          "java.lang.Object"
-        ],
+        "parameters": ["java.lang.Object"],
         "returnType": "java.lang.Object",
         "display": "c.r.CR.save",
         "flags": "pby",
@@ -4801,9 +4516,7 @@
         "id": 40574,
         "name": "setId",
         "type": "contacts.entity.Contacts",
-        "parameters": [
-          "java.lang.String"
-        ],
+        "parameters": ["java.lang.String"],
         "returnType": "void",
         "display": "c.e.C.setId",
         "flags": "p",
@@ -5953,7 +5666,6 @@
         "httpMethod": "GET"
       }
     ]
-
   },
   "createdAt": "2022-03-10T12:15:50"
 }

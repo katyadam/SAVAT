@@ -19,12 +19,10 @@ public class CallGraphOutput extends PanacheEntity {
     public Project project;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @NotBlank(message = "sourceCallGraphInput is required")
     @Column(nullable = false, name = "source_call_graph_input")
     public CallGraphInputSimpleDto sourceCallGraphInput;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @NotBlank(message = "targetCallGraphInput is required")
     @Column(nullable = false, name = "target_call_graph_input")
     public CallGraphInputSimpleDto targetCallGraphInput;
 
