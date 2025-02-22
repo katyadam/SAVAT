@@ -8,10 +8,9 @@ import { TabsTrigger } from "@radix-ui/react-tabs";
 import { CallGraphOutputsTable } from "./CallGraphOutputsTable";
 import { callGraphOutputsColumns } from "./OutputsColumns";
 import { useProjectsCallGraphOutputs } from "@/hooks/useCallGraphOutput";
-import { Diff } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import Overlay from "../ui/Overlay";
 import CompareDialog from "./compare/CompareDialog";
+import { Button } from "../ui/button";
 
 type CallGraphsTabType = {
   projectId: string;
@@ -59,17 +58,13 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
           >
             Analysis Outputs
           </TabsTrigger>
-          <Tooltip>
-            <TooltipTrigger>
-              <Diff
-                onClick={() => setOpenCompareDialog(true)}
-                className="cursor-pointer ml-5"
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Compare Inputs</p>
-            </TooltipContent>
-          </Tooltip>
+          <Button
+            onClick={() => setOpenCompareDialog(true)}
+            variant="link"
+            className="text-sm font-bold ml-5"
+          >
+            Change Impact Analysis
+          </Button>
         </TabsList>
 
         <TabsContent className="mt-0" value="inputs">
