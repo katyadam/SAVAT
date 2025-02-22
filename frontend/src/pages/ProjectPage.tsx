@@ -15,6 +15,7 @@ import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
 import { Separator } from "@/components/ui/separator";
 import { Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import ConfirmWindow from "@/components/ui/ConfirmWindow";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -38,6 +39,7 @@ const ProjectPage = () => {
   const { mutateAsync } = useDeleteProject();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isOpen, openConfigDialog] = useState<boolean>(false);
   const handleProjectDelete = async () => {
     try {
       if (projectId) {
@@ -79,7 +81,7 @@ const ProjectPage = () => {
             <p className="font-semibold text-gray-500">Delete This Project</p>
             <Trash2
               className="cursor-pointer"
-              onClick={() => handleProjectDelete()}
+              onClick={() => openConfigDialog(true)}
             />
           </div>
         </div>
@@ -143,6 +145,25 @@ const ProjectPage = () => {
               />
             )}
         </Overlay>
+      )}
+      {isOpen && (
+        <ConfirmWindow
+          closeFunc={() => openConfigDialog(false)}
+          title="Do you really want to delete this project ?"
+          width="w-1/4"
+          options={[
+            {
+              title: "YES",
+              callback: () => handleProjectDelete(),
+              btnVariant: "destructive",
+            },
+            {
+              title: "NO",
+              callback: () => openConfigDialog(false),
+              btnVariant: "ghost",
+            },
+          ]}
+        />
       )}
     </div>
   ) : (
