@@ -44,6 +44,7 @@ export const useHighlightReachability = (
     actionsStorage: Action[],
     setActionsStorage: (actions: Action[]) => void
 ) => {
+    console.log(actionsStorage)
     useEffect(() => {
         if (!cy) return;
 
@@ -124,13 +125,7 @@ export const useRemoveAction = (cy: Cytoscape.Core | null, actionToRemove: Actio
             });
             actionToRemove.calls.forEach((call) => {
                 const edge = cy.getElementById(call.callId);
-                edge.style({
-                    "line-color": call.isInterservice ? CY_COLOR_RED : CY_COLOR_NEUTRAL,
-                    "target-arrow-color": call.isInterservice
-                        ? CY_COLOR_RED
-                        : CY_COLOR_NEUTRAL,
-                    "line-style": call.isInterservice ? "dashed" : "solid",
-                })
+                edge.removeClass("highlighted");
             });
         }
     }, [actionToRemove]);

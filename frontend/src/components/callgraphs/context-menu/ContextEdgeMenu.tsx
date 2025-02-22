@@ -93,7 +93,7 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
             </ContextMenuInfo>
             <ContextMenuInfo label="Source Method's Parameters">
               {callMetadata.sourceParams?.map((param) => (
-                <p>{param}</p>
+                <p key={param}>{param}</p>
               ))}
             </ContextMenuInfo>
           </div>
