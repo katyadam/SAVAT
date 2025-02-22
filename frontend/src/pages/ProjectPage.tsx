@@ -1,10 +1,10 @@
 import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
 import { columns } from "@/components/inputs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
-import { useProject } from "@/hooks/useProject";
+import { useDeleteProject, useProject } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
@@ -12,6 +12,10 @@ import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreate
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 import { FileOperation } from "@/components/projects/types";
 import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
+import { Separator } from "@/components/ui/separator";
+import { Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import ConfirmWindow from "@/components/ui/ConfirmWindow";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -32,6 +36,36 @@ const ProjectPage = () => {
     projectId || ""
   );
 
+  const { mutateAsync } = useDeleteProject();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [isOpen, openConfigDialog] = useState<boolean>(false);
+  const handleProjectDelete = async () => {
+    try {
+      if (projectId) {
+        await mutateAsync(projectId);
+        navigate("/");
+        toast({
+          title: "Project Removed!",
+        });
+      }
+    } catch (error: unknown) {
+      let errorMessage = "An unexpected error occurred";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      toast({
+        title: "Something BAD happened, couldn't delete project!",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
+  };
+
   return projectId ? (
     <div className="m-5">
       <div className="flex flex-row justify-between">
@@ -40,7 +74,17 @@ const ProjectPage = () => {
         ) : (
           <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
         )}
-        <CreateEntrypoint showImportExportDialog={showImportExportDialog} />
+        <div className="flex flex-row gap-2 items-center">
+          <CreateEntrypoint showImportExportDialog={showImportExportDialog} />
+          <Separator className="p-0.5" orientation="vertical" />
+          <div className="flex flex-col items-center">
+            <p className="font-semibold text-gray-500">Delete This Project</p>
+            <Trash2
+              className="cursor-pointer"
+              onClick={() => openConfigDialog(true)}
+            />
+          </div>
+        </div>
       </div>
 
       <Tabs
@@ -101,6 +145,25 @@ const ProjectPage = () => {
               />
             )}
         </Overlay>
+      )}
+      {isOpen && (
+        <ConfirmWindow
+          closeFunc={() => openConfigDialog(false)}
+          title="Do you really want to delete this project ?"
+          width="w-1/4"
+          options={[
+            {
+              title: "YES",
+              callback: () => handleProjectDelete(),
+              btnVariant: "destructive",
+            },
+            {
+              title: "NO",
+              callback: () => openConfigDialog(false),
+              btnVariant: "ghost",
+            },
+          ]}
+        />
       )}
     </div>
   ) : (

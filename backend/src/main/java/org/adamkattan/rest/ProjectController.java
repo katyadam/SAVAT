@@ -40,4 +40,14 @@ public class ProjectController {
         return Response.ok(projectService.getAllProjects())
                 .build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response deleteProjectById(@PathParam("id") Long id) {
+        Long removedId = projectService.deleteProject(id);
+        return Response.ok("Removed Project with id: " + removedId)
+                .build();
+    }
 }
