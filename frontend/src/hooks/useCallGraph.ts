@@ -28,10 +28,14 @@ export const useCallGraphInputDelete = (projectId: string) => {
         mutationKey: ["deleteInput"],
         mutationFn: (payload: number) =>
             CallGraphsApi.deleteCallGraphInput(payload),
-        onSuccess: () =>
+        onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ["callgraphs", projectId],
-            }),
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["callGraphOutputs", projectId],
+            })
+        },
     });
 };
 

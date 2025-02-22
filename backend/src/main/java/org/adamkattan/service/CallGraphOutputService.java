@@ -1,6 +1,7 @@
 package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 
 import java.util.List;
@@ -18,7 +19,14 @@ public class CallGraphOutputService {
     }
 
     public Long deleteCallGraphOutputById(Long id) {
-        return CallGraphOutput.delete("id", id);
+        CallGraphOutput output = CallGraphOutput.find("id", id).firstResult();
+        if (output != null) {
+            output.project.callGraphOutputs.remove(output);
+            output.persist();
+            output.delete();
+            return output.id;
+        }
+        throw new EntityNotFoundException("Call graph output with id " + id + " not found");
     }
 
 }
