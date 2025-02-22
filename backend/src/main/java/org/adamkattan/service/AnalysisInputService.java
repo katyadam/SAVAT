@@ -2,11 +2,11 @@ package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.entities.Entities;
 import org.adamkattan.model.graph.Graph;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
-import org.adamkattan.model.methods.MicroserviceNode;
 
 import java.util.List;
 
@@ -59,6 +59,15 @@ public class AnalysisInputService {
     }
 
     public Long deleteAnalysisInputById(Long id) {
-        return AnalysisInput.delete("id", id);
+        AnalysisInput input = AnalysisInput.find("id", id).firstResult();
+        if (input != null) {
+            input.changedEntities.clear();
+            input.changedGraphs.clear();
+            input.project.inputs.remove(input);
+            input.persist();
+            input.delete();
+            return input.id;
+        }
+        throw new EntityNotFoundException("Input with id: " + id + " was not found");
     }
 }

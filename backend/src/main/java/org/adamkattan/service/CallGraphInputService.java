@@ -2,6 +2,7 @@ package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.CallGraphInputDto;
 
@@ -12,6 +13,9 @@ public class CallGraphInputService {
 
     @Inject
     ProjectService projectService;
+
+    @Inject
+    CallGraphOutputService callGraphOutputService;
 
     public CallGraphInput getCallGraphInputById(Long id) {
         return CallGraphInput.find("id", id).firstResult();
@@ -33,7 +37,18 @@ public class CallGraphInputService {
     }
 
     public Long deleteCallGraphInputById(Long id) {
-        return CallGraphInput.delete("id", id);
+        CallGraphInput callGraphInput = CallGraphInput.find("id", id).firstResult();
+        if (callGraphInput != null) {
+            callGraphOutputService.getAllProjectOutputs(callGraphInput.project.id)
+                    .stream()
+                    .filter(output ->
+                            output.sourceCallGraphInput.id().equals(callGraphInput.id) || output.targetCallGraphInput.id().equals(callGraphInput.id))
+                    .forEach((output) -> callGraphOutputService.deleteCallGraphOutputById(output.id));
+            callGraphInput.project.callGraphInputs.remove(callGraphInput);
+            callGraphInput.delete();
+            return callGraphInput.id;
+        }
+        throw new EntityNotFoundException("Input with id: " + id + " was not found");
     }
 
 }
