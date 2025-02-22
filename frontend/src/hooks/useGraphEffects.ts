@@ -3,7 +3,6 @@ import { CallGraph } from "@/api/callgraphs/types";
 import { getCommonDateString } from "@/api/utils";
 import { Action } from "@/pages/CallGraphPage";
 import Cytoscape from "cytoscape";
-import { CY_COLOR_NEUTRAL, CY_COLOR_RED } from "@/components/callgraphs/graphs/CytoscapeInstance";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
