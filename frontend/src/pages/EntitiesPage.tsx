@@ -3,7 +3,8 @@ import { CompareEntitiesLinksResponse } from "@/api/entities/types";
 import CompareForm from "@/components/entities/CompareForm";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";
-import EntitiesDiffGraph from "@/components/entities/graphs/EntitiesDiffGraph";
+import { getMicroservicesColors } from "@/components/entities/generators/colorGenerator";
+import Graph from "@/components/entities/graphs/Graph";
 import Navbar from "@/components/entities/Navbar";
 import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
@@ -12,7 +13,7 @@ import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { useEntities } from "@/hooks/useEntity";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 const EntitiesPage = () => {
@@ -70,19 +71,24 @@ const EntitiesPage = () => {
     setSelectedNode(null);
     setSelectedField(null);
   };
-
+  const msColors = useMemo(
+    () => getMicroservicesColors(entities?.nodes || []),
+    [entities]
+  );
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (showComparisons && entities && selectedEntitiesDiff) {
       return (
-        <EntitiesDiffGraph
+        <Graph
           graphData={{
             nodes: entities.nodes,
             links: [],
           }}
           onNodeClick={handleNodeClick}
           entitiesDiffId={selectedEntitiesDiff}
+          showIsolatedNodes={true}
+          msColors={msColors}
         />
       );
     }
@@ -92,6 +98,7 @@ const EntitiesPage = () => {
         entities={entities}
         renderType={selectedRenderType}
         showIsolatedNodes={showIsolatedNodes}
+        msColors={msColors}
       />
     );
   };
@@ -105,7 +112,9 @@ const EntitiesPage = () => {
         analysisInputId={id}
         setShowComparisons={setShowComparisons}
         showComparisons={showComparisons}
+        selectedEntitiesDiff={selectedEntitiesDiff}
         setSelectedEntitiesDiff={setSelectedEntitiesDiff}
+        msColors={msColors}
       />
       <Separator className="mt-2" />
       {renderContent()}

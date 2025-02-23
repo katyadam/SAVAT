@@ -1,6 +1,7 @@
 // @ts-expect-error Necessary for compatibility with cytoscape-cise
 import { CiseLayoutOptions } from "cytoscape-cise";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
+import { CY_COLOR_NEUTRAL, CY_COLOR_GREEN, CY_COLOR_BLUE, CY_COLOR_RED, CY_COLOR_HIGHLIGHTED } from "@/api/utils";
 
 const layoutOptions: CiseLayoutOptions = {
     name: "cise",
@@ -14,12 +15,6 @@ const layoutOptions: CiseLayoutOptions = {
     gravity: 0.5,
     direction: "horizontal",
 };
-
-export const CY_COLOR_RED = "#FF0000"
-export const CY_COLOR_GREEN = "#00FF00"
-export const CY_COLOR_BLUE = "#0000FF"
-export const CY_COLOR_NEUTRAL = "#808080"
-export const CY_COLOR_HIGHLIGHTED = "#FFD700"
 
 const getNodeStyles = (msColors: Map<string, string>): Cytoscape.Stylesheet[] => {
     return [

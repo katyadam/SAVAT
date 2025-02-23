@@ -12,6 +12,9 @@ import { Switch } from "@/components/ui/switch";
 import { useEntitiesDiffs } from "@/hooks/useEntity";
 import { Separator } from "../ui/separator";
 import dayjs from "dayjs";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import LegendTable from "../callgraphs/LegendTable";
+import { Eye } from "lucide-react";
 
 type NavbarType = {
   compareBtnClick: (val: boolean) => void;
@@ -20,7 +23,9 @@ type NavbarType = {
   setShowComparisons: (val: boolean) => void;
   showComparisons: boolean;
   analysisInputId: string;
+  selectedEntitiesDiff: string | null;
   setSelectedEntitiesDiff: (seletedEntitiesDiff: string) => void;
+  msColors: Map<string, string>;
 };
 
 const Navbar: FC<NavbarType> = ({
@@ -30,7 +35,9 @@ const Navbar: FC<NavbarType> = ({
   showComparisons,
   isolatedNodesBtnClick,
   analysisInputId,
+  selectedEntitiesDiff,
   setSelectedEntitiesDiff,
+  msColors,
 }) => {
   const { data: entitiesDiffs, isLoading } = useEntitiesDiffs(analysisInputId);
 
@@ -56,22 +63,37 @@ const Navbar: FC<NavbarType> = ({
       {showComparisons ? (
         <>
           {entitiesDiffs && (
-            <Select
-              defaultValue="None"
-              onValueChange={(value) => setSelectedEntitiesDiff(value)}
-            >
-              <SelectTrigger className="w-[280px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="None">None</SelectItem>
-                {entitiesDiffs.map((diff) => (
-                  <SelectItem key={diff.id} value={diff.id.toString()}>
-                    {formatDate(diff.createdAt)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <>
+              <Select
+                defaultValue="None"
+                value={selectedEntitiesDiff!}
+                onValueChange={(value) => setSelectedEntitiesDiff(value)}
+              >
+                <SelectTrigger className="w-[280px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="None">None</SelectItem>
+                  {entitiesDiffs.map((diff) => (
+                    <SelectItem key={diff.id} value={diff.id.toString()}>
+                      {formatDate(diff.createdAt)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {selectedEntitiesDiff && selectedEntitiesDiff !== "None" && (
+                <Popover modal={false}>
+                  <PopoverTrigger className="flex flex-col items-center mx-5 cursor-pointer">
+                    <label className="text-gray-500 mb-1">Legend</label>
+                    <Eye />
+                  </PopoverTrigger>
+
+                  <PopoverContent className="w-full">
+                    <LegendTable msColorsLegend={msColors} />
+                  </PopoverContent>
+                </Popover>
+              )}
+            </>
           )}
         </>
       ) : (
@@ -101,6 +123,18 @@ const Navbar: FC<NavbarType> = ({
               </SelectItem>
             </SelectContent>
           </Select>
+          {RenderType.BASIC_GRAPH && (
+            <Popover modal={false}>
+              <PopoverTrigger className="flex flex-col items-center mx-5 cursor-pointer">
+                <label className="text-gray-500 mb-1">Legend</label>
+                <Eye />
+              </PopoverTrigger>
+
+              <PopoverContent className="w-full">
+                <LegendTable msColorsLegend={msColors} />
+              </PopoverContent>
+            </Popover>
+          )}
           <div className="flex flex-col items-center mx-5">
             <label htmlFor="isolatedNodesSwitch" className="text-gray-500 mb-1">
               Show all nodes

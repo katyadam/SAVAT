@@ -1,6 +1,5 @@
 import { CompareCommGraphLinksResponse } from "@/api/communication-graphs/types";
 import CompareForm from "@/components/communication-graphs/CompareForm";
-import DiffGraph from "@/components/communication-graphs/graphs/DiffGraph";
 import Graph from "@/components/communication-graphs/graphs/Graph";
 import Navbar from "@/components/communication-graphs/Navbar";
 import Loading from "@/components/loading/Loading";
@@ -48,8 +47,8 @@ const GraphPage = () => {
     if (graph) {
       if (showComparisons && selectedCommGraphDiff) {
         return (
-          <DiffGraph
-            graphDiff={{
+          <Graph
+            graph={{
               nodes: graph.nodes,
               links: [],
             }}

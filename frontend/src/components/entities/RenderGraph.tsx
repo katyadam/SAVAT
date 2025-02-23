@@ -1,6 +1,6 @@
 import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
-import BasicGraph from "./graphs/BasicGraph";
+import Graph from "./graphs/Graph";
 import { RenderType } from "./types";
 
 import EntityDetailsDiagram from "./graphs/EntityDetailsDiagram";
@@ -10,6 +10,7 @@ type RenderGraphProps = {
   entities: GraphData | undefined;
   renderType: RenderType | null;
   showIsolatedNodes: boolean;
+  msColors: Map<string, string>;
 };
 
 const RenderGraph: FC<RenderGraphProps> = ({
@@ -17,15 +18,17 @@ const RenderGraph: FC<RenderGraphProps> = ({
   entities,
   renderType,
   showIsolatedNodes,
+  msColors,
 }) => {
   if (!entities) return <div>Loading graph...</div>;
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
       return (
-        <BasicGraph
+        <Graph
           graphData={entities}
           onNodeClick={onNodeClick}
           showIsolatedNodes={showIsolatedNodes}
+          msColors={msColors}
         />
       );
     case RenderType.ENTITY_DETAILS:

@@ -11,7 +11,7 @@ import { Highlighter } from "lucide-react";
 
 type LegendTableType = {
   msColorsLegend: Map<string, string>;
-  setMsToHighlight: (ms: string) => void;
+  setMsToHighlight?: (ms: string) => void;
 };
 
 const LegendTable: FC<LegendTableType> = ({
@@ -25,7 +25,7 @@ const LegendTable: FC<LegendTableType> = ({
           <TableRow>
             <TableHead>Microservice</TableHead>
             <TableHead>Color</TableHead>
-            <TableHead>Highlight</TableHead>
+            {setMsToHighlight && <TableHead>Highlight</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -39,9 +39,11 @@ const LegendTable: FC<LegendTableType> = ({
                 />
                 {color}
               </TableCell>
-              <TableCell className="cursor-pointer">
-                <Highlighter onClick={() => setMsToHighlight(name)} />
-              </TableCell>
+              {setMsToHighlight && (
+                <TableCell className="cursor-pointer">
+                  <Highlighter onClick={() => setMsToHighlight(name)} />
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
