@@ -1,115 +1,82 @@
 import { FC, useEffect, useRef } from "react";
-import Cytoscape, { ElementsDefinition } from "cytoscape";
+import { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
-import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
+import fcose from "cytoscape-fcose";
 import {
+  ChangedCommGraphLink,
   CommGraph,
   CommGraphLink,
   CommGraphNode,
 } from "@/api/communication-graphs/types";
+import { getCyInstance } from "./CytoscapeInstance";
+import { useCommGraphDiff } from "@/hooks/useCommGraph";
 
 type GraphType = {
   graph: CommGraph;
+  commGraphDiffId?: string;
 };
 
-const Graph: FC<GraphType> = ({ graph }) => {
+const Graph: FC<GraphType> = ({ graph, commGraphDiffId }) => {
+  const { data: commGraphDiff } = useCommGraphDiff(commGraphDiffId || "");
   const cyRef = useRef<HTMLDivElement | null>(null);
 
   cytoscape.use(fcose);
 
   useEffect(() => {
-    if (cyRef.current) {
-      const elements: ElementsDefinition = {
-        nodes: graph.nodes.map((node: CommGraphNode) => ({
-          data: {
-            id: node.nodeName,
-            label: node.nodeName,
-          },
-          group: "nodes",
-          style: {
-            "background-color": "blue",
-          },
-        })),
-        edges: graph.links.map((link: CommGraphLink) => ({
+    if (!cyRef.current) return;
+
+    const elements: ElementsDefinition = {
+      nodes: graph.nodes.map((node: CommGraphNode) => ({
+        data: {
+          id: node.nodeName,
+          label: node.nodeName,
+        },
+        group: "nodes",
+      })),
+      edges: (commGraphDiff ? commGraphDiff.changedLinks : graph.links).map(
+        (link: CommGraphLink | ChangedCommGraphLink) => ({
           data: {
             source: link.source,
             target: link.target,
+            typeOfChange: "type" in link ? link.type.toString() : "SAME",
           },
           group: "edges",
-        })),
-      };
+        })
+      ),
+    };
 
-      const layoutOptions: FcoseLayoutOptions = {
-        name: "fcose",
-        animate: true,
-        fit: true,
-        animationDuration: 0,
-        nodeSeparation: 80,
-        tilingPaddingHorizontal: 80,
-        tilingPaddingVertical: 20,
-      };
+    const cyInstance = getCyInstance(cyRef, elements);
 
-      const cy = Cytoscape({
-        container: cyRef.current,
-        elements,
-        style: [
-          {
-            selector: "node",
-            style: {
-              shape: "round-octagon",
-              width: "30",
-              height: "30",
-              label: "data(label)",
-              "text-valign": "top",
-              "text-halign": "center",
-              color: "black",
-              "font-size": "12px",
-            },
-          },
-          {
-            selector: "edge",
-            style: {
-              width: 5,
-              "line-color": "#808080",
-              "curve-style": "bezier",
-              "target-arrow-color": "#808080",
-              "target-arrow-shape": "triangle",
-            },
-          },
-        ],
-        layout: layoutOptions,
-      });
-
-      cy.on("layoutstop", () => {
-        cy.nodes().forEach((node) => {
-          const position = node.position();
-          node.position({
-            x: position.x - 20,
-            y: position.y - 10,
-          });
+    cyInstance.on("layoutstop", () => {
+      cyInstance.nodes().forEach((node) => {
+        const position = node.position();
+        node.position({
+          x: position.x - 20,
+          y: position.y - 10,
         });
       });
+    });
 
-      cy.on("tap", "node", (event) => {
-        const node = event.target;
+    cyInstance.on("tap", "node", (event) => {
+      const node = event.target;
 
-        const currentZoom = cy.zoom();
-        const zoomIncrement = 0.2;
-        const newZoom = currentZoom + zoomIncrement;
+      const currentZoom = cyInstance.zoom();
+      const zoomIncrement = 0.2;
+      const newZoom = currentZoom + zoomIncrement;
 
-        cy.zoom({
-          level: newZoom,
-          renderedPosition: node.renderedPosition(),
-        });
+      cyInstance.zoom({
+        level: newZoom,
+        renderedPosition: node.renderedPosition(),
       });
+    });
 
-      return () => {
-        cy.destroy();
-      };
-    }
-  }, [graph]);
+    return () => {
+      cyInstance.destroy();
+    };
+  }, [graph, commGraphDiff]);
 
+  if (commGraphDiffId === "None") return <></>;
   return <div ref={cyRef} className="w-full h-[90%]" />;
 };
 

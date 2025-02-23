@@ -1,4 +1,4 @@
-import { getChangedColor } from "@/api/utils";
+import { CY_COLOR_NEUTRAL, getChangedColor } from "@/api/utils";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
 import { FcoseLayoutOptions } from "cytoscape-fcose";
 
@@ -12,7 +12,6 @@ const layoutOptions: FcoseLayoutOptions = {
     tilingPaddingVertical: 20,
 };
 
-const CY_COLOR_NEUTRAL = "#808080"
 
 const getStyles = (msColors: Map<string, string>): Cytoscape.Stylesheet[] => {
     return [

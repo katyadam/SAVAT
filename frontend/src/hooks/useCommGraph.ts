@@ -19,6 +19,7 @@ export const useCommGraphDiffs = (analysisInputId: string): UseQueryResult<CommG
 export const useCommGraphDiff = (id: string): UseQueryResult<CommGraphDiff, Error> => {
     return useQuery({
         queryKey: ["commGraphDiff", id],
-        queryFn: () => CommGraphApi.getCommGraphDiff(id)
+        queryFn: () => CommGraphApi.getCommGraphDiff(id),
+        enabled: !!id && id !== "None",
     });
 }
