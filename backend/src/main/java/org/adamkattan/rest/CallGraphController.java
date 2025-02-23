@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.callgraph.CallGraph;
-import org.adamkattan.model.callgraph.CallGraphInput;
-import org.adamkattan.model.callgraph.CallGraphInputDto;
-import org.adamkattan.model.callgraph.CallGraphMethodKey;
+import org.adamkattan.model.callgraph.*;
 import org.adamkattan.model.callgraph.algorithms.MethodReachability;
 import org.adamkattan.service.CallGraphInputService;
 
@@ -43,6 +40,18 @@ public class CallGraphController {
         CallGraphInput callGraphInput = callGraphInputService.getCallGraphInputById(callGraphInputId);
         return Response.ok(CallGraphInput.toDto(callGraphInput)).build();
     }
+
+    @GET
+    @Path("/{callGraphInputId}/summary")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSummary(@PathParam("callGraphInputId") Long callGraphInputId) {
+        CallGraphInputSummary summary = new CallGraphInputSummary(
+                callGraphInputService.getCallGraphInputOutputsCount(callGraphInputId)
+        );
+        return Response.ok(summary)
+                .build();
+    }
+
 
     @PUT
     @Path("/{callGraphInputId}/method-reachability")

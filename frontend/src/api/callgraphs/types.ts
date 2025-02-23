@@ -73,3 +73,7 @@ export type ChangeImpactAnalysisPayload = {
     sourceCallGraphInputId: number,
     targetCallGraphInputId: number
 }
+
+export type CallGraphInputSummary = {
+    totalCallGraphOutputs: number;
+}

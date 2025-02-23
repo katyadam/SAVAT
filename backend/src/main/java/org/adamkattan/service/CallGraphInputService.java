@@ -36,13 +36,15 @@ public class CallGraphInputService {
         return CallGraphInput.toDto(callGraphInput);
     }
 
+    public int getCallGraphInputOutputsCount(Long id) {
+        CallGraphInput callGraphInput = getCallGraphInputById(id);
+        return callGraphOutputService.getCallGraphOutputsWithInputId(id, callGraphInput.project.id).size();
+    }
+
     public Long deleteCallGraphInputById(Long id) {
         CallGraphInput callGraphInput = CallGraphInput.find("id", id).firstResult();
         if (callGraphInput != null) {
-            callGraphOutputService.getAllProjectOutputs(callGraphInput.project.id)
-                    .stream()
-                    .filter(output ->
-                            output.sourceCallGraphInput.id().equals(callGraphInput.id) || output.targetCallGraphInput.id().equals(callGraphInput.id))
+            callGraphOutputService.getCallGraphOutputsWithInputId(id, callGraphInput.project.id)
                     .forEach((output) -> callGraphOutputService.deleteCallGraphOutputById(output.id));
             callGraphInput.project.callGraphInputs.remove(callGraphInput);
             callGraphInput.delete();

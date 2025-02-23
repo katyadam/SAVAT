@@ -20,9 +20,13 @@ import { Button } from "../ui/button";
 import { CallGraphInputSimple } from "@/api/callgraphs/types";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { useCallGraphInputDelete } from "@/hooks/useCallGraph";
+import {
+  useCallGraphInputDelete,
+  useCallGraphInputSummary,
+} from "@/hooks/useCallGraph";
 import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
 import HeaderWithSort from "../ui/HeaderWithSort";
+import ConfirmWindow from "../ui/ConfirmWindow";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +42,8 @@ export function CallGraphInputsTable<TData, TValue>({
   const { mutateAsync } = useCallGraphInputDelete(projectId);
   const { toast } = useToast();
 
+  const [inputToDelete, setInputToDelete] = useState<number | null>(null);
+  const { data: inputSummary } = useCallGraphInputSummary(inputToDelete);
   const handleOutputDelete = async (id: number) => {
     try {
       await mutateAsync(id);
@@ -170,7 +176,7 @@ export function CallGraphInputsTable<TData, TValue>({
                 <TableCell>
                   <Button
                     onClick={() =>
-                      handleOutputDelete(
+                      setInputToDelete(
                         (row.original as CallGraphInputSimple).id
                       )
                     }
@@ -193,6 +199,38 @@ export function CallGraphInputsTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {inputToDelete && (
+        <ConfirmWindow
+          closeFunc={() => setInputToDelete(null)}
+          title="Do you really want to delete this Call Graph Input ?"
+          width="w-1/3"
+          options={[
+            {
+              title: "YES",
+              callback: () => {
+                handleOutputDelete(inputToDelete);
+                setInputToDelete(null);
+              },
+              btnVariant: "destructive",
+            },
+            {
+              title: "NO",
+              callback: () => setInputToDelete(null),
+              btnVariant: "ghost",
+            },
+          ]}
+          body={
+            <div className="flex flex-col mb-5 items-start">
+              <p>
+                Usage in Change Impact Analysis Outputs:{" "}
+                <span className="text-xl font-bold">
+                  {inputSummary && inputSummary.totalCallGraphOutputs}
+                </span>
+              </p>
+            </div>
+          }
+        />
+      )}
     </div>
   );
 }

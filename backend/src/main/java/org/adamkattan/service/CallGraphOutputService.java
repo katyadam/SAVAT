@@ -18,6 +18,14 @@ public class CallGraphOutputService {
         return CallGraphOutput.find("id", id).firstResult();
     }
 
+    public List<CallGraphOutput> getCallGraphOutputsWithInputId(Long callGraphInputId, Long projectId) {
+        return getAllProjectOutputs(projectId).stream()
+                .filter(o -> o.sourceCallGraphInput.id().equals(callGraphInputId)
+                        || o.targetCallGraphInput.id().equals(callGraphInputId))
+                .toList();
+    }
+
+
     public Long deleteCallGraphOutputById(Long id) {
         CallGraphOutput output = CallGraphOutput.find("id", id).firstResult();
         if (output != null) {
