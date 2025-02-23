@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { AnalysisInput, CreateAnalysisInput } from "./types";
+import { AnalysisInput, AnalysisInputSummary, CreateAnalysisInput } from "./types";
 
 export const ANALYSIS_INPUTS_PREFIX = "/analysis-inputs"
 
@@ -21,10 +21,16 @@ async function deleteAnalysisInput(id: number) {
     return resp.data;
 }
 
+async function getSummary(id: number): Promise<AnalysisInputSummary> {
+    const resp = await axiosInstance.get(`${ANALYSIS_INPUTS_PREFIX}/${id}/summary`);
+    return resp.data;
+}
+
 const AnalysisInputApi = {
     getProjectAnalysisInputs,
     createAnalysisInput,
-    deleteAnalysisInput
+    deleteAnalysisInput,
+    getSummary
 };
 
 export default AnalysisInputApi;

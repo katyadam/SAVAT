@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { CallGraph, CallGraphInput, CallGraphInputSimple, CallGraphOutputSimple, ChangedCallGraph, ChangeImpactAnalysisPayload, CreateCallGraphInput } from "./types";
+import { CallGraph, CallGraphInput, CallGraphInputSimple, CallGraphInputSummary, CallGraphOutputSimple, ChangedCallGraph, ChangeImpactAnalysisPayload, CreateCallGraphInput } from "./types";
 
 export const CALL_GRAPH_INPUTS_PREFIX = "/call-graph-inputs"
 export const CALL_GRAPH_OUTPUTS_PREFIX = "/call-graph-outputs"
@@ -58,6 +58,11 @@ async function deleteCallGraphOutput(id: number) {
     return resp.data;
 }
 
+async function getSummary(id: number): Promise<CallGraphInputSummary> {
+    const resp = await axiosInstance.get(`${CALL_GRAPH_INPUTS_PREFIX}/${id}/summary`)
+    return resp.data;
+}
+
 
 const CallGraphsApi = {
     getCallGraphInputById,
@@ -68,7 +73,8 @@ const CallGraphsApi = {
     getAllProjectsCallGraphOuputs,
     getChangedCallGraphById,
     changeImpactAnalysis,
-    deleteCallGraphOutput
+    deleteCallGraphOutput,
+    getSummary
 }
 
 export default CallGraphsApi;

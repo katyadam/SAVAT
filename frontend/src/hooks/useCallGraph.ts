@@ -39,3 +39,9 @@ export const useCallGraphInputDelete = (projectId: string) => {
     });
 };
 
+export const useCallGraphInputSummary = (id: number | null) => {
+    return useQuery({
+        queryKey: ["cg_input_summary", id],
+        queryFn: () => id ? CallGraphsApi.getSummary(id) : Promise.reject("No ID provided")
+    });
+}

@@ -17,13 +17,17 @@ import {
 } from "@/components/ui/table";
 import AnalysisInputButton from "./AnalysisInputButton";
 import { AnalysisInput } from "@/api/inputs/types";
-import { useMemo, useState } from "react";
-import { CalendarArrowDown, CalendarArrowUp, Trash2 } from "lucide-react";
-import { useAnalyisiInputDelete } from "@/hooks/useAnalysisInput";
+import { useState } from "react";
+import { Trash2 } from "lucide-react";
+import {
+  useAnalyisiInputDelete,
+  useAnalysisInputSummary,
+} from "@/hooks/useAnalysisInput";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "../ui/button";
 import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
 import HeaderWithSort from "../ui/HeaderWithSort";
+import ConfirmWindow from "../ui/ConfirmWindow";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +42,8 @@ export function AnalysisInputsTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { mutateAsync } = useAnalyisiInputDelete(projectId);
   const { toast } = useToast();
+  const [inputToDelete, setInputToDelete] = useState<number | null>(null);
+  const { data: inputSummary } = useAnalysisInputSummary(inputToDelete);
 
   const handleOutputDelete = async (id: number) => {
     try {
@@ -161,7 +167,7 @@ export function AnalysisInputsTable<TData, TValue>({
                 <TableCell>
                   <Button
                     onClick={() =>
-                      handleOutputDelete((row.original as AnalysisInput).id)
+                      setInputToDelete((row.original as AnalysisInput).id)
                     }
                     variant="outline"
                   >
@@ -182,6 +188,44 @@ export function AnalysisInputsTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {inputToDelete && (
+        <ConfirmWindow
+          closeFunc={() => setInputToDelete(null)}
+          title="Do you really want to delete this Analysis Input ?"
+          width="w-1/4"
+          options={[
+            {
+              title: "YES",
+              callback: () => {
+                handleOutputDelete(inputToDelete);
+                setInputToDelete(null);
+              },
+              btnVariant: "destructive",
+            },
+            {
+              title: "NO",
+              callback: () => setInputToDelete(null),
+              btnVariant: "ghost",
+            },
+          ]}
+          body={
+            <div>
+              <p className="m-5">
+                Compared Entities:{" "}
+                <span className="text-xl font-bold">
+                  {inputSummary && inputSummary.totalEntitiesComparisons}
+                </span>
+              </p>
+              <p className="m-5">
+                Compared Graphs:{" "}
+                <span className="text-xl font-bold">
+                  {inputSummary && inputSummary.totalGraphComparisons}
+                </span>
+              </p>
+            </div>
+          }
+        />
+      )}
     </div>
   );
 }

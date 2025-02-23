@@ -1,7 +1,11 @@
 import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
 import { columns } from "@/components/inputs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
-import { useDeleteProject, useProject } from "@/hooks/useProject";
+import {
+  useDeleteProject,
+  useProject,
+  useProjectSummary,
+} from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,7 +43,8 @@ const ProjectPage = () => {
   const { mutateAsync } = useDeleteProject();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [isOpen, openConfigDialog] = useState<boolean>(false);
+  const [isOpen, openConfirmWindow] = useState<boolean>(false);
+  const { data: projectSummary } = useProjectSummary(projectId || "");
   const handleProjectDelete = async () => {
     try {
       if (projectId) {
@@ -81,7 +86,7 @@ const ProjectPage = () => {
             <p className="font-semibold text-gray-500">Delete This Project</p>
             <Trash2
               className="cursor-pointer"
-              onClick={() => openConfigDialog(true)}
+              onClick={() => openConfirmWindow(true)}
             />
           </div>
         </div>
@@ -148,7 +153,7 @@ const ProjectPage = () => {
       )}
       {isOpen && (
         <ConfirmWindow
-          closeFunc={() => openConfigDialog(false)}
+          closeFunc={() => openConfirmWindow(false)}
           title="Do you really want to delete this project ?"
           width="w-1/4"
           options={[
@@ -159,10 +164,32 @@ const ProjectPage = () => {
             },
             {
               title: "NO",
-              callback: () => openConfigDialog(false),
+              callback: () => openConfirmWindow(false),
               btnVariant: "ghost",
             },
           ]}
+          body={
+            <div className="flex flex-col items-start gap-2 mb-5">
+              <p className="">
+                Analysis Inputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalAnalysisInputs}
+                </span>
+              </p>
+              <p>
+                Call Graph Inputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalCallGraphInputs}
+                </span>
+              </p>
+              <p>
+                Change Impact Analysis Outputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalCallGraphOutputs}
+                </span>
+              </p>
+            </div>
+          }
         />
       )}
     </div>

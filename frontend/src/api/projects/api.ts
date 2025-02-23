@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { CreateProject, Project } from "./types";
+import { CreateProject, Project, ProjectSummary } from "./types";
 
 const PROJECTS_PREFIX = "/projects"
 
@@ -18,8 +18,13 @@ async function createProject(project: CreateProject) {
     return resp.data;
 }
 
-async function deleteProject(projectId: string) {
-    const resp = await axiosInstance.delete(`${PROJECTS_PREFIX}/${projectId}`);
+async function deleteProject(id: string) {
+    const resp = await axiosInstance.delete(`${PROJECTS_PREFIX}/${id}`);
+    return resp.data;
+}
+
+async function getSummary(id: string): Promise<ProjectSummary> {
+    const resp = await axiosInstance.get(`${PROJECTS_PREFIX}/${id}/summary`);
     return resp.data;
 }
 
@@ -27,7 +32,8 @@ const ProjectApi = {
     getAllProjects,
     getProjectById,
     createProject,
-    deleteProject
+    deleteProject,
+    getSummary
 };
 
 export default ProjectApi;

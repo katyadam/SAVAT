@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.project.CreateProjectDto;
 import org.adamkattan.model.project.Project;
+import org.adamkattan.model.project.ProjectSummary;
 import org.adamkattan.service.ProjectService;
 
 @Path("/projects")
@@ -14,17 +15,6 @@ public class ProjectController {
 
     @Inject
     ProjectService projectService;
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response createProject(CreateProjectDto projectDto) {
-        return Response.status(Response.Status.CREATED)
-                .entity(Project.toDto(projectService.createProject(projectDto)))
-                .build();
-    }
-
 
     @GET
     @Path("{id}")
@@ -38,6 +28,31 @@ public class ProjectController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProjects() {
         return Response.ok(projectService.getAllProjects())
+                .build();
+    }
+
+    @GET
+    @Path("{id}/summary")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSummary(@PathParam("id") Long id) {
+        Project project = projectService.getProjectById(id);
+        ProjectSummary projectSummary = new ProjectSummary(
+                project.inputs.size(),
+                project.callGraphInputs.size(),
+                project.callGraphOutputs.size()
+        );
+        return Response.ok(projectSummary)
+                .build();
+    }
+
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createProject(CreateProjectDto projectDto) {
+        return Response.status(Response.Status.CREATED)
+                .entity(Project.toDto(projectService.createProject(projectDto)))
                 .build();
     }
 

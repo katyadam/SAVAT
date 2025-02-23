@@ -18,6 +18,7 @@ import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { useCallGraphOutputDelete } from "@/hooks/useCallGraphOutput";
 import { useToast } from "@/hooks/use-toast";
 import { useMemo, useState } from "react";
+import ConfirmWindow from "../ui/ConfirmWindow";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -32,6 +33,7 @@ export function CallGraphOutputsTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { mutateAsync } = useCallGraphOutputDelete(projectId);
   const { toast } = useToast();
+  const [inputToDelete, setInputToDelete] = useState<number | null>(null);
 
   const handleOutputDelete = async (id: number) => {
     try {
@@ -132,7 +134,7 @@ export function CallGraphOutputsTable<TData, TValue>({
                 <TableCell>
                   <Button
                     onClick={() =>
-                      handleOutputDelete(
+                      setInputToDelete(
                         (row.original as CallGraphOutputSimple).id
                       )
                     }
@@ -149,12 +151,34 @@ export function CallGraphOutputsTable<TData, TValue>({
                 colSpan={columns.length + 3}
                 className="h-24 text-center"
               >
-                No analysis inputs.
+                No analysis outputs.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      {inputToDelete && (
+        <ConfirmWindow
+          closeFunc={() => setInputToDelete(null)}
+          title="Do you really want to delete this Change Impact Analysis Output ?"
+          width="w-1/3"
+          options={[
+            {
+              title: "YES",
+              callback: () => {
+                handleOutputDelete(inputToDelete);
+                setInputToDelete(null);
+              },
+              btnVariant: "destructive",
+            },
+            {
+              title: "NO",
+              callback: () => setInputToDelete(null),
+              btnVariant: "ghost",
+            },
+          ]}
+        />
+      )}
     </div>
   );
 }
