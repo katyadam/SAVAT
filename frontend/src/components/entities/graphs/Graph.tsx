@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { ElementsDefinition } from "cytoscape";
 import {
   GraphData,
@@ -9,7 +9,6 @@ import {
 
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
-import { getMicroservicesColors } from "../generators/colorGenerator";
 import { getCyInstance } from "./CytoscapeInstance";
 import { useEntitiesDiff } from "@/hooks/useEntity";
 
@@ -18,6 +17,7 @@ type GraphType = {
   graphData: GraphData;
   showIsolatedNodes: boolean;
   entitiesDiffId?: string;
+  msColors: Map<string, string>;
 };
 
 const Graph: FC<GraphType> = ({
@@ -25,13 +25,10 @@ const Graph: FC<GraphType> = ({
   onNodeClick,
   showIsolatedNodes,
   entitiesDiffId,
+  msColors,
 }) => {
   const { data: entitiesDiff } = useEntitiesDiff(entitiesDiffId || "");
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const msColors = useMemo(
-    () => getMicroservicesColors(graphData.nodes),
-    [graphData.nodes]
-  );
 
   cytoscape.use(fcose);
 
