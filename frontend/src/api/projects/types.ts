@@ -4,3 +4,9 @@ export type Project = {
 };
 
 export type CreateProject = Omit<Project, "id">
+
+export type ProjectSummary = {
+    totalAnalysisInputs: number;
+    totalCallGraphInputs: number;
+    totalCallGraphOutputs: number;
+}

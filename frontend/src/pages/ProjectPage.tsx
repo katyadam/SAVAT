@@ -1,7 +1,11 @@
 import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
 import { columns } from "@/components/inputs/Columns";
 import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
-import { useDeleteProject, useProject } from "@/hooks/useProject";
+import {
+  useDeleteProject,
+  useProject,
+  useProjectSummary,
+} from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -40,6 +44,7 @@ const ProjectPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isOpen, openConfirmWindow] = useState<boolean>(false);
+  const { data: projectSummary } = useProjectSummary(projectId || "");
   const handleProjectDelete = async () => {
     try {
       if (projectId) {
@@ -163,6 +168,28 @@ const ProjectPage = () => {
               btnVariant: "ghost",
             },
           ]}
+          body={
+            <div className="flex flex-col items-start gap-2 mb-5">
+              <p className="">
+                Analysis Inputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalAnalysisInputs}
+                </span>
+              </p>
+              <p>
+                Call Graph Inputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalCallGraphInputs}
+                </span>
+              </p>
+              <p>
+                Change Impact Analysis Outputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalCallGraphOutputs}
+                </span>
+              </p>
+            </div>
+          }
         />
       )}
     </div>

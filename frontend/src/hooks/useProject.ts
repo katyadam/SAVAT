@@ -56,3 +56,10 @@ export const useAnalysisInputCreate = (projectId: string) => {
         }
     })
 }
+
+export const useProjectSummary = (projectId: string) => {
+    return useQuery({
+        queryKey: ["project_summary", projectId],
+        queryFn: () => ProjectApi.getSummary(projectId)
+    });
+}
