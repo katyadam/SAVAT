@@ -193,7 +193,7 @@ export function CallGraphInputsTable<TData, TValue>({
                 colSpan={columns.length + 3}
                 className="h-24 text-center"
               >
-                No analysis inputs.
+                No Call Graph Inputs.
               </TableCell>
             </TableRow>
           )}
