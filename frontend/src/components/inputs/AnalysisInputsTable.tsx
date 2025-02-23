@@ -22,6 +22,8 @@ import { CalendarArrowDown, CalendarArrowUp, Trash2 } from "lucide-react";
 import { useAnalyisiInputDelete } from "@/hooks/useAnalysisInput";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "../ui/button";
+import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
+import HeaderWithSort from "../ui/HeaderWithSort";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -60,18 +62,16 @@ export function AnalysisInputsTable<TData, TValue>({
     }
   };
 
-  const [sortByDate, setSortByDate] = useState<boolean>(false);
-  const sortedData = useMemo<TData[]>(() => {
-    return [...data].sort((a, b) => {
-      const dateA = new Date((a as AnalysisInput).createdAt).getTime();
-      const dateB = new Date((b as AnalysisInput).createdAt).getTime();
-      return sortByDate ? dateA - dateB : dateB - dateA;
-    });
-  }, [data, sortByDate]);
+  const [sortBy, setSortBy] = useState<"version" | "date">("date");
+
+  const { dateSortedData, dateSortMethod, setDateSortMethod } =
+    useSortingByDate(data);
+  const { versionSortedData, versionSortMethod, setVersionSortMethod } =
+    useSortingByVersion(data);
 
   const microserviceFilter = (): boolean => false;
   const table = useReactTable({
-    data: sortedData,
+    data: sortBy === "date" ? dateSortedData : versionSortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     filterFns: { microserviceFilter },
@@ -84,10 +84,24 @@ export function AnalysisInputsTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) =>
-                header.id === "createdAt" ? (
+                header.id === "createdAt" || header.id === "version" ? (
                   <TableHead
                     key={header.id}
-                    onClick={() => setSortByDate(!sortByDate)}
+                    onClick={() => {
+                      if (header.id === "createdAt") {
+                        setSortBy("date");
+                        setDateSortMethod(
+                          dateSortMethod === "dateAsc" ? "dateDesc" : "dateAsc"
+                        );
+                      } else {
+                        setSortBy("version");
+                        setVersionSortMethod(
+                          versionSortMethod === "versionAsc"
+                            ? "versionDesc"
+                            : "versionAsc"
+                        );
+                      }
+                    }}
                     className="flex flex-row items-center gap-3 cursor-pointer"
                   >
                     <p>
@@ -96,7 +110,15 @@ export function AnalysisInputsTable<TData, TValue>({
                         header.getContext()
                       )}
                     </p>
-                    {sortByDate ? <CalendarArrowUp /> : <CalendarArrowDown />}
+                    <HeaderWithSort
+                      header={header.id}
+                      sortBy={sortBy}
+                      sortMethod={
+                        header.id === "createdAt"
+                          ? dateSortMethod
+                          : versionSortMethod
+                      }
+                    />
                   </TableHead>
                 ) : (
                   <TableHead key={header.id}>

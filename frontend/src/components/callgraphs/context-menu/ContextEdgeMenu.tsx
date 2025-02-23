@@ -23,8 +23,8 @@ type CallMetadata = {
   targetMethodName: string | undefined;
   sourceClassName: string | undefined;
   targetClassName: string | undefined;
-  sourceParams: string | undefined;
-  targetParams: string | undefined;
+  sourceParams: string[] | undefined;
+  targetParams: string[] | undefined;
   sourceMs: string | undefined;
   targetMs: string | undefined;
 };
@@ -54,8 +54,8 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
         targetMethodName: targetBeforeParams?.pop(),
         sourceClassName: sourceBeforeParams?.pop(),
         targetClassName: targetBeforeParams?.pop(),
-        sourceParams: call.source.split("(")[1].split(",").join(","),
-        targetParams: call.target.split("(")[1].split(",").join(","),
+        sourceParams: call.source.split("(")[1].slice(0, -1).split(","),
+        targetParams: call.target.split("(")[1].slice(0, -1).split(","),
         sourceMs: call.source.split("/")[0],
         targetMs: call.target.split("/")[0],
       });
@@ -79,7 +79,7 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
           {callMetadata.sourceMs} {"->"} {callMetadata.targetMs}
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 justify-between">
+      <CardContent className="flex flex-col gap-2 justify-between overflow-y-auto max-h-[500px]">
         <ContextMenuInfo label="Is Interservice Call">
           <p>{call.isInterserviceCall ? "Yes" : "No"}</p>
         </ContextMenuInfo>
@@ -92,7 +92,9 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
               <p>{callMetadata.sourceClassName}</p>
             </ContextMenuInfo>
             <ContextMenuInfo label="Source Method's Parameters">
-              <p>{callMetadata.sourceParams?.slice(0, -1)}</p>
+              {callMetadata.sourceParams?.map((param) => (
+                <p key={param}>{param}</p>
+              ))}
             </ContextMenuInfo>
           </div>
           <div className="p-2">
@@ -103,7 +105,9 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
               <p>{callMetadata.targetClassName}</p>
             </ContextMenuInfo>
             <ContextMenuInfo label="Target Method's Parameters">
-              <p>{callMetadata.targetParams?.slice(0, -1)}</p>
+              {callMetadata.targetParams?.map((param) => (
+                <p>{param}</p>
+              ))}
             </ContextMenuInfo>
           </div>
         </div>

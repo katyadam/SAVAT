@@ -58,32 +58,35 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
   };
 
   return (
-    <div className="flex flex-row justify-between items-center">
-      <InputsList
-        projectId={projectId}
-        inputToOmit={rightSelected}
-        selectedInput={leftSelected}
-        setSelectedInput={setLeftSelected}
-      />
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-row justify-between items-center gap-5">
-          <InputInfoBlock input={leftSelected} />
-          {leftSelected && rightSelected && <ArrowRightLeft />}
-          <InputInfoBlock input={rightSelected} />
+    <div>
+      <h1 className="text-md font-bold">Select Call Graph inputs</h1>
+      <div className="flex flex-row justify-between items-center">
+        <InputsList
+          projectId={projectId}
+          inputToOmit={rightSelected}
+          selectedInput={leftSelected}
+          setSelectedInput={setLeftSelected}
+        />
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-row justify-between items-center gap-5">
+            <InputInfoBlock input={leftSelected} />
+            {leftSelected && rightSelected && <ArrowRightLeft />}
+            <InputInfoBlock input={rightSelected} />
+          </div>
+          {leftSelected && rightSelected && (
+            <Button onClick={handleCiaDispatch} variant="default">
+              Compare
+            </Button>
+          )}
         </div>
-        {leftSelected && rightSelected && (
-          <Button onClick={handleCiaDispatch} variant="default">
-            Compare
-          </Button>
-        )}
-      </div>
 
-      <InputsList
-        projectId={projectId}
-        inputToOmit={leftSelected}
-        selectedInput={rightSelected}
-        setSelectedInput={setRightSelected}
-      />
+        <InputsList
+          projectId={projectId}
+          inputToOmit={leftSelected}
+          selectedInput={rightSelected}
+          setSelectedInput={setRightSelected}
+        />
+      </div>
     </div>
   );
 };
