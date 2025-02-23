@@ -13,3 +13,8 @@ export type CreateAnalysisInput = Omit<AnalysisInput, "id" | "createdAt"> & {
     entities: GraphData,
     graph: CommGraph,
 }
+
+export type AnalysisInputSummary = {
+    totalEntitiesComparisons: number;
+    totalGraphComparisons: number;
+}

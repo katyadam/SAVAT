@@ -39,7 +39,7 @@ const ProjectPage = () => {
   const { mutateAsync } = useDeleteProject();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [isOpen, openConfigDialog] = useState<boolean>(false);
+  const [isOpen, openConfirmWindow] = useState<boolean>(false);
   const handleProjectDelete = async () => {
     try {
       if (projectId) {
@@ -81,7 +81,7 @@ const ProjectPage = () => {
             <p className="font-semibold text-gray-500">Delete This Project</p>
             <Trash2
               className="cursor-pointer"
-              onClick={() => openConfigDialog(true)}
+              onClick={() => openConfirmWindow(true)}
             />
           </div>
         </div>
@@ -148,7 +148,7 @@ const ProjectPage = () => {
       )}
       {isOpen && (
         <ConfirmWindow
-          closeFunc={() => openConfigDialog(false)}
+          closeFunc={() => openConfirmWindow(false)}
           title="Do you really want to delete this project ?"
           width="w-1/4"
           options={[
@@ -159,7 +159,7 @@ const ProjectPage = () => {
             },
             {
               title: "NO",
-              callback: () => openConfigDialog(false),
+              callback: () => openConfirmWindow(false),
               btnVariant: "ghost",
             },
           ]}

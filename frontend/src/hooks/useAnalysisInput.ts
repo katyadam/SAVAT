@@ -20,3 +20,11 @@ export const useAnalyisiInputDelete = (projectId: string) => {
             }),
     });
 };
+
+export const useAnalysisInputSummary = (id: number | null) => {
+    return useQuery({
+        queryKey: ["ai_summary", id],
+        queryFn: () => id ? AnalysisInputApi.getSummary(id) : Promise.reject("No ID provided"),
+        enabled: !!id,
+    })
+}

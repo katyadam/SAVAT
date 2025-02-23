@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Button } from "./button";
 import Overlay from "./Overlay";
 
@@ -19,6 +19,7 @@ type ConfirmWindowType = {
   width: string;
   title: string;
   closeFunc: () => void;
+  body?: ReactNode;
 };
 
 const ConfirmWindow: FC<ConfirmWindowType> = ({
@@ -26,10 +27,12 @@ const ConfirmWindow: FC<ConfirmWindowType> = ({
   width,
   title,
   closeFunc,
+  body,
 }) => {
   return (
     <Overlay width={width} closeFunc={closeFunc}>
       <h1 className="flex mb-5">{title}</h1>
+      <>{body}</>
       <div className="flex flex-row gap-3">
         {options.map((option) => (
           <Button variant={option.btnVariant} onClick={option.callback}>
