@@ -3,7 +3,7 @@ import { CompareEntitiesLinksResponse } from "@/api/entities/types";
 import CompareForm from "@/components/entities/CompareForm";
 import EntityDetail from "@/components/entities/EntityDetail";
 import FieldDetail from "@/components/entities/FieldDetail";
-import EntitiesDiffGraph from "@/components/entities/graphs/EntitiesDiffGraph";
+import Graph from "@/components/entities/graphs/Graph";
 import Navbar from "@/components/entities/Navbar";
 import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
@@ -76,13 +76,14 @@ const EntitiesPage = () => {
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (showComparisons && entities && selectedEntitiesDiff) {
       return (
-        <EntitiesDiffGraph
+        <Graph
           graphData={{
             nodes: entities.nodes,
             links: [],
           }}
           onNodeClick={handleNodeClick}
           entitiesDiffId={selectedEntitiesDiff}
+          showIsolatedNodes={true}
         />
       );
     }

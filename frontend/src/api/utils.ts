@@ -1,15 +1,19 @@
+export const CY_COLOR_RED = "#FF0000"
+export const CY_COLOR_GREEN = "#00FF00"
+export const CY_COLOR_BLUE = "#0000FF"
+export const CY_COLOR_NEUTRAL = "#808080"
+export const CY_COLOR_HIGHLIGHTED = "#FFD700"
+
 export const getChangedColor = (type: string): string => {
     switch (type) {
-        case "SAME":
-            return "light-grey";
         case "ADDED":
-            return "green";
+            return CY_COLOR_GREEN;
         case "REMOVED":
-            return "red";
+            return CY_COLOR_RED;
         case "MODIFIED":
-            return "blue";
+            return CY_COLOR_BLUE;
         default:
-            return "white";
+            return CY_COLOR_NEUTRAL;
     }
 };
 

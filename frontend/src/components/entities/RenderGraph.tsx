@@ -1,6 +1,6 @@
 import { EntityNode, GraphData } from "@/api/entities/types";
 import { FC } from "react";
-import BasicGraph from "./graphs/BasicGraph";
+import Graph from "./graphs/Graph";
 import { RenderType } from "./types";
 
 import EntityDetailsDiagram from "./graphs/EntityDetailsDiagram";
@@ -22,7 +22,7 @@ const RenderGraph: FC<RenderGraphProps> = ({
   switch (renderType) {
     case RenderType.BASIC_GRAPH:
       return (
-        <BasicGraph
+        <Graph
           graphData={entities}
           onNodeClick={onNodeClick}
           showIsolatedNodes={showIsolatedNodes}

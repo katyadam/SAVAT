@@ -19,6 +19,7 @@ export const useEntitiesDiffs = (analysisInputId: string): UseQueryResult<Entiti
 export const useEntitiesDiff = (id: string): UseQueryResult<EntitiesDiff, Error> => {
     return useQuery({
         queryKey: ["entityDiff", id],
-        queryFn: () => EntitiesApi.getEntitiesDiff(id)
+        queryFn: () => EntitiesApi.getEntitiesDiff(id),
+        enabled: !!id && id !== "None",
     });
 }
