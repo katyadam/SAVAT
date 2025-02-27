@@ -14,7 +14,7 @@ import { Separator } from "../ui/separator";
 import dayjs from "dayjs";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import LegendTable from "../callgraphs/LegendTable";
-import { Eye } from "lucide-react";
+import { CircleHelp, Eye } from "lucide-react";
 
 type NavbarType = {
   compareBtnClick: (val: boolean) => void;
@@ -26,6 +26,7 @@ type NavbarType = {
   selectedEntitiesDiff: string | null;
   setSelectedEntitiesDiff: (seletedEntitiesDiff: string) => void;
   msColors: Map<string, string>;
+  hintComponent?: React.ReactNode;
 };
 
 const Navbar: FC<NavbarType> = ({
@@ -38,6 +39,7 @@ const Navbar: FC<NavbarType> = ({
   selectedEntitiesDiff,
   setSelectedEntitiesDiff,
   msColors,
+  hintComponent,
 }) => {
   const { data: entitiesDiffs, isLoading } = useEntitiesDiffs(analysisInputId);
 
@@ -95,6 +97,16 @@ const Navbar: FC<NavbarType> = ({
               )}
             </>
           )}
+          <Popover modal={false}>
+            <PopoverTrigger className="relative flex flex-col items-center mx-5 cursor-pointer">
+              <label className="text-gray-500 mb-1">Hint</label>
+              <div className="relative">
+                <CircleHelp />
+              </div>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-full">{hintComponent}</PopoverContent>
+          </Popover>
         </>
       ) : (
         <>

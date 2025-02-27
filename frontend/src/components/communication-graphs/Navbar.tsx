@@ -10,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { CircleHelp } from "lucide-react";
 
 type NavbarType = {
   analysisInputId: string;
@@ -17,6 +19,7 @@ type NavbarType = {
   compareBtnClick: (val: boolean) => void;
   setShowComparisons: (val: boolean) => void;
   setSelectedCommGraphDiff: (selectedCommGraphDiff: string) => void;
+  hintComponent?: React.ReactNode;
 };
 
 const Navbar: FC<NavbarType> = ({
@@ -25,6 +28,7 @@ const Navbar: FC<NavbarType> = ({
   compareBtnClick,
   setSelectedCommGraphDiff,
   setShowComparisons,
+  hintComponent,
 }) => {
   const { data: commGraphDiffs, isLoading } =
     useCommGraphDiffs(analysisInputId);
@@ -66,6 +70,16 @@ const Navbar: FC<NavbarType> = ({
               </SelectContent>
             </Select>
           )}
+          <Popover modal={false}>
+            <PopoverTrigger className="relative flex flex-col items-center mx-5 cursor-pointer">
+              <label className="text-gray-500 mb-1">Hint</label>
+              <div className="relative">
+                <CircleHelp />
+              </div>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-full">{hintComponent}</PopoverContent>
+          </Popover>
         </>
       ) : (
         <>

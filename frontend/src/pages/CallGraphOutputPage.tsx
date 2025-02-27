@@ -12,6 +12,7 @@ import { Action } from "./CallGraphPage";
 import { Separator } from "@/components/ui/separator";
 import Loading from "@/components/loading/Loading";
 import Navbar from "@/components/callgraphs/Navbar";
+import { CallGraphOutputHint } from "@/components/ui/hints";
 
 const CallGraphOutputPage = () => {
   useEffect(() => {
@@ -101,6 +102,7 @@ const CallGraphOutputPage = () => {
             setIsContextMenuOpen(false);
             setIsEdgeContextMenuOpen(false);
           }}
+          hintComponent={<CallGraphOutputHint />}
         />
       )}
       <Separator className="mt-2" />
