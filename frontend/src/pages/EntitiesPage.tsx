@@ -9,6 +9,7 @@ import Navbar from "@/components/entities/Navbar";
 import RenderGraph from "@/components/entities/RenderGraph";
 import { RenderType } from "@/components/entities/types";
 import Loading from "@/components/loading/Loading";
+import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
@@ -115,6 +116,7 @@ const EntitiesPage = () => {
         selectedEntitiesDiff={selectedEntitiesDiff}
         setSelectedEntitiesDiff={setSelectedEntitiesDiff}
         msColors={msColors}
+        hintComponent={<LinkDifferencesHint />}
       />
       <Separator className="mt-2" />
       {renderContent()}

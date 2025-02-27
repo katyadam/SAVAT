@@ -7,6 +7,7 @@ import { getMicroservicesColors } from "@/components/callgraphs/generators/color
 import Graph from "@/components/callgraphs/graphs/Graph";
 import Navbar from "@/components/callgraphs/Navbar";
 import Loading from "@/components/loading/Loading";
+import { CallGraphInputHint } from "@/components/ui/hints";
 import { Separator } from "@/components/ui/separator";
 import { useCallGraphInput } from "@/hooks/useCallGraph";
 import { useEffect, useState } from "react";
@@ -109,6 +110,7 @@ const CallGraphPage = () => {
             setIsContextMenuOpen(false);
             setIsEdgeContextMenuOpen(false);
           }}
+          hintComponent={<CallGraphInputHint />}
         />
       )}
       <Separator className="mt-2" />

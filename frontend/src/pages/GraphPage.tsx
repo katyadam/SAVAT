@@ -3,6 +3,7 @@ import CompareForm from "@/components/communication-graphs/CompareForm";
 import Graph from "@/components/communication-graphs/graphs/Graph";
 import Navbar from "@/components/communication-graphs/Navbar";
 import Loading from "@/components/loading/Loading";
+import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
@@ -68,6 +69,7 @@ const GraphPage = () => {
         setSelectedCommGraphDiff={setSelectedCommGraphDiff}
         setShowComparisons={setShowComparisons}
         showComparisons={showComparisons}
+        hintComponent={<LinkDifferencesHint />}
       />
       <Separator className="mt-2" />
       {renderContent()}
