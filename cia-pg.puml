@@ -1,0 +1,56 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class analysis_input {
+   commit_hash: varchar(255)
+   created_at: timestamp(6)
+   entities: jsonb
+   graph: jsonb
+   version: varchar(255)
+   project_id: bigint
+   id: bigint
+}
+class call_graph_input {
+   call_graph: jsonb
+   commit_hash: varchar(255)
+   created_at: timestamp(6)
+   version: varchar(255)
+   project_id: bigint
+   id: bigint
+}
+class call_graph_output {
+   changed_call_graph: jsonb
+   created_at: timestamp(6)
+   source_call_graph_input: jsonb
+   target_call_graph_input: jsonb
+   project_id: bigint
+   id: bigint
+}
+class changed_entity {
+   changed_links: jsonb
+   created_at: timestamp(6)
+   analysis_input_id: bigint
+   id: bigint
+}
+class changed_graph {
+   changed_links: jsonb
+   created_at: timestamp(6)
+   analysis_input_id: bigint
+   id: bigint
+}
+class project {
+   created_at: timestamp(6)
+   project_name: varchar(255)
+   id: bigint
+}
+
+analysis_input     -[#595959,plain]-^  project           : "project_id:id"
+call_graph_input   -[#595959,plain]-^  project           : "project_id:id"
+call_graph_output  -[#595959,plain]-^  project           : "project_id:id"
+changed_entity     -[#595959,plain]-^  analysis_input    : "analysis_input_id:id"
+changed_graph      -[#595959,plain]-^  analysis_input    : "analysis_input_id:id"
+@enduml
+
