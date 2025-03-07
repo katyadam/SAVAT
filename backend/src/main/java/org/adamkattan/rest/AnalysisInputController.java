@@ -6,13 +6,13 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.entities.compare.ChangedEntity;
-import org.adamkattan.model.graph.compare.ChangedGraph;
+import org.adamkattan.model.contextmap.compare.ChangedContextMap;
+import org.adamkattan.model.sdg.compare.ChangedServiceDependecyGraph;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.input.AnalysisInputSummary;
 import org.adamkattan.service.AnalysisInputService;
-import org.adamkattan.service.EntitiesDifferenceService;
+import org.adamkattan.service.ContextMapChangeImpactService;
 import org.adamkattan.service.GraphDifferenceService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class AnalysisInputController {
     AnalysisInputService analysisInputService;
 
     @Inject
-    EntitiesDifferenceService entitiesDifferenceService;
+    ContextMapChangeImpactService entitiesDifferenceService;
 
     @Inject
     GraphDifferenceService graphDifferenceService;
@@ -72,8 +72,8 @@ public class AnalysisInputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getAnalysisInputSummary(@PathParam("id") Long analysisInputId) {
-        List<ChangedEntity> changedEntities = entitiesDifferenceService.getChangedEntities(analysisInputId);
-        List<ChangedGraph> changedGraphs = graphDifferenceService.getChangedGraphs(analysisInputId);
+        List<ChangedContextMap> changedEntities = entitiesDifferenceService.getChangedEntities(analysisInputId);
+        List<ChangedServiceDependecyGraph> changedGraphs = graphDifferenceService.getChangedGraphs(analysisInputId);
         AnalysisInputSummary summary = new AnalysisInputSummary(changedEntities.size(), changedGraphs.size());
         return Response.ok(summary)
                 .build();

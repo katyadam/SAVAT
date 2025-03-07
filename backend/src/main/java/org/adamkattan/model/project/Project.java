@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
-import org.adamkattan.model.input.AnalysisInput;
+import org.adamkattan.model.contextmap.ContextMapEntity;
+import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,8 +20,12 @@ public class Project extends PanacheEntity {
     public String projectName;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @Column(nullable = false, name = "inputs")
-    public List<AnalysisInput> inputs;
+    @Column(nullable = false, name = "service_dependency_graphs")
+    public List<ServiceDependencyGraphEntity> sdgs;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(nullable = false, name = "context_maps")
+    public List<ContextMapEntity> contextMaps;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "call_graph_inputs")

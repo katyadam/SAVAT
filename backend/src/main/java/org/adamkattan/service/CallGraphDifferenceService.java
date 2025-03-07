@@ -2,7 +2,7 @@ package org.adamkattan.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.adamkattan.analysis.CallGraphDifferenceAnalysis;
+import org.adamkattan.analysis.CallGraphChangeImpactAnalysis;
 import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
@@ -21,7 +21,7 @@ public class CallGraphDifferenceService {
         Project projectById = projectService.getProjectById(projectId);
         CallGraphInput sourceCallGraphInput = callGraphInputService.getCallGraphInputById(sourceCallGraphId);
         CallGraphInput targetCallGraphInput = callGraphInputService.getCallGraphInputById(targetCallGraphId);
-        ChangedCallGraph changedCallGraph = CallGraphDifferenceAnalysis.changeImpactAnalysis(
+        ChangedCallGraph changedCallGraph = CallGraphChangeImpactAnalysis.changeImpactAnalysis(
                 sourceCallGraphInput.callGraph,
                 targetCallGraphInput.callGraph
         );

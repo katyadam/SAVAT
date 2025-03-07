@@ -3,8 +3,8 @@ package org.adamkattan.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
-import org.adamkattan.model.entities.Entities;
-import org.adamkattan.model.graph.Graph;
+import org.adamkattan.model.contextmap.ContextMap;
+import org.adamkattan.model.sdg.ServiceDependencyGraph;
 import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 
@@ -42,18 +42,18 @@ public class AnalysisInputService {
         analysisInput.project = project;
         analysisInput.version = analysisInputDto.version();
         analysisInput.commitHash = analysisInputDto.commitHash();
-        analysisInput.entities = analysisInputDto.entities();
-        analysisInput.graph = analysisInputDto.graph();
+        analysisInput.entities = analysisInputDto.contextMap();
+        analysisInput.graph = analysisInputDto.serviceDependencyGraph();
         analysisInput.persist();
         return AnalysisInput.toFullDto(analysisInput);
     }
 
-    public Entities getAnalysisInputEntities(Long inputId) {
+    public ContextMap getAnalysisInputEntities(Long inputId) {
         AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
         return input.entities;
     }
 
-    public Graph getAnalysisInputGraph(Long inputId) {
+    public ServiceDependencyGraph getAnalysisInputGraph(Long inputId) {
         AnalysisInput input = AnalysisInput.find("id", inputId).firstResult();
         return input.graph;
     }

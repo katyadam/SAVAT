@@ -8,9 +8,6 @@ import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.input.AnalysisInputFullDto;
 import org.adamkattan.model.output.DifferenceOutput;
 import org.adamkattan.model.output.DifferenceType;
-import org.adamkattan.model.output.PlainDifferenceOutput;
-
-import java.util.Optional;
 
 @ApplicationScoped
 public class DifferenceService {
@@ -33,8 +30,8 @@ public class DifferenceService {
 
     private DifferenceOutput computeDifference(AnalysisInputFullDto src, AnalysisInputFullDto dest, DifferenceType type) {
         var diffRows = switch (type) {
-            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.entities(), dest.entities());
-            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.graph(), dest.graph());
+            case DifferenceType.ENTITIES -> differenceAnalysis.getDifferenceRows(src.contextMap(), dest.contextMap());
+            case DifferenceType.GRAPH -> differenceAnalysis.getDifferenceRows(src.serviceDependencyGraph(), dest.serviceDependencyGraph());
         };
         StringBuilder oldJson = new StringBuilder();
         StringBuilder newJson = new StringBuilder();

@@ -6,10 +6,10 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.entities.EntitiesLinksInputDto;
-import org.adamkattan.model.entities.compare.ChangedEntitiesLinksOutput;
-import org.adamkattan.model.entities.compare.ChangedEntity;
-import org.adamkattan.service.EntitiesDifferenceService;
+import org.adamkattan.model.contextmap.LinksInputDto;
+import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.compare.ChangedContextMap;
+import org.adamkattan.service.ContextMapChangeImpactService;
 
 import java.util.List;
 
@@ -17,16 +17,16 @@ import java.util.List;
 public class EntitiesOutputController {
 
     @Inject
-    EntitiesDifferenceService entitiesDifferenceService;
+    ContextMapChangeImpactService contextMapChangeImpactService;
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedEntity(@PathParam("id") Long id) {
-        ChangedEntity changedEntity = entitiesDifferenceService.getChangedEntity(id);
+        ChangedContextMap changedContextMap = contextMapChangeImpactService.getChangedEntity(id);
         return Response.ok(
-                ChangedEntity.toDto(changedEntity)
+                ChangedContextMap.toDto(changedContextMap)
         ).build();
     }
 
@@ -35,10 +35,10 @@ public class EntitiesOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedEntities(@PathParam("analysisInputId") Long analysisInputId) {
-        List<ChangedEntity> changedEntities = entitiesDifferenceService.getChangedEntities(analysisInputId);
+        List<ChangedContextMap> changedEntities = contextMapChangeImpactService.getChangedEntities(analysisInputId);
         return Response.ok(
                 changedEntities.stream()
-                        .map(ChangedEntity::toDto)
+                        .map(ChangedContextMap::toDto)
         ).build();
     }
 
@@ -48,10 +48,10 @@ public class EntitiesOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response compareEntities(
-            @Valid EntitiesLinksInputDto entitiesLinksInputDto,
+            @Valid LinksInputDto entitiesLinksInputDto,
             @PathParam("analysisInputId") Long srcId
     ) {
-        ChangedEntitiesLinksOutput output = entitiesDifferenceService.saveChangedEntitiesLinks(entitiesLinksInputDto, srcId);
+        ChangedLinksOutput output = contextMapChangeImpactService.saveChangedEntitiesLinks(entitiesLinksInputDto, srcId);
         return Response.ok(output).build();
     }
 }

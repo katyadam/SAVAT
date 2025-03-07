@@ -17,6 +17,13 @@ public class ProjectController {
     ProjectService projectService;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllProjects() {
+        return Response.ok(projectService.getAllProjects())
+                .build();
+    }
+
+    @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProject(@PathParam("id") Long id) {
@@ -25,8 +32,33 @@ public class ProjectController {
     }
 
     @GET
+    @Path("{id}/context-maps")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllProjects() {
+    public Response getProjectContextMaps(@PathParam("id") Long id) {
+        return Response.ok(projectService.getAllProjects())
+                .build();
+    }
+
+    @GET
+    @Path("{id}/context-maps/latest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProjectLatestContextMaps(@PathParam("id") Long id) {
+        return Response.ok(projectService.getAllProjects())
+                .build();
+    }
+
+    @GET
+    @Path("{id}/sdgs")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProjectServiceDependencyGraphs(@PathParam("id") Long id) {
+        return Response.ok(projectService.getAllProjects())
+                .build();
+    }
+
+    @GET
+    @Path("{id}/sdgs/latest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProjectLatestServiceDependencyGraphs(@PathParam("id") Long id) {
         return Response.ok(projectService.getAllProjects())
                 .build();
     }
@@ -37,7 +69,8 @@ public class ProjectController {
     public Response getSummary(@PathParam("id") Long id) {
         Project project = projectService.getProjectById(id);
         ProjectSummary projectSummary = new ProjectSummary(
-                project.inputs.size(),
+                project.sdgs.size(),
+                project.contextMaps.size(),
                 project.callGraphInputs.size(),
                 project.callGraphOutputs.size()
         );

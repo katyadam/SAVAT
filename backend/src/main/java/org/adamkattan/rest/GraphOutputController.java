@@ -6,9 +6,9 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.graph.GraphLinksInputDto;
-import org.adamkattan.model.graph.compare.ChangedGraph;
-import org.adamkattan.model.graph.compare.ChangedGraphLinksOutput;
+import org.adamkattan.model.sdg.LinksInputDto;
+import org.adamkattan.model.sdg.compare.ChangedServiceDependecyGraph;
+import org.adamkattan.model.sdg.compare.ChangedLinksOutput;
 import org.adamkattan.service.GraphDifferenceService;
 
 import java.util.List;
@@ -24,9 +24,9 @@ public class GraphOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedGraph(@PathParam("id") Long id) {
-        ChangedGraph changedGraph = graphDifferenceService.getChangedGraph(id);
+        ChangedServiceDependecyGraph changedServiceDependecyGraph = graphDifferenceService.getChangedGraph(id);
         return Response.ok(
-                ChangedGraph.toDto(changedGraph)
+                ChangedServiceDependecyGraph.toDto(changedServiceDependecyGraph)
         ).build();
     }
 
@@ -35,10 +35,10 @@ public class GraphOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedGraphs(@PathParam("analysisInputId") Long analysisInputId) {
-        List<ChangedGraph> changedGraphs = graphDifferenceService.getChangedGraphs(analysisInputId);
+        List<ChangedServiceDependecyGraph> changedGraphs = graphDifferenceService.getChangedGraphs(analysisInputId);
         return Response.ok(
                 changedGraphs.stream()
-                        .map(ChangedGraph::toDto)
+                        .map(ChangedServiceDependecyGraph::toDto)
         ).build();
     }
 
@@ -48,10 +48,10 @@ public class GraphOutputController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response compareGraphs(
-            @Valid GraphLinksInputDto graphLinksInputDto,
+            @Valid LinksInputDto graphLinksInputDto,
             @PathParam("analysisInputId") Long srcId
     ) {
-        ChangedGraphLinksOutput output = graphDifferenceService.saveChangedGraphLinks(graphLinksInputDto, srcId);
+        ChangedLinksOutput output = graphDifferenceService.saveChangedGraphLinks(graphLinksInputDto, srcId);
         return Response.ok(output).build();
     }
 
