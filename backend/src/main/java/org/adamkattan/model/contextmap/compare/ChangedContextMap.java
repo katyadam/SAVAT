@@ -3,7 +3,6 @@ package org.adamkattan.model.contextmap.compare;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import org.adamkattan.model.contextmap.ContextMapEntity;
-import org.adamkattan.model.input.AnalysisInput;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 

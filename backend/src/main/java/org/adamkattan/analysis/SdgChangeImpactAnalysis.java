@@ -1,8 +1,9 @@
 package org.adamkattan.analysis;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import org.adamkattan.model.sdg.Link;
 import org.adamkattan.model.sdg.compare.ChangedLink;
 import org.adamkattan.model.sdg.compare.ChangedLinkType;
-import org.adamkattan.model.sdg.Link;
 import org.adamkattan.model.sdg.compare.ChangedLinksOutput;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@ApplicationScoped
 public class SdgChangeImpactAnalysis {
 
     private record LinkKey(String source, String target) {

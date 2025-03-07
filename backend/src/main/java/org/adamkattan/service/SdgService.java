@@ -1,13 +1,16 @@
 package org.adamkattan.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.model.sdg.ServiceDependencyGraphFullDto;
+import org.adamkattan.model.sdg.ServiceDependencyGraphSummary;
 import org.adamkattan.model.sdg.compare.ChangedServiceDependecyGraph;
 
 import java.util.List;
 
+@ApplicationScoped
 public class SdgService {
 
     @Inject
@@ -21,16 +24,12 @@ public class SdgService {
         return ServiceDependencyGraphEntity.find("project.id", projectId).list();
     }
 
-    public ServiceDependencyGraphEntity getProjectLatestSdgByVersion(Long projectId) {
-        return ServiceDependencyGraphEntity
-                .find("project.id = ?1 ORDER BY string_to_array(version, '.') DESC", projectId)
-                .firstResult();
-    }
-
-    public ServiceDependencyGraphEntity getProjectLatestSdgByTimestamp(Long projectId) {
-        return ServiceDependencyGraphEntity
-                .find("project.id = ?1 ORDER BY createdAt DESC", projectId)
-                .firstResult();
+    public ServiceDependencyGraphSummary getSdgSummary(Long id) {
+        ServiceDependencyGraphEntity sdg = ServiceDependencyGraphEntity.find("id", id).firstResult();
+        if (sdg != null) {
+            return new ServiceDependencyGraphSummary(sdg.changedSdgs.size());
+        }
+        throw new EntityNotFoundException("SDG not found");
     }
 
     public ServiceDependencyGraphFullDto addSdgToProject(ServiceDependencyGraphFullDto sdgFullDto) {

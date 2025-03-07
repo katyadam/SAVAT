@@ -1,11 +1,12 @@
 package org.adamkattan.service;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.ContextMapFullDto;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
+import org.adamkattan.model.contextmap.ContextMapSummary;
 
 import java.util.List;
 
@@ -23,16 +24,12 @@ public class ContextMapService {
         return ContextMapEntity.find("project.id", projectId).list();
     }
 
-    public ContextMapEntity getProjectLatestContextMapByVersion(Long projectId) {
-        return ContextMapEntity
-                .find("project.id = ?1 ORDER BY string_to_array(version, '.') DESC", projectId)
-                .firstResult();
-    }
-
-    public ContextMapEntity getProjectLatestContextMapByTimestamp(Long projectId) {
-        return ContextMapEntity
-                .find("project.id = ?1 ORDER BY createdAt DESC", projectId)
-                .firstResult();
+    public ContextMapSummary getContextMapSummary(Long id) {
+        ContextMapEntity contextMap = ContextMapEntity.find("id", id).firstResult();
+        if (contextMap != null) {
+            return new ContextMapSummary(contextMap.changedContextMaps.size());
+        }
+        throw new EntityNotFoundException("ContextMap not found");
     }
 
     public ContextMapFullDto addContextMapToProject(ContextMapFullDto contextMapFullDto) {
@@ -45,11 +42,6 @@ public class ContextMapService {
         contextMapEntity.persist();
         return ContextMapEntity.toFullDto(contextMapEntity);
 
-    }
-
-    public List<ChangedContextMap> getContextMapsChanges(Long id) {
-        ContextMapEntity contextMap = ContextMapEntity.find("id", id).firstResult();
-        return contextMap.changedContextMaps;
     }
 
     public Long deleteContextMapById(Long id) {

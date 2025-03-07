@@ -2,7 +2,6 @@ package org.adamkattan.model.sdg.compare;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.adamkattan.model.input.AnalysisInput;
 import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

@@ -9,7 +9,7 @@ import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
 import org.adamkattan.model.project.Project;
 
 @ApplicationScoped
-public class CallGraphDifferenceService {
+public class CallGraphChangeImpactService {
 
     @Inject
     CallGraphInputService callGraphInputService;

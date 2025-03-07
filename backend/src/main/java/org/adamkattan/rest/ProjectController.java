@@ -8,13 +8,21 @@ import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.project.CreateProjectDto;
 import org.adamkattan.model.project.Project;
 import org.adamkattan.model.project.ProjectSummary;
+import org.adamkattan.service.ContextMapService;
 import org.adamkattan.service.ProjectService;
+import org.adamkattan.service.SdgService;
 
 @Path("/projects")
 public class ProjectController {
 
     @Inject
     ProjectService projectService;
+
+    @Inject
+    ContextMapService contextMapService;
+
+    @Inject
+    SdgService sdgService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,15 +43,7 @@ public class ProjectController {
     @Path("{id}/context-maps")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectContextMaps(@PathParam("id") Long id) {
-        return Response.ok(projectService.getAllProjects())
-                .build();
-    }
-
-    @GET
-    @Path("{id}/context-maps/latest")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectLatestContextMaps(@PathParam("id") Long id) {
-        return Response.ok(projectService.getAllProjects())
+        return Response.ok(contextMapService.getProjectContextMaps(id))
                 .build();
     }
 
@@ -51,15 +51,7 @@ public class ProjectController {
     @Path("{id}/sdgs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectServiceDependencyGraphs(@PathParam("id") Long id) {
-        return Response.ok(projectService.getAllProjects())
-                .build();
-    }
-
-    @GET
-    @Path("{id}/sdgs/latest")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectLatestServiceDependencyGraphs(@PathParam("id") Long id) {
-        return Response.ok(projectService.getAllProjects())
+        return Response.ok(sdgService.getProjectSdgs(id))
                 .build();
     }
 
