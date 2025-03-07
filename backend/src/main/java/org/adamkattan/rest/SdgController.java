@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.adamkattan.model.sdg.CreateServiceDependencyGraph;
 import org.adamkattan.model.sdg.LinksInputDto;
 import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.model.sdg.ServiceDependencyGraphFullDto;
@@ -69,7 +70,7 @@ public class SdgController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response createSdg(@Valid ServiceDependencyGraphFullDto dto) {
+    public Response createSdg(@Valid CreateServiceDependencyGraph dto) {
         ServiceDependencyGraphFullDto createdSdg = sdgService.addSdgToProject(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(createdSdg)

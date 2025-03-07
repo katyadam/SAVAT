@@ -51,7 +51,7 @@ public class ProjectController {
     @Path("{id}/sdgs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectServiceDependencyGraphs(@PathParam("id") Long id) {
-        return Response.ok(sdgService.getProjectSdgs(id))
+        return Response.ok(sdgService.getProjectSdgs(id)) // TODO: use toDto
                 .build();
     }
 

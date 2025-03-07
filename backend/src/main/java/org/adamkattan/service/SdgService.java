@@ -3,6 +3,7 @@ package org.adamkattan.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
+import org.adamkattan.model.sdg.CreateServiceDependencyGraph;
 import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.model.sdg.ServiceDependencyGraphFullDto;
 import org.adamkattan.model.sdg.ServiceDependencyGraphSummary;
@@ -32,7 +33,7 @@ public class SdgService {
         throw new EntityNotFoundException("SDG not found");
     }
 
-    public ServiceDependencyGraphFullDto addSdgToProject(ServiceDependencyGraphFullDto sdgFullDto) {
+    public ServiceDependencyGraphFullDto addSdgToProject(CreateServiceDependencyGraph sdgFullDto) {
         var project = projectService.getProjectById(sdgFullDto.projectId());
         var serviceDependencyGraphEntity = new ServiceDependencyGraphEntity();
         serviceDependencyGraphEntity.project = project;

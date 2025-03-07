@@ -1,12 +1,12 @@
 package org.adamkattan.service;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.ContextMapFullDto;
 import org.adamkattan.model.contextmap.ContextMapSummary;
+import org.adamkattan.model.contextmap.CreateContextMap;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class ContextMapService {
         throw new EntityNotFoundException("ContextMap not found");
     }
 
-    public ContextMapFullDto addContextMapToProject(ContextMapFullDto contextMapFullDto) {
+    public ContextMapFullDto addContextMapToProject(CreateContextMap contextMapFullDto) {
         var project = projectService.getProjectById(contextMapFullDto.projectId());
         var contextMapEntity = new ContextMapEntity();
         contextMapEntity.project = project;

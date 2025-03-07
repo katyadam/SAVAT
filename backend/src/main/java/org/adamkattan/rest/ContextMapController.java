@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.ContextMapFullDto;
+import org.adamkattan.model.contextmap.CreateContextMap;
 import org.adamkattan.model.contextmap.LinksInputDto;
 import org.adamkattan.model.contextmap.compare.ChangedContextMap;
 import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
@@ -69,7 +70,7 @@ public class ContextMapController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response createContextMap(@Valid ContextMapFullDto dto) {
+    public Response createContextMap(@Valid CreateContextMap dto) {
         ContextMapFullDto createdContextMap = contextMapService.addContextMapToProject(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(createdContextMap)
