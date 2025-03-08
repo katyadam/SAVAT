@@ -43,7 +43,6 @@ export const useHighlightReachability = (
     actionsStorage: Action[],
     setActionsStorage: (actions: Action[]) => void
 ) => {
-    console.log(actionsStorage)
     useEffect(() => {
         if (!cy) return;
 

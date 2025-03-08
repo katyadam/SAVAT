@@ -2,16 +2,28 @@
   "projects": [
     {
       "projectName": "TEST",
-      "analysis-input-sources": [
+      "context-map-sources": [
         {
           "commitHash": "123abc",
           "version": "1.0.0",
-          "file": "../examples/analysis-inputs/example.json"
+          "file": "../examples/context-maps/example.json"
         },
         {
           "commitHash": "456def",
           "version": "2.0.0",
-          "file": "../examples/analysis-inputs/ts-whole.json"
+          "file": "../examples/context-maps/ts-whole.json"
+        }
+      ],
+      "service-dependency-graph-sources": [
+        {
+          "commitHash": "123abc",
+          "version": "1.0.0",
+          "file": "../examples/service-dependency-graphs/example.json"
+        },
+        {
+          "commitHash": "456def",
+          "version": "2.0.0",
+          "file": "../examples/service-dependency-graphs/ts-whole.json"
         }
       ],
       "callgraph-sources": [

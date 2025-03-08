@@ -6,7 +6,8 @@ export type Project = {
 export type CreateProject = Omit<Project, "id">
 
 export type ProjectSummary = {
-    totalAnalysisInputs: number;
+    totalSdgs: number;
+    totalContextMaps: number;
     totalCallGraphInputs: number;
     totalCallGraphOutputs: number;
 }

@@ -1,4 +1,6 @@
 import { axiosInstance } from "../config";
+import { ContextMapDto } from "../context-maps/types";
+import { SDGDto } from "../sdgs/types";
 import { CreateProject, Project, ProjectSummary } from "./types";
 
 const PROJECTS_PREFIX = "/projects"
@@ -28,12 +30,24 @@ async function getSummary(id: string): Promise<ProjectSummary> {
     return resp.data;
 }
 
+async function getProjectContextMaps(id: string): Promise<ContextMapDto[]> {
+    const resp = await axiosInstance.get(`${PROJECTS_PREFIX}/${id}/context-maps`);
+    return resp.data;
+}
+
+async function getProjectSDGs(id: string): Promise<SDGDto[]> {
+    const resp = await axiosInstance.get(`${PROJECTS_PREFIX}/${id}/sdgs`);
+    return resp.data;
+}
+
 const ProjectApi = {
     getAllProjects,
     getProjectById,
     createProject,
     deleteProject,
-    getSummary
+    getSummary,
+    getProjectContextMaps,
+    getProjectSDGs
 };
 
 export default ProjectApi;

@@ -4,15 +4,6 @@
 top to bottom direction
 skinparam linetype ortho
 
-class analysis_input {
-   commit_hash: varchar(255)
-   created_at: timestamp(6)
-   entities: jsonb
-   graph: jsonb
-   version: varchar(255)
-   project_id: bigint
-   id: bigint
-}
 class call_graph_input {
    call_graph: jsonb
    commit_hash: varchar(255)
@@ -29,16 +20,24 @@ class call_graph_output {
    project_id: bigint
    id: bigint
 }
-class changed_entity {
+class changed_context_map {
    changed_links: jsonb
    created_at: timestamp(6)
-   analysis_input_id: bigint
+   context_map_id: bigint
    id: bigint
 }
-class changed_graph {
+class changed_sdg {
    changed_links: jsonb
    created_at: timestamp(6)
-   analysis_input_id: bigint
+   service_dependency_graph_id: bigint
+   id: bigint
+}
+class context_map {
+   commit_hash: varchar(255)
+   context_map: jsonb
+   created_at: timestamp(6)
+   version: varchar(255)
+   project_id: bigint
    id: bigint
 }
 class project {
@@ -46,11 +45,19 @@ class project {
    project_name: varchar(255)
    id: bigint
 }
+class service_dependency_graph {
+   commit_hash: varchar(255)
+   created_at: timestamp(6)
+   service_dependency_graph: jsonb
+   version: varchar(255)
+   project_id: bigint
+   id: bigint
+}
 
-analysis_input     -[#595959,plain]-^  project           : "project_id:id"
-call_graph_input   -[#595959,plain]-^  project           : "project_id:id"
-call_graph_output  -[#595959,plain]-^  project           : "project_id:id"
-changed_entity     -[#595959,plain]-^  analysis_input    : "analysis_input_id:id"
-changed_graph      -[#595959,plain]-^  analysis_input    : "analysis_input_id:id"
+call_graph_input          -[#595959,plain]-^  project                  : "project_id:id"
+call_graph_output         -[#595959,plain]-^  project                  : "project_id:id"
+changed_context_map       -[#595959,plain]-^  context_map              : "context_map_id:id"
+changed_sdg               -[#595959,plain]-^  service_dependency_graph : "service_dependency_graph_id:id"
+context_map               -[#595959,plain]-^  project                  : "project_id:id"
+service_dependency_graph  -[#595959,plain]-^  project                  : "project_id:id"
 @enduml
-

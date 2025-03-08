@@ -15,7 +15,7 @@ import org.adamkattan.model.callgraph.algorithms.MethodReachability;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutputRequest;
 import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
-import org.adamkattan.service.CallGraphDifferenceService;
+import org.adamkattan.service.CallGraphChangeImpactService;
 import org.adamkattan.service.CallGraphOutputService;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 public class CallGraphOutputController {
 
     @Inject
-    CallGraphDifferenceService differenceService;
+    CallGraphChangeImpactService differenceService;
 
     @Inject
     CallGraphOutputService callGraphOutputService;

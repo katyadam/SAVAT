@@ -1,9 +1,8 @@
-import { AnalysisInputsTable } from "@/components/inputs/AnalysisInputsTable";
-import { columns } from "@/components/inputs/Columns";
-import { useAnalysisInputs } from "@/hooks/useAnalysisInput";
 import {
   useDeleteProject,
   useProject,
+  useProjectContextMaps,
+  useProjectSDGs,
   useProjectSummary,
 } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
@@ -12,7 +11,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
-import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreateDialog";
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 import { FileOperation } from "@/components/projects/types";
 import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
@@ -20,13 +18,19 @@ import { Separator } from "@/components/ui/separator";
 import { Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ConfirmWindow from "@/components/ui/ConfirmWindow";
+import { SDGsTable } from "@/components/sdgs/SDGsTable";
+import { columns } from "@/components/sdgs/Columns";
+import { ContextMapsTable } from "@/components/context-maps/ContextMapsTable";
+import { contextMapsColumns } from "@/components/context-maps/Columns";
+import ContextMapCreateDialog from "@/components/projects/ContextMapCreateDialog";
+import SDGCreateDialog from "@/components/projects/SDGCreateDialog";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
   const [importExportDialogUp, showImportExportDialog] =
     useState<FileOperation | null>(null);
   const [activeTab, setActive] = useState<string>(
-    localStorage.getItem("activeTab") || "components"
+    localStorage.getItem("activeTab") || "contextMaps"
   );
 
   useEffect(() => {
@@ -36,7 +40,11 @@ const ProjectPage = () => {
   const { data: project, isLoading: projectLoading } = useProject(
     projectId || ""
   );
-  const { data: inputs, isLoading: inputsLoading } = useAnalysisInputs(
+
+  const { data: contextMaps, isLoading: contextMapsLoading } =
+    useProjectContextMaps(projectId || "");
+
+  const { data: sdgs, isLoading: sdgsLoading } = useProjectSDGs(
     projectId || ""
   );
 
@@ -98,13 +106,22 @@ const ProjectPage = () => {
       >
         <TabsList className="flex flex-row py-2 text-center border-gray-300">
           <TabsTrigger
-            value="components"
+            value="contextMaps"
             className={
               "py-2 px-4 rounded-l-md transition-all duration-200 focus:outline-none" +
-              (activeTab === "components" ? " bg-gray-300" : "")
+              (activeTab === "contextMaps" ? " bg-gray-300" : "")
             }
           >
-            Components
+            Context Maps
+          </TabsTrigger>
+          <TabsTrigger
+            value="sdgs"
+            className={
+              "py-2 px-4 transition-all duration-200 focus:outline-none" +
+              (activeTab === "sdgs" ? " bg-gray-300" : "")
+            }
+          >
+            Service Dependency Graphs
           </TabsTrigger>
           <TabsTrigger
             value="callgraphs"
@@ -117,15 +134,23 @@ const ProjectPage = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="components">
-          {inputsLoading ? (
+        <TabsContent value="contextMaps">
+          {contextMapsLoading ? (
             <Loading overlay={false} />
           ) : (
-            <AnalysisInputsTable
-              columns={columns}
-              data={inputs!}
+            <ContextMapsTable
+              columns={contextMapsColumns}
+              data={contextMaps!}
               projectId={projectId}
             />
+          )}
+        </TabsContent>
+
+        <TabsContent value="sdgs">
+          {sdgsLoading ? (
+            <Loading overlay={false} />
+          ) : (
+            <SDGsTable columns={columns} data={sdgs!} projectId={projectId} />
           )}
         </TabsContent>
 
@@ -143,8 +168,15 @@ const ProjectPage = () => {
               />
             )}
           {importExportDialogUp == FileOperation.IMPORT &&
-            activeTab === "components" && (
-              <AnalysisInputCreateDialog
+            activeTab === "contextMaps" && (
+              <ContextMapCreateDialog
+                projectId={projectId}
+                closeDialog={() => showImportExportDialog(null)}
+              />
+            )}
+          {importExportDialogUp == FileOperation.IMPORT &&
+            activeTab === "sdgs" && (
+              <SDGCreateDialog
                 projectId={projectId}
                 closeDialog={() => showImportExportDialog(null)}
               />
@@ -171,9 +203,15 @@ const ProjectPage = () => {
           body={
             <div className="flex flex-col items-start gap-2 mb-5">
               <p className="">
-                Analysis Inputs:{" "}
+                Context Maps:{" "}
                 <span className="text-xl font-bold">
-                  {projectSummary && projectSummary.totalAnalysisInputs}
+                  {projectSummary && projectSummary.totalContextMaps}
+                </span>
+              </p>
+              <p className="">
+                Service Dependency Graphs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalSdgs}
                 </span>
               </p>
               <p>

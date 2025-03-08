@@ -1,5 +1,4 @@
 import CallGraphsApi from "@/api/callgraphs/api";
-import AnalysisInputApi from "@/api/inputs/api";
 import ProjectApi from "@/api/projects/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
@@ -47,19 +46,23 @@ export const useCallGraphInputCreate = (projectId: string) => {
     })
 }
 
-export const useAnalysisInputCreate = (projectId: string) => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: AnalysisInputApi.createAnalysisInput,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["inputs", projectId] })
-        }
-    })
-}
-
 export const useProjectSummary = (projectId: string) => {
     return useQuery({
-        queryKey: ["project_summary", projectId],
+        queryKey: ["projectSummary", projectId],
         queryFn: () => ProjectApi.getSummary(projectId)
+    });
+}
+
+export const useProjectContextMaps = (projectId: string) => {
+    return useQuery({
+        queryKey: ["contextMaps", projectId],
+        queryFn: () => ProjectApi.getProjectContextMaps(projectId)
+    });
+}
+
+export const useProjectSDGs = (projectId: string) => {
+    return useQuery({
+        queryKey: ["sdgs", projectId],
+        queryFn: () => ProjectApi.getProjectSDGs(projectId)
     });
 }

@@ -19,7 +19,8 @@ public class ProjectService {
     public Project createProject(CreateProjectDto projectDto) {
         var project = new Project();
         project.projectName = projectDto.projectName();
-        project.inputs = new ArrayList<>();
+        project.contextMaps = new ArrayList<>();
+        project.sdgs = new ArrayList<>();
         project.persist();
         return project;
     }
@@ -33,7 +34,8 @@ public class ProjectService {
     public Long deleteProject(Long projectId) {
         Project project = Project.find("id", projectId).firstResult();
         if (project != null) {
-            project.inputs.clear();
+            project.contextMaps.clear();
+            project.sdgs.clear();
             project.callGraphInputs.clear();
             project.callGraphOutputs.clear();
             project.persist();

@@ -4,13 +4,19 @@ import requests
 
 
 class Project:
-    def __init__(self, name, ai_sources, callgraph_sources):
+    def __init__(self, name, callgraph_sources, context_map_sources, sdg_sources):
         self.name = name
-        self.ai_sources = ai_sources
         self.callgraph_sources = callgraph_sources
+        self.context_map_sources = context_map_sources
+        self.sdg_sources = sdg_sources
 
     def __repr__(self):
-        return f"Project(name={self.name}, ai_sources={self.ai_sources}, callgraph_sources={self.callgraph_sources})"
+        return f"""Project(
+            name={self.name},
+            callgraph_sources={self.callgraph_sources}
+            context_map_sources={self.context_map_sources}
+            sdg_sources={self.sdg_sources}
+        )"""
 
 
 def parse_args():
@@ -33,10 +39,12 @@ def get_projects(config_data):
     projects = []
     for project_data in config_data["projects"]:
         name = project_data["projectName"]
-        ai_sources = project_data.get("analysis-input-sources", [])
         callgraph_sources = project_data.get("callgraph-sources", [])
+        context_map_sources = project_data.get("context-map-sources", [])
+        sdg_sources = project_data.get("service-dependency-graph-sources", [])
 
-        project = Project(name, ai_sources, callgraph_sources)
+        project = Project(name, callgraph_sources,
+                          context_map_sources, sdg_sources)
         projects.append(project)
 
     return projects
@@ -44,23 +52,14 @@ def get_projects(config_data):
 
 def upload_projects(projects, base_url):
     projects_url = f"{base_url}/projects"
-    ai_url = f"{base_url}/analysis-inputs"
     callgraphs_url = f"{base_url}/call-graph-inputs"
+    context_maps_url = f"{base_url}/context-maps"
+    sdgs_url = f"{base_url}/sdgs"
 
     for project in projects:
         project_resp = requests.post(
             projects_url, json={"projectName": project.name})
         print(f"Project create: {project_resp.json()}")
-        for ai in project.ai_sources:
-            loaded_file = load_json_file(ai["file"])
-            resp = requests.post(ai_url, json={
-                "projectId": project_resp.json()["id"],
-                "version": ai["version"],
-                "commitHash": ai["commitHash"],
-                "entities": loaded_file["entities"],
-                "graph": loaded_file["graph"]
-            })
-            print(f"AI create: {resp}")
 
         for cg in project.callgraph_sources:
             loaded_file = load_json_file(cg["file"])
@@ -71,6 +70,26 @@ def upload_projects(projects, base_url):
                 "callGraph": loaded_file["callGraph"]
             })
             print(f"CallGraph create: {resp}")
+
+        for cm in project.context_map_sources:
+            loaded_file = load_json_file(cm["file"])
+            resp = requests.post(context_maps_url, json={
+                "projectId": project_resp.json()["id"],
+                "version": cm["version"],
+                "commitHash": cm["commitHash"],
+                "contextMap": loaded_file,
+            })
+            print(f"Context Map Create: {resp}")
+
+        for sdg in project.sdg_sources:
+            loaded_file = load_json_file(sdg["file"])
+            resp = requests.post(sdgs_url, json={
+                "projectId": project_resp.json()["id"],
+                "version": sdg["version"],
+                "commitHash": sdg["commitHash"],
+                "sdg": loaded_file,
+            })
+            print(f"Service Dependency Graph Create: {resp}")
 
 
 def main():
