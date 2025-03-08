@@ -31,8 +31,8 @@ public class ContextMapController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getContextMap(@PathParam("id") Long id) {
-        ContextMapEntity contextMap = contextMapService.getContextMapById(id);
-        return Response.ok(ContextMapEntity.toFullDto(contextMap))
+        ContextMapEntity contextMapEntity = contextMapService.getContextMapById(id);
+        return Response.ok(contextMapEntity.contextMap)
                 .build();
     }
 

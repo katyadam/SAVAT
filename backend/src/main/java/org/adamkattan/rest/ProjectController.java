@@ -5,9 +5,11 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.project.CreateProjectDto;
 import org.adamkattan.model.project.Project;
 import org.adamkattan.model.project.ProjectSummary;
+import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.service.ContextMapService;
 import org.adamkattan.service.ProjectService;
 import org.adamkattan.service.SdgService;
@@ -43,16 +45,20 @@ public class ProjectController {
     @Path("{id}/context-maps")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectContextMaps(@PathParam("id") Long id) {
-        return Response.ok(contextMapService.getProjectContextMaps(id))
-                .build();
+        return Response.ok(
+                contextMapService.getProjectContextMaps(id).stream()
+                        .map(ContextMapEntity::toDto)
+        ).build();
     }
 
     @GET
     @Path("{id}/sdgs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProjectServiceDependencyGraphs(@PathParam("id") Long id) {
-        return Response.ok(sdgService.getProjectSdgs(id)) // TODO: use toDto
-                .build();
+        return Response.ok(
+                sdgService.getProjectSdgs(id).stream()
+                        .map(ServiceDependencyGraphEntity::toDto)
+        ).build();
     }
 
     @GET

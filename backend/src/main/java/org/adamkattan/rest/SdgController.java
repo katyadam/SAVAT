@@ -31,8 +31,8 @@ public class SdgController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getSdg(@PathParam("id") Long id) {
-        ServiceDependencyGraphEntity sdgById = sdgService.getSdgById(id);
-        return Response.ok(ServiceDependencyGraphEntity.toFullDto(sdgById))
+        ServiceDependencyGraphEntity sdgEntity = sdgService.getSdgById(id);
+        return Response.ok(sdgEntity.sdg)
                 .build();
     }
 

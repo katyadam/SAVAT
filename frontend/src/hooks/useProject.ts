@@ -52,14 +52,28 @@ export const useAnalysisInputCreate = (projectId: string) => {
     return useMutation({
         mutationFn: AnalysisInputApi.createAnalysisInput,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["inputs", projectId] })
+            queryClient.invalidateQueries({ queryKey: ["contextMaps", projectId] })
         }
     })
 }
 
 export const useProjectSummary = (projectId: string) => {
     return useQuery({
-        queryKey: ["project_summary", projectId],
+        queryKey: ["projectSummary", projectId],
         queryFn: () => ProjectApi.getSummary(projectId)
+    });
+}
+
+export const useProjectContextMaps = (projectId: string) => {
+    return useQuery({
+        queryKey: ["contextMaps", projectId],
+        queryFn: () => ProjectApi.getProjectContextMaps(projectId)
+    });
+}
+
+export const useProjectSDGs = (projectId: string) => {
+    return useQuery({
+        queryKey: ["sdgs", projectId],
+        queryFn: () => ProjectApi.getProjectSDGs(projectId)
     });
 }
