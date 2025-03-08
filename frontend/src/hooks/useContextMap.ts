@@ -48,10 +48,14 @@ export const useContextMapDelete = (projectId: string) => {
         mutationKey: ["coontextMapDelete"],
         mutationFn: (payload: number) =>
             ContextMapApi.deleteContextMap(payload),
-        onSuccess: () =>
+        onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ["contextMaps", projectId],
-            }),
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["projectSummary", projectId],
+            })
+        }
     });
 };
 

@@ -52,10 +52,14 @@ export const useSDGDelete = (projectId: string) => {
     mutationKey: ["SDGDelete"],
     mutationFn: (payload: number) =>
       SDGApi.deleteSDG(payload),
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["sdgs", projectId],
-      }),
+      })
+      queryClient.invalidateQueries({
+        queryKey: ["projectSummary", projectId],
+      })
+    }
   });
 };
 

@@ -35,6 +35,9 @@ export const useCallGraphInputDelete = (projectId: string) => {
             queryClient.invalidateQueries({
                 queryKey: ["callGraphOutputs", projectId],
             })
+            queryClient.invalidateQueries({
+                queryKey: ["projectSummary", projectId],
+            })
         },
     });
 };

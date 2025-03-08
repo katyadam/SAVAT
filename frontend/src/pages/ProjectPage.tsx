@@ -203,9 +203,15 @@ const ProjectPage = () => {
           body={
             <div className="flex flex-col items-start gap-2 mb-5">
               <p className="">
-                Analysis Inputs:{" "}
+                Context Maps:{" "}
                 <span className="text-xl font-bold">
-                  {projectSummary && projectSummary.totalAnalysisInputs}
+                  {projectSummary && projectSummary.totalContextMaps}
+                </span>
+              </p>
+              <p className="">
+                Service Dependency Graphs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalSdgs}
                 </span>
               </p>
               <p>
