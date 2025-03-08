@@ -35,14 +35,6 @@ const projectRoutes: RouteObject[] = [
     ),
   },
   {
-    path: "analysis-input/:id/methods",
-    Component: () => (
-      <ErrorBoundary>
-        <MethodsPage />
-      </ErrorBoundary>
-    ),
-  },
-  {
     path: "call-graph-input/:id/methods",
     Component: () => (
       <ErrorBoundary>
