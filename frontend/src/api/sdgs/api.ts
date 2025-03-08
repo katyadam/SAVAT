@@ -18,7 +18,7 @@ async function getSDGChange(changeSDGId: string | null): Promise<ChangedDto> {
     return resp.data;
 }
 
-async function getSummary(id: string): Promise<Summary> {
+async function getSummary(id: number): Promise<Summary> {
     const resp = await axiosInstance.get(`${SDG_PREFIX}/${id}/summary`);
     return resp.data;
 }

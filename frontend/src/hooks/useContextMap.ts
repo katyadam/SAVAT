@@ -24,10 +24,11 @@ export const useContextMapChange = (changeId: string): UseQueryResult<ChangedDto
     });
 }
 
-export const useContextMapSummary = (id: string) => {
+export const useContextMapSummary = (id: number | null) => {
     return useQuery({
         queryKey: ["contextMapSummary", id],
-        queryFn: () => ContextMapApi.getSummary(id)
+        queryFn: () => id ? ContextMapApi.getSummary(id) : Promise.reject("No ID provided"),
+        enabled: !!id,
     })
 }
 

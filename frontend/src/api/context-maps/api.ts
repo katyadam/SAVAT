@@ -18,7 +18,7 @@ async function getContextMapChange(id: string | null): Promise<ChangedDto> {
     return resp.data;
 }
 
-async function getSummary(id: string): Promise<Summary> {
+async function getSummary(id: number): Promise<Summary> {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_PREFIX}/${id}/summary`);
     return resp.data;
 }

@@ -52,7 +52,7 @@ export const useAnalysisInputCreate = (projectId: string) => {
     return useMutation({
         mutationFn: AnalysisInputApi.createAnalysisInput,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["contextMaps", projectId] })
+            queryClient.invalidateQueries({ queryKey: ["inputs", projectId] })
         }
     })
 }

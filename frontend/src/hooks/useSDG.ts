@@ -28,10 +28,11 @@ export const useSDGChange = (
   });
 };
 
-export const useSDGSummary = (id: string) => {
+export const useSDGSummary = (id: number | null) => {
   return useQuery({
     queryKey: ["SDGSummary", id],
-    queryFn: () => SDGApi.getSummary(id)
+    queryFn: () => id ? SDGApi.getSummary(id) : Promise.reject("No ID provided"),
+    enabled: !!id,
   })
 }
 

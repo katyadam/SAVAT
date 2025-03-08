@@ -1,7 +1,7 @@
 import { CompareCommGraphLinksResponse } from "@/api/communication-graphs/types";
-import CompareForm from "@/components/communication-graphs/CompareForm";
-import Graph from "@/components/communication-graphs/graphs/Graph";
-import Navbar from "@/components/communication-graphs/Navbar";
+import CompareForm from "@/components/sdgs/CompareForm";
+import Graph from "@/components/sdgs/graphs/Graph";
+import Navbar from "@/components/sdgs/Navbar";
 import Loading from "@/components/loading/Loading";
 import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
