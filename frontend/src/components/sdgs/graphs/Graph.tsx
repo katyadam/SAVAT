@@ -3,22 +3,17 @@ import { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
-import {
-  ChangedCommGraphLink,
-  CommGraph,
-  CommGraphLink,
-  CommGraphNode,
-} from "@/api/communication-graphs/types";
 import { getCyInstance } from "./CytoscapeInstance";
-import { useCommGraphDiff } from "@/hooks/useCommGraph";
+import { ChangedLink, Link, Node, SDG } from "@/api/sdgs/types";
+import { useSDGChange } from "@/hooks/useSDG";
 
 type GraphType = {
-  graph: CommGraph;
-  commGraphDiffId?: string;
+  graph: SDG;
+  changedSDGId?: string;
 };
 
-const Graph: FC<GraphType> = ({ graph, commGraphDiffId }) => {
-  const { data: commGraphDiff } = useCommGraphDiff(commGraphDiffId || "");
+const Graph: FC<GraphType> = ({ graph, changedSDGId }) => {
+  const { data: changedSDG } = useSDGChange(changedSDGId || "");
   const cyRef = useRef<HTMLDivElement | null>(null);
 
   cytoscape.use(fcose);
@@ -27,15 +22,15 @@ const Graph: FC<GraphType> = ({ graph, commGraphDiffId }) => {
     if (!cyRef.current) return;
 
     const elements: ElementsDefinition = {
-      nodes: graph.nodes.map((node: CommGraphNode) => ({
+      nodes: graph.nodes.map((node: Node) => ({
         data: {
           id: node.nodeName,
           label: node.nodeName,
         },
         group: "nodes",
       })),
-      edges: (commGraphDiff ? commGraphDiff.changedLinks : graph.links).map(
-        (link: CommGraphLink | ChangedCommGraphLink) => ({
+      edges: (changedSDG ? changedSDG.changedLinks : graph.links).map(
+        (link: Link | ChangedLink) => ({
           data: {
             source: link.source,
             target: link.target,
@@ -74,9 +69,9 @@ const Graph: FC<GraphType> = ({ graph, commGraphDiffId }) => {
     return () => {
       cyInstance.destroy();
     };
-  }, [graph, commGraphDiff]);
+  }, [graph, changedSDG]);
 
-  if (commGraphDiffId === "None") return <></>;
+  if (changedSDGId === "None") return <></>;
   return <div ref={cyRef} className="w-full h-[90%]" />;
 };
 

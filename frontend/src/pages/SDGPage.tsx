@@ -1,4 +1,3 @@
-import { CompareCommGraphLinksResponse } from "@/api/communication-graphs/types";
 import CompareForm from "@/components/sdgs/CompareForm";
 import Graph from "@/components/sdgs/graphs/Graph";
 import Navbar from "@/components/sdgs/Navbar";
@@ -7,11 +6,12 @@ import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { useCommGraph } from "@/hooks/useCommGraph";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSDG } from "@/hooks/useSDG";
+import { ChangedLinksResponse } from "@/api/sdgs/types";
 
-const GraphPage = () => {
+const SDGPage = () => {
   React.useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
@@ -21,7 +21,7 @@ const GraphPage = () => {
 
   const { id } = useParams();
 
-  const { data: graph, isLoading, error } = useCommGraph(id || "");
+  const { data: graph, isLoading, error } = useSDG(id || "");
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [selectedCommGraphDiff, setSelectedCommGraphDiff] = useState<
     string | null
@@ -33,7 +33,7 @@ const GraphPage = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: Unable to fetch entity data.</p>;
 
-  const handleCompareResponse = (resp: CompareCommGraphLinksResponse) => {
+  const handleCompareResponse = (resp: ChangedLinksResponse) => {
     console.log(resp);
     toast({
       title: "Comparison done",
@@ -53,7 +53,7 @@ const GraphPage = () => {
               nodes: graph.nodes,
               links: [],
             }}
-            commGraphDiffId={selectedCommGraphDiff}
+            changedSDGId={selectedCommGraphDiff}
           />
         );
       }
@@ -65,8 +65,8 @@ const GraphPage = () => {
     <div className="h-screen w-screen">
       <Navbar
         compareBtnClick={() => setCompareUp(true)}
-        analysisInputId={id}
-        setSelectedCommGraphDiff={setSelectedCommGraphDiff}
+        sdgId={id}
+        setSelectedSDGChange={setSelectedCommGraphDiff}
         setShowComparisons={setShowComparisons}
         showComparisons={showComparisons}
         hintComponent={<LinkDifferencesHint />}
@@ -79,7 +79,7 @@ const GraphPage = () => {
           closeFunc={() => setCompareUp(false)}
           aria-label="Compare Entities"
         >
-          <CompareForm analysisInputId={id} respFunc={handleCompareResponse} />
+          <CompareForm sdgId={id} respFunc={handleCompareResponse} />
         </Overlay>
       )}
     </div>
@@ -88,4 +88,4 @@ const GraphPage = () => {
   );
 };
 
-export default GraphPage;
+export default SDGPage;

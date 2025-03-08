@@ -16,11 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
-import {
-  useAnalyisiInputDelete,
-  useAnalysisInputSummary,
-} from "@/hooks/useAnalysisInput";
+import { Eye, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
 import HeaderWithSort from "../ui/HeaderWithSort";
@@ -151,18 +147,15 @@ export function SDGsTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                {/* <TableCell>
-                  <AnalysisInputButton
-                    type="entities"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
+
                 <TableCell>
-                  <AnalysisInputButton
-                    type="graph"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell> */}
+                  <a href={`/sdg/${(row.original as SDGDto).id}`}>
+                    <Button variant="outline">
+                      <Eye />
+                    </Button>
+                  </a>
+                </TableCell>
+
                 <TableCell>
                   <Button
                     onClick={() => setSdgToDelete((row.original as SDGDto).id)}
@@ -179,7 +172,7 @@ export function SDGsTable<TData, TValue>({
                 colSpan={columns.length + 3}
                 className="h-24 text-center"
               >
-                No analysis inputs.
+                No service dependency graphs.
               </TableCell>
             </TableRow>
           )}

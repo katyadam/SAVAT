@@ -3,8 +3,8 @@ import ProjectLayout from "@/layouts/ProjectLayout";
 import Error from "@/pages/Error";
 import CallGraphOutputPage from "@/pages/CallGraphOutputPage";
 import CallGraphPage from "@/pages/CallGraphPage";
-import EntitiesPage from "@/pages/EntitiesPage";
-import GraphPage from "@/pages/GraphPage";
+import ContextMapPage from "@/pages/ContextMapPage";
+import SDGPage from "@/pages/SDGPage";
 import MethodsPage from "@/pages/MethodsPage";
 import ProjectPage from "@/pages/ProjectPage";
 import ErrorBoundary from "./ErrorBoundary";
@@ -19,18 +19,18 @@ const projectRoutes: RouteObject[] = [
     ),
   },
   {
-    path: "analysis-input/:id/entities",
+    path: "context-maps/:id",
     Component: () => (
       <ErrorBoundary>
-        <EntitiesPage />
+        <ContextMapPage />
       </ErrorBoundary>
     ),
   },
   {
-    path: "analysis-input/:id/graph",
+    path: "sdg/:id",
     Component: () => (
       <ErrorBoundary>
-        <GraphPage />
+        <SDGPage />
       </ErrorBoundary>
     ),
   },

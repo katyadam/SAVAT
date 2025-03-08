@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
 import HeaderWithSort from "../ui/HeaderWithSort";
@@ -41,8 +41,10 @@ export function ContextMapsTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const { mutateAsync } = useContextMapDelete(projectId);
   const { toast } = useToast();
-  const [inputToDelete, setInputToDelete] = useState<number | null>(null);
-  const { data: inputSummary } = useContextMapSummary(inputToDelete);
+  const [contextMapToDelete, setContextMapToDelete] = useState<number | null>(
+    null
+  );
+  const { data: contextMapSummary } = useContextMapSummary(contextMapToDelete);
 
   const handleOutputDelete = async (id: number) => {
     try {
@@ -149,22 +151,21 @@ export function ContextMapsTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                {/* <TableCell>
-                  <AnalysisInputButton
-                    type="entities"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell>
+
                 <TableCell>
-                  <AnalysisInputButton
-                    type="graph"
-                    id={(row.original as AnalysisInput).id}
-                  />
-                </TableCell> */}
+                  <a
+                    href={`/context-maps/${(row.original as ContextMapDto).id}`}
+                  >
+                    <Button variant="outline">
+                      <Eye />
+                    </Button>
+                  </a>
+                </TableCell>
+
                 <TableCell>
                   <Button
                     onClick={() =>
-                      setInputToDelete((row.original as ContextMapDto).id)
+                      setContextMapToDelete((row.original as ContextMapDto).id)
                     }
                     variant="outline"
                   >
@@ -185,23 +186,23 @@ export function ContextMapsTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      {inputToDelete && (
+      {contextMapToDelete && (
         <ConfirmWindow
-          closeFunc={() => setInputToDelete(null)}
+          closeFunc={() => setContextMapToDelete(null)}
           title="Do you really want to delete this Context Map ?"
           width="w-1/3"
           options={[
             {
               title: "YES",
               callback: () => {
-                handleOutputDelete(inputToDelete);
-                setInputToDelete(null);
+                handleOutputDelete(contextMapToDelete);
+                setContextMapToDelete(null);
               },
               btnVariant: "destructive",
             },
             {
               title: "NO",
-              callback: () => setInputToDelete(null),
+              callback: () => setContextMapToDelete(null),
               btnVariant: "ghost",
             },
           ]}
@@ -210,7 +211,8 @@ export function ContextMapsTable<TData, TValue>({
               <p>
                 Total compared context maps:{" "}
                 <span className="text-xl font-bold">
-                  {inputSummary && inputSummary.totalChangedContextMaps}
+                  {contextMapSummary &&
+                    contextMapSummary.totalChangedContextMaps}
                 </span>
               </p>
             </div>

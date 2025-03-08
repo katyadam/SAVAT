@@ -1,20 +1,17 @@
 import { FC, useState } from "react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useCompareCommGraphLinks } from "@/hooks/useCompare";
 import { Button } from "../ui/button";
-import {
-  CommGraphLink,
-  CompareCommGraphLinksResponse,
-} from "@/api/communication-graphs/types";
+import { useSDGCompare } from "@/hooks/useSDG";
+import { ChangedLinksResponse, Link } from "@/api/sdgs/types";
 
 type CompareFormType = {
-  analysisInputId: string;
-  respFunc: (resp: CompareCommGraphLinksResponse) => void;
+  sdgId: string;
+  respFunc: (resp: ChangedLinksResponse) => void;
 };
 
-const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
-  const { mutateAsync } = useCompareCommGraphLinks(analysisInputId);
+const CompareForm: FC<CompareFormType> = ({ sdgId, respFunc }) => {
+  const { mutateAsync } = useSDGCompare(sdgId);
   const [jsonInput, setJsonInput] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -23,7 +20,7 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
 
   const handleCompare = async () => {
     try {
-      const parsedData: CommGraphLink[] = JSON.parse(jsonInput);
+      const parsedData: Link[] = JSON.parse(jsonInput);
 
       if (!Array.isArray(parsedData)) {
         throw new Error("Invalid JSON format. Expected an array.");
@@ -74,7 +71,7 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
         />
       </div>
       <Button onClick={handleCompare} variant="outline">
-        Compare Communication Graph Links
+        Compare Service Dependency Graphs Links
       </Button>
     </div>
   );

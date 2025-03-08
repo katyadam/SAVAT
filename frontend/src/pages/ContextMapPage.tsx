@@ -17,7 +17,7 @@ import { useEntities } from "@/hooks/useEntity";
 import React, { useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
-const EntitiesPage = () => {
+const ContextMapPage = () => {
   React.useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
@@ -151,4 +151,4 @@ const EntitiesPage = () => {
   );
 };
 
-export default EntitiesPage;
+export default ContextMapPage;
