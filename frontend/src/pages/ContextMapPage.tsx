@@ -1,5 +1,4 @@
-import { EntityNode, EntityField } from "@/api/entities/types";
-import { CompareEntitiesLinksResponse } from "@/api/entities/types";
+import { ChangedLinksResponse, Field, Node } from "@/api/context-maps/types";
 import CompareForm from "@/components/context-maps/CompareForm";
 import EntityDetail from "@/components/context-maps/EntityDetail";
 import FieldDetail from "@/components/context-maps/FieldDetail";
@@ -13,7 +12,7 @@ import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { useEntities } from "@/hooks/useEntity";
+import { useContextMap } from "@/hooks/useContextMap";
 import React, { useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
@@ -27,24 +26,24 @@ const ContextMapPage = () => {
 
   const { id } = useParams();
 
-  const [selectedNode, setSelectedNode] = useState<EntityNode | null>(null);
-  const [selectedField, setSelectedField] = useState<EntityField | null>(null);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [selectedField, setSelectedField] = useState<Field | null>(null);
   const [selectedRenderType, setSelectedRenderType] = useState<RenderType>(
     RenderType.BASIC_GRAPH
   );
-  const [selectedEntitiesDiff, setSelectedEntitiesDiff] = useState<
+  const [selectedContextMapChange, setSelectedContextMapChange] = useState<
     string | null
   >(null);
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
 
-  const { data: entities, isLoading, error } = useEntities(id || "");
+  const { data: contextMap, isLoading, error } = useContextMap(id || "");
 
   const { toast } = useToast();
 
   const handleNodeClick = useCallback(
-    (node: EntityNode): void => {
+    (node: Node): void => {
       if (node === selectedNode) {
         setSelectedNode(null);
         setSelectedField(null);
@@ -55,11 +54,11 @@ const ContextMapPage = () => {
     [selectedNode]
   );
 
-  const handleFieldClick = useCallback((field: EntityField) => {
+  const handleFieldClick = useCallback((field: Field) => {
     setSelectedField((prev) => (prev === field ? null : field));
   }, []);
 
-  const handleCompareResponse = (resp: CompareEntitiesLinksResponse) => {
+  const handleCompareResponse = (resp: ChangedLinksResponse) => {
     console.log(resp);
     toast({
       title: "Comparison done",
@@ -73,21 +72,21 @@ const ContextMapPage = () => {
     setSelectedField(null);
   };
   const msColors = useMemo(
-    () => getMicroservicesColors(entities?.nodes || []),
-    [entities]
+    () => getMicroservicesColors(contextMap?.nodes || []),
+    [contextMap]
   );
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (showComparisons && entities && selectedEntitiesDiff) {
+    if (showComparisons && contextMap && selectedContextMapChange) {
       return (
         <Graph
           graphData={{
-            nodes: entities.nodes,
+            nodes: contextMap.nodes,
             links: [],
           }}
           onNodeClick={handleNodeClick}
-          entitiesDiffId={selectedEntitiesDiff}
+          contextMapChangeId={selectedContextMapChange}
           showIsolatedNodes={true}
           msColors={msColors}
         />
@@ -96,7 +95,7 @@ const ContextMapPage = () => {
     return (
       <RenderGraph
         onNodeClick={handleNodeClick}
-        entities={entities}
+        contextMap={contextMap}
         renderType={selectedRenderType}
         showIsolatedNodes={showIsolatedNodes}
         msColors={msColors}
@@ -110,11 +109,11 @@ const ContextMapPage = () => {
         setSelectedRenderType={setSelectedRenderType}
         compareBtnClick={() => setCompareUp(true)}
         isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
-        analysisInputId={id}
+        contextMapId={id}
         setShowComparisons={setShowComparisons}
         showComparisons={showComparisons}
-        selectedEntitiesDiff={selectedEntitiesDiff}
-        setSelectedEntitiesDiff={setSelectedEntitiesDiff}
+        selectedContextMapChange={selectedContextMapChange}
+        setSelectedContextMapChange={setSelectedContextMapChange}
         msColors={msColors}
         hintComponent={<LinkDifferencesHint />}
       />
@@ -140,9 +139,9 @@ const ContextMapPage = () => {
         <Overlay
           width="5/6"
           closeFunc={() => setCompareUp(false)}
-          aria-label="Compare Entities"
+          aria-label="Compare Context Map"
         >
-          <CompareForm analysisInputId={id} respFunc={handleCompareResponse} />
+          <CompareForm contextMapId={id} respFunc={handleCompareResponse} />
         </Overlay>
       )}
     </div>

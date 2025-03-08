@@ -1,18 +1,17 @@
 import { FC, useState } from "react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useCompareEntitiesLinks } from "@/hooks/useCompare";
 import { Button } from "../ui/button";
-import { EntityLink } from "@/api/entities/types";
-import { CompareEntitiesLinksResponse } from "@/api/entities/types";
+import { ChangedLinksResponse, Link } from "@/api/context-maps/types";
+import { useContextMapCompare } from "@/hooks/useContextMap";
 
 type CompareFormType = {
-  analysisInputId: string;
-  respFunc: (resp: CompareEntitiesLinksResponse) => void;
+  contextMapId: string;
+  respFunc: (resp: ChangedLinksResponse) => void;
 };
 
-const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
-  const { mutateAsync } = useCompareEntitiesLinks(analysisInputId);
+const CompareForm: FC<CompareFormType> = ({ contextMapId, respFunc }) => {
+  const { mutateAsync } = useContextMapCompare(contextMapId);
   const [jsonInput, setJsonInput] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +20,7 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
 
   const handleCompare = async () => {
     try {
-      const parsedData: EntityLink[] = JSON.parse(jsonInput);
+      const parsedData: Link[] = JSON.parse(jsonInput);
 
       if (!Array.isArray(parsedData)) {
         throw new Error("Invalid JSON format. Expected an array.");
@@ -62,7 +61,7 @@ const CompareForm: FC<CompareFormType> = ({ analysisInputId, respFunc }) => {
         />
       </div>
       <Button onClick={handleCompare} variant="outline">
-        Compare Entity Links
+        Compare Context Maps Links
       </Button>
     </div>
   );

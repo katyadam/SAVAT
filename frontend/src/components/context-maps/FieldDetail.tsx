@@ -1,8 +1,8 @@
-import { EntityField } from "@/api/entities/types";
+import { Field } from "@/api/context-maps/types";
 import { FC } from "react";
 
 type FieldDetailProps = {
-  field: EntityField;
+  field: Field;
 };
 
 const FieldDetail: FC<FieldDetailProps> = ({ field }) => {

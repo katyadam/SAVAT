@@ -1,6 +1,6 @@
-import { EntityNode } from "@/api/entities/types";
+import { Node } from "@/api/context-maps/types";
 
-export const getMicroservicesColors = (nodes: EntityNode[]): Map<string, string> => {
+export const getMicroservicesColors = (nodes: Node[]): Map<string, string> => {
     const uniqueMsNames = [...new Set(nodes.map(node => node.msName))];
     return assignColorsToMicroservices(uniqueMsNames);
 }

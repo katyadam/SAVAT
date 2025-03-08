@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
-import { EntityField, EntityNode } from "@/api/entities/types";
+import { Field, Node } from "@/api/context-maps/types";
 
 type EntitiesDetailProps = {
-  entity: EntityNode;
-  handleFieldClick: (field: EntityField) => void;
+  entity: Node;
+  handleFieldClick: (field: Field) => void;
 };
 
 const EntityDetail: FC<EntitiesDetailProps> = ({

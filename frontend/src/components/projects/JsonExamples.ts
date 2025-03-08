@@ -29,7 +29,7 @@ export const exampleCallGraph = `{
     ]
 }`;
 
-export const exampleEntities = `{
+export const exampleContextMap = `{
     "nodes": [
       {
         "msName": "string",
@@ -64,7 +64,7 @@ export const exampleEntities = `{
     ]
 }`;
 
-export const exampleCommGraph = `{
+export const exampleSDG = `{
     "nodes": [
       {
         "nodeName": "string",

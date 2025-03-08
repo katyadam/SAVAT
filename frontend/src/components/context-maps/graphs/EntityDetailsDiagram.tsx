@@ -1,12 +1,12 @@
 import { FC, useEffect, useRef } from "react";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
-import { GraphData, EntityNode, EntityLink } from "@/api/entities/types";
 
 import cytoscape from "cytoscape";
 import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
+import { ContextMap, Link, Node } from "@/api/context-maps/types";
 
 type EntityDetailsDiagramType = {
-  graphData: GraphData;
+  graphData: ContextMap;
   showIsolatedNodes: boolean;
 };
 
@@ -16,7 +16,7 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   cytoscape.use(fcose);
-  const formatNodeLabel = (node: EntityNode) => {
+  const formatNodeLabel = (node: Node) => {
     let label = `Entity: ${node.nodeName}`;
 
     let fieldLabel = "";
@@ -31,7 +31,7 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
     return label + fieldLabel;
   };
 
-  const getNonIsolatedNodes = (nodes: EntityNode[], links: EntityLink[]) => {
+  const getNonIsolatedNodes = (nodes: Node[], links: Link[]) => {
     const linkedNodeNames = new Set<string>();
 
     links.forEach((link) => {
@@ -50,7 +50,7 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
 
       const elements: ElementsDefinition = {
         nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
-          (node: EntityNode) => ({
+          (node: Node) => ({
             data: {
               id: node.nodeName,
               label: formatNodeLabel(node),
@@ -58,7 +58,7 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
             group: "nodes",
           })
         ),
-        edges: graphData.links.map((link: EntityLink) => ({
+        edges: graphData.links.map((link: Link) => ({
           data: {
             source: link.source,
             target: link.target,

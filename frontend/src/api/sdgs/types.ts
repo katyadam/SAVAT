@@ -12,7 +12,7 @@ export type SDGDto = {
 }
 
 export type CreateSDGRequest = {
-    projectId: number;
+    projectId: string;
     version: string;
     commitHash: string;
     sdg: SDG;

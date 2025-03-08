@@ -11,7 +11,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
-import AnalysisInputCreateDialog from "@/components/projects/AnalysisInputCreateDialog";
 import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
 import { FileOperation } from "@/components/projects/types";
 import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
@@ -23,6 +22,8 @@ import { SDGsTable } from "@/components/sdgs/SDGsTable";
 import { columns } from "@/components/sdgs/Columns";
 import { ContextMapsTable } from "@/components/context-maps/ContextMapsTable";
 import { contextMapsColumns } from "@/components/context-maps/Columns";
+import ContextMapCreateDialog from "@/components/projects/ContextMapCreateDialog";
+import SDGCreateDialog from "@/components/projects/SDGCreateDialog";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -167,8 +168,15 @@ const ProjectPage = () => {
               />
             )}
           {importExportDialogUp == FileOperation.IMPORT &&
-            activeTab === "components" && (
-              <AnalysisInputCreateDialog
+            activeTab === "contextMaps" && (
+              <ContextMapCreateDialog
+                projectId={projectId}
+                closeDialog={() => showImportExportDialog(null)}
+              />
+            )}
+          {importExportDialogUp == FileOperation.IMPORT &&
+            activeTab === "sdgs" && (
+              <SDGCreateDialog
                 projectId={projectId}
                 closeDialog={() => showImportExportDialog(null)}
               />

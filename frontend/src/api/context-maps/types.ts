@@ -12,7 +12,7 @@ export type ContextMapDto = {
 }
 
 export type CreateContextMapRequest = {
-    projectId: number;
+    projectId: string;
     version: string;
     commitHash: string;
     contextMap: ContextMap;

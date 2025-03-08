@@ -4,48 +4,35 @@ import { Upload } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { useAnalysisInputCreate } from "@/hooks/useProject";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
-import { CreateAnalysisInput } from "@/api/inputs/types";
-import { exampleCommGraph, exampleEntities } from "./JsonExamples";
+import { exampleSDG } from "./JsonExamples";
 import { Separator } from "../ui/separator";
-import { GraphData } from "@/api/entities/types";
-import { CommGraph } from "@/api/communication-graphs/types";
+import { CreateSDGRequest, SDG } from "@/api/sdgs/types";
+import { useSDGCreate } from "@/hooks/useSDG";
 
-type AnalysisInputImportDialogType = {
+type SDGCreateDialogType = {
   projectId: string;
   closeDialog: () => void;
 };
 
-type AnalysisInputWithoutParsing = Omit<
-  CreateAnalysisInput,
-  "projectId" | "entities" | "graph"
-> & {
-  entities: string;
-  graph: string;
+type SDGWithoutParsing = Omit<CreateSDGRequest, "projectId" | "sdg"> & {
+  sdg: string;
 };
 
-const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
+const SDGCreateDialog: FC<SDGCreateDialogType> = ({
   projectId,
   closeDialog,
 }) => {
-  const { register, handleSubmit, setError } =
-    useForm<AnalysisInputWithoutParsing>();
+  const { register, handleSubmit, setError } = useForm<SDGWithoutParsing>();
 
-  const { mutateAsync } = useAnalysisInputCreate(projectId);
+  const { mutateAsync } = useSDGCreate(projectId);
   const { toast } = useToast();
 
-  const onSubmit = async (data: AnalysisInputWithoutParsing) => {
+  const onSubmit = async (data: SDGWithoutParsing) => {
     try {
-      const parsedEntities: GraphData = JSON.parse(data.entities);
-      const parsedCommGraph: CommGraph = JSON.parse(data.graph);
-      if (parsedEntities.nodes.length == 0) {
-        toast({
-          title: "Zero entities provided!",
-          description: "Specify atleast 1 entity!",
-        });
-      } else if (parsedCommGraph.nodes.length == 0) {
+      const parsedSDG: SDG = JSON.parse(data.sdg);
+      if (parsedSDG.nodes.length == 0) {
         toast({
           title: "Zero nodes provided!",
           description: "Specify atleast 1 node!",
@@ -55,8 +42,7 @@ const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
           projectId: projectId,
           version: data.version,
           commitHash: data.commitHash,
-          entities: parsedEntities,
-          graph: parsedCommGraph,
+          sdg: parsedSDG,
         });
         closeDialog();
       }
@@ -90,23 +76,13 @@ const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
       <Separator />
       <div className="flex flex-row justify-between gap-5 items-center">
         <div className="w-full text-left">
-          <Label htmlFor="jsonCallgraph">Communication Graph</Label>
+          <Label htmlFor="jsonCallgraph">Service Dependency Graph</Label>
           <Textarea
             className="min-h-64"
-            placeholder={exampleCommGraph}
+            placeholder={exampleSDG}
             id="jsonCallgraph"
             rows={20}
-            {...register("graph")}
-          />
-        </div>
-        <div className="w-full text-left">
-          <Label htmlFor="jsonCallgraph">Entities</Label>
-          <Textarea
-            className="min-h-64"
-            placeholder={exampleEntities}
-            id="jsonCallgraph"
-            rows={20}
-            {...register("entities")}
+            {...register("sdg")}
           />
         </div>
       </div>
@@ -117,4 +93,4 @@ const AnalysisInputCreateDialog: FC<AnalysisInputImportDialogType> = ({
   );
 };
 
-export default AnalysisInputCreateDialog;
+export default SDGCreateDialog;

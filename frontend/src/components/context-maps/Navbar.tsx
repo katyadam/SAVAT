@@ -9,12 +9,12 @@ import {
 } from "../ui/select";
 import { RenderType } from "./types";
 import { Switch } from "@/components/ui/switch";
-import { useEntitiesDiffs } from "@/hooks/useEntity";
 import { Separator } from "../ui/separator";
 import dayjs from "dayjs";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import LegendTable from "../callgraphs/LegendTable";
 import { CircleHelp, Eye } from "lucide-react";
+import { useContextMapChanges } from "@/hooks/useContextMap";
 
 type NavbarType = {
   compareBtnClick: (val: boolean) => void;
@@ -22,9 +22,9 @@ type NavbarType = {
   setSelectedRenderType: (selectedRenderType: RenderType) => void;
   setShowComparisons: (val: boolean) => void;
   showComparisons: boolean;
-  analysisInputId: string;
-  selectedEntitiesDiff: string | null;
-  setSelectedEntitiesDiff: (seletedEntitiesDiff: string) => void;
+  contextMapId: string;
+  selectedContextMapChange: string | null;
+  setSelectedContextMapChange: (selectedContextMapChange: string) => void;
   msColors: Map<string, string>;
   hintComponent?: React.ReactNode;
 };
@@ -35,13 +35,14 @@ const Navbar: FC<NavbarType> = ({
   setShowComparisons,
   showComparisons,
   isolatedNodesBtnClick,
-  analysisInputId,
-  selectedEntitiesDiff,
-  setSelectedEntitiesDiff,
+  contextMapId,
+  selectedContextMapChange,
+  setSelectedContextMapChange,
   msColors,
   hintComponent,
 }) => {
-  const { data: entitiesDiffs, isLoading } = useEntitiesDiffs(analysisInputId);
+  const { data: contextMapChanges, isLoading } =
+    useContextMapChanges(contextMapId);
 
   if (isLoading) return <p>Loading..</p>;
 
@@ -54,7 +55,7 @@ const Navbar: FC<NavbarType> = ({
       <Button
         onClick={() => {
           setShowComparisons(!showComparisons);
-          setSelectedEntitiesDiff("None");
+          setSelectedContextMapChange("None");
           setSelectedRenderType(RenderType.BASIC_GRAPH);
         }}
         variant="outline"
@@ -64,37 +65,38 @@ const Navbar: FC<NavbarType> = ({
       <Separator orientation="vertical" color="black" />
       {showComparisons ? (
         <>
-          {entitiesDiffs && (
+          {contextMapChanges && (
             <>
               <Select
                 defaultValue="None"
-                value={selectedEntitiesDiff!}
-                onValueChange={(value) => setSelectedEntitiesDiff(value)}
+                value={selectedContextMapChange!}
+                onValueChange={(value) => setSelectedContextMapChange(value)}
               >
                 <SelectTrigger className="w-[280px]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="None">None</SelectItem>
-                  {entitiesDiffs.map((diff) => (
+                  {contextMapChanges.map((diff) => (
                     <SelectItem key={diff.id} value={diff.id.toString()}>
                       {formatDate(diff.createdAt)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              {selectedEntitiesDiff && selectedEntitiesDiff !== "None" && (
-                <Popover modal={false}>
-                  <PopoverTrigger className="flex flex-col items-center mx-5 cursor-pointer">
-                    <label className="text-gray-500 mb-1">Legend</label>
-                    <Eye />
-                  </PopoverTrigger>
+              {selectedContextMapChange &&
+                selectedContextMapChange !== "None" && (
+                  <Popover modal={false}>
+                    <PopoverTrigger className="flex flex-col items-center mx-5 cursor-pointer">
+                      <label className="text-gray-500 mb-1">Legend</label>
+                      <Eye />
+                    </PopoverTrigger>
 
-                  <PopoverContent className="w-full">
-                    <LegendTable msColorsLegend={msColors} />
-                  </PopoverContent>
-                </Popover>
-              )}
+                    <PopoverContent className="w-full">
+                      <LegendTable msColorsLegend={msColors} />
+                    </PopoverContent>
+                  </Popover>
+                )}
             </>
           )}
           <Popover modal={false}>

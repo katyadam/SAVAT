@@ -1,22 +1,17 @@
 import { FC, useEffect, useRef } from "react";
 import { ElementsDefinition } from "cytoscape";
-import {
-  GraphData,
-  EntityNode,
-  EntityLink,
-  ChangedEntityLink,
-} from "@/api/entities/types";
 
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
 import { getCyInstance } from "./CytoscapeInstance";
-import { useEntitiesDiff } from "@/hooks/useEntity";
+import { ChangedLink, ContextMap, Link, Node } from "@/api/context-maps/types";
+import { useContextMapChange } from "@/hooks/useContextMap";
 
 type GraphType = {
-  onNodeClick: (node: EntityNode) => void;
-  graphData: GraphData;
+  onNodeClick: (node: Node) => void;
+  graphData: ContextMap;
   showIsolatedNodes: boolean;
-  entitiesDiffId?: string;
+  contextMapChangeId?: string;
   msColors: Map<string, string>;
 };
 
@@ -24,15 +19,17 @@ const Graph: FC<GraphType> = ({
   graphData,
   onNodeClick,
   showIsolatedNodes,
-  entitiesDiffId,
+  contextMapChangeId,
   msColors,
 }) => {
-  const { data: entitiesDiff } = useEntitiesDiff(entitiesDiffId || "");
+  const { data: contextMapChange } = useContextMapChange(
+    contextMapChangeId || ""
+  );
   const cyRef = useRef<HTMLDivElement | null>(null);
 
   cytoscape.use(fcose);
 
-  const getNonIsolatedNodes = (nodes: EntityNode[], links: EntityLink[]) => {
+  const getNonIsolatedNodes = (nodes: Node[], links: Link[]) => {
     const linkedNodeNames = new Set<string>();
 
     links.forEach((link) => {
@@ -48,7 +45,7 @@ const Graph: FC<GraphType> = ({
 
     const elements: ElementsDefinition = {
       nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
-        (node: EntityNode) => ({
+        (node: Node) => ({
           data: {
             id: node.nodeName,
             label: node.nodeName,
@@ -57,16 +54,17 @@ const Graph: FC<GraphType> = ({
           group: "nodes",
         })
       ),
-      edges: (entitiesDiff ? entitiesDiff.changedLinks : graphData.links).map(
-        (link: EntityLink | ChangedEntityLink) => ({
-          data: {
-            source: link.source,
-            target: link.target,
-            typeOfChange: "type" in link ? link.type.toString() : "SAME",
-          },
-          group: "edges",
-        })
-      ),
+      edges: (contextMapChange
+        ? contextMapChange.changedLinks
+        : graphData.links
+      ).map((link: Link | ChangedLink) => ({
+        data: {
+          source: link.source,
+          target: link.target,
+          typeOfChange: "type" in link ? link.type.toString() : "SAME",
+        },
+        group: "edges",
+      })),
     };
 
     const cyInstance = getCyInstance(cyRef, elements, msColors);
@@ -97,9 +95,9 @@ const Graph: FC<GraphType> = ({
     return () => {
       cyInstance.destroy();
     };
-  }, [graphData, showIsolatedNodes, msColors, entitiesDiff]);
+  }, [graphData, showIsolatedNodes, msColors, contextMapChange]);
 
-  if (entitiesDiffId === "None") {
+  if (contextMapChangeId === "None") {
     return <></>;
   }
 
