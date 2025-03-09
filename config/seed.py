@@ -79,7 +79,7 @@ def upload_projects(projects, base_url):
                 "version": cg["version"],
                 "commitHash": cg["commitHash"],
                 "branch": cg["branch"],
-                "callGraph": loaded_file["callGraph"]
+                "callGraph": loaded_file
             })
             print(f"CallGraph create: {resp}")
 
