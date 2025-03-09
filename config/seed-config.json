@@ -1,7 +1,9 @@
 {
   "projects": [
     {
-      "projectName": "TEST",
+      "name": "TEST",
+      "repository": "train-ticket",
+      "owner": "katyadam",
       "context-map-sources": [
         {
           "commitHash": "123abc",

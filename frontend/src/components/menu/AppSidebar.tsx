@@ -54,7 +54,7 @@ export function AppSidebar({ openCreateProjectDialog }: AppSidebarType) {
                       }`}
                       onClick={() => handleNavigation(project.id)}
                     >
-                      <span>{project.projectName}</span>
+                      <span>{project.name}</span>
                       <ArrowRight size={64} />
                     </SidebarMenuButton>
                   </SidebarMenuItem>
