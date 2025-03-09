@@ -43,6 +43,7 @@ const CallGraphInputCreateDialog: FC<ProjectsImportDialogType> = ({
           projectId: parseInt(projectId),
           version: data.version,
           commitHash: data.commitHash,
+          branch: data.branch,
           callGraph: parsedCallGraph,
         });
         closeDialog();
@@ -75,6 +76,10 @@ const CallGraphInputCreateDialog: FC<ProjectsImportDialogType> = ({
         <div className="w-full text-left">
           <Label htmlFor="commitHash">Commit Hash</Label>
           <Input id="commitHash" {...register("commitHash")} />
+        </div>
+        <div className="w-full text-left">
+          <Label htmlFor="branch">Branch</Label>
+          <Input id="branch" {...register("branch")} />
         </div>
       </div>
 

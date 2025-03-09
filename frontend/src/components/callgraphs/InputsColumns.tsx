@@ -14,6 +14,10 @@ export const callGraphInputsColumns: ColumnDef<CallGraphInputSimple>[] = [
     header: "Commit Hash",
   },
   {
+    accessorKey: "branch",
+    header: "Branch",
+  },
+  {
     accessorKey: "createdAt",
     header: "Created At",
     cell: ({ row }) => formatCommonDateString(row.original.createdAt),

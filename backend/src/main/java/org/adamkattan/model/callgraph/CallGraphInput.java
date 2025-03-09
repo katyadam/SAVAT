@@ -24,6 +24,10 @@ public class CallGraphInput extends PanacheEntity {
     @Column(nullable = false, name = "commit_hash")
     public String commitHash;
 
+    @NotBlank(message = "branch is required")
+    @Column(nullable = false, name = "branch")
+    public String branch;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "call_graph")
     public CallGraph callGraph;
@@ -36,6 +40,7 @@ public class CallGraphInput extends PanacheEntity {
                 input.project.id,
                 input.version,
                 input.commitHash,
+                input.branch,
                 input.callGraph
         );
     }
@@ -46,6 +51,7 @@ public class CallGraphInput extends PanacheEntity {
                 input.project.id,
                 input.version,
                 input.commitHash,
+                input.branch,
                 input.createdAt
         );
     }

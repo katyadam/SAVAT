@@ -32,26 +32,31 @@
         {
           "commitHash": "fb7w56",
           "version": "1.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms.json"
         },
         {
           "commitHash": "48ad54",
           "version": "1.0.1",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms-changed.json"
         },
         {
           "commitHash": "6f5e84",
           "version": "1.1.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms-more-changed.json"
         },
         {
           "commitHash": "gdga85",
           "version": "2.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-subset.json"
         },
         {
           "commitHash": "gdga85",
           "version": "3.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-whole.json"
         }
       ]

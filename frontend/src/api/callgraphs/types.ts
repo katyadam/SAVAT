@@ -32,6 +32,7 @@ export type CallGraphInput = {
     projectId: number;
     version: string;
     commitHash: string;
+    branch: string;
     callGraph: CallGraph;
     createdAt: string
 }

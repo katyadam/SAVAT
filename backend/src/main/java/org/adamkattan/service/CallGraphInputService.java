@@ -31,6 +31,7 @@ public class CallGraphInputService {
         callGraphInput.project = project;
         callGraphInput.version = callGraphInputDto.version();
         callGraphInput.commitHash = callGraphInputDto.commitHash();
+        callGraphInput.branch = callGraphInputDto.branch();
         callGraphInput.callGraph = callGraphInputDto.callGraph();
         callGraphInput.persist();
         return CallGraphInput.toDto(callGraphInput);

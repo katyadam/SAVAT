@@ -9,6 +9,7 @@ public record CallGraphInputSimpleDto(
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,
+        @JsonProperty("branch") String branch,
         @JsonProperty("createdAt") LocalDateTime createdAt
 ) {
     public CallGraphInputSimpleDto(CallGraphInput input) {
@@ -17,6 +18,7 @@ public record CallGraphInputSimpleDto(
                 input.project.id,
                 input.version,
                 input.commitHash,
+                input.branch,
                 input.createdAt);
     }
 }
