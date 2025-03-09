@@ -11,7 +11,9 @@ import { Button } from "../../ui/button";
 import { CircleEllipsis, ClipboardCopy, Info, X } from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
-import { useMethodReachability } from "@/hooks/useCallGraph";
+import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
+import { get_element_gh_url } from "@/api/github/connect";
+import { useProject } from "@/hooks/useProject";
 
 type ContextNodeMenuType = {
   selectedMethod: string | null;
@@ -35,6 +37,13 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
 
   const { mutateAsync } = useMethodReachability(callGraphInputId, variant);
 
+  const { data: project, isLoading } = useProject(
+    localStorage.getItem("selectedProjectId") || ""
+  );
+
+  const { data: callGraphInput, isLoading: cgInputLoading } =
+    useCallGraphInput(callGraphInputId);
+
   const handleDisplayReachability = async (methodSignature: string | null) => {
     if (methodSignature) {
       const methodReachabilityCG = await mutateAsync(methodSignature);
@@ -45,13 +54,41 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
     }
   };
 
+  const handleMethodLookup = async (methodSignature: string | null) => {
+    if (methodSignature) {
+      const method = methodsMap.get(methodSignature);
+      if (
+        method &&
+        !isLoading &&
+        project &&
+        !cgInputLoading &&
+        callGraphInput
+      ) {
+        const url = await get_element_gh_url(
+          method?.name,
+          method?.microservice,
+          method?.type,
+          callGraphInput.branch,
+          {
+            id: 52,
+            accessToken: project.accessToken,
+            name: project.name,
+            owner: project.owner,
+            repository: project.repository,
+          }
+        );
+        window.open(url, "_blank");
+      }
+    }
+  };
+
   useEffect(() => {
     if (selectedMethod && methodsMap.has(selectedMethod)) {
       setMethod(methodsMap.get(selectedMethod)!);
     }
   }, [selectedMethod, methodsMap]);
 
-  return method ? (
+  return method && !isLoading && !cgInputLoading ? (
     <Card className="border-t-transparent border-l-transparent shadow-none rounded-none">
       <CardHeader>
         <div className="flex flex-row justify-between items-center">
@@ -138,7 +175,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
             )}
           </>
         ) : (
-          <>
+          <div className="flex flex-col gap-2">
             <Button
               onClick={() => handleDisplayReachability(selectedMethod)}
               variant="ghost"
@@ -146,7 +183,14 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
             >
               <p className="text-left">Display Reachability</p>
             </Button>
-          </>
+            <Button
+              onClick={() => handleMethodLookup(selectedMethod)}
+              variant="ghost"
+              className="py-1.5 text-sm font-semibold"
+            >
+              <p className="text-left">Find on GitHub</p>
+            </Button>
+          </div>
         )}
       </CardContent>
     </Card>
