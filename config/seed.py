@@ -67,7 +67,7 @@ def upload_projects(projects, base_url):
                 "projectId": project_resp.json()["id"],
                 "version": cg["version"],
                 "commitHash": cg["commitHash"],
-                "callGraph": loaded_file["callGraph"]
+                "callGraph": loaded_file
             })
             print(f"CallGraph create: {resp}")
 
