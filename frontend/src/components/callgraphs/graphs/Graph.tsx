@@ -90,7 +90,6 @@ const Graph: FC<GraphType> = ({
         callGraph.methods,
         callGraph.calls
       );
-      console.log(callGraph);
       const nodeSet = new Set(
         (showIsolatedNodes ? callGraph.methods : visibleNodes)
           .filter((method) => method.bytecodeHash !== "null")
