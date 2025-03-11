@@ -7,25 +7,55 @@
       "context-map-sources": [
         {
           "commitHash": "123abc",
-          "version": "1.0.0",
+          "version": "0.1.0",
           "file": "../examples/context-maps/example.json"
         },
         {
-          "commitHash": "456def",
-          "version": "2.0.0",
-          "file": "../examples/context-maps/ts-whole.json"
+          "commitHash": "hgjmf4",
+          "version": "1.0.0",
+          "file": "../examples/context-maps/ts-1.0.0.json"
+        },
+        {
+          "commitHash": "qrtg23",
+          "version": "1.0.1",
+          "file": "../examples/context-maps/ts-1.0.1.json"
+        },
+        {
+          "commitHash": "plasd2",
+          "version": "1.0.2",
+          "file": "../examples/context-maps/ts-1.0.2.json"
+        },
+        {
+          "commitHash": "56dasa",
+          "version": "1.0.3",
+          "file": "../examples/context-maps/ts-1.0.3.json"
         }
       ],
       "service-dependency-graph-sources": [
         {
           "commitHash": "123abc",
-          "version": "1.0.0",
-          "file": "../examples/service-dependency-graphs/example.json"
+          "version": "0.1.0",
+          "file": "../examples/context-maps/example.json"
         },
         {
-          "commitHash": "456def",
-          "version": "2.0.0",
-          "file": "../examples/service-dependency-graphs/ts-whole.json"
+          "commitHash": "hgjmf4",
+          "version": "1.0.0",
+          "file": "../examples/service-dependency-graphs/ts-1.0.0.json"
+        },
+        {
+          "commitHash": "qrtg23",
+          "version": "1.0.1",
+          "file": "../examples/service-dependency-graphs/ts-1.0.1.json"
+        },
+        {
+          "commitHash": "plasd2",
+          "version": "1.0.2",
+          "file": "../examples/service-dependency-graphs/ts-1.0.2.json"
+        },
+        {
+          "commitHash": "56dasa",
+          "version": "1.0.3",
+          "file": "../examples/service-dependency-graphs/ts-1.0.3.json"
         }
       ],
       "callgraph-sources": [
@@ -54,10 +84,24 @@
           "file": "../examples/callgraphs/ts-subset.json"
         },
         {
-          "commitHash": "gdga85",
+          "commitHash": "hgjmf4",
           "version": "3.0.0",
-          "branch": "master",
-          "file": "../examples/callgraphs/ts-whole.json"
+          "file": "../examples/callgraphs/ts-3.0.0.json"
+        },
+        {
+          "commitHash": "qrtg23",
+          "version": "3.0.1",
+          "file": "../examples/callgraphs/ts-3.0.1.json"
+        },
+        {
+          "commitHash": "plasd2",
+          "version": "3.0.2",
+          "file": "../examples/callgraphs/ts-3.0.2.json"
+        },
+        {
+          "commitHash": "56dasa",
+          "version": "3.0.3",
+          "file": "../examples/callgraphs/ts-3.0.3.json"
         }
       ]
     }
