@@ -18,7 +18,10 @@ public class ProjectService {
 
     public Project createProject(CreateProjectDto projectDto) {
         var project = new Project();
-        project.projectName = projectDto.projectName();
+        project.name = projectDto.name();
+        project.owner = projectDto.owner();
+        project.repository = projectDto.repository();
+        project.accessToken = projectDto.accessToken().orElse(null);
         project.contextMaps = new ArrayList<>();
         project.sdgs = new ArrayList<>();
         project.persist();

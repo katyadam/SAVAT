@@ -12,7 +12,7 @@ type CreateProjectDialogType = {
 };
 
 const CreateProjectDialog: FC<CreateProjectDialogType> = ({ closeDialog }) => {
-  const { register, handleSubmit, setError } = useForm<CreateProject>();
+  const { register, handleSubmit } = useForm<CreateProject>();
   const { mutateAsync } = useCreateProject();
   const { toast } = useToast();
   const onSubmit = async (data: CreateProject) => {
@@ -21,10 +21,6 @@ const CreateProjectDialog: FC<CreateProjectDialogType> = ({ closeDialog }) => {
       closeDialog();
     } catch (error: unknown) {
       if (error instanceof Error) {
-        setError("projectName", {
-          type: "manual",
-          message: "Invalid string!",
-        });
         toast({
           title: "Error occured!",
           description: "Try again",
@@ -41,7 +37,16 @@ const CreateProjectDialog: FC<CreateProjectDialogType> = ({ closeDialog }) => {
       id="projectForm"
     >
       <Label htmlFor="projectName">New Project Name</Label>
-      <Input id="projectName" {...register("projectName")} />
+      <Input id="projectName" {...register("name")} />
+
+      <Label htmlFor="owner">Owner</Label>
+      <Input id="owner" {...register("owner")} />
+
+      <Label htmlFor="repository">Repository</Label>
+      <Input id="repository" {...register("repository")} />
+
+      <Label htmlFor="accessToken">Access Token (if needed)</Label>
+      <Input id="accessToken" {...register("accessToken")} />
       <button>
         <PlusCircle className="cursor-pointer w-12 h-12 hover:text-green-800 duration-300" />
       </button>

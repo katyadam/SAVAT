@@ -15,9 +15,20 @@ import java.util.List;
 @Table(name = "project")
 public class Project extends PanacheEntity {
 
-    @NotBlank(message = "projectName is required")
-    @Column(nullable = false, name = "project_name")
-    public String projectName;
+    @NotBlank(message = "name is required")
+    @Column(nullable = false, name = "name")
+    public String name;
+
+    @NotBlank(message = "owner is required")
+    @Column(nullable = false, name = "owner")
+    public String owner;
+
+    @NotBlank(message = "repository is required")
+    @Column(nullable = false, name = "repository")
+    public String repository;
+
+    @Column(nullable = true, name = "access_token")
+    public String accessToken;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "service_dependency_graphs")
@@ -41,7 +52,10 @@ public class Project extends PanacheEntity {
     public static ProjectDto toDto(Project project) {
         return new ProjectDto(
                 project.id,
-                project.projectName
+                project.name,
+                project.owner,
+                project.repository,
+                project.accessToken
         );
     }
 

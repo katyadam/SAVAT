@@ -1,7 +1,9 @@
 {
   "projects": [
     {
-      "projectName": "TEST",
+      "name": "TEST",
+      "repository": "train-ticket",
+      "owner": "katyadam",
       "context-map-sources": [
         {
           "commitHash": "123abc",
@@ -60,41 +62,49 @@
         {
           "commitHash": "fb7w56",
           "version": "1.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms.json"
         },
         {
           "commitHash": "48ad54",
           "version": "1.0.1",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms-changed.json"
         },
         {
           "commitHash": "6f5e84",
           "version": "1.1.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-two-ms-more-changed.json"
         },
         {
           "commitHash": "gdga85",
           "version": "2.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-subset.json"
         },
         {
           "commitHash": "hgjmf4",
           "version": "3.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-3.0.0.json"
         },
         {
           "commitHash": "qrtg23",
           "version": "3.0.1",
+          "branch": "1.0.1",
           "file": "../examples/callgraphs/ts-3.0.1.json"
         },
         {
           "commitHash": "plasd2",
           "version": "3.0.2",
+          "branch": "1.0.2",
           "file": "../examples/callgraphs/ts-3.0.2.json"
         },
         {
           "commitHash": "56dasa",
           "version": "3.0.3",
+          "branch": "1.0.3",
           "file": "../examples/callgraphs/ts-3.0.3.json"
         }
       ]

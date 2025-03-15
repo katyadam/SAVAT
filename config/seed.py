@@ -4,8 +4,11 @@ import requests
 
 
 class Project:
-    def __init__(self, name, callgraph_sources, context_map_sources, sdg_sources):
+    def __init__(self, name, owner, repository, accessToken, callgraph_sources, context_map_sources, sdg_sources):
         self.name = name
+        self.owner = owner
+        self.repository = repository
+        self.accessToken = accessToken
         self.callgraph_sources = callgraph_sources
         self.context_map_sources = context_map_sources
         self.sdg_sources = sdg_sources
@@ -38,12 +41,15 @@ def load_json_file(config_file):
 def get_projects(config_data):
     projects = []
     for project_data in config_data["projects"]:
-        name = project_data["projectName"]
+        name = project_data["name"]
+        owner = project_data["owner"]
+        repository = project_data["repository"]
+        accessToken = project_data["accessToken"] if "accessToken" in project_data else None
         callgraph_sources = project_data.get("callgraph-sources", [])
         context_map_sources = project_data.get("context-map-sources", [])
         sdg_sources = project_data.get("service-dependency-graph-sources", [])
 
-        project = Project(name, callgraph_sources,
+        project = Project(name, owner, repository, accessToken, callgraph_sources,
                           context_map_sources, sdg_sources)
         projects.append(project)
 
@@ -58,7 +64,12 @@ def upload_projects(projects, base_url):
 
     for project in projects:
         project_resp = requests.post(
-            projects_url, json={"projectName": project.name})
+            projects_url, json={
+                "name": project.name,
+                "owner": project.owner,
+                "repository": project.repository,
+                "accessToken": project.accessToken
+            })
         print(f"Project create: {project_resp.json()}")
 
         for cg in project.callgraph_sources:
@@ -67,6 +78,7 @@ def upload_projects(projects, base_url):
                 "projectId": project_resp.json()["id"],
                 "version": cg["version"],
                 "commitHash": cg["commitHash"],
+                "branch": cg["branch"],
                 "callGraph": loaded_file
             })
             print(f"CallGraph create: {resp}")

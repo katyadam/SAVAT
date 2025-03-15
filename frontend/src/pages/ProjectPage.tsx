@@ -85,7 +85,12 @@ const ProjectPage = () => {
         {projectLoading ? (
           <Loading overlay={false} />
         ) : (
-          <h1 className="text-2xl font-semibold">{project?.projectName}</h1>
+          <div>
+            <h1 className="text-2xl font-semibold">{project?.name}</h1>
+            <h2 className="text-md font-semibold">
+              {project?.owner}/{project?.repository}
+            </h2>
+          </div>
         )}
         <div className="flex flex-row gap-2 items-center">
           <CreateEntrypoint showImportExportDialog={showImportExportDialog} />

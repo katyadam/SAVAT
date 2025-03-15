@@ -28,6 +28,12 @@ export const callGraphOutputsColumns: ColumnDef<CallGraphOutputSimple>[] = [
                 {source.commitHash}
               </div>
             </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-semibold text-gray-500 group-hover:text-blue-400">
+                Branch
+              </span>
+              <div className="group-hover:text-blue-400">{source.branch}</div>
+            </div>
           </div>
         </a>
       );
@@ -57,6 +63,12 @@ export const callGraphOutputsColumns: ColumnDef<CallGraphOutputSimple>[] = [
               <div className="group-hover:text-blue-400">
                 {target.commitHash}
               </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-semibold text-gray-500 group-hover:text-blue-400">
+                Branch
+              </span>
+              <div className="group-hover:text-blue-400">{target.branch}</div>
             </div>
           </div>
         </a>

@@ -1,6 +1,9 @@
 export type Project = {
-    id: number,
-    projectName: string
+    id: number;
+    name: string;
+    owner: string;
+    repository: string;
+    accessToken: string | null;
 };
 
 export type CreateProject = Omit<Project, "id">

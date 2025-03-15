@@ -17,6 +17,10 @@ const InputInfoBlock: FC<InputInfoBlockType> = ({ input }) => {
         Commit Hash
       </span>
       <div className="group-hover:text-blue-400">{input.commitHash}</div>
+      <span className="text-xs font-semibold text-gray-500 group-hover:text-blue-400">
+        Branch
+      </span>
+      <div className="group-hover:text-blue-400">{input.branch}</div>
     </div>
   );
 };
