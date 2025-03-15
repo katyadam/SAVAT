@@ -185,7 +185,7 @@ const Graph: FC<GraphType> = ({
 
   useRemoveAction(cy, actionToRemove);
 
-  return (
+  return callGraph.methods.length > 0 ? (
     <div ref={cyRef} className="w-full h-full relative z-0">
       {isContextMenuOpen &&
         ReactDOM.createPortal(
@@ -229,6 +229,8 @@ const Graph: FC<GraphType> = ({
           cyRef.current!
         )}
     </div>
+  ) : (
+    <p className="m-5">The provided call graph does not contain any nodes!</p>
   );
 };
 
