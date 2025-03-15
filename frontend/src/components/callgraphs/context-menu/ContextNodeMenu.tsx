@@ -65,7 +65,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
         callGraphInput
       ) {
         const url = await get_element_gh_url(
-          method?.name,
+          " " + method?.name + "(",
           method?.microservice,
           method?.type,
           callGraphInput.branch,
