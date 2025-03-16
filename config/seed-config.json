@@ -106,6 +106,30 @@
           "version": "3.0.3",
           "branch": "1.0.3",
           "file": "../examples/callgraphs/ts-3.0.3.json"
+        },
+        {
+          "commitHash": "8rfd21",
+          "version": "3.0.3-new-heuristics",
+          "branch": "1.0.3",
+          "file": "../examples/callgraphs/ts-3.0.3-new-heuristics.json"
+        },
+        {
+          "commitHash": "ee95sa",
+          "version": "3.0.2-new-heuristics",
+          "branch": "1.0.2",
+          "file": "../examples/callgraphs/ts-3.0.2-new-heuristics.json"
+        },
+        {
+          "commitHash": "8a2s57",
+          "version": "3.0.1-new-heuristics",
+          "branch": "1.0.1",
+          "file": "../examples/callgraphs/ts-3.0.1-new-heuristics.json"
+        },
+        {
+          "commitHash": "r5as12",
+          "version": "3.0.0-new-heuristics",
+          "branch": "1.0.0",
+          "file": "../examples/callgraphs/ts-3.0.0-new-heuristics.json"
         }
       ]
     }
