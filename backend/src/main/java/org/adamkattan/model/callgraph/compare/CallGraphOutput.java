@@ -2,7 +2,6 @@ package org.adamkattan.model.callgraph.compare;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.callgraph.CallGraphInputSimpleDto;
 import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -30,13 +29,13 @@ public class CallGraphOutput extends PanacheEntity {
     @Column(nullable = false, columnDefinition = "jsonb", name = "changed_call_graph")
     public ChangedCallGraph changedCallGraph;
 
-    public static CallGraphOutputSimpleDto toSimpleDto(CallGraphOutput input) {
+    public static CallGraphOutputSimpleDto toSimpleDto(CallGraphOutput output) {
         return new CallGraphOutputSimpleDto(
-                input.id,
-                input.project.id,
-                input.sourceCallGraphInput,
-                input.targetCallGraphInput,
-                input.createdAt
+                output.id,
+                output.project.id,
+                output.sourceCallGraphInput,
+                output.targetCallGraphInput,
+                output.createdAt
         );
     }
 
