@@ -27,7 +27,7 @@ public class ContextMapOutput extends PanacheEntity {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "jsonb", name = "changed_context_map")
-    public ChangedContextMap changedContextMap;
+    public CIAContextMap changedContextMap;
 
     public static ContextMapOutputDto toDto(ContextMapOutput output) {
         return new ContextMapOutputDto(

@@ -13,12 +13,12 @@ public class ChangedNode extends Node {
 
     @JsonCreator
     public ChangedNode(Long id, String msName, String nodeName, String nodeFullName, List<Field> fields, TypeOfChange typeOfChange) {
-        super(id, msName, nodeName, nodeFullName, fields);
+        super(msName, nodeName, nodeFullName, fields);
         this.typeOfChange = typeOfChange;
     }
 
     public ChangedNode(Node node, TypeOfChange typeOfChange) {
-        super(node.id(), node.msName(), node.nodeName(), node.nodeFullName(), node.fields());
+        super(node.msName(), node.nodeName(), node.nodeFullName(), node.fields());
         this.typeOfChange = typeOfChange;
     }
 

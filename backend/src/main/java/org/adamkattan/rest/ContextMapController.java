@@ -1,5 +1,8 @@
 package org.adamkattan.rest;
 
+import io.smallrye.common.annotation.Blocking;
+import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -12,6 +15,8 @@ import org.adamkattan.model.contextmap.CreateContextMap;
 import org.adamkattan.model.contextmap.LinksInputDto;
 import org.adamkattan.model.contextmap.compare.ChangedContextMap;
 import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.output.CIAContextMap;
+import org.adamkattan.model.contextmap.output.ContextMapOutputRequest;
 import org.adamkattan.service.ContextMapChangeImpactService;
 import org.adamkattan.service.ContextMapService;
 
@@ -89,6 +94,24 @@ public class ContextMapController {
         ChangedLinksOutput output = contextMapChangeImpactService.saveChangedLinks(linksInputDto, srcId);
         return Response.ok(output)
                 .build();
+    }
+
+    @POST
+    @Path("/change-impact-analysis")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Blocking
+    @Transactional
+    public Uni<CIAContextMap> changeImpactAnalysis(
+            @Valid ContextMapOutputRequest request
+    ) {
+        return Uni.createFrom().item(
+                        () -> contextMapChangeImpactService.saveChangedContextMap(
+                                request.projectId(),
+                                request.sourceContextMapId(),
+                                request.targetContextMapId())
+                )
+                .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
 
     @DELETE
