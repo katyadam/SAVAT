@@ -10,8 +10,8 @@ import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.ContextMapFullDto;
 import org.adamkattan.model.contextmap.CreateContextMap;
 import org.adamkattan.model.contextmap.LinksInputDto;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
-import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
 import org.adamkattan.service.ContextMapLinksDifferenceService;
 import org.adamkattan.service.ContextMapService;
 

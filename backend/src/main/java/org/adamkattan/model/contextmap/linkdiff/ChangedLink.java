@@ -1,4 +1,4 @@
-package org.adamkattan.model.contextmap.compare;
+package org.adamkattan.model.contextmap.linkdiff;
 
 import org.adamkattan.model.contextmap.Link;
 

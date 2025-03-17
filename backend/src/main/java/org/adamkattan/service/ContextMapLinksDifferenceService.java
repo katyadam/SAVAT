@@ -5,8 +5,8 @@ import jakarta.inject.Inject;
 import org.adamkattan.analysis.ContextMapLinksDifferenceAnalysis;
 import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.LinksInputDto;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
-import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package org.adamkattan.analysis;
 
-import org.adamkattan.model.contextmap.compare.ChangedLink;
-import org.adamkattan.model.contextmap.compare.ChangedLinkType;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLink;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinkType;
 import org.adamkattan.model.contextmap.Link;
-import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
 
 import java.util.ArrayList;
 import java.util.List;
