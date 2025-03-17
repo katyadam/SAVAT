@@ -13,7 +13,7 @@ public class Node implements Serializable {
     private final String msName;
     @JsonProperty("nodeName")
     private final String nodeName;
-    @JsonProperty("nodeName")
+    @JsonProperty("nodeFullName")
     private final String nodeFullName;
     @JsonProperty("fields")
     private final List<Field> fields;
@@ -21,7 +21,7 @@ public class Node implements Serializable {
     public Node(
             @JsonProperty("msName") String msName,
             @JsonProperty("nodeName") String nodeName,
-            @JsonProperty("nodeName") String nodeFullName,
+            @JsonProperty("nodeFullName") String nodeFullName,
             @JsonProperty("fields") List<Field> fields
     ) {
         this.msName = msName;
@@ -40,7 +40,7 @@ public class Node implements Serializable {
         return nodeName;
     }
 
-    @JsonProperty("nodeName")
+    @JsonProperty("nodeFullName")
     public String nodeFullName() {
         return nodeFullName;
     }
@@ -97,7 +97,7 @@ public class Node implements Serializable {
         return "Node[" +
                 "msName=" + msName + ", " +
                 "nodeName=" + nodeName + ", " +
-                "nodeName=" + nodeFullName + ", " +
+                "nodeFullName=" + nodeFullName + ", " +
                 "fields=" + fields + ']';
     }
 }
