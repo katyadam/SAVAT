@@ -33,7 +33,7 @@ public class CallGraphOutputController {
     @GET
     @Path("/project/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) { // TODO: move to ProjectController
+    public Response getProjectCallGraphOutputs(@PathParam("projectId") Long projectId) { // TODO: move to ProjectController
         List<CallGraphOutput> allProjectOutputs = callGraphOutputService.getAllProjectOutputs(projectId);
 
         var dtos = allProjectOutputs.stream()
@@ -45,7 +45,7 @@ public class CallGraphOutputController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getChangedCallGraphById(@PathParam("id") Long id) {
+    public Response getCallGraphOutputById(@PathParam("id") Long id) {
         CallGraphOutput output = callGraphOutputService.getCallGraphOutputById(id);
 
         return Response.ok(output.changedCallGraph).build();

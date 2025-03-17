@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.adamkattan.model.callgraph.CallGraphInput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.contextmap.ContextMapEntity;
+import org.adamkattan.model.contextmap.output.ContextMapOutput;
 import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,10 @@ public class Project extends PanacheEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Column(nullable = false, name = "call_graph_outputs")
     public List<CallGraphOutput> callGraphOutputs;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(nullable = false, name = "context_map_outputs")
+    public List<ContextMapOutput> contextMapOutputs;
 
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
