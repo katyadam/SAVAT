@@ -29,7 +29,7 @@ public class ContextMapOutputController {
     @GET
     @Path("/project/{projectId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectAnalysisInputs(@PathParam("projectId") Long projectId) {
+    public Response getProjectContextMapOutputs(@PathParam("projectId") Long projectId) {
         List<ContextMapOutput> allProjectOutputs = contextMapOutputService.getAllProjectOutputs(projectId);
 
         var dtos = allProjectOutputs.stream()
@@ -41,7 +41,7 @@ public class ContextMapOutputController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCallGraphOutputById(@PathParam("id") Long id) {
+    public Response getContextMapOutputById(@PathParam("id") Long id) {
         ContextMapOutput output = contextMapOutputService.getContextMapOutputById(id);
 
         return Response.ok(output.changedContextMap).build();

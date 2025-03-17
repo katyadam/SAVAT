@@ -67,9 +67,31 @@ export type ChangedDto = {
     createdAt: string;
 }
 export type ChangedLinksResponse = {
-    changedLinks: ChangedLink[]
+    changedLinks: ChangedLink[];
 }
 
 export type Summary = {
     totalChangedContextMaps: number;
+}
+
+
+// Types for Change Impact Analysis
+
+export enum TypeOfChange {
+    ADDED, REMOVED, MODIFIED, NONE
+}
+
+export type ChangedNode = Node & {
+    typeOfChange: TypeOfChange
+}
+
+export type CIAContextMap = {
+    nodes: ChangedNode[];
+    links: Link[];
+}
+
+export type ChangeImpactAnalysisPayload = {
+    projectId: string,
+    sourceContextMapId: number,
+    targetContextMapId: number
 }
