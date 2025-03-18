@@ -54,7 +54,7 @@ const Navbar: FC<NavbarType> = ({
 
   return (
     <div className="flex flex-row ml-5 gap-4 justify-start items-center w-full h-12">
-      {setShowComparisons && showComparisons && setSelectedContextMapChange && (
+      {setShowComparisons && setSelectedContextMapChange && (
         <Button
           onClick={() => {
             setShowComparisons(!showComparisons);
@@ -66,7 +66,9 @@ const Navbar: FC<NavbarType> = ({
           {showComparisons ? "Show graph" : "Show differences"}
         </Button>
       )}
-      <Separator orientation="vertical" color="black" />
+      {setShowComparisons && setSelectedContextMapChange && (
+        <Separator orientation="vertical" color="black" />
+      )}
       {showComparisons ? (
         <>
           {contextMapChanges && setSelectedContextMapChange && (
