@@ -72,6 +72,7 @@ export type ChangedLinksResponse = {
 
 export type Summary = {
     totalChangedContextMaps: number;
+    totalContextMapsOutputs: number;
 }
 
 

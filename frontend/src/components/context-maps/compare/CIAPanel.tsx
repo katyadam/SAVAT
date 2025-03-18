@@ -61,6 +61,7 @@ const CIAPanel: FC<CIAPanelType> = ({ projectId }) => {
       <h1 className="text-md font-bold">Select Context Map Inputs</h1>
       <div className="flex flex-row justify-between items-center">
         <InputsList
+          key={1}
           projectId={projectId}
           inputToOmit={rightSelected}
           selectedInput={leftSelected}
@@ -80,6 +81,7 @@ const CIAPanel: FC<CIAPanelType> = ({ projectId }) => {
         </div>
 
         <InputsList
+          key={2}
           projectId={projectId}
           inputToOmit={leftSelected}
           selectedInput={rightSelected}

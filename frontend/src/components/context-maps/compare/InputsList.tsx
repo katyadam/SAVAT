@@ -29,6 +29,7 @@ const InputsList: FC<InputsListType> = ({
           .filter((input) => inputToOmit?.id !== input.id)
           .map((input) => (
             <div
+              key={selectedInput?.id}
               onClick={() =>
                 selectedInput?.id === input.id
                   ? setSelectedInput(null)
@@ -39,7 +40,7 @@ const InputsList: FC<InputsListType> = ({
                 ${selectedInput?.id == input.id && "bg-slate-200"}
                 `}
             >
-              <InputInfoBlock input={input} />
+              <InputInfoBlock key={selectedInput?.id} input={input} />
             </div>
           ))}
     </div>

@@ -215,6 +215,13 @@ export function ContextMapsInputsTable<TData, TValue>({
                     contextMapSummary.totalChangedContextMaps}
                 </span>
               </p>
+              <p>
+                Total context maps outputs (CIA):{" "}
+                <span className="text-xl font-bold">
+                  {contextMapSummary &&
+                    contextMapSummary.totalContextMapsOutputs}
+                </span>
+              </p>
             </div>
           }
         />
