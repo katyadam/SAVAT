@@ -1,38 +1,36 @@
+import { useProjectsContextMapOutputs } from "@/hooks/useContextMapOutput";
+import { useProjectContextMaps } from "@/hooks/useProject";
 import { FC, useEffect, useState } from "react";
-import { CallGraphInputsTable } from "./CallGraphInputsTable";
-import { callGraphInputsColumns } from "./InputsColumns";
-import { useProjectCallGraphInputs } from "@/hooks/useCallGraph";
-import Loading from "../loading/Loading";
-import { Tabs, TabsContent, TabsList } from "../ui/tabs";
-import { TabsTrigger } from "@radix-ui/react-tabs";
-import { CallGraphOutputsTable } from "./CallGraphOutputsTable";
-import { callGraphOutputsColumns } from "./OutputsColumns";
-import { useProjectsCallGraphOutputs } from "@/hooks/useCallGraphOutput";
-import Overlay from "../ui/Overlay";
-import CompareDialog from "./compare/CompareDialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Button } from "../ui/button";
+import Loading from "../loading/Loading";
+import { ContextMapsInputsTable } from "./ContextMapsInputsTable";
+import { contextMapsColumns, contextMapsOutputsColumns } from "./Columns";
+import { ContextMapsOutputsTable } from "./ContextMapsOutputsTable";
+import Overlay from "../ui/Overlay";
+import CompareDialog from "../callgraphs/compare/CompareDialog";
 
-type CallGraphsTabType = {
+type ContextMapsTabsType = {
   projectId: string;
 };
 
-const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
-  const { data: callGraphInputs, isLoading: callGraphInputsLoading } =
-    useProjectCallGraphInputs(projectId);
+const ContextMapsTabs: FC<ContextMapsTabsType> = ({ projectId }) => {
+  const { data: contextMapInputs, isLoading: contextMapInputsLoading } =
+    useProjectContextMaps(projectId);
 
-  const { data: callGraphOutputs, isLoading: callGraphOutputsLoading } =
-    useProjectsCallGraphOutputs(projectId);
+  const { data: contextMapOutputs, isLoading: contextMapOutputsLoading } =
+    useProjectsContextMapOutputs(projectId);
 
   const [activeTab, setActive] = useState<string>(
-    localStorage.getItem("callGraphsActiveTab") || "inputs"
+    localStorage.getItem("contextMapsActiveTab") || "inputs"
   );
 
   useEffect(() => {
-    localStorage.setItem("callGraphsActiveTab", activeTab);
+    localStorage.setItem("contextMapsActiveTab", activeTab);
   }, [activeTab]);
 
   const [openCompareDialog, setOpenCompareDialog] = useState<boolean>(false);
-
+  console.log(activeTab);
   return (
     <>
       <Tabs
@@ -68,23 +66,23 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
         </TabsList>
 
         <TabsContent className="mt-0" value="inputs">
-          {callGraphInputsLoading ? (
+          {contextMapInputsLoading ? (
             <Loading />
           ) : (
-            <CallGraphInputsTable
-              columns={callGraphInputsColumns}
-              data={callGraphInputs!}
+            <ContextMapsInputsTable
+              columns={contextMapsColumns}
+              data={contextMapInputs!}
               projectId={projectId}
             />
           )}
         </TabsContent>
         <TabsContent className="mt-0" value="analysis-outputs">
-          {callGraphOutputsLoading ? (
+          {contextMapOutputsLoading ? (
             <Loading />
           ) : (
-            <CallGraphOutputsTable
-              columns={callGraphOutputsColumns}
-              data={callGraphOutputs!}
+            <ContextMapsOutputsTable
+              columns={contextMapsOutputsColumns}
+              data={contextMapOutputs!}
               projectId={projectId}
             />
           )}
@@ -99,4 +97,4 @@ const CallGraphsTab: FC<CallGraphsTabType> = ({ projectId }) => {
   );
 };
 
-export default CallGraphsTab;
+export default ContextMapsTabs;

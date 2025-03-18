@@ -1,7 +1,6 @@
 import {
   useDeleteProject,
   useProject,
-  useProjectContextMaps,
   useProjectSDGs,
   useProjectSummary,
 } from "@/hooks/useProject";
@@ -11,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import CallGraphInputCreateDialog from "@/components/projects/CallGraphInputCreateDIalog";
-import CallGraphsTab from "@/components/callgraphs/CallGraphsTab";
+import CallGraphsTabs from "@/components/callgraphs/CallGraphsTabs";
 import { FileOperation } from "@/components/projects/types";
 import CreateEntrypoint from "@/components/projects/CreateEntrypoint";
 import { Separator } from "@/components/ui/separator";
@@ -20,10 +19,9 @@ import { useToast } from "@/hooks/use-toast";
 import ConfirmWindow from "@/components/ui/ConfirmWindow";
 import { SDGsTable } from "@/components/sdgs/SDGsTable";
 import { columns } from "@/components/sdgs/Columns";
-import { ContextMapsTable } from "@/components/context-maps/ContextMapsTable";
-import { contextMapsColumns } from "@/components/context-maps/Columns";
 import ContextMapCreateDialog from "@/components/projects/ContextMapCreateDialog";
 import SDGCreateDialog from "@/components/projects/SDGCreateDialog";
+import ContextMapsTabs from "@/components/context-maps/ContextMapsTabs";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -40,9 +38,6 @@ const ProjectPage = () => {
   const { data: project, isLoading: projectLoading } = useProject(
     projectId || ""
   );
-
-  const { data: contextMaps, isLoading: contextMapsLoading } =
-    useProjectContextMaps(projectId || "");
 
   const { data: sdgs, isLoading: sdgsLoading } = useProjectSDGs(
     projectId || ""
@@ -140,15 +135,7 @@ const ProjectPage = () => {
         </TabsList>
 
         <TabsContent value="contextMaps">
-          {contextMapsLoading ? (
-            <Loading overlay={false} />
-          ) : (
-            <ContextMapsTable
-              columns={contextMapsColumns}
-              data={contextMaps!}
-              projectId={projectId}
-            />
-          )}
+          <ContextMapsTabs projectId={projectId} />
         </TabsContent>
 
         <TabsContent value="sdgs">
@@ -160,7 +147,7 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="callgraphs">
-          <CallGraphsTab projectId={projectId} />
+          <CallGraphsTabs projectId={projectId} />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (

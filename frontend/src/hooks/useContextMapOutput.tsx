@@ -2,7 +2,7 @@ import ContextMapApi from "@/api/context-maps/api";
 import { ChangeImpactAnalysisPayload } from "@/api/context-maps/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useProjectsContextMaphOutputs = (projectId: string) => {
+export const useProjectsContextMapOutputs = (projectId: string) => {
   return useQuery({
     queryKey: ["contextMapOutputs", projectId],
     queryFn: () => ContextMapApi.getProjectContextMapOutputs(projectId),

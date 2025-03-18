@@ -15,18 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
-import { Eye, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useSortingByDate, useSortingByVersion } from "@/hooks/useTableSorting";
-import HeaderWithSort from "../ui/HeaderWithSort";
 import ConfirmWindow from "../ui/ConfirmWindow";
-import {
-  useContextMapDelete,
-  useContextMapSummary,
-} from "@/hooks/useContextMap";
-import { ContextMapDto } from "@/api/context-maps/types";
+import { ContextMapOutputSimple } from "@/api/context-maps/types";
 import { Button } from "../ui/button";
+import { useContextMapOutputDelete } from "@/hooks/useContextMapOutput";
 
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -34,23 +29,22 @@ type DataTableProps<TData, TValue> = {
   projectId: string;
 };
 
-export function ContextMapsTable<TData, TValue>({
+export function ContextMapsOutputsTable<TData, TValue>({
   columns,
   data,
   projectId,
 }: DataTableProps<TData, TValue>) {
-  const { mutateAsync } = useContextMapDelete(projectId);
+  const { mutateAsync } = useContextMapOutputDelete(projectId);
   const { toast } = useToast();
-  const [contextMapToDelete, setContextMapToDelete] = useState<number | null>(
-    null
-  );
-  const { data: contextMapSummary } = useContextMapSummary(contextMapToDelete);
+  const [contextMapOutputToDelete, setContextMapOutputToDelete] = useState<
+    number | null
+  >(null);
 
   const handleOutputDelete = async (id: number) => {
     try {
       await mutateAsync(id);
       toast({
-        title: "Context Map Removed!",
+        title: "Context Map Output Removed!",
       });
     } catch (error: unknown) {
       let errorMessage = "An unexpected error occurred";
@@ -62,53 +56,41 @@ export function ContextMapsTable<TData, TValue>({
       }
 
       toast({
-        title: "Something BAD happened, couldn't delete context map!",
+        title: "Something BAD happened, couldn't delete context map output!",
         description: errorMessage,
         variant: "destructive",
       });
     }
   };
 
-  const [sortBy, setSortBy] = useState<"version" | "date">("date");
-
-  const { dateSortedData, dateSortMethod, setDateSortMethod } =
-    useSortingByDate(data);
-  const { versionSortedData, versionSortMethod, setVersionSortMethod } =
-    useSortingByVersion(data);
+  const [sortByDate, setSortByDate] = useState<boolean>(false);
+  const sortedData = useMemo<TData[]>(() => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date((a as ContextMapOutputSimple).createdAt).getTime();
+      const dateB = new Date((b as ContextMapOutputSimple).createdAt).getTime();
+      return sortByDate ? dateA - dateB : dateB - dateA;
+    });
+  }, [data, sortByDate]);
 
   const microserviceFilter = (): boolean => false;
   const table = useReactTable({
-    data: sortBy === "date" ? dateSortedData : versionSortedData,
+    data: sortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     filterFns: { microserviceFilter },
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border max-h-[500px] overflow-auto">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) =>
-                header.id === "createdAt" || header.id === "version" ? (
+                header.id === "createdAt" ? (
                   <TableHead
                     key={header.id}
-                    onClick={() => {
-                      if (header.id === "createdAt") {
-                        setSortBy("date");
-                        setDateSortMethod(
-                          dateSortMethod === "dateAsc" ? "dateDesc" : "dateAsc"
-                        );
-                      } else {
-                        setSortBy("version");
-                        setVersionSortMethod(
-                          versionSortMethod === "versionAsc"
-                            ? "versionDesc"
-                            : "versionAsc"
-                        );
-                      }
-                    }}
+                    onClick={() => setSortByDate(!sortByDate)}
                     className="flex flex-row items-center gap-3 cursor-pointer"
                   >
                     <p>
@@ -117,15 +99,7 @@ export function ContextMapsTable<TData, TValue>({
                         header.getContext()
                       )}
                     </p>
-                    <HeaderWithSort
-                      header={header.id}
-                      sortBy={sortBy}
-                      sortMethod={
-                        header.id === "createdAt"
-                          ? dateSortMethod
-                          : versionSortMethod
-                      }
-                    />
+                    {sortByDate ? <CalendarArrowUp /> : <CalendarArrowDown />}
                   </TableHead>
                 ) : (
                   <TableHead key={header.id}>
@@ -136,6 +110,7 @@ export function ContextMapsTable<TData, TValue>({
                   </TableHead>
                 )
               )}
+              <TableHead>Context Map</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -151,21 +126,23 @@ export function ContextMapsTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-
                 <TableCell>
                   <a
-                    href={`/context-maps/${(row.original as ContextMapDto).id}`}
+                    href={`/context-map-output/${
+                      (row.original as ContextMapOutputSimple).id
+                    }/context-map`}
                   >
                     <Button variant="outline">
                       <Eye />
                     </Button>
                   </a>
                 </TableCell>
-
                 <TableCell>
                   <Button
                     onClick={() =>
-                      setContextMapToDelete((row.original as ContextMapDto).id)
+                      setContextMapOutputToDelete(
+                        (row.original as ContextMapOutputSimple).id
+                      )
                     }
                     variant="outline"
                   >
@@ -180,43 +157,32 @@ export function ContextMapsTable<TData, TValue>({
                 colSpan={columns.length + 3}
                 className="h-24 text-center"
               >
-                No context maps.
+                No analysis outputs.
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-      {contextMapToDelete && (
+      {contextMapOutputToDelete && (
         <ConfirmWindow
-          closeFunc={() => setContextMapToDelete(null)}
-          title="Do you really want to delete this Context Map ?"
+          closeFunc={() => setContextMapOutputToDelete(null)}
+          title="Do you really want to delete this Change Impact Analysis Output ?"
           width="w-1/3"
           options={[
             {
               title: "YES",
               callback: () => {
-                handleOutputDelete(contextMapToDelete);
-                setContextMapToDelete(null);
+                handleOutputDelete(contextMapOutputToDelete);
+                setContextMapOutputToDelete(null);
               },
               btnVariant: "destructive",
             },
             {
               title: "NO",
-              callback: () => setContextMapToDelete(null),
+              callback: () => setContextMapOutputToDelete(null),
               btnVariant: "ghost",
             },
           ]}
-          body={
-            <div className="flex flex-col mb-5 items-start">
-              <p>
-                Total compared context maps:{" "}
-                <span className="text-xl font-bold">
-                  {contextMapSummary &&
-                    contextMapSummary.totalChangedContextMaps}
-                </span>
-              </p>
-            </div>
-          }
         />
       )}
     </div>
