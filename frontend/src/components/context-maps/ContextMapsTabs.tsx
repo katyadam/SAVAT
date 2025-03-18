@@ -1,7 +1,6 @@
 import { useProjectsContextMapOutputs } from "@/hooks/useContextMapOutput";
 import { useProjectContextMaps } from "@/hooks/useProject";
 import { FC, useEffect, useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Button } from "../ui/button";
 import Loading from "../loading/Loading";
 import { ContextMapsInputsTable } from "./ContextMapsInputsTable";
@@ -9,6 +8,8 @@ import { contextMapsColumns, contextMapsOutputsColumns } from "./Columns";
 import { ContextMapsOutputsTable } from "./ContextMapsOutputsTable";
 import Overlay from "../ui/Overlay";
 import CompareDialog from "../callgraphs/compare/CompareDialog";
+import { Tabs, TabsContent, TabsList } from "../ui/tabs";
+import { TabsTrigger } from "@radix-ui/react-tabs";
 
 type ContextMapsTabsType = {
   projectId: string;
@@ -30,7 +31,6 @@ const ContextMapsTabs: FC<ContextMapsTabsType> = ({ projectId }) => {
   }, [activeTab]);
 
   const [openCompareDialog, setOpenCompareDialog] = useState<boolean>(false);
-  console.log(activeTab);
   return (
     <>
       <Tabs
@@ -41,7 +41,7 @@ const ContextMapsTabs: FC<ContextMapsTabsType> = ({ projectId }) => {
           <TabsTrigger
             value="inputs"
             className={
-              "py-2 px-4 rounded-tl-md transition-all duration-200 focus:outline-none" +
+              "py-2 px-4 rounded-tl-md transition-all duration-200 focus:outline-none " +
               (activeTab === "inputs" ? " bg-gray-300" : "")
             }
           >
@@ -50,7 +50,7 @@ const ContextMapsTabs: FC<ContextMapsTabsType> = ({ projectId }) => {
           <TabsTrigger
             value="analysis-outputs"
             className={
-              "py-2 px-4 rounded-tr-md transition-all duration-200 focus:outline-none" +
+              "py-2 px-4 rounded-tr-md transition-all duration-200 focus:outline-none " +
               (activeTab === "analysis-outputs" ? " bg-gray-300" : "")
             }
           >
