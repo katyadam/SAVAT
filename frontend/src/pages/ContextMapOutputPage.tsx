@@ -1,9 +1,7 @@
-import { ChangedLinksResponse, Field, Node } from "@/api/context-maps/types";
-import CompareForm from "@/components/context-maps/compare/CompareForm";
+import { Field, Node } from "@/api/context-maps/types";
 import EntityDetail from "@/components/context-maps/EntityDetail";
 import FieldDetail from "@/components/context-maps/FieldDetail";
 import { getMicroservicesColors } from "@/components/context-maps/generators/colorGenerator";
-import Graph from "@/components/context-maps/graphs/Graph";
 import Navbar from "@/components/context-maps/Navbar";
 import RenderGraph from "@/components/context-maps/RenderGraph";
 import { RenderType } from "@/components/context-maps/types";
@@ -11,36 +9,28 @@ import Loading from "@/components/loading/Loading";
 import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/hooks/use-toast";
-import { useContextMap } from "@/hooks/useContextMap";
-import React, { useState, useCallback, useMemo } from "react";
+import { useContextMapOutput } from "@/hooks/useContextMapOutput";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const ContextMapPage = () => {
-  React.useEffect(() => {
+const ContextMapOutputPage = () => {
+  useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
-
   const { id } = useParams();
+  const {
+    data: changedContextMap,
+    isLoading,
+    error,
+  } = useContextMapOutput(id || "");
+
+  const [msColors, setMsColors] = useState<Map<string, string>>(new Map());
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [selectedField, setSelectedField] = useState<Field | null>(null);
-  const [selectedRenderType, setSelectedRenderType] = useState<RenderType>(
-    RenderType.BASIC_GRAPH
-  );
-  const [selectedContextMapChange, setSelectedContextMapChange] = useState<
-    string | null
-  >(null);
-  const [compareUp, setCompareUp] = useState<boolean>(false);
-  const [showComparisons, setShowComparisons] = useState<boolean>(false);
-  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
-
-  const { data: contextMap, isLoading, error } = useContextMap(id || "");
-
-  const { toast } = useToast();
 
   const handleNodeClick = useCallback(
     (node: Node): void => {
@@ -58,65 +48,48 @@ const ContextMapPage = () => {
     setSelectedField((prev) => (prev === field ? null : field));
   }, []);
 
-  const handleCompareResponse = (resp: ChangedLinksResponse) => {
-    console.log(resp);
-    toast({
-      title: "Comparison done",
-      description: "Proceed to comparison",
-    });
-    setCompareUp(false);
-  };
+  const [selectedRenderType, setSelectedRenderType] = useState<RenderType>(
+    RenderType.BASIC_GRAPH
+  );
+
+  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(true);
 
   const closeOverlay = () => {
     setSelectedNode(null);
     setSelectedField(null);
   };
-  const msColors = useMemo(
-    () => getMicroservicesColors(contextMap?.nodes || []),
-    [contextMap]
-  );
+
+  useEffect(() => {
+    if (changedContextMap) {
+      setMsColors(getMicroservicesColors(changedContextMap.nodes));
+    }
+  }, [changedContextMap]);
+
   const renderContent = () => {
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (showComparisons && contextMap && selectedContextMapChange) {
+    if (error || !id) return <p>Error: Unable to fetch context map outputs.</p>;
+    if (changedContextMap && msColors && !isLoading) {
       return (
-        <Graph
-          graphData={{
-            nodes: contextMap.nodes,
-            links: [],
-          }}
+        <RenderGraph
           onNodeClick={handleNodeClick}
-          contextMapChangeId={selectedContextMapChange}
-          showIsolatedNodes={true}
+          contextMap={changedContextMap}
+          renderType={selectedRenderType}
+          showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
         />
       );
     }
-    return (
-      <RenderGraph
-        onNodeClick={handleNodeClick}
-        contextMap={contextMap}
-        renderType={selectedRenderType}
-        showIsolatedNodes={showIsolatedNodes}
-        msColors={msColors}
-      />
-    );
+    return <Loading />;
   };
 
   return id ? (
     <div className="h-screen w-screen">
       <Navbar
         setSelectedRenderType={setSelectedRenderType}
-        compareBtnClick={() => setCompareUp(true)}
         isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
-        showIsolatedNodes={false}
         contextMapId={id}
-        setShowComparisons={setShowComparisons}
-        showComparisons={showComparisons}
-        selectedContextMapChange={selectedContextMapChange}
-        setSelectedContextMapChange={setSelectedContextMapChange}
         msColors={msColors}
         hintComponent={<LinkDifferencesHint />}
+        showIsolatedNodes={true}
       />
       <Separator className="mt-2" />
       {renderContent()}
@@ -136,19 +109,10 @@ const ContextMapPage = () => {
           </div>
         </Overlay>
       )}
-      {compareUp && (
-        <Overlay
-          width="5/6"
-          closeFunc={() => setCompareUp(false)}
-          aria-label="Compare Context Map"
-        >
-          <CompareForm contextMapId={id} respFunc={handleCompareResponse} />
-        </Overlay>
-      )}
     </div>
   ) : (
     <Loading />
   );
 };
 
-export default ContextMapPage;
+export default ContextMapOutputPage;

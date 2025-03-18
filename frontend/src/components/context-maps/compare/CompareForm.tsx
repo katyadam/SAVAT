@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+import { Label } from "../../ui/label";
+import { Textarea } from "../../ui/textarea";
+import { Button } from "../../ui/button";
 import { ChangedLinksResponse, Link } from "@/api/context-maps/types";
 import { useContextMapCompare } from "@/hooks/useContextMap";
 

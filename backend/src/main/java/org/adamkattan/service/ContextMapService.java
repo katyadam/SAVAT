@@ -16,6 +16,9 @@ public class ContextMapService {
     @Inject
     ProjectService projectService;
 
+    @Inject
+    ContextMapOutputService outputService;
+
     public ContextMapEntity getContextMapById(Long id) {
         return ContextMapEntity.find("id", id).firstResult();
     }
@@ -27,7 +30,9 @@ public class ContextMapService {
     public ContextMapSummary getContextMapSummary(Long id) {
         ContextMapEntity contextMap = ContextMapEntity.find("id", id).firstResult();
         if (contextMap != null) {
-            return new ContextMapSummary(contextMap.changedContextMaps.size());
+            return new ContextMapSummary(
+                    contextMap.changedContextMaps.size(),
+                    outputService.getContextMapOutputsWithInputId(id, contextMap.project.id).size());
         }
         throw new EntityNotFoundException("ContextMap not found");
     }
@@ -47,6 +52,8 @@ public class ContextMapService {
     public Long deleteContextMapById(Long id) {
         ContextMapEntity contextMapEntity = ContextMapEntity.find("id", id).firstResult();
         if (contextMapEntity != null) {
+            outputService.getContextMapOutputsWithInputId(id, contextMapEntity.project.id)
+                    .forEach((output) -> outputService.deleteCallGraphOutputById(output.id));
             contextMapEntity.changedContextMaps.clear();
             contextMapEntity.project.contextMaps.remove(contextMapEntity);
             contextMapEntity.persist();

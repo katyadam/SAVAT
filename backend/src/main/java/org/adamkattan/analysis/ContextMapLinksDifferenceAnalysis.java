@@ -1,20 +1,17 @@
 package org.adamkattan.analysis;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import org.adamkattan.model.sdg.Link;
-import org.adamkattan.model.sdg.compare.ChangedLink;
-import org.adamkattan.model.sdg.compare.ChangedLinkType;
-import org.adamkattan.model.sdg.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLink;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinkType;
+import org.adamkattan.model.contextmap.Link;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
-public class SdgChangeImpactAnalysis {
-
-    private record LinkKey(String source, String target) {
+public class ContextMapLinksDifferenceAnalysis {
+    private record LinkKey(String source, String target, String msSource, String msTarget) {
     }
 
     public static ChangedLinksOutput getLinksDifference(List<Link> src, List<Link> dest) {
@@ -24,7 +21,9 @@ public class SdgChangeImpactAnalysis {
         for (Link link : src) {
             var key = new LinkKey(
                     link.source(),
-                    link.target()
+                    link.target(),
+                    link.msSource(),
+                    link.msTarget()
             );
             if (!destMap.containsKey(key)) {
                 changedLinks.add(new ChangedLink(link, ChangedLinkType.REMOVED));
@@ -38,7 +37,9 @@ public class SdgChangeImpactAnalysis {
         for (Link link : dest) {
             var key = new LinkKey(
                     link.source(),
-                    link.target()
+                    link.target(),
+                    link.msSource(),
+                    link.msTarget()
             );
             if (!srcMap.containsKey(key)) {
                 changedLinks.add(new ChangedLink(link, ChangedLinkType.ADDED));
@@ -57,9 +58,12 @@ public class SdgChangeImpactAnalysis {
                 .collect(Collectors.toMap(
                         link -> new LinkKey(
                                 link.source(),
-                                link.target()
+                                link.target(),
+                                link.msSource(),
+                                link.msTarget()
                         ),
                         link -> link
                 ));
     }
+
 }

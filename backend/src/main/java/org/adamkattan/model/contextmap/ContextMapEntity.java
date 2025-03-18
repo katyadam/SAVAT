@@ -3,7 +3,7 @@ package org.adamkattan.model.contextmap;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
+import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
 import org.adamkattan.model.project.Project;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

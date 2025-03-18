@@ -10,9 +10,9 @@ import org.adamkattan.model.contextmap.ContextMapEntity;
 import org.adamkattan.model.contextmap.ContextMapFullDto;
 import org.adamkattan.model.contextmap.CreateContextMap;
 import org.adamkattan.model.contextmap.LinksInputDto;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
-import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
-import org.adamkattan.service.ContextMapChangeImpactService;
+import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
+import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
+import org.adamkattan.service.ContextMapLinksDifferenceService;
 import org.adamkattan.service.ContextMapService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ContextMapController {
     ContextMapService contextMapService;
 
     @Inject
-    ContextMapChangeImpactService contextMapChangeImpactService;
+    ContextMapLinksDifferenceService contextMapLinksDifferenceService;
 
     @GET
     @Path("/{id}")
@@ -41,7 +41,7 @@ public class ContextMapController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedContextMaps(@PathParam("id") Long contextMapId) {
-        List<ChangedContextMap> changedContextMaps = contextMapChangeImpactService.getChangedContextMaps(contextMapId);
+        List<ChangedContextMap> changedContextMaps = contextMapLinksDifferenceService.getChangedContextMaps(contextMapId);
         return Response.ok(
                 changedContextMaps.stream()
                         .map(ChangedContextMap::toDto)
@@ -53,7 +53,7 @@ public class ContextMapController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedContextMap(@PathParam("changedContextMapId") Long changedContextMapId) {
-        ChangedContextMap changedContextMap = contextMapChangeImpactService.getChangedContextMap(changedContextMapId);
+        ChangedContextMap changedContextMap = contextMapLinksDifferenceService.getChangedContextMap(changedContextMapId);
         return Response.ok(ChangedContextMap.toDto(changedContextMap))
                 .build();
     }
@@ -86,7 +86,7 @@ public class ContextMapController {
             @Valid LinksInputDto linksInputDto,
             @PathParam("id") Long srcId
     ) {
-        ChangedLinksOutput output = contextMapChangeImpactService.saveChangedLinks(linksInputDto, srcId);
+        ChangedLinksOutput output = contextMapLinksDifferenceService.saveChangedLinks(linksInputDto, srcId);
         return Response.ok(output)
                 .build();
     }

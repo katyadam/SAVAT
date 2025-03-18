@@ -29,6 +29,11 @@
           "commitHash": "56dasa",
           "version": "1.0.3",
           "file": "../examples/context-maps/ts-1.0.3.json"
+        },
+        {
+          "commitHash": "zfv4sv",
+          "version": "1.0.3-modified",
+          "file": "../examples/context-maps/ts-modified-example.json"
         }
       ],
       "service-dependency-graph-sources": [
