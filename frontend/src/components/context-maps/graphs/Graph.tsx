@@ -12,6 +12,7 @@ import {
   TypeOfChange,
 } from "@/api/context-maps/types";
 import { useContextMapChange } from "@/hooks/useContextMap";
+import { getNodeSignature } from "@/api/context-maps/utils";
 
 type GraphType = {
   onNodeClick: (node: Node) => void;
@@ -39,10 +40,14 @@ const Graph: FC<GraphType> = ({
     const linkedNodeNames = new Set<string>();
 
     links.forEach((link) => {
-      linkedNodeNames.add(link.source);
-      linkedNodeNames.add(link.target);
+      linkedNodeNames.add(
+        getNodeSignature({ msName: link.msSource, nodeName: link.source })
+      );
+      linkedNodeNames.add(
+        getNodeSignature({ msName: link.msTarget, nodeName: link.target })
+      );
     });
-    return nodes.filter((node) => linkedNodeNames.has(node.nodeName));
+    return nodes.filter((node) => linkedNodeNames.has(getNodeSignature(node)));
   };
 
   useEffect(() => {
@@ -53,7 +58,7 @@ const Graph: FC<GraphType> = ({
       nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
         (node: Node) => ({
           data: {
-            id: node.nodeName,
+            id: getNodeSignature(node),
             label: node.nodeName,
             microservice: node.msName,
             typeOfChange:
@@ -69,8 +74,14 @@ const Graph: FC<GraphType> = ({
         : graphData.links
       ).map((link: Link | ChangedLink) => ({
         data: {
-          source: link.source,
-          target: link.target,
+          source: getNodeSignature({
+            msName: link.msSource,
+            nodeName: link.source,
+          }),
+          target: getNodeSignature({
+            msName: link.msTarget,
+            nodeName: link.target,
+          }),
           typeOfChange: "type" in link ? link.type.toString() : "SAME",
         },
         group: "edges",
@@ -94,7 +105,9 @@ const Graph: FC<GraphType> = ({
 
     cyInstance.on("cxttap", "node", (event) => {
       const nodeData = event.target.data();
-      const res = graphData.nodes.find((node) => node.nodeName == nodeData.id);
+      const res = graphData.nodes.find(
+        (node) => getNodeSignature(node) == nodeData.id
+      );
       if (!res) {
         alert("This node doesn't exist!");
       } else {

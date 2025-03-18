@@ -1,6 +1,6 @@
 import { Link, Node } from "./types";
 
-export const getNodeSignature = (node: Node): string => {
+export const getNodeSignature = (node: Node | { msName: string, nodeName: string }): string => {
     return `${node.msName}__${node.nodeName}`
 }
 
