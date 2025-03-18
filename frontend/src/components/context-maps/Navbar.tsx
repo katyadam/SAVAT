@@ -17,14 +17,14 @@ import { CircleHelp, Eye } from "lucide-react";
 import { useContextMapChanges } from "@/hooks/useContextMap";
 
 type NavbarType = {
-  compareBtnClick: (val: boolean) => void;
+  compareBtnClick?: (val: boolean) => void;
   isolatedNodesBtnClick: () => void;
   setSelectedRenderType: (selectedRenderType: RenderType) => void;
-  setShowComparisons: (val: boolean) => void;
-  showComparisons: boolean;
+  setShowComparisons?: (val: boolean) => void;
+  showComparisons?: boolean;
   contextMapId: string;
-  selectedContextMapChange: string | null;
-  setSelectedContextMapChange: (selectedContextMapChange: string) => void;
+  selectedContextMapChange?: string | null;
+  setSelectedContextMapChange?: (selectedContextMapChange: string) => void;
   msColors: Map<string, string>;
   hintComponent?: React.ReactNode;
 };
@@ -52,20 +52,22 @@ const Navbar: FC<NavbarType> = ({
 
   return (
     <div className="flex flex-row ml-5 gap-4 justify-start items-center w-full h-12">
-      <Button
-        onClick={() => {
-          setShowComparisons(!showComparisons);
-          setSelectedContextMapChange("None");
-          setSelectedRenderType(RenderType.BASIC_GRAPH);
-        }}
-        variant="outline"
-      >
-        {showComparisons ? "Show graph" : "Show differences"}
-      </Button>
+      {setShowComparisons && showComparisons && setSelectedContextMapChange && (
+        <Button
+          onClick={() => {
+            setShowComparisons(!showComparisons);
+            setSelectedContextMapChange("None");
+            setSelectedRenderType(RenderType.BASIC_GRAPH);
+          }}
+          variant="outline"
+        >
+          {showComparisons ? "Show graph" : "Show differences"}
+        </Button>
+      )}
       <Separator orientation="vertical" color="black" />
       {showComparisons ? (
         <>
-          {contextMapChanges && (
+          {contextMapChanges && setSelectedContextMapChange && (
             <>
               <Select
                 defaultValue="None"
@@ -112,13 +114,15 @@ const Navbar: FC<NavbarType> = ({
         </>
       ) : (
         <>
-          <Button
-            onClick={() => compareBtnClick(true)}
-            className=""
-            variant="outline"
-          >
-            Compare
-          </Button>
+          {compareBtnClick && (
+            <Button
+              onClick={() => compareBtnClick(true)}
+              className=""
+              variant="outline"
+            >
+              Compare
+            </Button>
+          )}
           <Select
             defaultValue={RenderType.BASIC_GRAPH}
             onValueChange={(value) =>

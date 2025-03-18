@@ -4,12 +4,18 @@ import { ElementsDefinition } from "cytoscape";
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
 import { getCyInstance } from "./CytoscapeInstance";
-import { ChangedLink, ContextMap, Link, Node } from "@/api/context-maps/types";
+import {
+  ChangedLink,
+  GenericContextMap,
+  Link,
+  Node,
+  TypeOfChange,
+} from "@/api/context-maps/types";
 import { useContextMapChange } from "@/hooks/useContextMap";
 
 type GraphType = {
   onNodeClick: (node: Node) => void;
-  graphData: ContextMap;
+  graphData: GenericContextMap;
   showIsolatedNodes: boolean;
   contextMapChangeId?: string;
   msColors: Map<string, string>;
@@ -50,6 +56,10 @@ const Graph: FC<GraphType> = ({
             id: node.nodeName,
             label: node.nodeName,
             microservice: node.msName,
+            typeOfChange:
+              "typeOfChange" in node
+                ? (node.typeOfChange as TypeOfChange)
+                : TypeOfChange.NONE,
           },
           group: "nodes",
         })

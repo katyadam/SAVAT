@@ -8,6 +8,7 @@ import SDGPage from "@/pages/SDGPage";
 import MethodsPage from "@/pages/MethodsPage";
 import ProjectPage from "@/pages/ProjectPage";
 import ErrorBoundary from "./ErrorBoundary";
+import ContextMapOutputPage from "@/pages/ContextMapOutputPage";
 
 const projectRoutes: RouteObject[] = [
   {
@@ -55,6 +56,14 @@ const projectRoutes: RouteObject[] = [
     Component: () => (
       <ErrorBoundary>
         <CallGraphOutputPage />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: "context-map-output/:id/context-map",
+    Component: () => (
+      <ErrorBoundary>
+        <ContextMapOutputPage />
       </ErrorBoundary>
     ),
   },

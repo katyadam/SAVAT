@@ -95,3 +95,13 @@ export type ChangeImpactAnalysisPayload = {
     sourceContextMapId: number,
     targetContextMapId: number
 }
+
+export type ContextMapOutputSimple = {
+    id: number,
+    projectId: number,
+    sourceInput: ContextMapDto,
+    targetInput: ContextMapDto,
+    createdAt: string
+}
+
+export type GenericContextMap = ContextMap | CIAContextMap

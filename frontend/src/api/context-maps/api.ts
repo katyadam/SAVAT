@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { ChangedDto, ChangedLinksResponse, ChangeImpactAnalysisPayload, ContextMap, CreateContextMapRequest, Link, Summary } from "./types";
+import { ChangedDto, ChangedLinksResponse, ChangeImpactAnalysisPayload, CIAContextMap, ContextMap, ContextMapOutputSimple, CreateContextMapRequest, Link, Summary } from "./types";
 
 export const CONTEXT_MAPS_PREFIX = "/context-maps"
 export const CONTEXT_MAPS_OUTPUTS_PREFIX = "/context-maps-outputs"
@@ -25,12 +25,12 @@ async function getSummary(id: number): Promise<Summary> {
     return resp.data;
 }
 
-async function getProjectContextMapOutputs(projectId: string) {
+async function getProjectContextMapOutputs(projectId: string): Promise<ContextMapOutputSimple[]> {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/project/${projectId}`);
     return resp.data;
 }
 
-async function getContextMapOutputById(id: string) {
+async function getContextMapOutputById(id: string): Promise<CIAContextMap> {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/${id}`);
     return resp.data;
 }

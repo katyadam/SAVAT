@@ -3,11 +3,11 @@ import Graph from "./graphs/Graph";
 import { RenderType } from "./types";
 
 import EntityDetailsDiagram from "./graphs/EntityDetailsDiagram";
-import { ContextMap, Node } from "@/api/context-maps/types";
+import { GenericContextMap, Node } from "@/api/context-maps/types";
 
 type RenderGraphProps = {
   onNodeClick: (node: Node) => void;
-  contextMap: ContextMap | undefined;
+  contextMap: GenericContextMap | undefined;
   renderType: RenderType | null;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;

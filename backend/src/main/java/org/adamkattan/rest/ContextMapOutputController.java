@@ -41,7 +41,7 @@ public class ContextMapOutputController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getContextMapOutputById(@PathParam("id") Long id) {
+    public Response getChangedContextMap(@PathParam("id") Long id) {
         ContextMapOutput output = contextMapOutputService.getContextMapOutputById(id);
 
         return Response.ok(output.changedContextMap).build();
