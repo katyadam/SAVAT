@@ -25,12 +25,12 @@ async function getSummary(id: number): Promise<Summary> {
     return resp.data;
 }
 
-async function getProjectContextMapOutputs(projectId: number) {
+async function getProjectContextMapOutputs(projectId: string) {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/project/${projectId}`);
     return resp.data;
 }
 
-async function getContextMapOutputById(id: number) {
+async function getContextMapOutputById(id: string) {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/${id}`);
     return resp.data;
 }
