@@ -201,6 +201,12 @@ const ProjectPage = () => {
                 </span>
               </p>
               <p className="">
+                Context Map Analysis Outputs:{" "}
+                <span className="text-xl font-bold">
+                  {projectSummary && projectSummary.totalContextMapOutputs}
+                </span>
+              </p>
+              <p className="">
                 Service Dependency Graphs:{" "}
                 <span className="text-xl font-bold">
                   {projectSummary && projectSummary.totalSdgs}
@@ -213,7 +219,7 @@ const ProjectPage = () => {
                 </span>
               </p>
               <p>
-                Change Impact Analysis Outputs:{" "}
+                Call Graph Analysis Outputs:{" "}
                 <span className="text-xl font-bold">
                   {projectSummary && projectSummary.totalCallGraphOutputs}
                 </span>

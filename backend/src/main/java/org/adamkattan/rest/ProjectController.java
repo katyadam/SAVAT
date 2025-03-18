@@ -70,7 +70,8 @@ public class ProjectController {
                 project.sdgs.size(),
                 project.contextMaps.size(),
                 project.callGraphInputs.size(),
-                project.callGraphOutputs.size()
+                project.callGraphOutputs.size(),
+                project.contextMapOutputs.size()
         );
         return Response.ok(projectSummary)
                 .build();

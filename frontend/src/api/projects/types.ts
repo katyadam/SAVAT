@@ -13,4 +13,5 @@ export type ProjectSummary = {
     totalContextMaps: number;
     totalCallGraphInputs: number;
     totalCallGraphOutputs: number;
+    totalContextMapOutputs: number;
 }

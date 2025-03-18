@@ -29,6 +29,9 @@ export const useContextMapOutputDelete = (projectId: string) => {
       queryClient.invalidateQueries({
         queryKey: ["contextMapSummary", projectId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["projectSummary", projectId],
+      });
     },
   });
 };
@@ -42,6 +45,9 @@ export const useContextMapChangeImpactAnalysis = (projectId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["contextMapOutputs", projectId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["projectSummary", projectId],
       });
     },
   });
