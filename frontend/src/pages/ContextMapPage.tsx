@@ -109,6 +109,7 @@ const ContextMapPage = () => {
         setSelectedRenderType={setSelectedRenderType}
         compareBtnClick={() => setCompareUp(true)}
         isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
+        showIsolatedNodes={false}
         contextMapId={id}
         setShowComparisons={setShowComparisons}
         showComparisons={showComparisons}

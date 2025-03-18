@@ -19,6 +19,7 @@ import { useContextMapChanges } from "@/hooks/useContextMap";
 type NavbarType = {
   compareBtnClick?: (val: boolean) => void;
   isolatedNodesBtnClick: () => void;
+  showIsolatedNodes: boolean;
   setSelectedRenderType: (selectedRenderType: RenderType) => void;
   setShowComparisons?: (val: boolean) => void;
   showComparisons?: boolean;
@@ -35,6 +36,7 @@ const Navbar: FC<NavbarType> = ({
   setShowComparisons,
   showComparisons,
   isolatedNodesBtnClick,
+  showIsolatedNodes,
   contextMapId,
   selectedContextMapChange,
   setSelectedContextMapChange,
@@ -159,6 +161,7 @@ const Navbar: FC<NavbarType> = ({
             </label>
             <Switch
               id="isolatedNodesSwitch"
+              defaultChecked={showIsolatedNodes}
               onCheckedChange={isolatedNodesBtnClick}
             />
           </div>

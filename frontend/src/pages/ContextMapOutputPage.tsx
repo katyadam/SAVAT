@@ -52,7 +52,7 @@ const ContextMapOutputPage = () => {
     RenderType.BASIC_GRAPH
   );
 
-  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
+  const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(true);
 
   const closeOverlay = () => {
     setSelectedNode(null);
@@ -89,6 +89,7 @@ const ContextMapOutputPage = () => {
         contextMapId={id}
         msColors={msColors}
         hintComponent={<LinkDifferencesHint />}
+        showIsolatedNodes={true}
       />
       <Separator className="mt-2" />
       {renderContent()}
