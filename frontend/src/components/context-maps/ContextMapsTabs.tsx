@@ -7,9 +7,9 @@ import { ContextMapsInputsTable } from "./ContextMapsInputsTable";
 import { contextMapsColumns, contextMapsOutputsColumns } from "./Columns";
 import { ContextMapsOutputsTable } from "./ContextMapsOutputsTable";
 import Overlay from "../ui/Overlay";
-import CompareDialog from "../callgraphs/compare/CompareDialog";
 import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
+import CIAPanel from "./compare/CIAPanel";
 
 type ContextMapsTabsType = {
   projectId: string;
@@ -90,7 +90,7 @@ const ContextMapsTabs: FC<ContextMapsTabsType> = ({ projectId }) => {
       </Tabs>
       {openCompareDialog && (
         <Overlay width="w-2/3" closeFunc={() => setOpenCompareDialog(false)}>
-          <CompareDialog projectId={projectId} />
+          <CIAPanel projectId={projectId} />
         </Overlay>
       )}
     </>

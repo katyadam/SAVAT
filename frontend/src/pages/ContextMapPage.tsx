@@ -1,5 +1,5 @@
 import { ChangedLinksResponse, Field, Node } from "@/api/context-maps/types";
-import CompareForm from "@/components/context-maps/CompareForm";
+import CompareForm from "@/components/context-maps/compare/CompareForm";
 import EntityDetail from "@/components/context-maps/EntityDetail";
 import FieldDetail from "@/components/context-maps/FieldDetail";
 import { getMicroservicesColors } from "@/components/context-maps/generators/colorGenerator";
