@@ -6,13 +6,15 @@ import fcose from "cytoscape-fcose";
 import { getCyInstance } from "./CytoscapeInstance";
 import { ChangedLink, Link, Node, SDG } from "@/api/sdgs/types";
 import { useSDGChange } from "@/hooks/useSDG";
+import { getLinkSignature } from "@/api/sdgs/utils";
 
 type GraphType = {
   graph: SDG;
   changedSDGId?: string;
+  selectLink: (link: Link) => void;
 };
 
-const Graph: FC<GraphType> = ({ graph, changedSDGId }) => {
+const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
   const { data: changedSDG } = useSDGChange(changedSDGId || "");
   const cyRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,6 +34,7 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId }) => {
       edges: (changedSDG ? changedSDG.changedLinks : graph.links).map(
         (link: Link | ChangedLink) => ({
           data: {
+            id: getLinkSignature(link),
             source: link.source,
             target: link.target,
             typeOfChange: "type" in link ? link.type.toString() : "SAME",
@@ -64,6 +67,18 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId }) => {
         level: newZoom,
         renderedPosition: node.renderedPosition(),
       });
+    });
+
+    cyInstance.on("tap", "edge", (event) => {
+      const clickedLink = event.target.data();
+      const foundLink = (
+        changedSDG ? changedSDG.changedLinks : graph.links
+      ).find(
+        (link: Link | ChangedLink) => getLinkSignature(link) == clickedLink.id
+      );
+      if (foundLink) {
+        selectLink(foundLink);
+      }
     });
 
     return () => {

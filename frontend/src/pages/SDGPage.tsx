@@ -6,10 +6,11 @@ import { LinkDifferencesHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSDG } from "@/hooks/useSDG";
-import { ChangedLinksResponse } from "@/api/sdgs/types";
+import { ChangedLink, ChangedLinksResponse, Link } from "@/api/sdgs/types";
+import LinkPanel from "@/components/sdgs/LinkPanel";
 
 const SDGPage = () => {
   React.useEffect(() => {
@@ -27,6 +28,19 @@ const SDGPage = () => {
     string | null
   >(null);
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
+
+  const [selectedLink, selectLink] = useState<Link | null>(null);
+
+  const handleLinkClick = useCallback(
+    (link: Link | ChangedLink): void => {
+      if (link === selectedLink) {
+        selectLink(null);
+      } else {
+        selectLink(link);
+      }
+    },
+    [selectedLink]
+  );
 
   const { toast } = useToast();
 
@@ -54,35 +68,43 @@ const SDGPage = () => {
               links: [],
             }}
             changedSDGId={selectedCommGraphDiff}
+            selectLink={handleLinkClick}
           />
         );
       }
-      return <Graph graph={graph} />;
+      return <Graph graph={graph} selectLink={handleLinkClick} />;
     }
   };
 
   return id ? (
-    <div className="h-screen w-screen">
-      <Navbar
-        compareBtnClick={() => setCompareUp(true)}
-        sdgId={id}
-        setSelectedSDGChange={setSelectedCommGraphDiff}
-        setShowComparisons={setShowComparisons}
-        showComparisons={showComparisons}
-        hintComponent={<LinkDifferencesHint />}
-      />
-      <Separator className="mt-2" />
-      {renderContent()}
-      {compareUp && (
-        <Overlay
-          width="5/6"
-          closeFunc={() => setCompareUp(false)}
-          aria-label="Compare Entities"
-        >
-          <CompareForm sdgId={id} respFunc={handleCompareResponse} />
+    <>
+      <div className="h-screen w-screen">
+        <Navbar
+          compareBtnClick={() => setCompareUp(true)}
+          sdgId={id}
+          setSelectedSDGChange={setSelectedCommGraphDiff}
+          setShowComparisons={setShowComparisons}
+          showComparisons={showComparisons}
+          hintComponent={<LinkDifferencesHint />}
+        />
+        <Separator className="mt-2" />
+        {renderContent()}
+        {compareUp && (
+          <Overlay
+            width="5/6"
+            closeFunc={() => setCompareUp(false)}
+            aria-label="Compare Entities"
+          >
+            <CompareForm sdgId={id} respFunc={handleCompareResponse} />
+          </Overlay>
+        )}
+      </div>
+      {selectedLink && (
+        <Overlay width="1/2" closeFunc={() => selectLink(null)}>
+          <LinkPanel link={selectedLink} />
         </Overlay>
       )}
-    </div>
+    </>
   ) : (
     <Loading />
   );
