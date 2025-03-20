@@ -10,6 +10,8 @@ const layoutOptions: FcoseLayoutOptions = {
     nodeSeparation: 80,
     tilingPaddingHorizontal: 80,
     tilingPaddingVertical: 20,
+    edgeElasticity: 0.02,
+    idealEdgeLength: 200
 };
 
 const styles: Cytoscape.Stylesheet[] = [
