@@ -4,6 +4,10 @@ import { FC, useState } from "react";
 import { Button } from "../ui/button";
 import RequestDetail from "./RequestDetail";
 import RequestDetailField from "./RequestDetailField";
+import {
+  getRequestTypeColor,
+  getRequestTypeHoverColor,
+} from "@/api/sdgs/utils";
 
 type LinkPanelType = {
   link: Link | ChangedLink;
@@ -41,9 +45,14 @@ const LinkPanel: FC<LinkPanelType> = ({ link }) => {
           <div className="flex flex-col gap-2">
             {link.requests.map((request) => (
               <Button
+                key={request.uri + request.type}
                 onClick={() => handleSelectRequest(request)}
                 variant="ghost"
-                className={`${selectedRequest == request && "bg-slate-200"}`}
+                className={
+                  `${selectedRequest == request && "border-2 border-black"} ` +
+                  `${getRequestTypeColor(request.type)} ` +
+                  `${getRequestTypeHoverColor(request.type)}`
+                }
               >
                 {request.uri}
               </Button>
