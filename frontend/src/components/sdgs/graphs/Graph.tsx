@@ -27,7 +27,7 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
       nodes: graph.nodes.map((node: Node) => ({
         data: {
           id: node.nodeName,
-          label: node.nodeName,
+          label: node.nodeType + "::" + node.nodeName,
         },
         group: "nodes",
       })),

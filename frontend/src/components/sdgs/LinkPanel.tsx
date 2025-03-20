@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { FC, useState } from "react";
 import { Button } from "../ui/button";
 import RequestDetail from "./RequestDetail";
+import RequestDetailField from "./RequestDetailField";
 
 type LinkPanelType = {
   link: Link | ChangedLink;
@@ -22,10 +23,16 @@ const LinkPanel: FC<LinkPanelType> = ({ link }) => {
   return (
     <div className="flex flex-row gap-5">
       <div className="flex flex-col gap-5">
-        <div className="flex flex-row gap-5">
-          <p>{link.source}</p>
+        <div className="flex flex-row justify-between items-center">
+          <RequestDetailField
+            label="Source Microservice"
+            children={link.source}
+          />
           <ArrowRight />
-          <p>{link.target}</p>
+          <RequestDetailField
+            label="Target Microservice"
+            children={link.target}
+          />
         </div>
         {"type" in link && link.type && <p>Type of change: {link.type}</p>}
 
