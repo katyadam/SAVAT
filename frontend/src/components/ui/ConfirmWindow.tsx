@@ -35,7 +35,11 @@ const ConfirmWindow: FC<ConfirmWindowType> = ({
       <>{body}</>
       <div className="flex flex-row gap-3">
         {options.map((option) => (
-          <Button variant={option.btnVariant} onClick={option.callback}>
+          <Button
+            key={option.title}
+            variant={option.btnVariant}
+            onClick={option.callback}
+          >
             {option.title}
           </Button>
         ))}

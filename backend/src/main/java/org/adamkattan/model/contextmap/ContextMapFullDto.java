@@ -1,7 +1,7 @@
 package org.adamkattan.model.contextmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.adamkattan.model.contextmap.compare.ChangedContextMap;
+import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
 
 import java.util.List;
 

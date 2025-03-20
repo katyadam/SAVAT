@@ -1,69 +1,79 @@
 package org.adamkattan.analysis;
 
-import org.adamkattan.model.contextmap.compare.ChangedLink;
-import org.adamkattan.model.contextmap.compare.ChangedLinkType;
+import org.adamkattan.model.contextmap.ContextMap;
 import org.adamkattan.model.contextmap.Link;
-import org.adamkattan.model.contextmap.compare.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.Node;
+import org.adamkattan.model.contextmap.NodeKey;
+import org.adamkattan.model.contextmap.algorithms.NodeDependency;
+import org.adamkattan.model.contextmap.output.CIAContextMap;
+import org.adamkattan.model.contextmap.output.ChangedNode;
+import org.adamkattan.model.contextmap.output.TypeOfChange;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class ContextMapChangeImpactAnalysis {
-    private record LinkKey(String source, String target, String msSource, String msTarget) {
+
+    public static CIAContextMap changeImpactAnalysis(ContextMap sourceContextMap, ContextMap targetContextMap) {
+        Map<NodeKey, Node> sourceNodesMap = sourceContextMap.getNodesMap();
+        Map<NodeKey, Node> targetNodesMap = targetContextMap.getNodesMap();
+
+        Map<NodeKey, ChangedNode> changedNodesMap = getChangedNodesMap(
+                sourceNodesMap, targetNodesMap
+        );
+
+        Set<ChangedNode> dependencyGraphNodes = new HashSet<>();
+        Set<Link> dependencyGraphLinks = new HashSet<>();
+        changedNodesMap.forEach((key, value) -> {
+            CIAContextMap dependencyGraph = NodeDependency.getDependencyGraph(targetContextMap, key, targetNodesMap);
+            dependencyGraphNodes.addAll(dependencyGraph.nodes());
+            dependencyGraphLinks.addAll(dependencyGraph.links());
+        });
+
+        List<ChangedNode> allNodes = new ArrayList<>(changedNodesMap.values());
+        allNodes.addAll(
+                dependencyGraphNodes.stream()
+                        .filter(
+                                node -> !changedNodesMap.containsKey(new NodeKey(node))
+                        ).toList()
+        );
+        return new CIAContextMap(
+                allNodes,
+                new ArrayList<>(dependencyGraphLinks)
+        );
     }
 
-    public static ChangedLinksOutput getLinksDifference(List<Link> src, List<Link> dest) {
-        Map<LinkKey, Link> srcMap = transformToMap(src);
-        Map<LinkKey, Link> destMap = transformToMap(dest);
-        List<ChangedLink> changedLinks = new ArrayList<>();
-        for (Link link : src) {
-            var key = new LinkKey(
-                    link.source(),
-                    link.target(),
-                    link.msSource(),
-                    link.msTarget()
-            );
-            if (!destMap.containsKey(key)) {
-                changedLinks.add(new ChangedLink(link, ChangedLinkType.REMOVED));
-                continue;
-            }
-            var destVal = destMap.get(key);
-            if (!destVal.equals(link)) {
-                changedLinks.add(new ChangedLink(destVal, ChangedLinkType.MODIFIED));
-            }
-        }
-        for (Link link : dest) {
-            var key = new LinkKey(
-                    link.source(),
-                    link.target(),
-                    link.msSource(),
-                    link.msTarget()
-            );
-            if (!srcMap.containsKey(key)) {
-                changedLinks.add(new ChangedLink(link, ChangedLinkType.ADDED));
-                continue;
-            }
-            var srcVal = srcMap.get(key);
-            if (srcVal.equals(link)) {
-                changedLinks.add(new ChangedLink(link, ChangedLinkType.SAME));
-            }
-        }
-        return new ChangedLinksOutput(changedLinks);
-    }
+    private static Map<NodeKey, ChangedNode> getChangedNodesMap(
+            Map<NodeKey, Node> sourceNodes,
+            Map<NodeKey, Node> targetNodes
+    ) {
+        Map<NodeKey, ChangedNode> changedNodes = new HashMap<>();
 
-    private static Map<LinkKey, Link> transformToMap(List<Link> links) {
-        return links.stream()
-                .collect(Collectors.toMap(
-                        link -> new LinkKey(
-                                link.source(),
-                                link.target(),
-                                link.msSource(),
-                                link.msTarget()
-                        ),
-                        link -> link
-                ));
+        sourceNodes.forEach((key, value) -> {
+            if (!targetNodes.containsKey(key)) {
+                changedNodes.put(
+                        new NodeKey(value.msName(), value.nodeName()),
+                        new ChangedNode(value, TypeOfChange.REMOVED)
+                );
+            }
+            Node node = targetNodes.get(key);
+            if (node != null && !node.compare(value)) {
+                changedNodes.put(
+                        new NodeKey(value.msName(), value.nodeName()),
+                        new ChangedNode(value, TypeOfChange.MODIFIED)
+                );
+            }
+        });
+
+        targetNodes.forEach((key, value) -> {
+            if (!sourceNodes.containsKey(key)) {
+                changedNodes.put(
+                        new NodeKey(value.msName(), value.nodeName()),
+                        new ChangedNode(value, TypeOfChange.ADDED)
+                );
+            }
+        });
+
+        return changedNodes;
     }
 
 }

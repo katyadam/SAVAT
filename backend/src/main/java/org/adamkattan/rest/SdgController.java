@@ -12,7 +12,7 @@ import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.model.sdg.ServiceDependencyGraphFullDto;
 import org.adamkattan.model.sdg.compare.ChangedLinksOutput;
 import org.adamkattan.model.sdg.compare.ChangedServiceDependecyGraph;
-import org.adamkattan.service.SdgChangeImpactService;
+import org.adamkattan.service.SdgLinksDifferenceService;
 import org.adamkattan.service.SdgService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class SdgController {
     SdgService sdgService;
 
     @Inject
-    SdgChangeImpactService sdgChangeImpactService;
+    SdgLinksDifferenceService sdgLinksDifferenceService;
 
     @GET
     @Path("/{id}")
@@ -41,7 +41,7 @@ public class SdgController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedSdgs(@PathParam("id") Long sdgId) {
-        List<ChangedServiceDependecyGraph> changedGraphs = sdgChangeImpactService.getChangedGraphs(sdgId);
+        List<ChangedServiceDependecyGraph> changedGraphs = sdgLinksDifferenceService.getChangedGraphs(sdgId);
         return Response.ok(
                 changedGraphs.stream()
                         .map(ChangedServiceDependecyGraph::toDto)
@@ -53,7 +53,7 @@ public class SdgController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getChangedSdg(@PathParam("changeSdgId") Long changeSdgId) {
-        ChangedServiceDependecyGraph changedGraph = sdgChangeImpactService.getChangedGraph(changeSdgId);
+        ChangedServiceDependecyGraph changedGraph = sdgLinksDifferenceService.getChangedGraph(changeSdgId);
         return Response.ok(ChangedServiceDependecyGraph.toDto(changedGraph))
                 .build();
     }
@@ -86,7 +86,7 @@ public class SdgController {
             @Valid LinksInputDto graphLinksInputDto,
             @PathParam("id") Long srcId
     ) {
-        ChangedLinksOutput output = sdgChangeImpactService.saveChangedGraphLinks(graphLinksInputDto, srcId);
+        ChangedLinksOutput output = sdgLinksDifferenceService.saveChangedGraphLinks(graphLinksInputDto, srcId);
         return Response.ok(output)
                 .build();
     }

@@ -53,6 +53,9 @@ export const useContextMapDelete = (projectId: string) => {
                 queryKey: ["contextMaps", projectId],
             })
             queryClient.invalidateQueries({
+                queryKey: ["contextMapOutputs", projectId],
+            })
+            queryClient.invalidateQueries({
                 queryKey: ["projectSummary", projectId],
             })
         }

@@ -1,7 +1,9 @@
 import { axiosInstance } from "../config";
-import { ChangedDto, ChangedLinksResponse, ContextMap, CreateContextMapRequest, Link, Summary } from "./types";
+import { ChangedDto, ChangedLinksResponse, ChangeImpactAnalysisPayload, CIAContextMap, ContextMap, ContextMapOutputSimple, CreateContextMapRequest, Link, Summary } from "./types";
 
 export const CONTEXT_MAPS_PREFIX = "/context-maps"
+export const CONTEXT_MAPS_OUTPUTS_PREFIX = "/context-maps-outputs"
+
 
 async function getContextMap(id: string): Promise<ContextMap> {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_PREFIX}/${id}`)
@@ -23,6 +25,16 @@ async function getSummary(id: number): Promise<Summary> {
     return resp.data;
 }
 
+async function getProjectContextMapOutputs(projectId: string): Promise<ContextMapOutputSimple[]> {
+    const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/project/${projectId}`);
+    return resp.data;
+}
+
+async function getContextMapOutputById(id: string): Promise<CIAContextMap> {
+    const resp = await axiosInstance.get(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/${id}`);
+    return resp.data;
+}
+
 async function createContextMap(req: CreateContextMapRequest) {
     const resp = await axiosInstance.post(`${CONTEXT_MAPS_PREFIX}`, req);
     return resp.data;
@@ -38,8 +50,18 @@ async function compareContextMapsLinks(
     return resp.data;
 }
 
+async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload) {
+    const resp = await axiosInstance.post(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/change-impact-analysis`, ids);
+    return resp.data;
+}
+
 async function deleteContextMap(id: number) {
     const resp = await axiosInstance.delete(`${CONTEXT_MAPS_PREFIX}/${id}`);
+    return resp.data;
+}
+
+async function deleteContextMapOutputById(id: number) {
+    const resp = await axiosInstance.delete(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/${id}`);
     return resp.data;
 }
 
@@ -48,9 +70,13 @@ const ContextMapApi = {
     getContextMapChanges,
     getContextMapChange,
     getSummary,
+    getProjectContextMapOutputs,
+    getContextMapOutputById,
     createContextMap,
     compareContextMapsLinks,
-    deleteContextMap
+    changeImpactAnalysis,
+    deleteContextMap,
+    deleteContextMapOutputById
 };
 
 export default ContextMapApi;
