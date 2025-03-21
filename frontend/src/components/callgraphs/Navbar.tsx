@@ -55,7 +55,7 @@ const Navbar: FC<NavbarType> = ({
       </Popover>
       <Popover modal={false}>
         <PopoverTrigger className="relative flex flex-col items-center mx-5 cursor-pointer">
-          <label className="text-gray-500 mb-1">Made Actions</label>
+          <label className="text-gray-500 mb-1">Actions Taken</label>
           <div className="relative">
             <Eye />
             {actionsStorage.length > 0 && (
