@@ -32,7 +32,7 @@ const styles: Cytoscape.Stylesheet[] = [
     {
         selector: "edge",
         style: {
-            width: 5,
+            width: 2,
             "line-color": (ele) => getChangedColor(ele.data("typeOfChange")),
             "curve-style": "bezier",
             "target-arrow-color": (ele) => getChangedColor(ele.data("typeOfChange")),
