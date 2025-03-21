@@ -20,6 +20,7 @@ type NavbarType = {
   setShowComparisons: (val: boolean) => void;
   setSelectedSDGChange: (selectedSdgChange: string) => void;
   hintComponent?: React.ReactNode;
+  removeHighlight: () => void;
 };
 
 const Navbar: FC<NavbarType> = ({
@@ -29,6 +30,7 @@ const Navbar: FC<NavbarType> = ({
   setSelectedSDGChange,
   setShowComparisons,
   hintComponent,
+  removeHighlight,
 }) => {
   const { data: changedSDGs, isLoading } = useSDGChanges(sdgId);
   if (isLoading) return <p>Loading..</p>;
@@ -91,6 +93,13 @@ const Navbar: FC<NavbarType> = ({
           </Button>
         </>
       )}
+      <Button
+        variant="link"
+        className="flex flex-col items-center"
+        onClick={removeHighlight}
+      >
+        <p>Remove Highlighting</p>
+      </Button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { FC, useEffect, useRef } from "react";
-import { ElementsDefinition } from "cytoscape";
+import { FC, useEffect, useRef, useState } from "react";
+import Cytoscape, { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
 import fcose from "cytoscape-fcose";
@@ -7,19 +7,29 @@ import { getCyInstance } from "./CytoscapeInstance";
 import { ChangedLink, Link, Node, SDG } from "@/api/sdgs/types";
 import { useSDGChange } from "@/hooks/useSDG";
 import { getLinkSignature } from "@/api/sdgs/utils";
+import { useSDGHighlight } from "@/hooks/useGraphEffects";
 
 type GraphType = {
   graph: SDG;
   changedSDGId?: string;
   selectLink: (link: Link) => void;
+  selectNode: (node: string) => void;
+  selectedNode: string | null;
 };
 
-const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
+const Graph: FC<GraphType> = ({
+  graph,
+  changedSDGId,
+  selectLink,
+  selectNode,
+  selectedNode,
+}) => {
   const { data: changedSDG } = useSDGChange(changedSDGId || "");
   const cyRef = useRef<HTMLDivElement | null>(null);
 
-  cytoscape.use(fcose);
+  const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
+  cytoscape.use(fcose);
   useEffect(() => {
     if (!cyRef.current) return;
 
@@ -45,6 +55,7 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
     };
 
     const cyInstance = getCyInstance(cyRef, elements);
+    setCy(cyInstance);
 
     cyInstance.on("layoutstop", () => {
       cyInstance.nodes().forEach((node) => {
@@ -57,16 +68,7 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
     });
 
     cyInstance.on("tap", "node", (event) => {
-      const node = event.target;
-
-      const currentZoom = cyInstance.zoom();
-      const zoomIncrement = 0.2;
-      const newZoom = currentZoom + zoomIncrement;
-
-      cyInstance.zoom({
-        level: newZoom,
-        renderedPosition: node.renderedPosition(),
-      });
+      selectNode(event.target.data().id);
     });
 
     cyInstance.on("tap", "edge", (event) => {
@@ -85,6 +87,8 @@ const Graph: FC<GraphType> = ({ graph, changedSDGId, selectLink }) => {
       cyInstance.destroy();
     };
   }, [graph, changedSDG]);
+
+  useSDGHighlight(cy, graph, selectedNode);
 
   if (changedSDGId === "None") return <></>;
   return <div ref={cyRef} className="w-full h-[90%]" />;

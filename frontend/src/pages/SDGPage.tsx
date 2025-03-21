@@ -30,6 +30,7 @@ const SDGPage = () => {
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
 
   const [selectedLink, selectLink] = useState<Link | null>(null);
+  const [selectedNode, selectNode] = useState<string | null>(null);
 
   const handleLinkClick = useCallback(
     (link: Link | ChangedLink): void => {
@@ -37,6 +38,17 @@ const SDGPage = () => {
         selectLink(null);
       } else {
         selectLink(link);
+      }
+    },
+    [selectedLink]
+  );
+
+  const handleNodeClick = useCallback(
+    (node: string): void => {
+      if (node === selectedNode) {
+        selectNode(null);
+      } else {
+        selectNode(node);
       }
     },
     [selectedLink]
@@ -69,10 +81,19 @@ const SDGPage = () => {
             }}
             changedSDGId={selectedCommGraphDiff}
             selectLink={handleLinkClick}
+            selectNode={handleNodeClick}
+            selectedNode={selectedNode}
           />
         );
       }
-      return <Graph graph={graph} selectLink={handleLinkClick} />;
+      return (
+        <Graph
+          graph={graph}
+          selectLink={handleLinkClick}
+          selectNode={selectNode}
+          selectedNode={selectedNode}
+        />
+      );
     }
   };
 
@@ -86,6 +107,7 @@ const SDGPage = () => {
           setShowComparisons={setShowComparisons}
           showComparisons={showComparisons}
           hintComponent={<LinkDifferencesHint />}
+          removeHighlight={() => selectNode(null)}
         />
         <Separator className="mt-2" />
         {renderContent()}
