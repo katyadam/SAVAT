@@ -86,9 +86,16 @@ const Graph: FC<GraphType> = ({
     return () => {
       cyInstance.destroy();
     };
-  }, [graph, changedSDG]);
+  }, [changedSDG ? changedSDG : graph]);
 
-  useSDGHighlight(cy, graph, selectedNode);
+  useSDGHighlight(
+    cy,
+    {
+      nodes: graph.nodes,
+      links: changedSDG ? changedSDG.changedLinks : graph.links,
+    },
+    selectedNode
+  );
 
   if (changedSDGId === "None") return <></>;
   return <div ref={cyRef} className="w-full h-[90%]" />;
