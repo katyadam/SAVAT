@@ -3,6 +3,8 @@ import { CallGraph } from "@/api/callgraphs/types";
 import { getCommonDateString } from "@/api/utils";
 import { Action } from "@/pages/CallGraphPage";
 import Cytoscape from "cytoscape";
+import { SDG } from "@/api/sdgs/types";
+import { getLinkSignature, getSubgraph } from "@/api/sdgs/utils";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
@@ -127,4 +129,44 @@ export const useRemoveAction = (cy: Cytoscape.Core | null, actionToRemove: Actio
             });
         }
     }, [actionToRemove]);
+};
+
+export const useSDGHighlight = (
+    cy: Cytoscape.Core | null,
+    sdg: SDG | null,
+    selectedNode: string | null
+) => {
+    useEffect(() => {
+        if (!cy || !sdg) return;
+        if (selectedNode) {
+            const subgraph = getSubgraph(sdg, selectedNode);
+            subgraph.nodes.forEach((sdgNode) => {
+                const node = cy.getElementById(sdgNode.nodeName);
+                if (node) {
+                    node.addClass("highlighted");
+                }
+            });
+
+            subgraph.links.forEach((link) => {
+                const edge = cy.getElementById(getLinkSignature(link));
+                if (edge) {
+                    edge.addClass("highlighted")
+                }
+            });
+        } else {
+            sdg.nodes.forEach((sdgNode) => {
+                const node = cy.getElementById(sdgNode.nodeName);
+                if (node) {
+                    node.removeClass("highlighted");
+                }
+            });
+
+            sdg.links.forEach((link) => {
+                const edge = cy.getElementById(getLinkSignature(link));
+                if (edge) {
+                    edge.removeClass("highlighted")
+                }
+            });
+        }
+    }, [selectedNode]);
 };
