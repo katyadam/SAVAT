@@ -30,8 +30,8 @@ public class CallGraphMethod {
     private final String httpMethod;
     @JsonProperty("endpointMethod")
     private final boolean isInterserviceMethod;
-    @JsonProperty("isEntryPoint")
-    private final boolean isEntryPoint;
+    @JsonProperty("entryPoint")
+    private final boolean entryPoint;
     @JsonProperty("methodSignature")
     private final String methodSignature;
 
@@ -48,7 +48,7 @@ public class CallGraphMethod {
             @JsonProperty("endpointURI") String endpointURI,
             @JsonProperty("httpMethod") String httpMethod,
             @JsonProperty("endpointMethod") boolean isInterserviceMethod,
-            @JsonProperty("isEntryPoint") boolean isEntryPoint, // TODO: correct ?
+            @JsonProperty("entryPoint") boolean entryPoint,
             @JsonProperty("methodSignature") String methodSignature
     ) {
         this.id = id;
@@ -63,7 +63,7 @@ public class CallGraphMethod {
         this.endpointURI = endpointURI;
         this.httpMethod = httpMethod;
         this.isInterserviceMethod = isInterserviceMethod;
-        this.isEntryPoint = isEntryPoint;
+        this.entryPoint = entryPoint;
         this.methodSignature = methodSignature;
     }
 
@@ -139,9 +139,9 @@ public class CallGraphMethod {
         return isInterserviceMethod;
     }
 
-    @JsonProperty("isEntryPoint")
-    public boolean isEntryPoint() {
-        return isEntryPoint;
+    @JsonProperty("entryPoint")
+    public boolean entryPoint() {
+        return entryPoint;
     }
 
     @JsonProperty("methodSignature")
@@ -164,7 +164,7 @@ public class CallGraphMethod {
                 "endpointURI=" + endpointURI + ", " +
                 "httpMethod=" + httpMethod + ", " +
                 "isInterserviceMethod=" + isInterserviceMethod + ", " +
-                "isEntryPoint=" + isEntryPoint + ", " +
+                "entryPoint=" + entryPoint + ", " +
                 "methodSignature=" + methodSignature + ']';
     }
 

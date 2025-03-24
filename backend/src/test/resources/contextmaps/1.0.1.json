@@ -1,0 +1,99 @@
+{
+  "nodes": [
+    {
+      "msName": "ts-common",
+      "nodeName": "Assurance",
+      "nodeFullName": "Assurance - Full name",
+      "fields": [
+        {
+          "fieldName": "typo",
+          "fieldFullName": "type",
+          "fieldType": "AssuranceType",
+          "fieldAnnotations": [
+            {
+              "annotation": "@Column"
+            },
+            {
+              "annotation": "@Enumerated"
+            }
+          ],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "AssuranceType",
+          "isCollection": false
+        }
+      ]
+    },
+    {
+      "msName": "ts-order",
+      "nodeName": "Order",
+      "nodeFullName": "Order - Full name",
+      "fields": [
+        {
+          "fieldName": "type",
+          "fieldFullName": "type",
+          "fieldType": "OrderType",
+          "fieldAnnotations": [
+            {
+              "annotation": "@Column"
+            },
+            {
+              "annotation": "@Enumerated"
+            },
+            {
+              "annotation": "@NewAnnotation"
+            }
+          ],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "OrderType",
+          "isCollection": false
+        }
+      ]
+    },
+    {
+      "msName": "ts-ticket",
+      "nodeName": "Ticket",
+      "nodeFullName": "Ticket - Full name",
+      "fields": []
+    },
+    {
+      "msName": "ts-train",
+      "nodeName": "Train",
+      "nodeFullName": "Train - Full name",
+      "fields": []
+    }
+  ],
+  "links": [
+    {
+      "source": "Assurance",
+      "target": "Order",
+      "msSource": "ts-common",
+      "msTarget": "ts-order",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Ticket",
+      "target": "Train",
+      "msSource": "ts-ticket",
+      "msTarget": "ts-train",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Assurance",
+      "target": "Train",
+      "msSource": "ts-common",
+      "msTarget": "ts-train",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    },
+    {
+      "source": "Order",
+      "target": "Ticket",
+      "msSource": "ts-order",
+      "msTarget": "ts-ticket",
+      "sourceMultiplicity": "0..*",
+      "targetMultiplicity": "0"
+    }
+  ]
+}

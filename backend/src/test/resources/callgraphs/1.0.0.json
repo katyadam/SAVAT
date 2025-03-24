@@ -1,0 +1,48 @@
+{
+  "methods": [
+    {
+      "id": 0,
+      "name": "foo",
+      "type": "package.controller.A",
+      "parameters": [
+        "String"
+      ],
+      "returnType": "void",
+      "display": "p.c.A.foo",
+      "flags": "s",
+      "bytecodeHash": "bd644066246de131eb8bee812f2ace80f49d71bafe3d92fade0edd3c214420e7",
+      "microservice": "A",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "A/void package.controller.A.foo(String)"
+    },
+    {
+      "id": 1,
+      "name": "bar",
+      "type": "package.controller.B",
+      "parameters": [
+        "int"
+      ],
+      "returnType": "int",
+      "display": "p.c.B.bar",
+      "flags": "s",
+      "bytecodeHash": "d0b415391f7859c7e318aacd934c13c40c1e0032b38735ef71ac3516e5adb493",
+      "microservice": "B",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "B/int package.controller.B.bar(String)"
+    }
+  ],
+  "calls": [
+    {
+      "source": "B/int package.controller.B.bar(String)",
+      "target": "A/void package.controller.A.foo(String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    }
+  ]
+}

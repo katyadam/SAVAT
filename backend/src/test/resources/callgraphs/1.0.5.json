@@ -1,0 +1,102 @@
+{
+  "methods": [
+    {
+      "id": 0,
+      "name": "foo",
+      "type": "package.controller.A",
+      "parameters": [
+        "String"
+      ],
+      "returnType": "void",
+      "display": "p.c.A.foo",
+      "flags": "s",
+      "bytecodeHash": "4460686a66aed4c5bb6fab3a37cdaa6e4bb260abfc8b620538d664cb860c7a9d",
+      "microservice": "A",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "A/void package.controller.A.foo(String)"
+    },
+    {
+      "id": 1,
+      "name": "bar",
+      "type": "package.controller.B",
+      "parameters": [
+        "int"
+      ],
+      "returnType": "int",
+      "display": "p.c.B.bar",
+      "flags": "s",
+      "bytecodeHash": "5acc11ee41e516cd1f9d154364807e8d359778f6e97b3d1da226122bbdf3a83f",
+      "microservice": "B",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "B/int package.controller.B.bar(String)"
+    },
+    {
+      "id": 2,
+      "name": "baz",
+      "type": "package.controller.C",
+      "parameters": [
+        "double"
+      ],
+      "returnType": "double",
+      "display": "p.c.C.baz",
+      "flags": "s",
+      "bytecodeHash": "b1364b7a61a7d5dd245f5daf989708d4938bd087d7742c5943b2074007c04944",
+      "microservice": "C",
+      "endpointURI": "C/getDouble",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "C/double package.controller.C.baz(double)"
+    },
+    {
+      "id": 3,
+      "name": "qux",
+      "type": "package.controller.D",
+      "parameters": [
+        "void"
+      ],
+      "returnType": "void",
+      "display": "p.c.D.qux",
+      "flags": "s",
+      "bytecodeHash": "82fbfc09935709f22df3a755e26569d832ef08beaafe4933aa87e59694285585",
+      "microservice": "D",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "D/void package.controller.D.qux(void)"
+    }
+  ],
+  "calls": [
+    {
+      "source": "B/int package.controller.B.bar(String)",
+      "target": "A/void package.controller.A.foo(String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "B/int package.controller.B.bar(String)",
+      "target": "C/double package.controller.C.baz(double)",
+      "isInterserviceCall": true,
+      "httpMethod": "GET"
+    },
+    {
+      "source": "D/void package.controller.D.qux(void)",
+      "target": "C/double package.controller.C.baz(double)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "D/void package.controller.D.qux(void)",
+      "target": "A/void package.controller.A.foo(String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    }
+  ]
+}
