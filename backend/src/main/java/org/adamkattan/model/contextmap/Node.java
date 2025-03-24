@@ -51,16 +51,16 @@ public class Node implements Serializable {
     }
 
     /**
-     * @param node - node for comparison
+     * @param otherNode - node for comparison
      * @return true - if nodes are same, but don't have same fields, otherwise false
      */
-    public boolean compare(Node node) {
-        if (Objects.equals(this.msName, node.msName) &&
-                Objects.equals(this.nodeName, node.nodeName) &&
-                Objects.equals(this.nodeFullName, node.nodeFullName)) {
+    public boolean compare(Node otherNode) {
+        if (Objects.equals(this.msName, otherNode.msName) &&
+                Objects.equals(this.nodeName, otherNode.nodeName) &&
+                Objects.equals(this.nodeFullName, otherNode.nodeFullName)) {
             // Nodes are same
             Map<FieldKey, Field> fieldMap = getFieldMap();
-            return node.fields.stream().allMatch(otherField -> {
+            return otherNode.fields.size() == this.fields.size() && otherNode.fields.stream().allMatch(otherField -> {
                 Field field = fieldMap.get(new FieldKey(otherField.fieldType(), otherField.fieldName()));
                 return field != null && field.compare(otherField);
             });
