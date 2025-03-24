@@ -87,7 +87,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
       setMethod(methodsMap.get(selectedMethod)!);
     }
   }, [selectedMethod, methodsMap]);
-
+  console.log(method);
   return method && !isLoading && !cgInputLoading ? (
     <Card className="border-t-transparent border-l-transparent shadow-none rounded-none">
       <CardHeader>
@@ -150,7 +150,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
               </div>
             </ContextMenuInfo>
             <ContextMenuInfo label="Is Entrypoint">
-              <p>{method.isEntryPoint ? "Yes" : "No"}</p>
+              <p>{method.entryPoint ? "Yes" : "No"}</p>
             </ContextMenuInfo>
             <ContextMenuInfo label="Flags">
               <p>{method.flags}</p>

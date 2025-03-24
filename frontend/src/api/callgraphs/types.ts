@@ -16,7 +16,7 @@ export type CallGraphMethod = {
     endpointURI: string;
     httpMethod: string;
     endpointMethod: boolean;
-    isEntryPoint: boolean;
+    entryPoint: boolean;
     methodSignature: string;
 };
 

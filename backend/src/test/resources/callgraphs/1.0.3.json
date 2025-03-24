@@ -1,0 +1,48 @@
+{
+  "methods": [
+    {
+      "id": 1,
+      "name": "bar",
+      "type": "package.controller.B",
+      "parameters": [
+        "int"
+      ],
+      "returnType": "int",
+      "display": "p.c.B.bar",
+      "flags": "s",
+      "bytecodeHash": "5acc11ee41e516cd1f9d154364807e8d359778f6e97b3d1da226122bbdf3a83f",
+      "microservice": "B",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "B/int package.controller.B.bar(String)"
+    },
+    {
+      "id": 2,
+      "name": "baz",
+      "type": "package.controller.C",
+      "parameters": [
+        "double"
+      ],
+      "returnType": "double",
+      "display": "p.c.C.baz",
+      "flags": "s",
+      "bytecodeHash": "2ed2ea62f2a850c3918857bf2e4a28f54b6fb529d92071a932cb709a1917bce6",
+      "microservice": "C",
+      "endpointURI": "C/getDouble",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "C/double package.controller.C.baz(double)"
+    }
+  ],
+  "calls": [
+    {
+      "source": "B/int package.controller.B.bar(String)",
+      "target": "C/double package.controller.C.baz(double)",
+      "isInterserviceCall": true,
+      "httpMethod": "GET"
+    }
+  ]
+}

@@ -11,8 +11,8 @@ public class ChangedCallGraphMethod extends CallGraphMethod {
     private final TypeOfChange typeOfChange;
 
     @JsonCreator
-    public ChangedCallGraphMethod(Long id, String name, String classPath, List<String> parameters, String returnType, String display, String flags, String bytecodeHash, String msName, String endpointURI, String httpMethod, boolean isInterserviceMethod, boolean isEntryPoint, String methodSignature, TypeOfChange typeOfChange) {
-        super(id, name, classPath, parameters, returnType, display, flags, bytecodeHash, msName, endpointURI, httpMethod, isInterserviceMethod, isEntryPoint, methodSignature);
+    public ChangedCallGraphMethod(Long id, String name, String classPath, List<String> parameters, String returnType, String display, String flags, String bytecodeHash, String msName, String endpointURI, String httpMethod, boolean isInterserviceMethod, boolean entryPoint, String methodSignature, TypeOfChange typeOfChange) {
+        super(id, name, classPath, parameters, returnType, display, flags, bytecodeHash, msName, endpointURI, httpMethod, isInterserviceMethod, entryPoint, methodSignature);
         this.typeOfChange = typeOfChange;
     }
 
@@ -20,7 +20,7 @@ public class ChangedCallGraphMethod extends CallGraphMethod {
         super(method.id(), method.name(), method.classPath(), method.parameters(), method.returnType(),
                 method.display(), method.flags(), method.bytecodeHash(), method.msName(),
                 method.endpointURI(), method.httpMethod(), method.isInterserviceMethod(),
-                method.isEntryPoint(), method.methodSignature());
+                method.entryPoint(), method.methodSignature());
         this.typeOfChange = typeOfChange;
     }
 
