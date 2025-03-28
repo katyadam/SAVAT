@@ -14,6 +14,7 @@ import { toast } from "@/hooks/use-toast";
 import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
 import { get_element_gh_url } from "@/api/github/connect";
 import { useProject } from "@/hooks/useProject";
+import NumberInput from "@/components/ui/NumberInput";
 
 type ContextNodeMenuType = {
   selectedMethod: string | null;
@@ -34,6 +35,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
 }) => {
   const [method, setMethod] = useState<CallGraphMethod | null>(null);
   const [showMethodDetails, setShowMethodDetails] = useState<boolean>(false);
+  const [reachValue, setReachValue] = useState<number>(0);
 
   const { mutateAsync } = useMethodReachability(callGraphInputId, variant);
 
@@ -175,21 +177,28 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
             )}
           </>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <Button
               onClick={() => handleDisplayReachability(selectedMethod)}
               variant="ghost"
-              className="py-1.5 text-sm font-semibold"
+              className="py-1.5 w-full text-sm font-semibold"
             >
               <p className="text-left">Display Reachability</p>
             </Button>
             <Button
               onClick={() => handleMethodLookup(selectedMethod)}
               variant="ghost"
-              className="py-1.5 text-sm font-semibold"
+              className="py-1.5 w-full text-sm font-semibold"
             >
               <p className="text-left">Find on GitHub</p>
             </Button>
+            <NumberInput
+              value={reachValue}
+              setValue={setReachValue}
+              min={0}
+              max={5}
+              step={1}
+            />
           </div>
         )}
       </CardContent>
