@@ -4,7 +4,8 @@ import { getCommonDateString } from "@/api/utils";
 import { Action } from "@/pages/CallGraphPage";
 import Cytoscape from "cytoscape";
 import { SDG } from "@/api/sdgs/types";
-import { getLinkSignature, getSubgraph } from "@/api/sdgs/utils";
+import { getLinkSignature } from "@/api/sdgs/utils";
+import { getSubgraph } from "@/api/sdgs/subgraph";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
