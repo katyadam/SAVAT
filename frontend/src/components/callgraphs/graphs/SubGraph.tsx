@@ -1,5 +1,5 @@
 import cytoscape from "cytoscape";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef } from "react";
 import { ElementsDefinition } from "cytoscape";
 // @ts-expect-error Necessary for compatibility with cytoscape-cise
 import cise from "cytoscape-cise";
@@ -17,8 +17,6 @@ type SubGraphType = {
 
 const SubGraph: FC<SubGraphType> = ({ callGraph, msColors }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const [_selectedMethod, setSelectedMethod] = useState<string | null>(null);
-  const [_selectedCall, setSelectedCall] = useState<string | null>(null);
 
   cytoscape.use(cise);
 
@@ -54,16 +52,6 @@ const SubGraph: FC<SubGraphType> = ({ callGraph, msColors }) => {
       };
 
       const cyInstance = getCyInstance(cyRef, elements, msColors);
-
-      cyInstance.on("tap", "node", (event) => {
-        const node = event.target;
-        setSelectedMethod(node.data("id"));
-      });
-
-      cyInstance.on("tap", "edge", (event) => {
-        const edge = event.target;
-        setSelectedCall(edge.data("id"));
-      });
 
       return () => {
         cyInstance.destroy();
