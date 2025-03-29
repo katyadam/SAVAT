@@ -13,6 +13,9 @@ import { Separator } from "@/components/ui/separator";
 import Loading from "@/components/loading/Loading";
 import Navbar from "@/components/callgraphs/Navbar";
 import { CallGraphOutputHint } from "@/components/ui/hints";
+import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import Overlay from "@/components/ui/Overlay";
+import ExplorePanel from "@/components/callgraphs/reachability/ExplorePanel";
 
 const CallGraphOutputPage = () => {
   useEffect(() => {
@@ -37,6 +40,9 @@ const CallGraphOutputPage = () => {
     string,
     CallGraphCall
   > | null>(null);
+
+  const { cgMethodReachState, cgMethodReachDispatch } =
+    useCallGraphMethodReach();
 
   const [msColors, setMsColors] = useState<Map<string, string> | null>();
   const [msToHighlight, setMsToHighlight] = useState<string | null>(null);
@@ -107,6 +113,20 @@ const CallGraphOutputPage = () => {
       )}
       <Separator className="mt-2" />
       {renderContent()}
+      {changedCallGraph &&
+        msColors &&
+        cgMethodReachState.methodSignature &&
+        cgMethodReachState.reachValue &&
+        cgMethodReachState.reachValue > 0 && (
+          <Overlay
+            closeFunc={() =>
+              cgMethodReachDispatch({ type: "REMOVE_METHOD_REACH" })
+            }
+            width={"5/6"}
+          >
+            <ExplorePanel callGraph={changedCallGraph} msColors={msColors} />
+          </Overlay>
+        )}
     </div>
   );
 };

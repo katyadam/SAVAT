@@ -14,6 +14,7 @@ import { toast } from "@/hooks/use-toast";
 import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
 import { get_element_gh_url } from "@/api/github/connect";
 import { useProject } from "@/hooks/useProject";
+import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
 
 type ContextNodeMenuType = {
   selectedMethod: string | null;
@@ -43,6 +44,16 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
 
   const { data: callGraphInput, isLoading: cgInputLoading } =
     useCallGraphInput(callGraphInputId);
+
+  const { cgMethodReachDispatch } = useCallGraphMethodReach();
+
+  const handleExplorerOpen = () => {
+    if (method)
+      cgMethodReachDispatch({
+        payload: { methodSignature: method?.methodSignature, reachValue: 1 },
+        type: "SET_METHOD_REACH",
+      });
+  };
 
   const handleDisplayReachability = async (methodSignature: string | null) => {
     if (methodSignature) {
@@ -87,7 +98,6 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
       setMethod(methodsMap.get(selectedMethod)!);
     }
   }, [selectedMethod, methodsMap]);
-  console.log(method);
   return method && !isLoading && !cgInputLoading ? (
     <Card className="border-t-transparent border-l-transparent shadow-none rounded-none">
       <CardHeader>
@@ -175,18 +185,25 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
             )}
           </>
         ) : (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <Button
               onClick={() => handleDisplayReachability(selectedMethod)}
               variant="ghost"
-              className="py-1.5 text-sm font-semibold"
+              className="py-1.5 w-full text-sm font-semibold"
             >
-              <p className="text-left">Display Reachability</p>
+              <p className="text-left">Display Full Reachability</p>
+            </Button>
+            <Button
+              onClick={() => handleExplorerOpen()}
+              variant="ghost"
+              className="py-1.5 w-full text-sm font-semibold"
+            >
+              <p className="text-left">Explore Reachability </p>
             </Button>
             <Button
               onClick={() => handleMethodLookup(selectedMethod)}
               variant="ghost"
-              className="py-1.5 text-sm font-semibold"
+              className="py-1.5 w-full text-sm font-semibold"
             >
               <p className="text-left">Find on GitHub</p>
             </Button>
