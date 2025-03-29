@@ -48,10 +48,7 @@ const CallGraphPage = () => {
 
   const { cgMethodReachState, cgMethodReachDispatch } =
     useCallGraphMethodReach();
-  console.log(
-    cgMethodReachState.methodSignature,
-    cgMethodReachState.reachValue
-  );
+
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
   const [msColors, setMsColors] = useState<Map<string, string> | null>();
   const [msToHighlight, setMsToHighlight] = useState<string | null>(null);

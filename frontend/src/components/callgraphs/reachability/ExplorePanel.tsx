@@ -2,7 +2,10 @@ import NumberInput from "@/components/ui/NumberInput";
 import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
 import { GenericCallGraph } from "@/api/callgraphs/types";
 import { FC, useEffect, useState } from "react";
-import { getSubgraph } from "@/api/callgraphs/subgraph";
+import {
+  getMaxSubgraphReachLevel,
+  getSubgraph,
+} from "@/api/callgraphs/subgraph";
 import SubGraph from "../graphs/SubGraph";
 
 type ExplorePanelType = {
@@ -14,7 +17,6 @@ const ExplorePanel: FC<ExplorePanelType> = ({ callGraph, msColors }) => {
     useCallGraphMethodReach();
 
   const [subGraph, setSubGraph] = useState<GenericCallGraph | null>(null);
-
   useEffect(() => {
     if (cgMethodReachState.methodSignature && cgMethodReachState.reachValue) {
       setSubGraph(
@@ -40,16 +42,22 @@ const ExplorePanel: FC<ExplorePanelType> = ({ callGraph, msColors }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <NumberInput
-        value={cgMethodReachState.reachValue || 0}
-        setValue={setReachValue}
-        min={0}
-        max={5}
-        step={1}
-      />
-      {subGraph && <SubGraph callGraph={subGraph} msColors={msColors} />}
-    </div>
+    subGraph &&
+    cgMethodReachState.methodSignature && (
+      <div className="flex flex-col items-center gap-2">
+        <NumberInput
+          value={cgMethodReachState.reachValue || 0}
+          setValue={setReachValue}
+          min={0}
+          max={getMaxSubgraphReachLevel(
+            callGraph,
+            cgMethodReachState.methodSignature
+          )}
+          step={1}
+        />
+        {<SubGraph callGraph={subGraph} msColors={msColors} />}
+      </div>
+    )
   );
 };
 
