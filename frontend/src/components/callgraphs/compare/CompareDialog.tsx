@@ -59,14 +59,17 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
 
   return (
     <div>
-      <h1 className="text-md font-bold">Select Call Graph inputs</h1>
+      <h1 className="text-md font-bold">Select Call Graph Inputs for CIA</h1>
       <div className="flex flex-row justify-between items-center">
-        <InputsList
-          projectId={projectId}
-          inputToOmit={rightSelected}
-          selectedInput={leftSelected}
-          setSelectedInput={setLeftSelected}
-        />
+        <div className="flex flex-col gap-2">
+          <h1>Previous Call Graph</h1>
+          <InputsList
+            projectId={projectId}
+            inputToOmit={rightSelected}
+            selectedInput={leftSelected}
+            setSelectedInput={setLeftSelected}
+          />
+        </div>
         <div className="flex flex-col gap-8">
           <div className="flex flex-row justify-between items-center gap-5">
             <InputInfoBlock input={leftSelected} />
@@ -79,13 +82,15 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
             </Button>
           )}
         </div>
-
-        <InputsList
-          projectId={projectId}
-          inputToOmit={leftSelected}
-          selectedInput={rightSelected}
-          setSelectedInput={setRightSelected}
-        />
+        <div className="flex flex-col gap-2">
+          <h2>Next Call Graph</h2>
+          <InputsList
+            projectId={projectId}
+            inputToOmit={leftSelected}
+            selectedInput={rightSelected}
+            setSelectedInput={setRightSelected}
+          />
+        </div>
       </div>
     </div>
   );

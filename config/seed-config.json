@@ -133,8 +133,26 @@
         {
           "commitHash": "r5as12",
           "version": "3.0.0-new-heuristics",
-          "branch": "1.0.0",
+          "branch": "master",
           "file": "../examples/callgraphs/ts-3.0.0-new-heuristics.json"
+        },
+        {
+          "commitHash": "r5as12",
+          "version": "3.0.0-fixed-new-heuristics",
+          "branch": "master",
+          "file": "../examples/callgraphs/ts-3.0.0-fixed-new-heuristics.json"
+        },
+        {
+          "commitHash": "abc123",
+          "version": "3.0.2-fixed-new-heuristics",
+          "branch": "1.0.2",
+          "file": "../examples/callgraphs/ts-3.0.2-fixed-new-heuristics.json"
+        },
+        {
+          "commitHash": "def456",
+          "version": "3.0.3-fixed-new-heuristics",
+          "branch": "1.0.3",
+          "file": "../examples/callgraphs/ts-3.0.3-fixed-new-heuristics.json"
         }
       ]
     }

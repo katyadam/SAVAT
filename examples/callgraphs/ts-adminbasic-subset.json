@@ -1,0 +1,3211 @@
+{
+  "methods": [
+    {
+      "id": 0,
+      "name": "<clinit>",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "a.c.ABIC.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "bd644066246de131eb8bee812f2ace80f49d71bafe3d92fade0edd3c214420e7",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/void adminbasic.controller.AdminBasicInfoController.<clinit>(empty)"
+    },
+    {
+      "id": 1,
+      "name": "addConfig",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.addConfig",
+      "flags": "p",
+      "bytecodeHash": "fdf2b9256a9116011078b552471857825c3ced64129a1cf767b66d46ed60c20a",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 2,
+      "name": "addContacts",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.addContacts",
+      "flags": "p",
+      "bytecodeHash": "987710cbb8be4b2fc434fdb1e12ba6031b58caec339c20595a2f0f6c4c6b17e7",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addContacts(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 3,
+      "name": "addPrice",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.addPrice",
+      "flags": "p",
+      "bytecodeHash": "4dade039254be01f45efa7c49a82a4d0934fe7e7e2924c5c4d7a3ab5b6e4c766",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 4,
+      "name": "addStation",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.addStation",
+      "flags": "p",
+      "bytecodeHash": "2e527ffbc9c16654c9a90693323ab6e8aeb793bf5c0601900f983e258f2ca967",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 5,
+      "name": "addTrain",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.addTrain",
+      "flags": "p",
+      "bytecodeHash": "81fdd375a81c5c60ce5e57a14bc69e4bf027309c1f43220b3f900c970aba0ec1",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6,
+      "name": "deleteConfig",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.deleteConfig",
+      "flags": "p",
+      "bytecodeHash": "6e06edd207885ff1b2c674ca349dda8edc0e2e81f4d184a88d29022d1aa42092",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs/{name}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7,
+      "name": "deleteContacts",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.deleteContacts",
+      "flags": "p",
+      "bytecodeHash": "b80770900a35c398bd9fe0cc80a2f7b54621ac6d6a76c7db238c70a71c386242",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts/{contactsId}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteContacts(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 8,
+      "name": "deletePrice",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.deletePrice",
+      "flags": "p",
+      "bytecodeHash": "81785c4a549bb2e01cdcbdb661f005c29017fd97bbff23084d882ba5efeb07c7",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices/{pricesId}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 9,
+      "name": "deleteStation",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.deleteStation",
+      "flags": "p",
+      "bytecodeHash": "e065b06ffaf900d105fefbe7d1a6e384a0e76747cebcdcf465163dc9864360c0",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations/{id}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 10,
+      "name": "deleteTrain",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.deleteTrain",
+      "flags": "p",
+      "bytecodeHash": "efeaa86192946d684f80f2b0b55c86a4a12e28555a1b17776904c9678716397d",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains/{id}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 11,
+      "name": "getAllConfigs",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.getAllConfigs",
+      "flags": "p",
+      "bytecodeHash": "cdf50aba3596b5d883786068e5dcd8225902d890a1eb494be814ba8c00a9279b",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllConfigs(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 12,
+      "name": "getAllContacts",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.getAllContacts",
+      "flags": "p",
+      "bytecodeHash": "77604c5353051bdc1c00951ddb8d9b68696994f73402249dcc0798ff5db0e965",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllContacts(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 13,
+      "name": "getAllPrices",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.getAllPrices",
+      "flags": "p",
+      "bytecodeHash": "eb052b17adda42f94f206c98d2de38c12ed530ec0e9fc63f096c46205400db72",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllPrices(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 14,
+      "name": "getAllStations",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.getAllStations",
+      "flags": "p",
+      "bytecodeHash": "59f58242c58bc5a32e245fcb2fc8e36231673f91d0e19262b9f1f919190761c4",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllStations(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 15,
+      "name": "getAllTrains",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.getAllTrains",
+      "flags": "p",
+      "bytecodeHash": "b1788be7073984c8f23aa809b9705a99f1a6f6114c1d0184c52e3b7c1265e3c9",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllTrains(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 16,
+      "name": "home",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "java.lang.String",
+      "display": "a.c.ABIC.home",
+      "flags": "p",
+      "bytecodeHash": "c4da0d8a6165d94d26b71d7644c3b49d7730372d252a19f9d8139a8ced18571e",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/welcome",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/java.lang.String adminbasic.controller.AdminBasicInfoController.home(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 17,
+      "name": "modifyConfig",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.modifyConfig",
+      "flags": "p",
+      "bytecodeHash": "b77baf7a3ead645f9ce32dc7ecc2b72706236f07c86300124a87eae7ee97ba2f",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/configs",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 18,
+      "name": "modifyContacts",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.modifyContacts",
+      "flags": "p",
+      "bytecodeHash": "87d081a43593b66a308f22582a184b9fbcc7bd5415183104886caf5f27c7163e",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/contacts",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyContacts(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 19,
+      "name": "modifyPrice",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.modifyPrice",
+      "flags": "p",
+      "bytecodeHash": "946c73a02bfd2d55d6f3908d6c2a803feaf27d0227a83fe3cd1654d16d02fd3c",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/prices",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 20,
+      "name": "modifyStation",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.modifyStation",
+      "flags": "p",
+      "bytecodeHash": "85317bbbfe38c602bcb81586dc0dabcc851341802f27ef09504eff1e14857814",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/stations",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 21,
+      "name": "modifyTrain",
+      "type": "adminbasic.controller.AdminBasicInfoController",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "a.c.ABIC.modifyTrain",
+      "flags": "p",
+      "bytecodeHash": "ca4bb9a02c615d93f2c69b8f7c67ef0a630b484fbcbd5386ec674396246fde77",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": "/api/v1/adminbasicservice/adminbasic/trains",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 22,
+      "name": "<clinit>",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "a.s.ABISI.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "8bd3157a17cb962cfac371a1066a28783564dd467b90ed625694f4cdb631e4de",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/void adminbasic.service.AdminBasicInfoServiceImpl.<clinit>(empty)"
+    },
+    {
+      "id": 10651,
+      "name": "getServiceUrl",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["java.lang.String"],
+      "returnType": "java.lang.String",
+      "display": "a.s.ABISI.getServiceUrl",
+      "flags": "P",
+      "bytecodeHash": "4c9cdca9114d46d9b6782076a5fcdd786861a709d13bfd695ca633cdf0ab0f00",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)"
+    },
+    {
+      "id": 39252,
+      "name": "addConfig",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.addConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39256,
+      "name": "addContact",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.addContact",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.addContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39257,
+      "name": "getId",
+      "type": "adminbasic.entity.PriceInfo",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "a.e.PI.getId",
+      "flags": "p",
+      "bytecodeHash": "804b3ae705e9e66161446b56a0c8ea320f025aad25a62dc23af37c7c98396f39",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/java.lang.String adminbasic.entity.PriceInfo.getId(empty)"
+    },
+    {
+      "id": 39258,
+      "name": "addPrice",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.addPrice",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39260,
+      "name": "addStation",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.addStation",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39262,
+      "name": "addTrain",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.addTrain",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39263,
+      "name": "deleteConfig",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.deleteConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39264,
+      "name": "deleteContact",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.deleteContact",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.deleteContact(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39265,
+      "name": "deletePrice",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.deletePrice",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39266,
+      "name": "deleteStation",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.deleteStation",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39267,
+      "name": "deleteTrain",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.deleteTrain",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39270,
+      "name": "getAllConfigs",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.getAllConfigs",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.getAllConfigs(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7271,
+      "name": "addConfig",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.addConfig",
+      "flags": "p",
+      "bytecodeHash": "e2959a64132679b28338442e599e6b4eba669b7dcf5a433e8e505fde2bc6fd93",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39271,
+      "name": "getAllContacts",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.getAllContacts",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.getAllContacts(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39272,
+      "name": "getAllPrices",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.getAllPrices",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.getAllPrices(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7273,
+      "name": "addContact",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.addContact",
+      "flags": "p",
+      "bytecodeHash": "97aa6506bfcd4a49aee9eb415c08427f11ef9624d2fa7e54d6b4bf36c9c35cdc",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39273,
+      "name": "getAllStations",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.getAllStations",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.getAllStations(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7274,
+      "name": "addPrice",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.addPrice",
+      "flags": "p",
+      "bytecodeHash": "5d093507c6e38d209821272f729f4a53f696a59f3a059d82615510a9bf731e09",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39274,
+      "name": "getAllTrains",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.getAllTrains",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.getAllTrains(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7275,
+      "name": "addStation",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.addStation",
+      "flags": "p",
+      "bytecodeHash": "905ef9404034d53893d2efd48ae485ee5642429f7accb00b7f0aed203725f2bf",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39275,
+      "name": "modifyConfig",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.modifyConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7276,
+      "name": "addTrain",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.addTrain",
+      "flags": "p",
+      "bytecodeHash": "fdba467e2bb893dd6b13de136ac9369a42a1caab36103bbbed5974e272295718",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39276,
+      "name": "modifyContact",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.modifyContact",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.modifyContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7277,
+      "name": "deleteConfig",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.deleteConfig",
+      "flags": "p",
+      "bytecodeHash": "fc82e3649473d94f0b5531ca9dd29d8216beea4bb5d3f061735ebb74d04ea862",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39277,
+      "name": "modifyPrice",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.modifyPrice",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7278,
+      "name": "deleteContact",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.deleteContact",
+      "flags": "p",
+      "bytecodeHash": "28152eb50bdc418e4d0836e1dd390de543cdcefa0e32ffe7647b5ad11cacb0e8",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteContact(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39278,
+      "name": "modifyStation",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.modifyStation",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7279,
+      "name": "deletePrice",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.deletePrice",
+      "flags": "p",
+      "bytecodeHash": "b6f14fc392424e5754550fd758fb0133333063cb920fcb54a1cf50f562279e37",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 39279,
+      "name": "modifyTrain",
+      "type": "adminbasic.service.AdminBasicInfoService",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABIS.modifyTrain",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoService.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7280,
+      "name": "deleteStation",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.deleteStation",
+      "flags": "p",
+      "bytecodeHash": "ba5c1abc0858ba71506ac9d32de1cc471a2d00525454c3047ec5536353d08722",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7281,
+      "name": "deleteTrain",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.deleteTrain",
+      "flags": "p",
+      "bytecodeHash": "9b97eb5a801e8cdc18be2f132155c90449413fb40c7ddd07c7fa9bc9a1acddb5",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7285,
+      "name": "getAllConfigs",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.getAllConfigs",
+      "flags": "p",
+      "bytecodeHash": "14c4cd3462ddfad88b4250ff0f254036f4f5cc03d5870c7013359ce30ff895c0",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7286,
+      "name": "getAllContacts",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.getAllContacts",
+      "flags": "p",
+      "bytecodeHash": "0196ecb807937159d6a54df3c8b09f54ec1cbdb72009c62c08c1cf95a40a1526",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7287,
+      "name": "getAllPrices",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.getAllPrices",
+      "flags": "p",
+      "bytecodeHash": "de8b241e8a1e18ba773ae4d09e338f190089e3c484776f26ff1a410f7fa4994e",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7288,
+      "name": "getAllStations",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.getAllStations",
+      "flags": "p",
+      "bytecodeHash": "2f737c0a78eda9aa4b7a8238409676f0c714ca407abf4741706bac2e850cb9e7",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllStations(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7289,
+      "name": "getAllTrains",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.getAllTrains",
+      "flags": "p",
+      "bytecodeHash": "c8d51e9db870d576a3e2ac2667f4c7429c8f552cd129e6de11ee5af272d5b564",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7290,
+      "name": "modifyConfig",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Config",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.modifyConfig",
+      "flags": "p",
+      "bytecodeHash": "d6ebcc42a6b102619899a295819bf47eafac90b70e0dea6f19680851119cd547",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7291,
+      "name": "modifyContact",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Contacts",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.modifyContact",
+      "flags": "p",
+      "bytecodeHash": "ea42978fbed9cb5dfd12f8ee1f1b2efd8e0202e0198a4a4b4e54325f0ceb59b4",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7292,
+      "name": "modifyPrice",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "adminbasic.entity.PriceInfo",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.modifyPrice",
+      "flags": "p",
+      "bytecodeHash": "14a027569c2c6a72e67bd1936c3dd78fdfaf43606ff7cf6d4fbbbfaa962acec2",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7293,
+      "name": "modifyStation",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.modifyStation",
+      "flags": "p",
+      "bytecodeHash": "066b8adc6f1c6a3351ff4c936c8a2a1a3e3b297ed19b2f83218cdd3ac9dfa787",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 7294,
+      "name": "modifyTrain",
+      "type": "adminbasic.service.AdminBasicInfoServiceImpl",
+      "parameters": [
+        "edu.fudan.common.entity.TrainType",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "a.s.ABISI.modifyTrain",
+      "flags": "p",
+      "bytecodeHash": "17b946be352fe50df57c47f40ba3ec77668c20a6487017c67d85593748df7c1d",
+      "microservice": "ts-admin-basic-info-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6528,
+      "name": "equals",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["java.lang.Object"],
+      "returnType": "boolean",
+      "display": "p.e.PC.equals",
+      "flags": "p",
+      "bytecodeHash": "c452b4e720f9a2e5b1eef42cf88e695aca6842c615ff6b13efc34ae25a9e98a6",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)"
+    },
+    {
+      "id": 6529,
+      "name": "hashCode",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "int",
+      "display": "p.e.PC.hashCode",
+      "flags": "p",
+      "bytecodeHash": "85e6f8a60a3a0ca09b07f80d8201cc693a8d1143f70d4b67ca8b4a9dcb973889",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)"
+    },
+    {
+      "id": 6530,
+      "name": "toString",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "p.e.PC.toString",
+      "flags": "p",
+      "bytecodeHash": "b0130e71317a8f09041a7bc9c0f4d1073f35f21ac6d06288080f7a9baeec1e1e",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)"
+    },
+    {
+      "id": 6531,
+      "name": "<clinit>",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "p.s.PSI.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "0accde5b0dbc2a298334295646f05aea4c06fa06536c13a38e9d5c434965728b",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.service.PriceServiceImpl.<clinit>(empty)"
+    },
+    {
+      "id": 10243,
+      "name": "getRouteId",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "p.e.PC.getRouteId",
+      "flags": "p",
+      "bytecodeHash": "ef835e507bd4ea519107210e7bb65f3b42e6b56ba571981c71ee43aaf43ec38c",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)"
+    },
+    {
+      "id": 10244,
+      "name": "getTrainType",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "p.e.PC.getTrainType",
+      "flags": "p",
+      "bytecodeHash": "50a94a34808085e9d9bc049e7d864135c84bb0cff502213e3534480e277d48d2",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)"
+    },
+    {
+      "id": 13636,
+      "name": "<init>",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "p.e.PC.<init>",
+      "flags": "p",
+      "bytecodeHash": "2e3a7756e3a8f17765266b6e4240358450faa67bfa032948f10904d77903deae",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.<init>(empty)"
+    },
+    {
+      "id": 42180,
+      "name": "createNewPriceConfig",
+      "type": "price.service.PriceService",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.createNewPriceConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 13638,
+      "name": "setBasicPriceRate",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["double"],
+      "returnType": "void",
+      "display": "p.e.PC.setBasicPriceRate",
+      "flags": "p",
+      "bytecodeHash": "55e4edf531cc8c88a71ec60a1be3c68a3be455d5c49e5e59c6996e1c601086b2",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.setBasicPriceRate(double)"
+    },
+    {
+      "id": 42182,
+      "name": "save",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["java.lang.Object"],
+      "returnType": "java.lang.Object",
+      "display": "p.r.PCR.save",
+      "flags": "pby",
+      "bytecodeHash": "a16d5abe2301b2bd07cb69b5fd5392d7777b7278cc349bd881edf5169261ea4c",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.Object price.repository.PriceConfigRepository.save(java.lang.Object)"
+    },
+    {
+      "id": 13639,
+      "name": "setFirstClassPriceRate",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["double"],
+      "returnType": "void",
+      "display": "p.e.PC.setFirstClassPriceRate",
+      "flags": "p",
+      "bytecodeHash": "bef0afc1595537293420c619720a42e4843dabd48d13b2d7a9b207d929fb91ec",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.setFirstClassPriceRate(double)"
+    },
+    {
+      "id": 42183,
+      "name": "findById",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["java.lang.String"],
+      "returnType": "java.util.Optional",
+      "display": "p.r.PCR.findById",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.util.Optional price.repository.PriceConfigRepository.findById(java.lang.String)"
+    },
+    {
+      "id": 10248,
+      "name": "createNewPriceConfig",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.createNewPriceConfig",
+      "flags": "p",
+      "bytecodeHash": "a7c200ec34ea010d55bf062dad58ff35522db9cc9a00e8b7a8ec915e08cc71f9",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 13640,
+      "name": "setRouteId",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["java.lang.String"],
+      "returnType": "void",
+      "display": "p.e.PC.setRouteId",
+      "flags": "p",
+      "bytecodeHash": "935836f6468fbbdce3aa550163b41db4acc66eaba962e885841470780dddd4d2",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.setRouteId(java.lang.String)"
+    },
+    {
+      "id": 13641,
+      "name": "setTrainType",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["java.lang.String"],
+      "returnType": "void",
+      "display": "p.e.PC.setTrainType",
+      "flags": "p",
+      "bytecodeHash": "1c059b5fe325fde7d43b063306b8ea508a338bafb0f3efc8a9c0b94e3f6e422c",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.setTrainType(java.lang.String)"
+    },
+    {
+      "id": 42185,
+      "name": "deletePriceConfig",
+      "type": "price.service.PriceService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.deletePriceConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.deletePriceConfig(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42187,
+      "name": "delete",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["java.lang.Object"],
+      "returnType": "void",
+      "display": "p.r.PCR.delete",
+      "flags": "pby",
+      "bytecodeHash": "ffbea97c684e7c2bbaa2a901f15f4d8cdcf183b95729e103b94e87e26256ae23",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.repository.PriceConfigRepository.delete(java.lang.Object)"
+    },
+    {
+      "id": 10253,
+      "name": "deletePriceConfig",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.deletePriceConfig",
+      "flags": "p",
+      "bytecodeHash": "712d2a407751713fa7ce83a8f821933504b2eb1713333dcbd6b50e84837dd23b",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.deletePriceConfig(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42189,
+      "name": "findByRouteIdAndTrainType",
+      "type": "price.service.PriceService",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.findByRouteIdAndTrainType",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.findByRouteIdAndTrainType(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42190,
+      "name": "findByRouteIdAndTrainType",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["java.lang.String", "java.lang.String"],
+      "returnType": "price.entity.PriceConfig",
+      "display": "p.r.PCR.findByRouteIdAndTrainType",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/price.entity.PriceConfig price.repository.PriceConfigRepository.findByRouteIdAndTrainType(java.lang.String, java.lang.String)"
+    },
+    {
+      "id": 10255,
+      "name": "findByRouteIdAndTrainType",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.findByRouteIdAndTrainType",
+      "flags": "p",
+      "bytecodeHash": "8538d1e4d0e163e4af9f5edd30e36fc12de3c1b9c8d17c0c5b5720f3864ca637",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findByRouteIdAndTrainType(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 10256,
+      "name": "findByRouteIdsAndTrainTypes",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.findByRouteIdsAndTrainTypes",
+      "flags": "p",
+      "bytecodeHash": "4e916f0c94eda9e28f115ffb962f63da55a1685d8b402ba61fa9fdf77cdcbf5f",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findByRouteIdsAndTrainTypes(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42192,
+      "name": "findByRouteIdsAndTrainTypes",
+      "type": "price.service.PriceService",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.findByRouteIdsAndTrainTypes",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.findByRouteIdsAndTrainTypes(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42193,
+      "name": "findByRouteIdsAndTrainTypes",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["java.util.List", "java.util.List"],
+      "returnType": "java.util.List",
+      "display": "p.r.PCR.findByRouteIdsAndTrainTypes",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.util.List price.repository.PriceConfigRepository.findByRouteIdsAndTrainTypes(java.util.List, java.util.List)"
+    },
+    {
+      "id": 42194,
+      "name": "findAllPriceConfig",
+      "type": "price.service.PriceService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.findAllPriceConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.findAllPriceConfig(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42195,
+      "name": "findAll",
+      "type": "price.repository.PriceConfigRepository",
+      "parameters": ["empty"],
+      "returnType": "java.util.List",
+      "display": "p.r.PCR.findAll",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.util.List price.repository.PriceConfigRepository.findAll(empty)"
+    },
+    {
+      "id": 10260,
+      "name": "findAllPriceConfig",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.findAllPriceConfig",
+      "flags": "p",
+      "bytecodeHash": "a200f9e3d9c19da6bf277d63f48c332bb6fab0e1200997eeb1f7a7a0e6af969f",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findAllPriceConfig(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 10261,
+      "name": "getId",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "p.e.PC.getId",
+      "flags": "p",
+      "bytecodeHash": "c3c2dd5b1474b9c55e245ba84fd6afb6b1002efdd064cf2cf508b60044fb0d92",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)"
+    },
+    {
+      "id": 42197,
+      "name": "updatePriceConfig",
+      "type": "price.service.PriceService",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PS.updatePriceConfig",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 10262,
+      "name": "updatePriceConfig",
+      "type": "price.service.PriceServiceImpl",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "p.s.PSI.updatePriceConfig",
+      "flags": "p",
+      "bytecodeHash": "8eaad2601d64f58d407ff1366c87b74573efe427fad7377d2cc050c41e25a595",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 42198,
+      "name": "setId",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["java.lang.String"],
+      "returnType": "void",
+      "display": "p.e.PC.setId",
+      "flags": "p",
+      "bytecodeHash": "69e52eac317680e748fa698b13b4527c910f3cd3f7436b5eb79b7a10eba51484",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.entity.PriceConfig.setId(java.lang.String)"
+    },
+    {
+      "id": 10263,
+      "name": "canEqual",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["java.lang.Object"],
+      "returnType": "boolean",
+      "display": "p.e.PC.canEqual",
+      "flags": "d",
+      "bytecodeHash": "a68dc653e04e3320436802d4e774643da76551bbd07cf806c855cbfc1096e4e1",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/boolean price.entity.PriceConfig.canEqual(java.lang.Object)"
+    },
+    {
+      "id": 10264,
+      "name": "getBasicPriceRate",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "double",
+      "display": "p.e.PC.getBasicPriceRate",
+      "flags": "p",
+      "bytecodeHash": "3c2c79f272c179eaf982cb90eb6f0619a2fb56fbe8762f0487b3ada2124e8ec9",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)"
+    },
+    {
+      "id": 10266,
+      "name": "getFirstClassPriceRate",
+      "type": "price.entity.PriceConfig",
+      "parameters": ["empty"],
+      "returnType": "double",
+      "display": "p.e.PC.getFirstClassPriceRate",
+      "flags": "p",
+      "bytecodeHash": "34c25fc3e412c3dfa25329217331cbc31c623afa2225c914914ba0c77944499c",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)"
+    },
+    {
+      "id": 6520,
+      "name": "<clinit>",
+      "type": "price.controller.PriceController",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "p.c.PC.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "722b64a47fdee802e097c7442846cc4d5fe0eff21e8ceb9f2edffe4e5223ed75",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/void price.controller.PriceController.<clinit>(empty)"
+    },
+    {
+      "id": 6521,
+      "name": "create",
+      "type": "price.controller.PriceController",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.create",
+      "flags": "p",
+      "bytecodeHash": "73116a268bb80eb565b4b72e42c7923a816ada8b71764c6ba176abdbb1de924a",
+      "microservice": "ts-price-service",
+      "endpointURI": "/api/v1/priceservice/prices",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.create(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6522,
+      "name": "delete",
+      "type": "price.controller.PriceController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.delete",
+      "flags": "p",
+      "bytecodeHash": "2cce2862feed9d45a8971f6fbed6205a5feb4c4807bf023721eb2c77f629128b",
+      "microservice": "ts-price-service",
+      "endpointURI": "/api/v1/priceservice/prices/{pricesId}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.delete(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6523,
+      "name": "home",
+      "type": "price.controller.PriceController",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "p.c.PC.home",
+      "flags": "p",
+      "bytecodeHash": "c4da0d8a6165d94d26b71d7644c3b49d7730372d252a19f9d8139a8ced18571e",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/java.lang.String price.controller.PriceController.home(empty)"
+    },
+    {
+      "id": 6524,
+      "name": "query",
+      "type": "price.controller.PriceController",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.query",
+      "flags": "p",
+      "bytecodeHash": "fa90f021081f72522fd4d9e352ee4456ae641f983e9e7771cddf3489546bbdb2",
+      "microservice": "ts-price-service",
+      "endpointURI": "/api/v1/priceservice/prices/{routeId}/{trainType}",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.query(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6525,
+      "name": "query",
+      "type": "price.controller.PriceController",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.query",
+      "flags": "p",
+      "bytecodeHash": "b80770900a35c398bd9fe0cc80a2f7b54621ac6d6a76c7db238c70a71c386242",
+      "microservice": "ts-price-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.query(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6526,
+      "name": "queryAll",
+      "type": "price.controller.PriceController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.queryAll",
+      "flags": "p",
+      "bytecodeHash": "1be9d49a2bde016376229a89fa44efc35e0366e5e2c0a79656606d9806e2e399",
+      "microservice": "ts-price-service",
+      "endpointURI": "/api/v1/priceservice/prices",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.queryAll(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 6527,
+      "name": "update",
+      "type": "price.controller.PriceController",
+      "parameters": [
+        "price.entity.PriceConfig",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "p.c.PC.update",
+      "flags": "p",
+      "bytecodeHash": "3e23e33f919194cd4511d893aee28f5f563cf005964b763de582d363d1892933",
+      "microservice": "ts-price-service",
+      "endpointURI": "/api/v1/priceservice/prices",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.update(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40512,
+      "name": "delete",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.delete",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.delete(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1921,
+      "name": "<clinit>",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "f.m.c.SC.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "df637bcf8bcb1756b1614636f7a07cb0a918b856eb2c4964281061d72249d41a",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/void fdse.microservice.controller.StationController.<clinit>(empty)"
+    },
+    {
+      "id": 40513,
+      "name": "findById",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["java.lang.String"],
+      "returnType": "java.util.Optional",
+      "display": "f.m.r.SR.findById",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.util.Optional fdse.microservice.repository.StationRepository.findById(java.lang.String)"
+    },
+    {
+      "id": 1922,
+      "name": "create",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.ResponseEntity",
+      "display": "f.m.c.SC.create",
+      "flags": "p",
+      "bytecodeHash": "2c74b08932c2e2231d95891505ccf858fa4a6b294949af15d14eaf91eb363113",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations",
+      "httpMethod": "POST",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40514,
+      "name": "delete",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["java.lang.Object"],
+      "returnType": "void",
+      "display": "f.m.r.SR.delete",
+      "flags": "pby",
+      "bytecodeHash": "53163a94a915f7580eb1900832bc179674c55fd0d3e9a096209002808bfe9e6c",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/void fdse.microservice.repository.StationRepository.delete(java.lang.Object)"
+    },
+    {
+      "id": 1923,
+      "name": "delete",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.ResponseEntity",
+      "display": "f.m.c.SC.delete",
+      "flags": "p",
+      "bytecodeHash": "f658dfacb2b064a83b52afdb7e872ca09c56516651ba91fe2847b91c6552770c",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations/{stationsId}",
+      "httpMethod": "DELETE",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.delete(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1924,
+      "name": "home",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "java.lang.String",
+      "display": "f.m.c.SC.home",
+      "flags": "p",
+      "bytecodeHash": "c4da0d8a6165d94d26b71d7644c3b49d7730372d252a19f9d8139a8ced18571e",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/welcome",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.lang.String fdse.microservice.controller.StationController.home(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40516,
+      "name": "query",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.query",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.query(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1925,
+      "name": "query",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.query",
+      "flags": "p",
+      "bytecodeHash": "20721b6b5f8e9343d4cf614d884fda32044269cc286e20c3b363b9da2667b79a",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.query(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40517,
+      "name": "findAll",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["empty"],
+      "returnType": "java.util.List",
+      "display": "f.m.r.SR.findAll",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.util.List fdse.microservice.repository.StationRepository.findAll(empty)"
+    },
+    {
+      "id": 1926,
+      "name": "queryById",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.queryById",
+      "flags": "p",
+      "bytecodeHash": "b45f515a5a06cb604e9cc4a285cb0c1c8f28f6776c1e0ab6dfbd9de9fd40eecd",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations/name/{stationIdForName}",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryById(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1927,
+      "name": "queryForIdBatch",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.queryForIdBatch",
+      "flags": "p",
+      "bytecodeHash": "a2490d1e263f65e6c42bbb28306aa73d5c3d7b9412f38fe7047b2201158440dc",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40519,
+      "name": "queryById",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.queryById",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.queryById(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1928,
+      "name": "queryForNameBatch",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.queryForNameBatch",
+      "flags": "p",
+      "bytecodeHash": "9283cc41115b519a720cf830aeafcd77feb0addf2cb250c46f968aa82d35594e",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForNameBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40520,
+      "name": "queryForIdBatch",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.queryForIdBatch",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.queryForIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1929,
+      "name": "queryForStationId",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.queryForStationId",
+      "flags": "p",
+      "bytecodeHash": "b99b0d94897c834dfe859a5a5098efea11e66601af3042b4174dea6ab47515b5",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations/id/{stationNameForId}",
+      "httpMethod": "GET",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForStationId(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40521,
+      "name": "findByNames",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["java.util.List"],
+      "returnType": "java.util.List",
+      "display": "f.m.r.SR.findByNames",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.util.List fdse.microservice.repository.StationRepository.findByNames(java.util.List)"
+    },
+    {
+      "id": 1930,
+      "name": "update",
+      "type": "fdse.microservice.controller.StationController",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "org.springframework.http.HttpEntity",
+      "display": "f.m.c.SC.update",
+      "flags": "p",
+      "bytecodeHash": "f10655d56059a1bf1a41c428aedb2b43dc76e9575a115290c6429e05c37db2b9",
+      "microservice": "ts-station-service",
+      "endpointURI": "/api/v1/stationservice/stations",
+      "httpMethod": "PUT",
+      "endpointMethod": true,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 1931,
+      "name": "<clinit>",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": ["empty"],
+      "returnType": "void",
+      "display": "f.m.s.SSI.<clinit>",
+      "flags": "s",
+      "bytecodeHash": "93b239255b19a3a4c3eded08ba16a6aa966acf9b0a1ae70a389bd6467de2cabe",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/void fdse.microservice.service.StationServiceImpl.<clinit>(empty)"
+    },
+    {
+      "id": 40523,
+      "name": "queryByIdBatch",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.queryByIdBatch",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.queryByIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40524,
+      "name": "queryForId",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.queryForId",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.queryForId(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40525,
+      "name": "update",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.update",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40526,
+      "name": "setName",
+      "type": "fdse.microservice.entity.Station",
+      "parameters": ["java.lang.String"],
+      "returnType": "void",
+      "display": "f.m.e.S.setName",
+      "flags": "p",
+      "bytecodeHash": "2fd8c2a8f3d1134d3e34a26a2406f0a5f918d6d1b2f20dbb47905214806b0675",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/void fdse.microservice.entity.Station.setName(java.lang.String)"
+    },
+    {
+      "id": 8093,
+      "name": "create",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.create",
+      "flags": "p",
+      "bytecodeHash": "f0b50ceec6b3f440ac216c2875fe9eabe3d463327c36843fa478ad59f090477c",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 8095,
+      "name": "delete",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.delete",
+      "flags": "p",
+      "bytecodeHash": "93804476afffa10e4eef93ec564f8d535b97e9b84b005ec6a6c006be6b8ef5fa",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.delete(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40479,
+      "name": "getName",
+      "type": "fdse.microservice.entity.Station",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "f.m.e.S.getName",
+      "flags": "p",
+      "bytecodeHash": "8d1865bd647c076749233fa03b80b1af1f6aac4e3f3d452b92461ff796c58a7c",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.lang.String fdse.microservice.entity.Station.getName(empty)"
+    },
+    {
+      "id": 8097,
+      "name": "query",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": ["org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.query",
+      "flags": "p",
+      "bytecodeHash": "5d7dd8d17850387d48734b2d6f0916c4960fe62ccdfc7d2de9548cab88f0f38a",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.query(org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 8098,
+      "name": "queryById",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.queryById",
+      "flags": "p",
+      "bytecodeHash": "d7065ae3d3dc5ea3e1df516d216ad784f738c5bb0cc5523e61f49ea3340fc44e",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryById(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40504,
+      "name": "create",
+      "type": "fdse.microservice.service.StationService",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SS.create",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationService.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 8121,
+      "name": "queryForIdBatch",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.queryForIdBatch",
+      "flags": "p",
+      "bytecodeHash": "dead6b5835912cb6e8cdb775201a769a0d55e05cdbdb6fee1a1f651571a5c337",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryForIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 8122,
+      "name": "queryByIdBatch",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.queryByIdBatch",
+      "flags": "p",
+      "bytecodeHash": "9901542ac8546cd3345c572f1e32d9a803a80c84fde810245ebf3a0a70cd4c2f",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryByIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40506,
+      "name": "findByName",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["java.lang.String"],
+      "returnType": "fdse.microservice.entity.Station",
+      "display": "f.m.r.SR.findByName",
+      "flags": "pa",
+      "bytecodeHash": "null",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/fdse.microservice.entity.Station fdse.microservice.repository.StationRepository.findByName(java.lang.String)"
+    },
+    {
+      "id": 8123,
+      "name": "queryForId",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.queryForId",
+      "flags": "p",
+      "bytecodeHash": "3de2c5d18cdb38c8dce5c7d2391691a8f68681db72967697d75bc7116c3e25f8",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryForId(java.lang.String, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40507,
+      "name": "getStayTime",
+      "type": "fdse.microservice.entity.Station",
+      "parameters": ["empty"],
+      "returnType": "int",
+      "display": "f.m.e.S.getStayTime",
+      "flags": "p",
+      "bytecodeHash": "4e87c9fe351fd630631b8c2c11fde4a77d4cbc7a34bda59eecb5686ec0a54d34",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/int fdse.microservice.entity.Station.getStayTime(empty)"
+    },
+    {
+      "id": 8124,
+      "name": "update",
+      "type": "fdse.microservice.service.StationServiceImpl",
+      "parameters": [
+        "fdse.microservice.entity.Station",
+        "org.springframework.http.HttpHeaders"
+      ],
+      "returnType": "edu.fudan.common.util.Response",
+      "display": "f.m.s.SSI.update",
+      "flags": "p",
+      "bytecodeHash": "b35b1cbf988c5905130d665cd4d2b9b771aef798e6fc2b4359c436b953acbd2e",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)"
+    },
+    {
+      "id": 40508,
+      "name": "setStayTime",
+      "type": "fdse.microservice.entity.Station",
+      "parameters": ["int"],
+      "returnType": "void",
+      "display": "f.m.e.S.setStayTime",
+      "flags": "p",
+      "bytecodeHash": "59a70dcd638befe150432fa942f77d6dfd336b826c12bbb8826a287c9394b27d",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/void fdse.microservice.entity.Station.setStayTime(int)"
+    },
+    {
+      "id": 40509,
+      "name": "save",
+      "type": "fdse.microservice.repository.StationRepository",
+      "parameters": ["java.lang.Object"],
+      "returnType": "java.lang.Object",
+      "display": "f.m.r.SR.save",
+      "flags": "pby",
+      "bytecodeHash": "972694f554e3b6c7ae5ce632249b428f8db743b56c63ba721dac069f664903ff",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.lang.Object fdse.microservice.repository.StationRepository.save(java.lang.Object)"
+    },
+    {
+      "id": 40510,
+      "name": "getId",
+      "type": "fdse.microservice.entity.Station",
+      "parameters": ["empty"],
+      "returnType": "java.lang.String",
+      "display": "f.m.e.S.getId",
+      "flags": "p",
+      "bytecodeHash": "d73222d33f4bf7535a8b02b0d2cf70e7ffd05ba27d7c971ea11dda6b6a31b84a",
+      "microservice": "ts-station-service",
+      "endpointURI": null,
+      "httpMethod": null,
+      "endpointMethod": false,
+      "entryPoint": false,
+      "methodSignature": "ts-station-service/java.lang.String fdse.microservice.entity.Station.getId(empty)"
+    }
+  ],
+  "calls": [
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addContacts(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteContacts(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteContact(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllConfigs(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllContacts(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllPrices(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllStations(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllStations(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.getAllTrains(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyContacts(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteConfig(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteContact(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteTrain(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllConfigs(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllContacts(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllStations(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllTrains(org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyConfig(edu.fudan.common.entity.Config, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyContact(edu.fudan.common.entity.Contacts, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyTrain(edu.fudan.common.entity.TrainType, org.springframework.http.HttpHeaders)",
+      "target": "ts-admin-basic-info-service/java.lang.String adminbasic.service.AdminBasicInfoServiceImpl.getServiceUrl(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.create(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.create(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.create(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.delete(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.deletePriceConfig(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.query(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findByRouteIdAndTrainType(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.query(java.util.List, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findByRouteIdsAndTrainTypes(java.util.List, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.queryAll(org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.findAllPriceConfig(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.update(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.update(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/boolean price.entity.PriceConfig.canEqual(java.lang.Object)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/int price.entity.PriceConfig.hashCode(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/java.lang.String price.entity.PriceConfig.toString(empty)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.<init>(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.<init>(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.setBasicPriceRate(double)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.setFirstClassPriceRate(double)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.setRouteId(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.createNewPriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/void price.entity.PriceConfig.setTrainType(java.lang.String)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.delete(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.delete(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.query(org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.query(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryById(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryById(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForIdBatch(java.util.List, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryForIdBatch(java.util.List, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForNameBatch(java.util.List, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryByIdBatch(java.util.List, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryForStationId(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryForId(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": false,
+      "httpMethod": null
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllPrices(org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.queryAll(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "GET"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.create(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "POST"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deletePrice(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.delete(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "DELETE"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.update(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "PUT"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.getAllStations(org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.query(org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "GET"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.create(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "POST"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.modifyStation(edu.fudan.common.entity.Station, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.update(fdse.microservice.entity.Station, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "PUT"
+    },
+    {
+      "source": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.deleteStation(java.lang.String, org.springframework.http.HttpHeaders)",
+      "target": "ts-station-service/org.springframework.http.ResponseEntity fdse.microservice.controller.StationController.delete(java.lang.String, org.springframework.http.HttpHeaders)",
+      "isInterserviceCall": true,
+      "httpMethod": "DELETE"
+    }
+  ]
+}
