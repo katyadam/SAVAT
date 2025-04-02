@@ -35,7 +35,12 @@ const NumberInput: FC<NumberInputType> = ({
 
   return (
     <div className="flex items-center gap-2">
-      <Button size="icon" variant="outline" onClick={handleDecrement}>
+      <Button
+        size="icon"
+        variant="outline"
+        onClick={handleDecrement}
+        className={value - 1 > min ? "" : "invisible"}
+      >
         <Minus className="w-4 h-4" />
       </Button>
       <Input
@@ -44,7 +49,12 @@ const NumberInput: FC<NumberInputType> = ({
         onChange={handleChange}
         className="w-16 text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
-      <Button size="icon" variant="outline" onClick={handleIncrement}>
+      <Button
+        size="icon"
+        variant="outline"
+        onClick={handleIncrement}
+        className={value < max ? "" : "invisible"}
+      >
         <Plus className="w-4 h-4" />
       </Button>
     </div>
