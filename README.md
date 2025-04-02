@@ -27,14 +27,14 @@ Once the project is running in development mode, you can access:
 
 ### Docker-Compose Mode
 
-- The application is served at <http://localhost>.
+- The application is served at <http://localhost:8081>.
 - In the `frontend` directory, create a `.env` file based on `env.prod`.
 - Then, run the following commands:
 
 ```shell
 cd backend && ./mvnw clean package -DskipTests
 
-docker-compose up -d  # Alternatively, use `docker compose up -d`
+docker compose up -d
 ```
 
 ## Seeding the Database
@@ -52,5 +52,5 @@ python seed.py seed-config.json http://localhost:8080
 
 ```shell
 cd config
-python seed.py seed-config.json http://localhost/api
+python seed.py seed-config.json http://localhost:8081/api
 ```
