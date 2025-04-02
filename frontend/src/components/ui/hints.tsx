@@ -2,15 +2,15 @@ export const CallGraphOutputHint = () => (
   <div>
     <ul className="space-y-2">
       <li className="flex items-center">
-        <span className="w-6 h-0.5 border-dashed border-green-500 border-2 mr-2"></span>
+        <div className="w-10 h-7 border-dotted border-green-400 border-[4px] rounded-full mr-3"></div>
         <span>Added method</span>
       </li>
       <li className="flex items-center">
-        <span className="w-6 h-0.5 border-dashed border-red-500 border-2 mr-2"></span>
+        <div className="w-10 h-7 border-dotted border-red-400 border-[4px] rounded-full mr-3"></div>
         <span>Removed method</span>
       </li>
       <li className="flex items-center">
-        <span className="w-6 h-0.5 border-dashed border-blue-500 border-2 mr-2"></span>
+        <div className="w-10 h-7 border-dotted border-blue-400 border-[4px] rounded-full mr-3"></div>
         <span>Modified method</span>
       </li>
     </ul>
@@ -42,6 +42,25 @@ export const LinkDifferencesHint = () => (
       <li className="flex items-center">
         <span className="w-8 h-3 border-2 border-blue-500 bg-blue-500 mr-2"></span>
         <span>Modified Link</span>
+      </li>
+    </ul>
+  </div>
+);
+
+export const ContextMapOutputHint = () => (
+  <div>
+    <ul className="space-y-2">
+      <li className="flex items-center">
+        <div className="w-10 h-7 border-dotted border-green-400 border-[4px] rounded-full mr-3"></div>
+        <span>Added entity</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-10 h-7 border-dotted border-red-400 border-[4px] rounded-full mr-3"></div>
+        <span>Removed entity</span>
+      </li>
+      <li className="flex items-center">
+        <div className="w-10 h-7 border-dotted border-blue-400 border-[4px] rounded-full mr-3"></div>
+        <span>Modified entity</span>
       </li>
     </ul>
   </div>

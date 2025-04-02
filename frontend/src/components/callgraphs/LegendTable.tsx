@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import {
   Table,
   TableBody,
@@ -12,14 +12,16 @@ import { Highlighter } from "lucide-react";
 type LegendTableType = {
   msColorsLegend: Map<string, string>;
   setMsToHighlight?: (ms: string) => void;
+  hintComponent?: ReactNode;
 };
 
 const LegendTable: FC<LegendTableType> = ({
   msColorsLegend,
   setMsToHighlight,
+  hintComponent,
 }) => {
   return (
-    <div className="max-h-[400px] overflow-y-auto">
+    <div className="flex flex-row gap-5 max-h-[400px] overflow-y-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -48,6 +50,10 @@ const LegendTable: FC<LegendTableType> = ({
           ))}
         </TableBody>
       </Table>
+      <div className="flex flex-col gap-5 items-center border-l-2 p-5">
+        <h1>Hint</h1>
+        {hintComponent}
+      </div>
     </div>
   );
 };
