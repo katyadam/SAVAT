@@ -25,7 +25,7 @@ services:
       DB_PASSWORD: postgres
       DB_URL: jdbc:postgresql://database:5432/cia
       DB_GENERATION: drop-and-create
-      QUARKUS_HTTP_CORS_ORIGINS: http://localhost
+      QUARKUS_HTTP_CORS_ORIGINS: http://localhost:8081
       QUARKUS_HTTP_CORS_METHODS: GET,POST,PUT,DELETE,OPTIONS
       QUARKUS_HTTP_CORS_HEADERS: Content-Type
     ports:
@@ -39,7 +39,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8081:8081"
     depends_on:
       - backend
 
