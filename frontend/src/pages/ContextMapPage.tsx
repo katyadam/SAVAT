@@ -76,7 +76,7 @@ const ContextMapPage = () => {
     [contextMap]
   );
   const renderContent = () => {
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <Loading />;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (showComparisons && contextMap && selectedContextMapChange) {
       return (

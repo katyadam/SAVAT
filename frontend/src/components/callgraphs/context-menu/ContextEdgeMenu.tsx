@@ -9,6 +9,7 @@ import {
 import { X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import ContextMenuInfo from "./ContextMenuInfo";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type ContextEdgeMenuType = {
   selectedCall: string | null;
@@ -114,7 +115,7 @@ const ContextEdgeMenu: FC<ContextEdgeMenuType> = ({
       </CardContent>
     </Card>
   ) : (
-    <p>Loading...</p>
+    <Skeleton className="w-[500px] h-[200px]" />
   );
 };
 

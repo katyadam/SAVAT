@@ -22,7 +22,12 @@ export function AppSidebar({ openCreateProjectDialog }: AppSidebarType) {
   const { data: projects, isLoading, error } = useProjects();
 
   if (isLoading) return <Skeleton className="w-[300px] h-screen" />;
-  if (error) return <div>Error loading projects.</div>;
+  if (error)
+    return (
+      <div>
+        Error occured while loading projects. Please reload the windows.
+      </div>
+    );
 
   const handleNavigation = (projectId: number) => {
     localStorage.setItem("selectedProjectId", projectId.toString());

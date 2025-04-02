@@ -56,7 +56,7 @@ const SDGPage = () => {
 
   const { toast } = useToast();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading overlay={true} />;
   if (error) return <p>Error: Unable to fetch entity data.</p>;
 
   const handleCompareResponse = (resp: ChangedLinksResponse) => {
@@ -69,7 +69,7 @@ const SDGPage = () => {
   };
 
   const renderContent = () => {
-    if (isLoading) return <Loading />;
+    if (isLoading) return <Loading overlay={true} />;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
     if (graph) {
       if (showComparisons && selectedCommGraphDiff) {
