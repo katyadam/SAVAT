@@ -17,6 +17,15 @@ export const getChangedColor = (type: string): string => {
     }
 };
 
+export const decideTextColorByBgColor = (bgColor: string): string => {
+    const colorValue = bgColor.substring(1)
+    const R = colorValue.substring(0, 2)
+    const G = colorValue.substring(2, 4)
+    const B = colorValue.substring(4, 6)
+
+    return parseInt(R, 16) + parseInt(G, 16) + parseInt(B, 16) < 300 ? "#FFFFFF" : "#000000";
+}
+
 export function getCommonDateString(): string {
     return new Date(Date.now()).toLocaleString("en-US", {
         weekday: "long",

@@ -36,6 +36,7 @@ const RenderGraph: FC<RenderGraphProps> = ({
         <EntityDetailsDiagram
           graphData={contextMap}
           showIsolatedNodes={showIsolatedNodes}
+          msColors={msColors}
         />
       );
 

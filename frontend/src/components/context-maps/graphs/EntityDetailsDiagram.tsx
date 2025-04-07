@@ -1,18 +1,27 @@
 import { FC, useEffect, useRef } from "react";
-import Cytoscape, { ElementsDefinition } from "cytoscape";
+import { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
-import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
-import { ContextMap, Link, Node } from "@/api/context-maps/types";
+import fcose from "cytoscape-fcose";
+import {
+  ChangedLink,
+  ContextMap,
+  Link,
+  Node,
+  TypeOfChange,
+} from "@/api/context-maps/types";
+import { getCyInstance } from "./CytoscapeInstance";
 
 type EntityDetailsDiagramType = {
   graphData: ContextMap;
   showIsolatedNodes: boolean;
+  msColors: Map<string, string>;
 };
 
 const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
   graphData,
   showIsolatedNodes,
+  msColors,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   cytoscape.use(fcose);
@@ -54,11 +63,16 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
             data: {
               id: node.nodeName,
               label: formatNodeLabel(node),
+              microservice: node.msName,
+              typeOfChange:
+                "typeOfChange" in node
+                  ? (node.typeOfChange as TypeOfChange)
+                  : TypeOfChange.NONE,
             },
             group: "nodes",
           })
         ),
-        edges: graphData.links.map((link: Link) => ({
+        edges: graphData.links.map((link: Link | ChangedLink) => ({
           data: {
             source: link.source,
             target: link.target,
@@ -66,65 +80,29 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
           group: "edges",
         })),
       };
-      const layoutOptions: FcoseLayoutOptions = {
-        name: "fcose",
-        animate: true,
-        fit: true,
-        animationDuration: 0,
-      };
-      const cy = Cytoscape({
-        container: cyRef.current,
-        elements,
-        style: [
-          {
-            selector: "node",
-            style: {
-              "background-color": "white",
-              "border-color": "black",
-              "border-width": "5",
-              shape: "roundrectangle",
-              label: "data(label)",
-              width: "label",
-              height: "label",
-              "text-wrap": "wrap",
-              "padding-left": "10",
-              "text-justification": "left",
-              "text-halign": "center",
-              "text-valign": "center",
-              "font-size": 12,
-              "font-family": "Arial, sans-serif",
-            },
-          },
-          {
-            selector: "edge",
-            style: {
-              width: 5,
-              "line-color": "#808080",
-              "curve-style": "bezier",
-              "target-arrow-color": "#808080",
-              "target-arrow-shape": "triangle",
-              "text-rotation": "autorotate",
-            },
-          },
-        ],
-        layout: layoutOptions,
-      });
 
-      cy.on("tap", "node", (event) => {
+      const cyInstance = getCyInstance(
+        cyRef,
+        elements,
+        msColors,
+        "detailsGraph"
+      );
+
+      cyInstance.on("tap", "node", (event) => {
         const node = event.target;
 
-        const currentZoom = cy.zoom();
+        const currentZoom = cyInstance.zoom();
         const zoomIncrement = 0.2;
         const newZoom = currentZoom + zoomIncrement;
 
-        cy.zoom({
+        cyInstance.zoom({
           level: newZoom,
           renderedPosition: node.renderedPosition(),
         });
       });
 
       return () => {
-        cy.destroy();
+        cyInstance.destroy();
       };
     }
   }, [graphData, showIsolatedNodes]);

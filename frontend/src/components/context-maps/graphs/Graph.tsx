@@ -88,7 +88,7 @@ const Graph: FC<GraphType> = ({
       })),
     };
 
-    const cyInstance = getCyInstance(cyRef, elements, msColors);
+    const cyInstance = getCyInstance(cyRef, elements, msColors, "defaultGraph");
 
     cyInstance.on("tap", "node", (event) => {
       const node = event.target;
