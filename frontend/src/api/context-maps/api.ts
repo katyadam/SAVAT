@@ -50,7 +50,7 @@ async function compareContextMapsLinks(
     return resp.data;
 }
 
-async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload) {
+async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload): Promise<ContextMapOutputSimple> {
     const resp = await axiosInstance.post(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/change-impact-analysis`, ids);
     return resp.data;
 }

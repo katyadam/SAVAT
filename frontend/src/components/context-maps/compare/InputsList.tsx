@@ -27,9 +27,9 @@ const InputsList: FC<InputsListType> = ({
       {contextMaps &&
         contextMaps
           .filter((input) => inputToOmit?.id !== input.id)
-          .map((input) => (
+          .map((input, i) => (
             <div
-              key={selectedInput?.id}
+              key={i}
               onClick={() =>
                 selectedInput?.id === input.id
                   ? setSelectedInput(null)

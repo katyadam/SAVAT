@@ -17,7 +17,7 @@ public class CallGraphChangeImpactService {
     @Inject
     ProjectService projectService;
 
-    public ChangedCallGraph saveChangedCallGraph(Long projectId, Long sourceCallGraphId, Long targetCallGraphId) {
+    public CallGraphOutput saveChangedCallGraph(Long projectId, Long sourceCallGraphId, Long targetCallGraphId) {
         Project projectById = projectService.getProjectById(projectId);
         CallGraphInput sourceCallGraphInput = callGraphInputService.getCallGraphInputById(sourceCallGraphId);
         CallGraphInput targetCallGraphInput = callGraphInputService.getCallGraphInputById(targetCallGraphId);
@@ -33,7 +33,7 @@ public class CallGraphChangeImpactService {
         callGraphOutput.project = projectById;
         callGraphOutput.persist();
 
-        return changedCallGraph;
+        return callGraphOutput;
     }
 
 }

@@ -6,6 +6,8 @@ import InputsList from "./InputsList";
 import { Button } from "@/components/ui/button";
 import InputInfoBlock from "./InputInfoBlock";
 import { ArrowRightLeft } from "lucide-react";
+import { ToastAction } from "@/components/ui/toast";
+import { useNavigate } from "react-router-dom";
 
 type CIAPanelType = {
   projectId: string;
@@ -21,16 +23,30 @@ const CIAPanel: FC<CIAPanelType> = ({ projectId }) => {
 
   const { toast } = useToast();
 
+  const navigate = useNavigate();
+  const routeToNewCIA = (newCIAId: number) => {
+    navigate(`/context-map-output/${newCIAId}/context-map`);
+  };
+
   const handleCiaDispatch = async () => {
     try {
       if (leftSelected && rightSelected) {
-        await mutateAsync({
+        const createdCIA = await mutateAsync({
           projectId: projectId,
           sourceContextMapId: leftSelected.id,
           targetContextMapId: rightSelected.id,
         });
+
         toast({
           title: "Successfully created new Analysis",
+          action: (
+            <ToastAction
+              altText="Try again"
+              onClick={() => routeToNewCIA(createdCIA.id)}
+            >
+              Show
+            </ToastAction>
+          ),
         });
       } else {
         toast({

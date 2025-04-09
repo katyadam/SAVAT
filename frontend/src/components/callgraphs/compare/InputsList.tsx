@@ -28,8 +28,9 @@ const InputsList: FC<InputsListType> = ({
       {callGraphInputs &&
         callGraphInputs
           .filter((input) => inputToOmit?.id !== input.id)
-          .map((input) => (
+          .map((input, i) => (
             <div
+              key={i}
               onClick={() =>
                 selectedInput?.id === input.id
                   ? setSelectedInput(null)
