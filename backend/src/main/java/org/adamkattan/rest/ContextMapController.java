@@ -12,6 +12,7 @@ import org.adamkattan.model.contextmap.CreateContextMap;
 import org.adamkattan.model.contextmap.LinksInputDto;
 import org.adamkattan.model.contextmap.linkdiff.ChangedContextMap;
 import org.adamkattan.model.contextmap.linkdiff.ChangedLinksOutput;
+import org.adamkattan.model.contextmap.linkdiff.CompareContextMapsRequest;
 import org.adamkattan.service.ContextMapLinksDifferenceService;
 import org.adamkattan.service.ContextMapService;
 
@@ -32,8 +33,9 @@ public class ContextMapController {
     @Transactional
     public Response getContextMap(@PathParam("id") Long id) {
         ContextMapEntity contextMapEntity = contextMapService.getContextMapById(id);
-        return Response.ok(contextMapEntity.contextMap)
-                .build();
+        return Response.ok(
+                ContextMapEntity.toFullDto(contextMapEntity)
+        ).build();
     }
 
     @GET
@@ -74,6 +76,16 @@ public class ContextMapController {
         ContextMapFullDto createdContextMap = contextMapService.addContextMapToProject(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(createdContextMap)
+                .build();
+    }
+
+    @POST
+    @Path("/compare")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createContextMap(@Valid CompareContextMapsRequest req) {
+        ChangedLinksOutput output = contextMapLinksDifferenceService.saveChangedLinks(req.sourceId(), req.targetId());
+        return Response.ok(output)
                 .build();
     }
 

@@ -8,6 +8,7 @@ import org.adamkattan.model.contextmap.ContextMapFullDto;
 import org.adamkattan.model.contextmap.ContextMapSummary;
 import org.adamkattan.model.contextmap.CreateContextMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -44,6 +45,7 @@ public class ContextMapService {
         contextMapEntity.version = contextMapFullDto.version();
         contextMapEntity.commitHash = contextMapFullDto.commitHash();
         contextMapEntity.contextMap = contextMapFullDto.contextMap();
+        contextMapEntity.changedContextMaps = new ArrayList<>();
         contextMapEntity.persist();
         return ContextMapEntity.toFullDto(contextMapEntity);
 

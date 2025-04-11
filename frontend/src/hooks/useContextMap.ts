@@ -62,14 +62,26 @@ export const useContextMapDelete = (projectId: string) => {
     });
 };
 
-export const useContextMapCompare = (id: string) => {
+export const useContextMapCompareManually = (id: string) => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (links: Link[]) =>
-            ContextMapApi.compareContextMapsLinks(id, links),
+            ContextMapApi.compareContextMapsLinksManually(id, links),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["contextMapChanges", id] });
+        },
+    })
+}
+
+export const useContextMapCompare = (srcId: string) => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (targetId: string) =>
+            ContextMapApi.compareContextMapsLinks(srcId, targetId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["contextMapChanges", srcId] });
         },
     })
 }

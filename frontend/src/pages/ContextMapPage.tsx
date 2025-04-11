@@ -1,5 +1,5 @@
 import { ChangedLinksResponse, Field, Node } from "@/api/context-maps/types";
-import CompareForm from "@/components/context-maps/compare/CompareForm";
+import LDAPanel from "@/components/context-maps/compare/LDAPanel";
 import EntityDetail from "@/components/context-maps/EntityDetail";
 import FieldDetail from "@/components/context-maps/FieldDetail";
 import { getMicroservicesColors } from "@/components/context-maps/generators/colorGenerator";
@@ -38,7 +38,7 @@ const ContextMapPage = () => {
   const [showComparisons, setShowComparisons] = useState<boolean>(false);
   const [showIsolatedNodes, setShowIsolatedNodes] = useState<boolean>(false);
 
-  const { data: contextMap, isLoading, error } = useContextMap(id || "");
+  const { data: contextMapEntity, isLoading, error } = useContextMap(id || "");
 
   const { toast } = useToast();
 
@@ -72,17 +72,21 @@ const ContextMapPage = () => {
     setSelectedField(null);
   };
   const msColors = useMemo(
-    () => getMicroservicesColors(contextMap?.nodes || []),
-    [contextMap]
+    () =>
+      getMicroservicesColors(
+        (contextMapEntity?.contextMap && contextMapEntity?.contextMap.nodes) ||
+          []
+      ),
+    [contextMapEntity?.contextMap?.nodes]
   );
   const renderContent = () => {
     if (isLoading) return <Loading />;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (showComparisons && contextMap && selectedContextMapChange) {
+    if (showComparisons && contextMapEntity && selectedContextMapChange) {
       return (
         <Graph
           graphData={{
-            nodes: contextMap.nodes,
+            nodes: contextMapEntity.contextMap.nodes,
             links: [],
           }}
           onNodeClick={handleNodeClick}
@@ -95,7 +99,7 @@ const ContextMapPage = () => {
     return (
       <RenderGraph
         onNodeClick={handleNodeClick}
-        contextMap={contextMap}
+        contextMap={contextMapEntity?.contextMap}
         renderType={selectedRenderType}
         showIsolatedNodes={showIsolatedNodes}
         msColors={msColors}
@@ -136,13 +140,17 @@ const ContextMapPage = () => {
           </div>
         </Overlay>
       )}
-      {compareUp && (
+      {compareUp && contextMapEntity && (
         <Overlay
-          width="5/6"
+          width="w-1/4"
           closeFunc={() => setCompareUp(false)}
           aria-label="Compare Context Map"
         >
-          <CompareForm contextMapId={id} respFunc={handleCompareResponse} />
+          <LDAPanel
+            contextMapEntity={contextMapEntity}
+            respFunc={handleCompareResponse}
+            projectId={contextMapEntity?.projectId.toString()}
+          />
         </Overlay>
       )}
     </div>

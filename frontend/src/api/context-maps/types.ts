@@ -11,6 +11,10 @@ export type ContextMapDto = {
     createdAt: string
 }
 
+export type ContextMapFullDto = ContextMapDto & {
+    contextMap: ContextMap;
+};
+
 export type CreateContextMapRequest = {
     projectId: string;
     version: string;
