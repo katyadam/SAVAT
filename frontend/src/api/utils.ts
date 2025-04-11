@@ -3,6 +3,7 @@ export const CY_COLOR_GREEN = "#00FF00"
 export const CY_COLOR_BLUE = "#0000FF"
 export const CY_COLOR_NEUTRAL = "#808080"
 export const CY_COLOR_HIGHLIGHTED = "#FFD700"
+export const CY_COLOR_BLACK = "#000000"
 
 export const getChangedColor = (type: string): string => {
     switch (type) {
