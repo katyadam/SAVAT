@@ -37,6 +37,7 @@ const RenderGraph: FC<RenderGraphProps> = ({
           graphData={contextMap}
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}
+          onNodeClick={onNodeClick}
         />
       );
 

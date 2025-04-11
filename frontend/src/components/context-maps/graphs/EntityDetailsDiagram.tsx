@@ -11,17 +11,20 @@ import {
   TypeOfChange,
 } from "@/api/context-maps/types";
 import { getCyInstance } from "./CytoscapeInstance";
+import { getNodeSignature } from "@/api/context-maps/utils";
 
 type EntityDetailsDiagramType = {
   graphData: ContextMap;
   showIsolatedNodes: boolean;
   msColors: Map<string, string>;
+  onNodeClick: (node: Node) => void;
 };
 
 const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
   graphData,
   showIsolatedNodes,
   msColors,
+  onNodeClick,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   cytoscape.use(fcose);
@@ -61,7 +64,7 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
         nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
           (node: Node) => ({
             data: {
-              id: node.nodeName,
+              id: getNodeSignature(node),
               label: formatNodeLabel(node),
               microservice: node.msName,
               typeOfChange:
@@ -74,8 +77,15 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
         ),
         edges: graphData.links.map((link: Link | ChangedLink) => ({
           data: {
-            source: link.source,
-            target: link.target,
+            source: getNodeSignature({
+              msName: link.msSource,
+              nodeName: link.source,
+            }),
+            target: getNodeSignature({
+              msName: link.msTarget,
+              nodeName: link.target,
+            }),
+            typeOfChange: "type" in link ? link.type.toString() : "SAME",
           },
           group: "edges",
         })),
@@ -89,16 +99,15 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
       );
 
       cyInstance.on("tap", "node", (event) => {
-        const node = event.target;
-
-        const currentZoom = cyInstance.zoom();
-        const zoomIncrement = 0.2;
-        const newZoom = currentZoom + zoomIncrement;
-
-        cyInstance.zoom({
-          level: newZoom,
-          renderedPosition: node.renderedPosition(),
-        });
+        const nodeData = event.target.data();
+        const res = graphData.nodes.find(
+          (node) => getNodeSignature(node) == nodeData.id
+        );
+        if (!res) {
+          alert("This node doesn't exist!");
+        } else {
+          onNodeClick(res);
+        }
       });
 
       return () => {
