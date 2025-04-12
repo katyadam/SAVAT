@@ -36,11 +36,11 @@ public class ServiceDependencyGraphEntity extends PanacheEntity {
 
     public static ServiceDependencyGraphFullDto toFullDto(ServiceDependencyGraphEntity input) {
         return new ServiceDependencyGraphFullDto(
+                input.id,
                 input.project.id,
                 input.version,
                 input.commitHash,
-                input.sdg,
-                input.changedSdgs
+                input.sdg
         );
     }
 

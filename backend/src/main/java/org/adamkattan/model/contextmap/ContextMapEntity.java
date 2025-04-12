@@ -42,10 +42,7 @@ public class ContextMapEntity extends PanacheEntity {
                 input.project.id,
                 input.version,
                 input.commitHash,
-                input.contextMap,
-                input.changedContextMaps.stream()
-                        .map(ChangedContextMap::toDto)
-                        .toList()
+                input.contextMap
         );
     }
 

@@ -83,7 +83,7 @@ public class ContextMapController {
     @Path("/compare")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response createContextMap(@Valid CompareContextMapsRequest req) {
+    public Response compareContextMaps(@Valid CompareContextMapsRequest req) {
         ChangedLinksOutput output = contextMapLinksDifferenceService.saveChangedLinks(req.sourceId(), req.targetId());
         return Response.ok(output)
                 .build();

@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import { useSDGCompare } from "@/hooks/useSDG";
+import { Label } from "../../ui/label";
+import { Textarea } from "../../ui/textarea";
+import { Button } from "../../ui/button";
+import { useSDGCompareManually } from "@/hooks/useSDG";
 import { ChangedLinksResponse, Link } from "@/api/sdgs/types";
 
 type CompareFormType = {
@@ -11,7 +11,7 @@ type CompareFormType = {
 };
 
 const CompareForm: FC<CompareFormType> = ({ sdgId, respFunc }) => {
-  const { mutateAsync } = useSDGCompare(sdgId);
+  const { mutateAsync } = useSDGCompareManually(sdgId);
   const [jsonInput, setJsonInput] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

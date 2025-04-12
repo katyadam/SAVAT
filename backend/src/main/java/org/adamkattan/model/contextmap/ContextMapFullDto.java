@@ -11,7 +11,6 @@ public record ContextMapFullDto(
         @JsonProperty("projectId") Long projectId,
         @JsonProperty("version") String version,
         @JsonProperty("commitHash") String commitHash,
-        @JsonProperty("contextMap") ContextMap contextMap,
-        @JsonProperty("changedContextMaps") List<ChangedContextMapDto> changedContextMaps
+        @JsonProperty("contextMap") ContextMap contextMap
 ) {
 }

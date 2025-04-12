@@ -11,6 +11,10 @@ export type SDGDto = {
     createdAt: string
 }
 
+export type SDGFullDto = SDGDto & {
+    sdg: SDG
+};
+
 export type CreateSDGRequest = {
     projectId: string;
     version: string;

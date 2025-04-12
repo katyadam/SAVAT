@@ -1,4 +1,3 @@
-import CompareForm from "@/components/sdgs/CompareForm";
 import Graph from "@/components/sdgs/graphs/Graph";
 import Navbar from "@/components/sdgs/Navbar";
 import Loading from "@/components/loading/Loading";
@@ -11,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useSDG } from "@/hooks/useSDG";
 import { ChangedLink, ChangedLinksResponse, Link } from "@/api/sdgs/types";
 import LinkPanel from "@/components/sdgs/LinkPanel";
+import LDAPanel from "@/components/sdgs/compare/LDAPanel";
 
 const SDGPage = () => {
   React.useEffect(() => {
@@ -22,7 +22,7 @@ const SDGPage = () => {
 
   const { id } = useParams();
 
-  const { data: graph, isLoading, error } = useSDG(id || "");
+  const { data: sdgDto, isLoading, error } = useSDG(id || "");
   const [compareUp, setCompareUp] = useState<boolean>(false);
   const [selectedCommGraphDiff, setSelectedCommGraphDiff] = useState<
     string | null
@@ -71,12 +71,12 @@ const SDGPage = () => {
   const renderContent = () => {
     if (isLoading) return <Loading overlay={true} />;
     if (error) return <p>Error: Unable to fetch entity data.</p>;
-    if (graph) {
+    if (sdgDto) {
       if (showComparisons && selectedCommGraphDiff) {
         return (
           <Graph
             graph={{
-              nodes: graph.nodes,
+              nodes: sdgDto?.sdg.nodes,
               links: [],
             }}
             changedSDGId={selectedCommGraphDiff}
@@ -88,7 +88,7 @@ const SDGPage = () => {
       }
       return (
         <Graph
-          graph={graph}
+          graph={sdgDto?.sdg}
           selectLink={handleLinkClick}
           selectNode={selectNode}
           selectedNode={selectedNode}
@@ -111,13 +111,17 @@ const SDGPage = () => {
         />
         <Separator className="mt-2" />
         {renderContent()}
-        {compareUp && (
+        {compareUp && sdgDto && (
           <Overlay
-            width="5/6"
+            width="1/4"
             closeFunc={() => setCompareUp(false)}
-            aria-label="Compare Entities"
+            aria-label="Compare SDGs"
           >
-            <CompareForm sdgId={id} respFunc={handleCompareResponse} />
+            <LDAPanel
+              sdgDto={sdgDto}
+              respFunc={handleCompareResponse}
+              projectId={sdgDto?.projectId.toString()}
+            />
           </Overlay>
         )}
       </div>

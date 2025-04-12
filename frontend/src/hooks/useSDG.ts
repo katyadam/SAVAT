@@ -63,14 +63,26 @@ export const useSDGDelete = (projectId: string) => {
   });
 };
 
-export const useSDGCompare = (id: string) => {
+export const useSDGCompareManually = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (links: Link[]) =>
-      SDGApi.compareSDGLinks(id, links),
+      SDGApi.compareSDGLinksManually(id, links),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["SDGChanges", id] });
+    },
+  })
+}
+
+export const useSDGCompare = (sourceId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (targetId: string) =>
+      SDGApi.compareSDGLinks(sourceId, targetId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["SDGChanges", sourceId] });
     },
   })
 }

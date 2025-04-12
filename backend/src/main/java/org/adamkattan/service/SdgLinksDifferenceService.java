@@ -39,4 +39,21 @@ public class SdgLinksDifferenceService {
         changedGraph.persist();
         return linksDifference;
     }
+
+    public ChangedLinksOutput saveChangedGraphLinks(
+            Long sourceId,
+            Long targetId
+    ) {
+        ServiceDependencyGraphEntity sourceSdgEntity = sdgService.getSdgById(sourceId);
+        ServiceDependencyGraphEntity targetSdgEntity = sdgService.getSdgById(targetId);
+        ChangedLinksOutput linksDifference = SdgLinksDifferenceAnalysis.getLinksDifference(
+                sourceSdgEntity.sdg.links(),
+                targetSdgEntity.sdg.links()
+        );
+        var changedGraph = new ChangedServiceDependecyGraph();
+        changedGraph.changedLinks = linksDifference.changedLinks();
+        changedGraph.sdg = sourceSdgEntity;
+        changedGraph.persist();
+        return linksDifference;
+    }
 }
