@@ -24,7 +24,7 @@ const SubGraph: FC<SubGraphType> = ({ callGraph, msColors }) => {
     if (cyRef.current) {
       const elements: ElementsDefinition = {
         nodes: callGraph.methods
-          .filter((method) => method.bytecodeHash !== "null")
+          .filter((method) => method && method.bytecodeHash !== "null")
           .map((method) => ({
             data: {
               id: method.methodSignature,

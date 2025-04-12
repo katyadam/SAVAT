@@ -41,8 +41,9 @@ export const getSubgraph = (callGraph: GenericCallGraph, initialMethodSignature:
         if (currNode) {
             const currMethodCalls: CallGraphCall[] = getAdjacents(callGraph, currNode?.[0]);
             for (const call of currMethodCalls) {
-                if (!visited.has(call.target)) {
-                    methods.push(methodsMap.get(call.target)!);
+                const methodToAdd = methodsMap.get(call.target);
+                if (!visited.has(call.target) && methodToAdd) {
+                    methods.push(methodToAdd);
                     calls.push(call);
                     visited.add(call.target);
                     const nextLevel: number = currNode?.[1];
