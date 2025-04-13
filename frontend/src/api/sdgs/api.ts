@@ -1,9 +1,9 @@
 import { axiosInstance } from "../config";
-import { ChangedDto, ChangedLinksResponse, CreateSDGRequest, Link, SDG, Summary } from "./types";
+import { ChangedDto, ChangedLinksResponse, CreateSDGRequest, Link, SDGFullDto, Summary } from "./types";
 
 export const SDG_PREFIX = "/sdgs"
 
-async function getSDG(id: string): Promise<SDG> {
+async function getSDG(id: string): Promise<SDGFullDto> {
     const resp = await axiosInstance.get(`${SDG_PREFIX}/${id}`)
     return resp.data;
 }
@@ -28,12 +28,23 @@ async function createSDG(req: CreateSDGRequest) {
     return resp.data;
 }
 
-async function compareSDGLinks(
+async function compareSDGLinksManually(
     id: string,
     links: Link[]
 ): Promise<ChangedLinksResponse> {
     const resp = await axiosInstance.put(`${SDG_PREFIX}/${id}/compare`, {
         links: links
+    })
+    return resp.data;
+}
+
+async function compareSDGLinks(
+    sourceId: string,
+    targetId: string
+): Promise<ChangedLinksResponse> {
+    const resp = await axiosInstance.post(`${SDG_PREFIX}/compare`, {
+        sourceId: sourceId,
+        targetId: targetId
     })
     return resp.data;
 }
@@ -49,6 +60,7 @@ const SDGApi = {
     getSDGChange,
     getSummary,
     createSDG,
+    compareSDGLinksManually,
     compareSDGLinks,
     deleteSDG
 }

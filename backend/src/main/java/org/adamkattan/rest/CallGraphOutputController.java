@@ -14,7 +14,7 @@ import org.adamkattan.model.callgraph.CallGraphMethodKey;
 import org.adamkattan.model.callgraph.algorithms.MethodReachability;
 import org.adamkattan.model.callgraph.compare.CallGraphOutput;
 import org.adamkattan.model.callgraph.compare.CallGraphOutputRequest;
-import org.adamkattan.model.callgraph.compare.ChangedCallGraph;
+import org.adamkattan.model.callgraph.compare.CallGraphOutputSimpleDto;
 import org.adamkattan.service.CallGraphChangeImpactService;
 import org.adamkattan.service.CallGraphOutputService;
 
@@ -58,14 +58,16 @@ public class CallGraphOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Blocking
     @Transactional
-    public Uni<ChangedCallGraph> changeImpactAnalysis(
+    public Uni<CallGraphOutputSimpleDto> changeImpactAnalysis(
             @Valid CallGraphOutputRequest callGraphOutputRequest
     ) {
         return Uni.createFrom().item(
-                        () -> differenceService.saveChangedCallGraph(
-                                callGraphOutputRequest.projectId(),
-                                callGraphOutputRequest.sourceCallGraphInputId(),
-                                callGraphOutputRequest.targetCallGraphInputId())
+                        () -> CallGraphOutput.toSimpleDto(
+                                differenceService.saveChangedCallGraph(
+                                        callGraphOutputRequest.projectId(),
+                                        callGraphOutputRequest.sourceCallGraphInputId(),
+                                        callGraphOutputRequest.targetCallGraphInputId())
+                        )
                 )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }

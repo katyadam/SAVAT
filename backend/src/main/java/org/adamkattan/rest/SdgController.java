@@ -12,6 +12,7 @@ import org.adamkattan.model.sdg.ServiceDependencyGraphEntity;
 import org.adamkattan.model.sdg.ServiceDependencyGraphFullDto;
 import org.adamkattan.model.sdg.compare.ChangedLinksOutput;
 import org.adamkattan.model.sdg.compare.ChangedServiceDependecyGraph;
+import org.adamkattan.model.sdg.compare.CompareSDGsRequest;
 import org.adamkattan.service.SdgLinksDifferenceService;
 import org.adamkattan.service.SdgService;
 
@@ -32,7 +33,7 @@ public class SdgController {
     @Transactional
     public Response getSdg(@PathParam("id") Long id) {
         ServiceDependencyGraphEntity sdgEntity = sdgService.getSdgById(id);
-        return Response.ok(sdgEntity.sdg)
+        return Response.ok(ServiceDependencyGraphEntity.toFullDto(sdgEntity))
                 .build();
     }
 
@@ -74,6 +75,16 @@ public class SdgController {
         ServiceDependencyGraphFullDto createdSdg = sdgService.addSdgToProject(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(createdSdg)
+                .build();
+    }
+
+    @POST
+    @Path("/compare")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response compareSdgs(@Valid CompareSDGsRequest req) {
+        ChangedLinksOutput output = sdgLinksDifferenceService.saveChangedGraphLinks(req.sourceId(), req.targetId());
+        return Response.ok(output)
                 .build();
     }
 

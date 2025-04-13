@@ -48,7 +48,7 @@ async function getChangedCallGraphById(id: string): Promise<ChangedCallGraph> {
     return resp.data;
 }
 
-async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload) {
+async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload): Promise<CallGraphOutputSimple> {
     const resp = await axiosInstance.post(`${CALL_GRAPH_OUTPUTS_PREFIX}/change-impact-analysis`, ids);
     return resp.data;
 }

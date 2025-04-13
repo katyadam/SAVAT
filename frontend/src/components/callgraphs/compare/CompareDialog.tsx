@@ -6,6 +6,8 @@ import { ArrowRightLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCallGraphChangeImpactAnalysis } from "@/hooks/useCallGraphOutput";
 import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useNavigate } from "react-router-dom";
 
 type CompareDialogType = {
   projectId: string;
@@ -22,16 +24,28 @@ const CompareDialog: FC<CompareDialogType> = ({ projectId }) => {
 
   const { toast } = useToast();
 
+  const navigate = useNavigate();
+  const routeToNewCIA = (newCIAId: number) => {
+    navigate(`/call-graph-output/${newCIAId}/call-graph`);
+  };
   const handleCiaDispatch = async () => {
     try {
       if (leftSelected && rightSelected) {
-        await mutateAsync({
+        const createdCIA = await mutateAsync({
           projectId: projectId,
           sourceCallGraphInputId: leftSelected.id,
           targetCallGraphInputId: rightSelected.id,
         });
         toast({
           title: "Successfully created new Analysis",
+          action: (
+            <ToastAction
+              altText="Try again"
+              onClick={() => routeToNewCIA(createdCIA.id)}
+            >
+              Show
+            </ToastAction>
+          ),
         });
       } else {
         toast({

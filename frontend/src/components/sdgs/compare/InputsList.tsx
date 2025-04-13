@@ -1,13 +1,13 @@
-import { ContextMapDto } from "@/api/context-maps/types";
-import { useProjectContextMaps } from "@/hooks/useProject";
+import { useProjectSDGs } from "@/hooks/useProject";
 import { FC } from "react";
 import InputInfoBlock from "./InputInfoBlock";
+import { SDGDto } from "@/api/sdgs/types";
 
 type InputsListType = {
   projectId: string;
-  inputToOmit: ContextMapDto | null;
-  selectedInput: ContextMapDto | null;
-  setSelectedInput: (inputId: ContextMapDto | null) => void;
+  inputToOmit: SDGDto | null;
+  selectedInput: SDGDto | null;
+  setSelectedInput: (inputId: SDGDto | null) => void;
 };
 
 const InputsList: FC<InputsListType> = ({
@@ -16,16 +16,16 @@ const InputsList: FC<InputsListType> = ({
   selectedInput,
   setSelectedInput,
 }) => {
-  const { data: contextMaps, isLoading } = useProjectContextMaps(projectId);
+  const { data: sdgs, isLoading } = useProjectSDGs(projectId);
 
-  if (!contextMaps || isLoading) {
-    return <p>Wait for context maps to load...</p>;
+  if (!sdgs || isLoading) {
+    return <p>Wait for Service Dependency Graphs to load...</p>;
   }
 
   return (
     <div className="max-h-[500px] min-w-[150px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-      {contextMaps &&
-        contextMaps
+      {sdgs &&
+        sdgs
           .filter((input) => inputToOmit?.id !== input.id)
           .map((input, i) => (
             <div

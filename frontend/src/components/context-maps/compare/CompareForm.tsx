@@ -3,7 +3,7 @@ import { Label } from "../../ui/label";
 import { Textarea } from "../../ui/textarea";
 import { Button } from "../../ui/button";
 import { ChangedLinksResponse, Link } from "@/api/context-maps/types";
-import { useContextMapCompare } from "@/hooks/useContextMap";
+import { useContextMapCompareManually } from "@/hooks/useContextMap";
 
 type CompareFormType = {
   contextMapId: string;
@@ -11,7 +11,7 @@ type CompareFormType = {
 };
 
 const CompareForm: FC<CompareFormType> = ({ contextMapId, respFunc }) => {
-  const { mutateAsync } = useContextMapCompare(contextMapId);
+  const { mutateAsync } = useContextMapCompareManually(contextMapId);
   const [jsonInput, setJsonInput] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,7 +60,7 @@ const CompareForm: FC<CompareFormType> = ({ contextMapId, respFunc }) => {
           onChange={handleInputChange}
         />
       </div>
-      <Button onClick={handleCompare} variant="outline">
+      <Button onClick={handleCompare} variant="default">
         Compare Context Maps Links
       </Button>
     </div>

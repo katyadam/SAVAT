@@ -15,6 +15,7 @@ import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
 import { get_element_gh_url } from "@/api/github/connect";
 import { useProject } from "@/hooks/useProject";
 import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type ContextNodeMenuType = {
   selectedMethod: string | null;
@@ -212,7 +213,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
       </CardContent>
     </Card>
   ) : (
-    <p>Loading...</p>
+    <Skeleton className="w-[300px] h-[200px]" />
   );
 };
 

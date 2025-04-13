@@ -6,7 +6,7 @@ import Navbar from "@/components/context-maps/Navbar";
 import RenderGraph from "@/components/context-maps/RenderGraph";
 import { RenderType } from "@/components/context-maps/types";
 import Loading from "@/components/loading/Loading";
-import { LinkDifferencesHint } from "@/components/ui/hints";
+import { ContextMapOutputHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
 import { useContextMapOutput } from "@/hooks/useContextMapOutput";
@@ -88,7 +88,7 @@ const ContextMapOutputPage = () => {
         isolatedNodesBtnClick={() => setShowIsolatedNodes(!showIsolatedNodes)}
         contextMapId={id}
         msColors={msColors}
-        hintComponent={<LinkDifferencesHint />}
+        hintComponent={<ContextMapOutputHint />}
         showIsolatedNodes={true}
       />
       <Separator className="mt-2" />

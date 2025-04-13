@@ -1,11 +1,11 @@
 import { axiosInstance } from "../config";
-import { ChangedDto, ChangedLinksResponse, ChangeImpactAnalysisPayload, CIAContextMap, ContextMap, ContextMapOutputSimple, CreateContextMapRequest, Link, Summary } from "./types";
+import { ChangedDto, ChangedLinksResponse, ChangeImpactAnalysisPayload, CIAContextMap, ContextMapFullDto, ContextMapOutputSimple, CreateContextMapRequest, Link, Summary } from "./types";
 
 export const CONTEXT_MAPS_PREFIX = "/context-maps"
 export const CONTEXT_MAPS_OUTPUTS_PREFIX = "/context-maps-outputs"
 
 
-async function getContextMap(id: string): Promise<ContextMap> {
+async function getContextMap(id: string): Promise<ContextMapFullDto> {
     const resp = await axiosInstance.get(`${CONTEXT_MAPS_PREFIX}/${id}`)
     return resp.data;
 }
@@ -40,7 +40,7 @@ async function createContextMap(req: CreateContextMapRequest) {
     return resp.data;
 }
 
-async function compareContextMapsLinks(
+async function compareContextMapsLinksManually(
     id: string,
     links: Link[]
 ): Promise<ChangedLinksResponse> {
@@ -50,7 +50,15 @@ async function compareContextMapsLinks(
     return resp.data;
 }
 
-async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload) {
+async function compareContextMapsLinks(srcId: string, targetId: string): Promise<ChangedLinksResponse> {
+    const resp = await axiosInstance.post(`${CONTEXT_MAPS_PREFIX}/compare`, {
+        sourceId: srcId,
+        targetId: targetId
+    })
+    return resp.data;
+}
+
+async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload): Promise<ContextMapOutputSimple> {
     const resp = await axiosInstance.post(`${CONTEXT_MAPS_OUTPUTS_PREFIX}/change-impact-analysis`, ids);
     return resp.data;
 }
@@ -73,10 +81,11 @@ const ContextMapApi = {
     getProjectContextMapOutputs,
     getContextMapOutputById,
     createContextMap,
-    compareContextMapsLinks,
+    compareContextMapsLinksManually,
     changeImpactAnalysis,
     deleteContextMap,
-    deleteContextMapOutputById
+    deleteContextMapOutputById,
+    compareContextMapsLinks
 };
 
 export default ContextMapApi;

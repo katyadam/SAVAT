@@ -17,7 +17,7 @@ public class ContextMapChangeImpactService {
     @Inject
     ProjectService projectService;
 
-    public CIAContextMap saveChangedContextMap(Long projectId, Long sourceContextMapId, Long targetContextMapId) {
+    public ContextMapOutput saveChangedContextMap(Long projectId, Long sourceContextMapId, Long targetContextMapId) {
         Project projectById = projectService.getProjectById(projectId);
         ContextMapEntity sourceContextMapEntity = contextMapService.getContextMapById(sourceContextMapId);
         ContextMapEntity targetContextMapEntity = contextMapService.getContextMapById(targetContextMapId);
@@ -30,6 +30,6 @@ public class ContextMapChangeImpactService {
         contextMapOutput.project = projectById;
         contextMapOutput.persist();
 
-        return CIAContextMap;
+        return contextMapOutput;
     }
 }

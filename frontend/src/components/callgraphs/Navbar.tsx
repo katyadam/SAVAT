@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Switch } from "../ui/switch";
-import { CircleHelp, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import LegendTable from "./LegendTable";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { CallGraphMethod } from "@/api/callgraphs/types";
@@ -50,6 +50,7 @@ const Navbar: FC<NavbarType> = ({
           <LegendTable
             msColorsLegend={msColorsLegend}
             setMsToHighlight={setMsToHighlight}
+            hintComponent={hintComponent}
           />
         </PopoverContent>
       </Popover>
@@ -89,16 +90,6 @@ const Navbar: FC<NavbarType> = ({
           />
         </div>
       )}
-      <Popover modal={false}>
-        <PopoverTrigger className="relative flex flex-col items-center mx-5 cursor-pointer">
-          <label className="text-gray-500 mb-1">Hint</label>
-          <div className="relative">
-            <CircleHelp />
-          </div>
-        </PopoverTrigger>
-
-        <PopoverContent className="w-full">{hintComponent}</PopoverContent>
-      </Popover>
     </div>
   );
 };

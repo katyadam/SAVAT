@@ -44,26 +44,6 @@
     },
     {
       "msName": "ts-common",
-      "nodeName": "NewContact",
-      "nodeFullName": "NewContact",
-      "fields": [
-        {
-          "fieldName": "name",
-          "fieldFullName": "name",
-          "fieldType": "String",
-          "fieldAnnotations": [
-            {
-              "annotation": "@Entity"
-            }
-          ],
-          "fieldIsReference": false,
-          "fieldEntityRefName": "null",
-          "isCollection": false
-        }
-      ]
-    },
-    {
-      "msName": "ts-common",
       "nodeName": "DocumentType",
       "nodeFullName": "DocumentType",
       "fields": []
@@ -72,6 +52,22 @@
       "msName": "ts-common",
       "nodeName": "Food",
       "nodeFullName": "Food",
+      "fields": [
+        {
+          "fieldName": "typeOfFood",
+          "fieldFullName": "typeOfFood",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": false,
+          "fieldEntityRefName": "null",
+          "isCollection": false
+        }
+      ]
+    },
+    {
+      "msName": "ts-common",
+      "nodeName": "FoodOrder",
+      "nodeFullName": "FoodOrder",
       "fields": []
     },
     {
@@ -733,22 +729,6 @@
     },
     {
       "msName": "ts-cancel-service",
-      "nodeName": "GetOrderByIdInfo",
-      "nodeFullName": "GetOrderByIdInfo",
-      "fields": [
-        {
-          "fieldName": "orderId",
-          "fieldFullName": "orderId",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        }
-      ]
-    },
-    {
-      "msName": "ts-cancel-service",
       "nodeName": "GetAccountByIdResult",
       "nodeFullName": "GetAccountByIdResult",
       "fields": [
@@ -777,6 +757,22 @@
           "fieldAnnotations": [],
           "fieldIsReference": true,
           "fieldEntityRefName": "Account",
+          "isCollection": false
+        }
+      ]
+    },
+    {
+      "msName": "ts-cancel-service",
+      "nodeName": "GetOrderByIdInfo",
+      "nodeFullName": "GetOrderByIdInfo",
+      "fields": [
+        {
+          "fieldName": "orderId",
+          "fieldFullName": "orderId",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
           "isCollection": false
         }
       ]
@@ -2006,15 +2002,6 @@
       "nodeFullName": "NotifyInfo",
       "fields": [
         {
-          "fieldName": "price",
-          "fieldFullName": "price",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
           "fieldName": "orderNumber",
           "fieldFullName": "orderNumber",
           "fieldType": "String",
@@ -2042,8 +2029,17 @@
           "isCollection": false
         },
         {
-          "fieldName": "date",
-          "fieldFullName": "date",
+          "fieldName": "sendStatus",
+          "fieldFullName": "sendStatus",
+          "fieldType": "Boolean",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "Boolean",
+          "isCollection": false
+        },
+        {
+          "fieldName": "startPlace",
+          "fieldFullName": "startPlace",
           "fieldType": "String",
           "fieldAnnotations": [],
           "fieldIsReference": true,
@@ -2051,12 +2047,30 @@
           "isCollection": false
         },
         {
-          "fieldName": "sendStatus",
-          "fieldFullName": "sendStatus",
-          "fieldType": "Boolean",
+          "fieldName": "endPlace",
+          "fieldFullName": "endPlace",
+          "fieldType": "String",
           "fieldAnnotations": [],
           "fieldIsReference": true,
-          "fieldEntityRefName": "Boolean",
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "price",
+          "fieldFullName": "price",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "date",
+          "fieldFullName": "date",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
           "isCollection": false
         },
         {
@@ -2087,24 +2101,6 @@
         {
           "fieldName": "seatClass",
           "fieldFullName": "seatClass",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "startPlace",
-          "fieldFullName": "startPlace",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "endPlace",
-          "fieldFullName": "endPlace",
           "fieldType": "String",
           "fieldAnnotations": [],
           "fieldIsReference": true,
@@ -3114,6 +3110,58 @@
     },
     {
       "msName": "ts-route-service",
+      "nodeName": "RouteInfo",
+      "nodeFullName": "RouteInfo",
+      "fields": [
+        {
+          "fieldName": "distanceList",
+          "fieldFullName": "distanceList",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "startStation",
+          "fieldFullName": "startStation",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "endStation",
+          "fieldFullName": "endStation",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "stationList",
+          "fieldFullName": "stationList",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        },
+        {
+          "fieldName": "Id",
+          "fieldFullName": "Id",
+          "fieldType": "String",
+          "fieldAnnotations": [],
+          "fieldIsReference": true,
+          "fieldEntityRefName": "String",
+          "isCollection": false
+        }
+      ]
+    },
+    {
+      "msName": "ts-route-service",
       "nodeName": "Route",
       "nodeFullName": "Route",
       "fields": [
@@ -3182,58 +3230,6 @@
           "fieldIsReference": true,
           "fieldEntityRefName": "List<String>",
           "isCollection": true
-        }
-      ]
-    },
-    {
-      "msName": "ts-route-service",
-      "nodeName": "RouteInfo",
-      "nodeFullName": "RouteInfo",
-      "fields": [
-        {
-          "fieldName": "distanceList",
-          "fieldFullName": "distanceList",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "startStation",
-          "fieldFullName": "startStation",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "endStation",
-          "fieldFullName": "endStation",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "stationList",
-          "fieldFullName": "stationList",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
-        },
-        {
-          "fieldName": "Id",
-          "fieldFullName": "Id",
-          "fieldType": "String",
-          "fieldAnnotations": [],
-          "fieldIsReference": true,
-          "fieldEntityRefName": "String",
-          "isCollection": false
         }
       ]
     },
@@ -4039,9 +4035,6 @@
           "fieldAnnotations": [
             {
               "annotation": "@Embedded"
-            },
-            {
-              "annotation": "@Transaction"
             }
           ],
           "fieldIsReference": true,

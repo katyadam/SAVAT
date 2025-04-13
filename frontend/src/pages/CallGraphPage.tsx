@@ -71,13 +71,7 @@ const CallGraphPage = () => {
 
   const renderContent = () => {
     if (error || !id) return <p>Error: Unable to fetch call graph inputs.</p>;
-    if (
-      callGraph &&
-      msColors &&
-      callGraphMethodsMap &&
-      callGraphCallsMap &&
-      !isLoading
-    ) {
+    if (callGraph && msColors && callGraphMethodsMap && callGraphCallsMap) {
       return (
         <Graph
           callGraph={callGraph.callGraph}
@@ -98,7 +92,9 @@ const CallGraphPage = () => {
         />
       );
     }
-    return <Loading />;
+    let loadingMessage: string = "Generating Graph Layout...";
+    if (isLoading) loadingMessage = "Fetching Call Graph...";
+    return <Loading message={loadingMessage} overlay={true} />;
   };
 
   return (

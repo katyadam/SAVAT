@@ -40,4 +40,20 @@ public class ContextMapLinksDifferenceService {
         return linksDifference;
     }
 
+    public ChangedLinksOutput saveChangedLinks(
+            Long srcId,
+            Long targetId
+    ) {
+        ContextMapEntity sourceContextMapEntity = contextMapService.getContextMapById(srcId);
+        ContextMapEntity targetContextMapEntity = contextMapService.getContextMapById(targetId);
+        ChangedLinksOutput linksDifference = ContextMapLinksDifferenceAnalysis.getLinksDifference(
+                sourceContextMapEntity.contextMap.links(),
+                targetContextMapEntity.contextMap.links()
+        );
+        var changedContextMap = new ChangedContextMap();
+        changedContextMap.changedLinks = linksDifference.changedLinks();
+        changedContextMap.contextMap = sourceContextMapEntity;
+        changedContextMap.persist();
+        return linksDifference;
+    }
 }

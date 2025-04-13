@@ -13,7 +13,7 @@ import { Separator } from "../ui/separator";
 import dayjs from "dayjs";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import LegendTable from "../callgraphs/LegendTable";
-import { CircleHelp, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { useContextMapChanges } from "@/hooks/useContextMap";
 
 type NavbarType = {
@@ -99,22 +99,15 @@ const Navbar: FC<NavbarType> = ({
                     </PopoverTrigger>
 
                     <PopoverContent className="w-full">
-                      <LegendTable msColorsLegend={msColors} />
+                      <LegendTable
+                        msColorsLegend={msColors}
+                        hintComponent={hintComponent}
+                      />
                     </PopoverContent>
                   </Popover>
                 )}
             </>
           )}
-          <Popover modal={false}>
-            <PopoverTrigger className="relative flex flex-col items-center mx-5 cursor-pointer">
-              <label className="text-gray-500 mb-1">Hint</label>
-              <div className="relative">
-                <CircleHelp />
-              </div>
-            </PopoverTrigger>
-
-            <PopoverContent className="w-full">{hintComponent}</PopoverContent>
-          </Popover>
         </>
       ) : (
         <>
@@ -153,7 +146,10 @@ const Navbar: FC<NavbarType> = ({
               </PopoverTrigger>
 
               <PopoverContent className="w-full">
-                <LegendTable msColorsLegend={msColors} />
+                <LegendTable
+                  msColorsLegend={msColors}
+                  hintComponent={hintComponent}
+                />
               </PopoverContent>
             </Popover>
           )}

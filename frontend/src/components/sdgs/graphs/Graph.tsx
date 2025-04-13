@@ -37,7 +37,7 @@ const Graph: FC<GraphType> = ({
       nodes: graph.nodes.map((node: Node) => ({
         data: {
           id: node.nodeName,
-          label: (node.nodeType ? node.nodeType + "::" : "") + node.nodeName,
+          label: node.nodeName,
         },
         group: "nodes",
       })),

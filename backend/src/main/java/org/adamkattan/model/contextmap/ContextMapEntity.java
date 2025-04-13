@@ -38,11 +38,11 @@ public class ContextMapEntity extends PanacheEntity {
 
     public static ContextMapFullDto toFullDto(ContextMapEntity input) {
         return new ContextMapFullDto(
+                input.id,
                 input.project.id,
                 input.version,
                 input.commitHash,
-                input.contextMap,
-                input.changedContextMaps
+                input.contextMap
         );
     }
 

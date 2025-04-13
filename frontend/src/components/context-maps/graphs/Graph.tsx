@@ -88,22 +88,9 @@ const Graph: FC<GraphType> = ({
       })),
     };
 
-    const cyInstance = getCyInstance(cyRef, elements, msColors);
+    const cyInstance = getCyInstance(cyRef, elements, msColors, "defaultGraph");
 
     cyInstance.on("tap", "node", (event) => {
-      const node = event.target;
-
-      const currentZoom = cyInstance.zoom();
-      const zoomIncrement = 0.2;
-      const newZoom = currentZoom + zoomIncrement;
-
-      cyInstance.zoom({
-        level: newZoom,
-        renderedPosition: node.renderedPosition(),
-      });
-    });
-
-    cyInstance.on("cxttap", "node", (event) => {
       const nodeData = event.target.data();
       const res = graphData.nodes.find(
         (node) => getNodeSignature(node) == nodeData.id

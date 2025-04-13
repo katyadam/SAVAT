@@ -1,18 +1,30 @@
 import { FC, useEffect, useRef } from "react";
-import Cytoscape, { ElementsDefinition } from "cytoscape";
+import { ElementsDefinition } from "cytoscape";
 
 import cytoscape from "cytoscape";
-import fcose, { FcoseLayoutOptions } from "cytoscape-fcose";
-import { ContextMap, Link, Node } from "@/api/context-maps/types";
+import fcose from "cytoscape-fcose";
+import {
+  ChangedLink,
+  ContextMap,
+  Link,
+  Node,
+  TypeOfChange,
+} from "@/api/context-maps/types";
+import { getCyInstance } from "./CytoscapeInstance";
+import { getNodeSignature } from "@/api/context-maps/utils";
 
 type EntityDetailsDiagramType = {
   graphData: ContextMap;
   showIsolatedNodes: boolean;
+  msColors: Map<string, string>;
+  onNodeClick: (node: Node) => void;
 };
 
 const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
   graphData,
   showIsolatedNodes,
+  msColors,
+  onNodeClick,
 }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   cytoscape.use(fcose);
@@ -52,79 +64,54 @@ const EntityDetailsDiagram: FC<EntityDetailsDiagramType> = ({
         nodes: (showIsolatedNodes ? graphData.nodes : visibleNodes).map(
           (node: Node) => ({
             data: {
-              id: node.nodeName,
+              id: getNodeSignature(node),
               label: formatNodeLabel(node),
+              microservice: node.msName,
+              typeOfChange:
+                "typeOfChange" in node
+                  ? (node.typeOfChange as TypeOfChange)
+                  : TypeOfChange.NONE,
             },
             group: "nodes",
           })
         ),
-        edges: graphData.links.map((link: Link) => ({
+        edges: graphData.links.map((link: Link | ChangedLink) => ({
           data: {
-            source: link.source,
-            target: link.target,
+            source: getNodeSignature({
+              msName: link.msSource,
+              nodeName: link.source,
+            }),
+            target: getNodeSignature({
+              msName: link.msTarget,
+              nodeName: link.target,
+            }),
+            typeOfChange: "type" in link ? link.type.toString() : "SAME",
           },
           group: "edges",
         })),
       };
-      const layoutOptions: FcoseLayoutOptions = {
-        name: "fcose",
-        animate: true,
-        fit: true,
-        animationDuration: 0,
-      };
-      const cy = Cytoscape({
-        container: cyRef.current,
+
+      const cyInstance = getCyInstance(
+        cyRef,
         elements,
-        style: [
-          {
-            selector: "node",
-            style: {
-              "background-color": "white",
-              "border-color": "black",
-              "border-width": "5",
-              shape: "roundrectangle",
-              label: "data(label)",
-              width: "label",
-              height: "label",
-              "text-wrap": "wrap",
-              "padding-left": "10",
-              "text-justification": "left",
-              "text-halign": "center",
-              "text-valign": "center",
-              "font-size": 12,
-              "font-family": "Arial, sans-serif",
-            },
-          },
-          {
-            selector: "edge",
-            style: {
-              width: 5,
-              "line-color": "#808080",
-              "curve-style": "bezier",
-              "target-arrow-color": "#808080",
-              "target-arrow-shape": "triangle",
-              "text-rotation": "autorotate",
-            },
-          },
-        ],
-        layout: layoutOptions,
-      });
+        msColors,
+        "detailsGraph"
+      );
 
-      cy.on("tap", "node", (event) => {
-        const node = event.target;
-
-        const currentZoom = cy.zoom();
-        const zoomIncrement = 0.2;
-        const newZoom = currentZoom + zoomIncrement;
-
-        cy.zoom({
-          level: newZoom,
-          renderedPosition: node.renderedPosition(),
-        });
+      cyInstance.on("tap", "node", (event) => {
+        const nodeData = event.target.data();
+        const res = graphData.nodes.find(
+          (node) => getNodeSignature(node) == nodeData.id
+        );
+        if (!res) {
+          alert("This node doesn't exist!");
+        } else {
+          onNodeClick(res);
+        }
       });
 
       return () => {
-        cy.destroy();
+        cyInstance.destroy();
       };
     }
   }, [graphData, showIsolatedNodes]);

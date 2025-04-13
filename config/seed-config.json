@@ -34,6 +34,21 @@
           "commitHash": "zfv4sv",
           "version": "1.0.3-modified",
           "file": "../examples/context-maps/ts-modified-example.json"
+        },
+        {
+          "commitHash": "zfv4sv",
+          "version": "1.0.4",
+          "file": "../examples/context-maps/ts-1.0.4.json"
+        },
+        {
+          "commitHash": "8asd1a",
+          "version": "example",
+          "file": "../examples/context-maps/example.json"
+        },
+        {
+          "commitHash": "zbba1a",
+          "version": "example-diff",
+          "file": "../examples/context-maps/full-example-diff.json"
         }
       ],
       "service-dependency-graph-sources": [
@@ -61,6 +76,16 @@
           "commitHash": "56dasa",
           "version": "1.0.3",
           "file": "../examples/service-dependency-graphs/ts-1.0.3.json"
+        },
+        {
+          "commitHash": "8asd1a",
+          "version": "example",
+          "file": "../examples/service-dependency-graphs/example.json"
+        },
+        {
+          "commitHash": "zbba1a",
+          "version": "example-diff",
+          "file": "../examples/service-dependency-graphs/full-example-diff.json"
         }
       ],
       "callgraph-sources": [
@@ -135,6 +160,24 @@
           "version": "3.0.0-new-heuristics",
           "branch": "1.0.0",
           "file": "../examples/callgraphs/ts-3.0.0-new-heuristics.json"
+        },
+        {
+          "commitHash": "8e2v5g",
+          "version": "3.0.0-correct-heuristics",
+          "branch": "master",
+          "file": "../examples/callgraphs/ts-3.0.0-correct-heuristics.json"
+        },
+        {
+          "commitHash": "gaa21s",
+          "version": "3.0.2-correct-heuristics",
+          "branch": "1.0.2",
+          "file": "../examples/callgraphs/ts-3.0.2-correct-heuristics.json"
+        },
+        {
+          "commitHash": "96oq34",
+          "version": "3.0.3-correct-heuristics",
+          "branch": "1.0.3",
+          "file": "../examples/callgraphs/ts-3.0.3-correct-heuristics.json"
         }
       ]
     }

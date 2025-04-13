@@ -9,8 +9,8 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.adamkattan.model.contextmap.output.CIAContextMap;
 import org.adamkattan.model.contextmap.output.ContextMapOutput;
+import org.adamkattan.model.contextmap.output.ContextMapOutputDto;
 import org.adamkattan.model.contextmap.output.ContextMapOutputRequest;
 import org.adamkattan.service.ContextMapChangeImpactService;
 import org.adamkattan.service.ContextMapOutputService;
@@ -53,14 +53,15 @@ public class ContextMapOutputController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Blocking
     @Transactional
-    public Uni<CIAContextMap> changeImpactAnalysis(
+    public Uni<ContextMapOutputDto> changeImpactAnalysis(
             @Valid ContextMapOutputRequest request
     ) {
         return Uni.createFrom().item(
-                        () -> contextMapChangeImpactService.saveChangedContextMap(
+                        () -> ContextMapOutput.toDto(contextMapChangeImpactService.saveChangedContextMap(
                                 request.projectId(),
                                 request.sourceContextMapId(),
                                 request.targetContextMapId())
+                        )
                 )
                 .runSubscriptionOn(Infrastructure.getDefaultExecutor());
     }
