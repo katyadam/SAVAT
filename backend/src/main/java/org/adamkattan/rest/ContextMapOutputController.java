@@ -44,7 +44,9 @@ public class ContextMapOutputController {
     public Response getChangedContextMap(@PathParam("id") Long id) {
         ContextMapOutput output = contextMapOutputService.getContextMapOutputById(id);
 
-        return Response.ok(output.changedContextMap).build();
+        return Response.ok(
+                ContextMapOutput.toFullDto(output)
+        ).build();
     }
 
     @POST

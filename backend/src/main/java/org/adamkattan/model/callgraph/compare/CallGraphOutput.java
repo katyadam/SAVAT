@@ -39,6 +39,17 @@ public class CallGraphOutput extends PanacheEntity {
         );
     }
 
+    public static CallGraphOutputFullDto toFullDto(CallGraphOutput output) {
+        return new CallGraphOutputFullDto(
+                output.id,
+                output.project.id,
+                output.sourceCallGraphInput,
+                output.targetCallGraphInput,
+                output.createdAt,
+                output.changedCallGraph
+        );
+    }
+
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 

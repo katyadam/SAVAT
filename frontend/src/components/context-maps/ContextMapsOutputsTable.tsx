@@ -19,7 +19,7 @@ import { useMemo, useState } from "react";
 import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ConfirmWindow from "../ui/ConfirmWindow";
-import { ContextMapOutputSimple } from "@/api/context-maps/types";
+import { ContextMapOutputDto } from "@/api/context-maps/types";
 import { Button } from "../ui/button";
 import { useContextMapOutputDelete } from "@/hooks/useContextMapOutput";
 
@@ -66,8 +66,8 @@ export function ContextMapsOutputsTable<TData, TValue>({
   const [sortByDate, setSortByDate] = useState<boolean>(false);
   const sortedData = useMemo<TData[]>(() => {
     return [...data].sort((a, b) => {
-      const dateA = new Date((a as ContextMapOutputSimple).createdAt).getTime();
-      const dateB = new Date((b as ContextMapOutputSimple).createdAt).getTime();
+      const dateA = new Date((a as ContextMapOutputDto).createdAt).getTime();
+      const dateB = new Date((b as ContextMapOutputDto).createdAt).getTime();
       return sortByDate ? dateA - dateB : dateB - dateA;
     });
   }, [data, sortByDate]);
@@ -129,7 +129,7 @@ export function ContextMapsOutputsTable<TData, TValue>({
                 <TableCell>
                   <a
                     href={`/context-map-output/${
-                      (row.original as ContextMapOutputSimple).id
+                      (row.original as ContextMapOutputDto).id
                     }/context-map`}
                   >
                     <Button variant="outline">
@@ -141,7 +141,7 @@ export function ContextMapsOutputsTable<TData, TValue>({
                   <Button
                     onClick={() =>
                       setContextMapOutputToDelete(
-                        (row.original as ContextMapOutputSimple).id
+                        (row.original as ContextMapOutputDto).id
                       )
                     }
                     variant="outline"

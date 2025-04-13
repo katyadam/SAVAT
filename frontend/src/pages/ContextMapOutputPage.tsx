@@ -22,7 +22,7 @@ const ContextMapOutputPage = () => {
   }, []);
   const { id } = useParams();
   const {
-    data: changedContextMap,
+    data: contextMapOutput,
     isLoading,
     error,
   } = useContextMapOutput(id || "");
@@ -60,18 +60,23 @@ const ContextMapOutputPage = () => {
   };
 
   useEffect(() => {
-    if (changedContextMap) {
-      setMsColors(getMicroservicesColors(changedContextMap.nodes));
+    if (contextMapOutput && contextMapOutput.ciaContextMap) {
+      setMsColors(getMicroservicesColors(contextMapOutput.ciaContextMap.nodes));
     }
-  }, [changedContextMap]);
+  }, [contextMapOutput?.ciaContextMap]);
 
   const renderContent = () => {
     if (error || !id) return <p>Error: Unable to fetch context map outputs.</p>;
-    if (changedContextMap && msColors && !isLoading) {
+    if (
+      contextMapOutput &&
+      contextMapOutput.ciaContextMap &&
+      msColors &&
+      !isLoading
+    ) {
       return (
         <RenderGraph
           onNodeClick={handleNodeClick}
-          contextMap={changedContextMap}
+          contextMap={contextMapOutput.ciaContextMap}
           renderType={selectedRenderType}
           showIsolatedNodes={showIsolatedNodes}
           msColors={msColors}

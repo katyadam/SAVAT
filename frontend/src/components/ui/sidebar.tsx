@@ -16,7 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { getWindowNaming } from "./utils";
+import { useWindowName } from "@/hooks/useWindowName";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -264,6 +264,7 @@ const SidebarTrigger = React.forwardRef<
 >(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar();
 
+  const windowName = useWindowName();
   return (
     <div className="flex flex-row gap-8 items-center p-2">
       <Button
@@ -281,7 +282,7 @@ const SidebarTrigger = React.forwardRef<
         <PanelLeft />
         <span className="sr-only">Toggle Sidebar</span>
       </Button>
-      <h1 className="m-0 text-xl font-bold">{getWindowNaming()}</h1>
+      <h1 className="m-0 text-xl font-bold">{windowName}</h1>
     </div>
   );
 });

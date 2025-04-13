@@ -26,7 +26,7 @@ const CallGraphOutputPage = () => {
   }, []);
   const { id } = useParams();
   const {
-    data: changedCallGraph,
+    data: callGraphOutput,
     isLoading,
     error,
   } = useCallGraphOutput(id || "");
@@ -48,12 +48,18 @@ const CallGraphOutputPage = () => {
   const [msToHighlight, setMsToHighlight] = useState<string | null>(null);
 
   useEffect(() => {
-    if (changedCallGraph) {
-      setMsColors(getMicroservicesColors(changedCallGraph.methods));
-      setCallGraphMethodsMap(indexCallGraphMethods(changedCallGraph.methods));
-      setCallGraphCallsMap(indexCallGraphCalls(changedCallGraph.calls));
+    if (callGraphOutput && callGraphOutput.changedCallGraph) {
+      setMsColors(
+        getMicroservicesColors(callGraphOutput.changedCallGraph.methods)
+      );
+      setCallGraphMethodsMap(
+        indexCallGraphMethods(callGraphOutput.changedCallGraph.methods)
+      );
+      setCallGraphCallsMap(
+        indexCallGraphCalls(callGraphOutput.changedCallGraph.calls)
+      );
     }
-  }, [changedCallGraph]);
+  }, [callGraphOutput]);
 
   const [actionsStorage, setActionsStorage] = useState<Action[]>([]);
   const [removedAction, setRemovedAction] = useState<Action | null>(null);
@@ -64,7 +70,8 @@ const CallGraphOutputPage = () => {
   const renderContent = () => {
     if (error || !id) return <p>Error: Unable to fetch call graph inputs.</p>;
     if (
-      changedCallGraph &&
+      callGraphOutput &&
+      callGraphOutput.changedCallGraph &&
       msColors &&
       callGraphMethodsMap &&
       callGraphCallsMap &&
@@ -72,7 +79,7 @@ const CallGraphOutputPage = () => {
     ) {
       return (
         <Graph
-          callGraph={changedCallGraph}
+          callGraph={callGraphOutput.changedCallGraph}
           methodsMap={callGraphMethodsMap}
           callsMap={callGraphCallsMap}
           showIsolatedNodes={true}
@@ -95,12 +102,12 @@ const CallGraphOutputPage = () => {
 
   return (
     <div className="w-screen h-screen">
-      {msColors && changedCallGraph && (
+      {msColors && callGraphOutput && callGraphOutput.changedCallGraph && (
         <Navbar
           isolatedNodesBtnClick={null}
           msColorsLegend={msColors}
           setMsToHighlight={setMsToHighlight}
-          methods={changedCallGraph.methods}
+          methods={callGraphOutput.changedCallGraph.methods}
           setActionsStorage={setActionsStorage}
           actionsStorage={actionsStorage}
           setRemovedAction={setRemovedAction}
@@ -113,7 +120,8 @@ const CallGraphOutputPage = () => {
       )}
       <Separator className="mt-2" />
       {renderContent()}
-      {changedCallGraph &&
+      {callGraphOutput &&
+        callGraphOutput.changedCallGraph &&
         msColors &&
         cgMethodReachState.methodSignature &&
         cgMethodReachState.reachValue &&
@@ -124,7 +132,10 @@ const CallGraphOutputPage = () => {
             }
             width={"5/6"}
           >
-            <ExplorePanel callGraph={changedCallGraph} msColors={msColors} />
+            <ExplorePanel
+              callGraph={callGraphOutput.changedCallGraph}
+              msColors={msColors}
+            />
           </Overlay>
         )}
     </div>
