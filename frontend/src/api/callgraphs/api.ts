@@ -1,5 +1,5 @@
 import { axiosInstance } from "../config";
-import { CallGraph, CallGraphInput, CallGraphInputSimple, CallGraphInputSummary, CallGraphOutputSimple, ChangedCallGraph, ChangeImpactAnalysisPayload, CreateCallGraphInput } from "./types";
+import { CallGraph, CallGraphInput, CallGraphInputSimple, CallGraphInputSummary, CallGraphOutputDto, CallGraphOutputFullDto, ChangeImpactAnalysisPayload, CreateCallGraphInput } from "./types";
 
 export const CALL_GRAPH_INPUTS_PREFIX = "/call-graph-inputs"
 export const CALL_GRAPH_OUTPUTS_PREFIX = "/call-graph-outputs"
@@ -38,17 +38,17 @@ async function deleteCallGraphInput(id: number) {
     return resp.data;
 }
 
-async function getAllProjectsCallGraphOuputs(projectId: string): Promise<CallGraphOutputSimple[]> {
+async function getAllProjectsCallGraphOuputs(projectId: string): Promise<CallGraphOutputDto[]> {
     const resp = await axiosInstance.get(`${CALL_GRAPH_OUTPUTS_PREFIX}/project/${projectId}`)
     return resp.data;
 }
 
-async function getChangedCallGraphById(id: string): Promise<ChangedCallGraph> {
+async function getChangedCallGraphById(id: string): Promise<CallGraphOutputFullDto> {
     const resp = await axiosInstance.get(`${CALL_GRAPH_OUTPUTS_PREFIX}/${id}`);
     return resp.data;
 }
 
-async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload): Promise<CallGraphOutputSimple> {
+async function changeImpactAnalysis(ids: ChangeImpactAnalysisPayload): Promise<CallGraphOutputDto> {
     const resp = await axiosInstance.post(`${CALL_GRAPH_OUTPUTS_PREFIX}/change-impact-analysis`, ids);
     return resp.data;
 }

@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { CallGraphOutputSimple } from "@/api/callgraphs/types";
+import { CallGraphOutputDto } from "@/api/callgraphs/types";
 import { Button } from "../ui/button";
 import { CalendarArrowDown, CalendarArrowUp, Eye, Trash2 } from "lucide-react";
 import { useCallGraphOutputDelete } from "@/hooks/useCallGraphOutput";
@@ -61,8 +61,8 @@ export function CallGraphOutputsTable<TData, TValue>({
   const [sortByDate, setSortByDate] = useState<boolean>(false);
   const sortedData = useMemo<TData[]>(() => {
     return [...data].sort((a, b) => {
-      const dateA = new Date((a as CallGraphOutputSimple).createdAt).getTime();
-      const dateB = new Date((b as CallGraphOutputSimple).createdAt).getTime();
+      const dateA = new Date((a as CallGraphOutputDto).createdAt).getTime();
+      const dateB = new Date((b as CallGraphOutputDto).createdAt).getTime();
       return sortByDate ? dateA - dateB : dateB - dateA;
     });
   }, [data, sortByDate]);
@@ -123,7 +123,7 @@ export function CallGraphOutputsTable<TData, TValue>({
                 <TableCell>
                   <a
                     href={`/call-graph-output/${
-                      (row.original as CallGraphOutputSimple).id
+                      (row.original as CallGraphOutputDto).id
                     }/call-graph`}
                   >
                     <Button variant="outline">
@@ -134,9 +134,7 @@ export function CallGraphOutputsTable<TData, TValue>({
                 <TableCell>
                   <Button
                     onClick={() =>
-                      setInputToDelete(
-                        (row.original as CallGraphOutputSimple).id
-                      )
+                      setInputToDelete((row.original as CallGraphOutputDto).id)
                     }
                     variant="outline"
                   >

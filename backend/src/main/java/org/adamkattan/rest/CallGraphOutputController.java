@@ -48,7 +48,9 @@ public class CallGraphOutputController {
     public Response getCallGraphOutputById(@PathParam("id") Long id) {
         CallGraphOutput output = callGraphOutputService.getCallGraphOutputById(id);
 
-        return Response.ok(output.changedCallGraph).build();
+        return Response.ok(
+                CallGraphOutput.toFullDto(output)
+        ).build();
     }
 
 

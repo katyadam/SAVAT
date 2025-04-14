@@ -39,6 +39,17 @@ public class ContextMapOutput extends PanacheEntity {
         );
     }
 
+    public static ContextMapOutputFullDto toFullDto(ContextMapOutput output) {
+        return new ContextMapOutputFullDto(
+                output.id,
+                output.project.id,
+                output.sourceContextMap,
+                output.targetContextMap,
+                output.createdAt,
+                output.changedContextMap
+        );
+    }
+
     @Column(nullable = false, name = "created_at")
     public LocalDateTime createdAt;
 

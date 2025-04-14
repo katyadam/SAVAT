@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  ContextMapDto,
-  ContextMapOutputSimple,
-} from "@/api/context-maps/types";
+import { ContextMapDto, ContextMapOutputDto } from "@/api/context-maps/types";
 import { formatCommonDateString } from "@/api/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -23,7 +20,7 @@ export const contextMapsColumns: ColumnDef<ContextMapDto>[] = [
   },
 ];
 
-export const contextMapsOutputsColumns: ColumnDef<ContextMapOutputSimple>[] = [
+export const contextMapsOutputsColumns: ColumnDef<ContextMapOutputDto>[] = [
   {
     accessorKey: "sourceInput",
     header: "Source Input",

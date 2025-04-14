@@ -1,8 +1,8 @@
-import { CallGraphOutputSimple } from "@/api/callgraphs/types";
+import { CallGraphOutputDto } from "@/api/callgraphs/types";
 import { formatCommonDateString } from "@/api/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const callGraphOutputsColumns: ColumnDef<CallGraphOutputSimple>[] = [
+export const callGraphOutputsColumns: ColumnDef<CallGraphOutputDto>[] = [
   {
     accessorKey: "sourceInput",
     header: "Source Input",
