@@ -21,7 +21,6 @@ export const useVariousSAR = <T extends keyof SARTypeMap>(
     return useQuery<SARTypeMap[T]>({
         queryKey: [type, id],
         queryFn: () => {
-            console.log(type, id)
             switch (type) {
                 case "cmInput":
                     return ContextMapApi.getContextMap(id) as Promise<SARTypeMap[T]>;
