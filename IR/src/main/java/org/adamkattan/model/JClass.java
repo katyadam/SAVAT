@@ -116,28 +116,28 @@ public class JClass extends ProjectFile {
         this.methodCalls = methodCalls;
     }
 
-    public Set<Endpoint> getEndpoints() {
-        if ((!getClassRole().equals(ClassRole.CONTROLLER) && !getClassRole().equals(ClassRole.REP_REST_RSC))
-                || getMethods().isEmpty()) {
-            return new HashSet<>();
-        }
-        return methods.stream()
-                .filter(method -> method instanceof Endpoint)
-                .map(method -> (Endpoint) method)
-                .collect(Collectors.toUnmodifiableSet());
-    }
-
-    public List<RestCall> getRestCalls() {
-        return methodCalls.stream()
-                .filter(methodCall -> methodCall instanceof RestCall)
-                .map(methodCall -> (RestCall) methodCall)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    public void updateMicroserviceName(String name) {
-        methodCalls.forEach(methodCall -> methodCall.setMicroserviceName(name));
-        methods.forEach(method -> method.setMicroserviceName(name));
-    }
+//    public Set<Endpoint> getEndpoints() {
+//        if ((!getClassRole().equals(ClassRole.CONTROLLER) && !getClassRole().equals(ClassRole.REP_REST_RSC))
+//                || getMethods().isEmpty()) {
+//            return new HashSet<>();
+//        }
+//        return methods.stream()
+//                .filter(method -> method instanceof Endpoint)
+//                .map(method -> (Endpoint) method)
+//                .collect(Collectors.toUnmodifiableSet());
+//    }
+//
+//    public List<RestCall> getRestCalls() {
+//        return methodCalls.stream()
+//                .filter(methodCall -> methodCall instanceof RestCall)
+//                .map(methodCall -> (RestCall) methodCall)
+//                .collect(Collectors.toUnmodifiableList());
+//    }
+//
+//    public void updateMicroserviceName(String name) {
+//        methodCalls.forEach(methodCall -> methodCall.setMicroserviceName(name));
+//        methods.forEach(method -> method.setMicroserviceName(name));
+//    }
 
     @Override
     public boolean equals(Object o) {
