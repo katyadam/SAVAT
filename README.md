@@ -1,6 +1,6 @@
-# Change Impact Analysis
+# SAVANT
 
-This project is part of a bachelor's thesis exploring the application of established change impact analysis techniques in microservice-based systems.
+This project is part of a bachelor's thesis exploring the application of established Change Impact Analysis techniques in microservice-based systems.
 
 ## Running the Application
 
