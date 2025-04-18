@@ -24,23 +24,23 @@ import ConfirmWindow from "../ui/ConfirmWindow";
 import { useSDGDelete, useSDGSummary } from "@/hooks/useSDG";
 import { Button } from "../ui/button";
 import { SDGDto } from "@/api/sdgs/types";
+import { useProjectSDGs } from "@/hooks/useProject";
+import Loading from "../loading/Loading";
 
-type DataTableProps<TData, TValue> = {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+type DataTableProps<SDGDto, TValue> = {
+  columns: ColumnDef<SDGDto, TValue>[];
   projectId: string;
 };
 
-export function SDGsTable<TData, TValue>({
+export function SDGsTable<TValue>({
   columns,
-  data,
   projectId,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<SDGDto, TValue>) {
   const { mutateAsync } = useSDGDelete(projectId);
   const { toast } = useToast();
   const [sdgToDelete, setSdgToDelete] = useState<number | null>(null);
+  const { data: sdgs } = useProjectSDGs(projectId);
   const { data: sdgSummary } = useSDGSummary(sdgToDelete);
-
   const handleOutputDelete = async (id: number) => {
     try {
       await mutateAsync(id);
@@ -68,9 +68,9 @@ export function SDGsTable<TData, TValue>({
   const [sortBy, setSortBy] = useState<"version" | "date">("date");
 
   const { dateSortedData, dateSortMethod, setDateSortMethod } =
-    useSortingByDate(data);
+    useSortingByDate(sdgs || []);
   const { versionSortedData, versionSortMethod, setVersionSortMethod } =
-    useSortingByVersion(data);
+    useSortingByVersion(sdgs || []);
 
   const microserviceFilter = (): boolean => false;
   const table = useReactTable({
@@ -79,7 +79,9 @@ export function SDGsTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     filterFns: { microserviceFilter },
   });
-
+  if (!sdgs) {
+    return <Loading />;
+  }
   return (
     <div className="rounded-md border">
       <Table>

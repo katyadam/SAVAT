@@ -1,7 +1,6 @@
 import {
   useDeleteProject,
   useProject,
-  useProjectSDGs,
   useProjectSummary,
 } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
@@ -37,10 +36,6 @@ const ProjectPage = () => {
   }, [activeTab]);
 
   const { data: project, isLoading: projectLoading } = useProject(
-    projectId || ""
-  );
-
-  const { data: sdgs, isLoading: sdgsLoading } = useProjectSDGs(
     projectId || ""
   );
 
@@ -149,11 +144,7 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="sdgs">
-          {sdgsLoading ? (
-            <Loading overlay={false} />
-          ) : (
-            <SDGsTable columns={columns} data={sdgs!} projectId={projectId} />
-          )}
+          <SDGsTable columns={columns} projectId={projectId} />
         </TabsContent>
 
         <TabsContent value="callgraphs">
