@@ -9,6 +9,7 @@ import MethodsPage from "@/pages/MethodsPage";
 import ProjectPage from "@/pages/ProjectPage";
 import ErrorBoundary from "./ErrorBoundary";
 import ContextMapOutputPage from "@/pages/ContextMapOutputPage";
+import IRPage from "@/pages/IRPage";
 
 const projectRoutes: RouteObject[] = [
   {
@@ -64,6 +65,14 @@ const projectRoutes: RouteObject[] = [
     Component: () => (
       <ErrorBoundary>
         <ContextMapOutputPage />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: "ir/:irFile",
+    Component: () => (
+      <ErrorBoundary>
+        <IRPage />
       </ErrorBoundary>
     ),
   },
