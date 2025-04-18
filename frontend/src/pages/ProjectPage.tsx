@@ -22,6 +22,7 @@ import { columns } from "@/components/sdgs/Columns";
 import ContextMapCreateDialog from "@/components/projects/ContextMapCreateDialog";
 import SDGCreateDialog from "@/components/projects/SDGCreateDialog";
 import ContextMapsTabs from "@/components/context-maps/ContextMapsTabs";
+import IRTabs from "@/components/irs/IRTabs";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -126,11 +127,20 @@ const ProjectPage = () => {
           <TabsTrigger
             value="callgraphs"
             className={
-              "py-2 px-4 rounded-r-md transition-all duration-200 focus:outline-none" +
+              "py-2 px-4 transition-all duration-200 focus:outline-none" +
               (activeTab === "callgraphs" ? " bg-gray-300" : "")
             }
           >
             Call Graphs
+          </TabsTrigger>
+          <TabsTrigger
+            value="irs"
+            className={
+              "py-2 px-4 rounded-r-md transition-all duration-200 focus:outline-none" +
+              (activeTab === "irs" ? " bg-gray-300" : "")
+            }
+          >
+            CIMET IRs
           </TabsTrigger>
         </TabsList>
 
@@ -148,6 +158,10 @@ const ProjectPage = () => {
 
         <TabsContent value="callgraphs">
           <CallGraphsTabs projectId={projectId} />
+        </TabsContent>
+
+        <TabsContent value="irs">
+          <IRTabs projectId={projectId} />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (
