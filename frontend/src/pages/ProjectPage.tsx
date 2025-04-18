@@ -152,7 +152,7 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="irs">
-          <IRTabs projectId={projectId} />
+          <IRTabs />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (
