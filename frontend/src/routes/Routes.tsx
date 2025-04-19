@@ -69,7 +69,7 @@ const projectRoutes: RouteObject[] = [
     ),
   },
   {
-    path: "ir/:irFile",
+    path: "ir-viewer",
     Component: () => (
       <ErrorBoundary>
         <IRPage />

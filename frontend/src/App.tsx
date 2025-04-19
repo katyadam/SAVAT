@@ -4,12 +4,15 @@ import router from "./routes";
 import { Toaster } from "./components/ui/toaster";
 import { CallGraphLookupProvider } from "./context/CallGraphMethodLookupContext";
 import { CGMethodReachProvider } from "./context/CallGraphMethodReachContext";
+import { SelectedIRFileProvider } from "./context/SelectedIRFileContext";
 
 const ContextProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <CallGraphLookupProvider>
-      <CGMethodReachProvider>{children}</CGMethodReachProvider>
-    </CallGraphLookupProvider>
+    <SelectedIRFileProvider>
+      <CallGraphLookupProvider>
+        <CGMethodReachProvider>{children}</CGMethodReachProvider>
+      </CallGraphLookupProvider>
+    </SelectedIRFileProvider>
   );
 };
 

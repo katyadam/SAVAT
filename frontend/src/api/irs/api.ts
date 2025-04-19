@@ -3,7 +3,7 @@ import { IR } from "./types";
 
 const IRs_PATH = "/irs";
 
-const getIRFiles = async (): Promise<String[]> => {
+const getIRFiles = async (): Promise<string[]> => {
     const resp = await irAI.get("/api/files");
     return resp.data;
 }

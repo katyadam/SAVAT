@@ -11,6 +11,13 @@ export const useIRFileContent = (fileName: string) => {
 export const useIRFiles = () => {
     return useQuery({
         queryKey: ["IR_files"],
-        queryFn: () => IRApi.getIRFiles()
+        queryFn: async () => {
+            const irFiles = await IRApi.getIRFiles();
+            return irFiles.sort((a, b) => {
+                const numA = parseInt(a.split("_")[0].slice(2));
+                const numB = parseInt(b.split("_")[0].slice(2));
+                return numA - numB;
+            });
+        }
     });
 }
