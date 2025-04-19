@@ -11,14 +11,14 @@ const Navbar: FC<NavbarType> = () => {
     <div className="ml-10">
       <div className="flex flex-row gap-2 items-center text-xl">
         <ChevronLeft
-          size="30"
-          className="cursor-pointer"
+          size="45"
+          className="cursor-pointer p-2 hover:text-slate-400 duration-200"
           onClick={() => selectedIRFileDispatch({ type: "MOVE_TO_PREV" })}
         />
         <p className="p-2">{selectedIRFileState.selectedIRFile}</p>
         <ChevronRight
-          size="30"
-          className="cursor-pointer"
+          size="45"
+          className="cursor-pointer p-2 hover:text-slate-400 duration-200"
           onClick={() => selectedIRFileDispatch({ type: "MOVE_TO_NEXT" })}
         />
       </div>
