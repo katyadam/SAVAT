@@ -12,7 +12,6 @@ const IRTabs: FC<IRTabsType> = () => {
   if (isLoading) return <Loading />;
 
   if (!irFiles) return <div>No data loaded</div>;
-  console.log(irFiles);
   return (
     <div className="overflow-y-auto max-h-[600px]">
       {irFiles &&
