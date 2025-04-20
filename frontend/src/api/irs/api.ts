@@ -13,25 +13,6 @@ const getIR = async (fileName: string): Promise<IR> => {
     return await fileResp.json();
 }
 
-// const getIrs = async (onProgress?: (loaded: number, total: number) => void): Promise<Map<string, IR>> => {
-//     const irsMap: Map<string, IR> = new Map();
-
-//     const filesFetch = await irAI.get("/api/files");
-//     const files: string[] = filesFetch.data;
-//     const total = files.length;
-//     let loaded = 0;
-//     for (const file of files) {
-//         const fileResponse = await fetch(`${IRs_PATH}/${file}`);
-//         const ir: IR = await fileResponse.json();
-//         irsMap.set(ir.commitID, ir);
-
-//         loaded++;
-//         onProgress?.(loaded, total);
-//     }
-
-//     return irsMap;
-// };
-
 const IRApi = {
     getIR,
     getIRFiles

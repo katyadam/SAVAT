@@ -27,7 +27,7 @@ export type JClass = {
 };
 
 export type Method = {
-    url: string;
+    url: string | null;
     httpMethod: string;
     parameters: Field[];
     returnType: string;
@@ -62,3 +62,23 @@ export type MethodCall = {
     name: string,
     packageAndClassName: string
 };
+
+
+// IR GRAPH CREATION
+
+export type IREdge = {
+    sourceMs: string;
+    targetMs: string;
+};
+
+export type Endpoint = {
+    URI: string;
+    method: string;
+    microservice: string;
+};
+
+export type RESTCall = {
+    targetURI: string;
+    method: string;
+    microservice: string;
+}

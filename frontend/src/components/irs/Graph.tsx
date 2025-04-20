@@ -5,6 +5,7 @@ import cise from "cytoscape-cise";
 import cytoscape from "cytoscape";
 import { getCyInstance } from "./CytoscapeInstance";
 import { IR } from "@/api/irs/types";
+import { createIREdges } from "@/api/irs/graphCreators";
 
 type GraphType = {
   ir: IR;
@@ -18,9 +19,9 @@ const Graph: FC<GraphType> = ({ ir, msColors }) => {
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
   cytoscape.use(cise);
-
   useEffect(() => {
     if (cyRef.current) {
+      const irEdges = createIREdges(ir.microservices);
       const elements: ElementsDefinition = {
         nodes: ir.microservices.map((ms) => ({
           data: {
@@ -30,21 +31,27 @@ const Graph: FC<GraphType> = ({ ir, msColors }) => {
           group: "nodes",
         })),
 
-        edges: [],
+        edges: irEdges.map((edge) => ({
+          data: {
+            id: `${edge.sourceMs}__${edge.targetMs}`,
+            source: edge.sourceMs,
+            target: edge.targetMs,
+          },
+        })),
       };
 
       const cyInstance = getCyInstance(cyRef, elements, msColors);
       setCy(cyInstance);
 
-      cyInstance.on("tap", "node", (event: any) => {
-        const node = event.target;
-        setSelectedMethod(node.data("id"));
-      });
+      // cyInstance.on("tap", "node", (event: any) => {
+      //   const node = event.target;
+      //   setSelectedMethod(node.data("id"));
+      // });
 
-      cyInstance.on("tap", "edge", (event: any) => {
-        const edge = event.target;
-        setSelectedCall(edge.data("id"));
-      });
+      // cyInstance.on("tap", "edge", (event: any) => {
+      //   const edge = event.target;
+      //   setSelectedCall(edge.data("id"));
+      // });
 
       return () => {
         cyInstance.destroy();
