@@ -6,16 +6,15 @@ import cytoscape from "cytoscape";
 import { getCyInstance } from "./CytoscapeInstance";
 import { IR } from "@/api/irs/types";
 import { createIREdges } from "@/api/irs/graphCreators";
+import { useIRHighlight } from "@/hooks/useGraphEffects";
 
 type GraphType = {
   ir: IR;
-  msColors: Map<string, string>;
 };
 
-const Graph: FC<GraphType> = ({ ir, msColors }) => {
+const Graph: FC<GraphType> = ({ ir }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-  const [selectedCall, setSelectedCall] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
   cytoscape.use(cise);
@@ -37,27 +36,28 @@ const Graph: FC<GraphType> = ({ ir, msColors }) => {
             source: edge.sourceMs,
             target: edge.targetMs,
           },
+          group: "edges",
         })),
       };
 
-      const cyInstance = getCyInstance(cyRef, elements, msColors);
+      const cyInstance = getCyInstance(cyRef, elements);
       setCy(cyInstance);
 
-      // cyInstance.on("tap", "node", (event: any) => {
-      //   const node = event.target;
-      //   setSelectedMethod(node.data("id"));
-      // });
+      cyInstance.on("mouseover", "node", (event) => {
+        setSelectedNode(event.target.data().id);
+      });
 
-      // cyInstance.on("tap", "edge", (event: any) => {
-      //   const edge = event.target;
-      //   setSelectedCall(edge.data("id"));
-      // });
+      cyInstance.on("mouseout", "node", () => {
+        setSelectedNode(null);
+      });
 
       return () => {
         cyInstance.destroy();
       };
     }
   }, [ir]);
+
+  useIRHighlight(cy, ir, createIREdges(ir.microservices), selectedNode);
 
   return ir.microservices.length > 0 ? (
     <div ref={cyRef} className="w-full h-full relative z-0"></div>

@@ -1,7 +1,7 @@
 // @ts-expect-error Necessary for compatibility with cytoscape-cise
 import { CiseLayoutOptions } from "cytoscape-cise";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
-import { CY_COLOR_NEUTRAL } from "@/api/utils";
+import { CY_COLOR_HIGHLIGHTED, CY_COLOR_NEUTRAL } from "@/api/utils";
 
 const layoutOptions: CiseLayoutOptions = {
     name: "cise",
@@ -16,11 +16,12 @@ const layoutOptions: CiseLayoutOptions = {
     direction: "horizontal",
 };
 
-const getNodeStyles = (msColors: Map<string, string>): Cytoscape.Stylesheet[] => {
+const getNodeStyles = (): Cytoscape.Stylesheet[] => {
     return [
         {
             selector: "node",
             style: {
+                "background-color": "black",
                 shape: "round-octagon",
                 width: "30",
                 height: "30",
@@ -32,10 +33,11 @@ const getNodeStyles = (msColors: Map<string, string>): Cytoscape.Stylesheet[] =>
             },
         },
         {
-            selector: "node[microservice]",
+            selector: "node.highlighted",
             style: {
-                "background-color": (ele) =>
-                    msColors.get(ele.data("microservice")) || CY_COLOR_NEUTRAL,
+                "border-width": 4,
+                "border-color": CY_COLOR_HIGHLIGHTED,
+                "background-color": CY_COLOR_HIGHLIGHTED,
             },
         },
     ]
@@ -51,9 +53,15 @@ const getEdgeStyles = (): Cytoscape.Stylesheet[] => {
                 "curve-style": "bezier",
                 "target-arrow-color": CY_COLOR_NEUTRAL,
                 "target-arrow-shape": "triangle",
-                label: "data(label)",
                 "text-rotation": "autorotate",
                 "text-margin-y": -10,
+            },
+        },
+        {
+            selector: "edge.highlighted",
+            style: {
+                "line-color": CY_COLOR_HIGHLIGHTED,
+                "target-arrow-color": CY_COLOR_HIGHLIGHTED,
             },
         },
     ]
@@ -62,11 +70,10 @@ const getEdgeStyles = (): Cytoscape.Stylesheet[] => {
 export const getCyInstance = (
     cyRef: React.MutableRefObject<HTMLDivElement | null>,
     elements: ElementsDefinition,
-    msColors: Map<string, string>
 ) => {
 
     const styles: Cytoscape.Stylesheet[] = [
-        ...(elements.nodes && elements.nodes.length > 0 ? getNodeStyles(msColors) : []),
+        ...(elements.nodes && elements.nodes.length > 0 ? getNodeStyles() : []),
         ...(elements.edges && elements.edges.length > 0 ? getEdgeStyles() : [])
     ];
     return Cytoscape({

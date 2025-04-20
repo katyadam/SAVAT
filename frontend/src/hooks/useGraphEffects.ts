@@ -6,6 +6,8 @@ import Cytoscape from "cytoscape";
 import { SDG } from "@/api/sdgs/types";
 import { getLinkSignature } from "@/api/sdgs/utils";
 import { getSubgraph } from "@/api/sdgs/subgraph";
+import { IR, IREdge } from "@/api/irs/types";
+import { getIRSubGraph } from "@/api/irs/graphCreators";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
@@ -164,6 +166,46 @@ export const useSDGHighlight = (
 
             sdg.links.forEach((link) => {
                 const edge = cy.getElementById(getLinkSignature(link));
+                if (edge) {
+                    edge.removeClass("highlighted")
+                }
+            });
+        }
+    }, [selectedNode]);
+};
+
+export const useIRHighlight = (
+    cy: Cytoscape.Core | null,
+    ir: IR | null,
+    edges: IREdge[],
+    selectedNode: string | null
+) => {
+    useEffect(() => {
+        if (!cy || !ir) return;
+        if (selectedNode) {
+            const subgraph = getIRSubGraph(ir.microservices, edges, selectedNode);
+            subgraph.nodes.forEach((ms) => {
+                const node = cy.getElementById(ms.name);
+                if (node) {
+                    node.addClass("highlighted");
+                }
+            });
+            subgraph.links.forEach((iterEdge) => {
+                const edge = cy.getElementById(`${iterEdge.sourceMs}__${iterEdge.targetMs}`);
+                if (edge) {
+                    edge.addClass("highlighted")
+                }
+            });
+        } else {
+            ir.microservices.forEach((ms) => {
+                const node = cy.getElementById(ms.name);
+                if (node) {
+                    node.removeClass("highlighted");
+                }
+            });
+
+            edges.forEach((iterEdge) => {
+                const edge = cy.getElementById(`${iterEdge.sourceMs}__${iterEdge.targetMs}`);
                 if (edge) {
                     edge.removeClass("highlighted")
                 }

@@ -23,7 +23,7 @@ const IRPage = () => {
     if (isLoading) return <Loading />;
     if (error) return <p>This IR file doesn't exist!</p>;
     if (ir) {
-      return <Graph ir={ir} msColors={new Map<string, string>()} />;
+      return <Graph ir={ir} />;
     }
   };
   return (
