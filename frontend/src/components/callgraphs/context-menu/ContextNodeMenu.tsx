@@ -12,7 +12,7 @@ import { CircleEllipsis, ClipboardCopy, Info, X } from "lucide-react";
 import ContextMenuInfo from "./ContextMenuInfo";
 import { toast } from "@/hooks/use-toast";
 import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
-import { get_element_gh_url } from "@/api/github/connect";
+import { getElementGHUrl } from "@/api/github/connect";
 import { useProject } from "@/hooks/useProject";
 import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -76,7 +76,7 @@ const ContextNodeMenu: FC<ContextNodeMenuType> = ({
         !cgInputLoading &&
         callGraphInput
       ) {
-        const url = await get_element_gh_url(
+        const url = await getElementGHUrl(
           method?.returnType.split(".").pop() + " " + method?.name + "(",
           method?.microservice,
           method?.type,
