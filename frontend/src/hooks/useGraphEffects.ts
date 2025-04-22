@@ -7,7 +7,7 @@ import { SDG } from "@/api/sdgs/types";
 import { getLinkSignature } from "@/api/sdgs/utils";
 import { getSubgraph } from "@/api/sdgs/subgraph";
 import { IR, IREdge } from "@/api/irs/types";
-import { getIRSubGraph } from "@/api/irs/graphCreators";
+import { getIRSubGraph } from "@/api/irs/graphFunctions";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,

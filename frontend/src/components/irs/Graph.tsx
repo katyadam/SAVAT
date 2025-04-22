@@ -5,16 +5,17 @@ import Cytoscape, { ElementsDefinition } from "cytoscape";
 import cise from "cytoscape-cise";
 import cytoscape from "cytoscape";
 import { getCyInstance } from "./CytoscapeInstance";
-import { IR } from "@/api/irs/types";
-import { createIREdges } from "@/api/irs/graphCreators";
+import { IR, IREdge } from "@/api/irs/types";
+import { createIREdges } from "@/api/irs/graphFunctions";
 import { useIRHighlight } from "@/hooks/useGraphEffects";
 
 type GraphType = {
   ir: IR;
+  irEdges: IREdge[];
   setClickedNode: (arg: string) => void;
 };
 
-const Graph: FC<GraphType> = ({ ir, setClickedNode }) => {
+const Graph: FC<GraphType> = ({ ir, irEdges, setClickedNode }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
@@ -22,7 +23,6 @@ const Graph: FC<GraphType> = ({ ir, setClickedNode }) => {
   cytoscape.use(cise);
   useEffect(() => {
     if (cyRef.current) {
-      const irEdges = createIREdges(ir.microservices);
       const elements: ElementsDefinition = {
         nodes: ir.microservices.map((ms) => ({
           data: {
