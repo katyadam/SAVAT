@@ -33,16 +33,19 @@ const selectedIRFileReducer = (
 ): SelectedIRFileState => {
   switch (action.type) {
     case "SET_INITIAL_STATE":
+      localStorage.setItem("selectedIRFile", action.payload.selectedIRFile);
       return { ...action.payload };
     case "MOVE_TO_NEXT": {
       if (state.selectedIRFile) {
         const currIndex = state.irFiles.indexOf(state.selectedIRFile);
+        const selectedIRFile =
+          currIndex + 1 < state.irFiles.length
+            ? state.irFiles[currIndex + 1]
+            : state.selectedIRFile;
+        localStorage.setItem("selectedIRFile", selectedIRFile);
         return {
           irFiles: state.irFiles,
-          selectedIRFile:
-            currIndex + 1 < state.irFiles.length
-              ? state.irFiles[currIndex + 1]
-              : state.selectedIRFile,
+          selectedIRFile: selectedIRFile,
         };
       }
       return { ...state };
@@ -50,12 +53,12 @@ const selectedIRFileReducer = (
     case "MOVE_TO_PREV": {
       if (state.selectedIRFile) {
         const currIndex = state.irFiles.indexOf(state.selectedIRFile);
+        const selectedIRFile =
+          currIndex != 0 ? state.irFiles[currIndex - 1] : state.selectedIRFile;
+        localStorage.setItem("selectedIRFile", selectedIRFile);
         return {
           irFiles: state.irFiles,
-          selectedIRFile:
-            currIndex != 0
-              ? state.irFiles[currIndex - 1]
-              : state.selectedIRFile,
+          selectedIRFile: selectedIRFile,
         };
       }
       return { ...state };
@@ -87,5 +90,13 @@ export const useSelectedIRFile = () => {
       "useSelectedIRFile must be used within SelectedIRFileProvider!"
     );
   }
+  if (!context.selectedIRFileState.selectedIRFile)
+    return {
+      selectedIRFileState: {
+        selectedIRFile: localStorage.getItem("selectedIRFile"),
+        irFiles: context.selectedIRFileState.irFiles,
+      },
+      selectedIRFileDispatch: context.selectedIRFileDispatch,
+    };
   return context;
 };

@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
+
 // @ts-expect-error Necessary for compatibility with cytoscape-cise
 import cise from "cytoscape-cise";
 import cytoscape from "cytoscape";
@@ -7,6 +8,7 @@ import { getCyInstance } from "./CytoscapeInstance";
 import { IR } from "@/api/irs/types";
 import { createIREdges } from "@/api/irs/graphCreators";
 import { useIRHighlight } from "@/hooks/useGraphEffects";
+import ReactDOM from "react-dom";
 
 type GraphType = {
   ir: IR;
@@ -14,7 +16,9 @@ type GraphType = {
 
 const Graph: FC<GraphType> = ({ ir }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const detailMenuRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [clickedNode, setClickedNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
   cytoscape.use(cise);
@@ -44,11 +48,15 @@ const Graph: FC<GraphType> = ({ ir }) => {
       setCy(cyInstance);
 
       cyInstance.on("mouseover", "node", (event) => {
-        setSelectedNode(event.target.data().id);
+        setHoveredNode(event.target.data().id);
       });
 
       cyInstance.on("mouseout", "node", () => {
-        setSelectedNode(null);
+        setHoveredNode(null);
+      });
+
+      cyInstance.on("tap", "node", (event) => {
+        setClickedNode(event.target.data().id);
       });
 
       return () => {
@@ -57,10 +65,18 @@ const Graph: FC<GraphType> = ({ ir }) => {
     }
   }, [ir]);
 
-  useIRHighlight(cy, ir, createIREdges(ir.microservices), selectedNode);
+  useIRHighlight(cy, ir, createIREdges(ir.microservices), hoveredNode);
 
   return ir.microservices.length > 0 ? (
-    <div ref={cyRef} className="w-full h-full relative z-0"></div>
+    <div ref={cyRef} className="w-full h-full relative z-0">
+      {clickedNode &&
+        ReactDOM.createPortal(
+          <div ref={detailMenuRef}>
+            <h1>aaa</h1>
+          </div>,
+          cyRef.current!
+        )}
+    </div>
   ) : (
     <p className="m-5">The provided call graph does not contain any nodes!</p>
   );
