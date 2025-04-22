@@ -8,17 +8,15 @@ import { getCyInstance } from "./CytoscapeInstance";
 import { IR } from "@/api/irs/types";
 import { createIREdges } from "@/api/irs/graphCreators";
 import { useIRHighlight } from "@/hooks/useGraphEffects";
-import ReactDOM from "react-dom";
 
 type GraphType = {
   ir: IR;
+  setClickedNode: (arg: string) => void;
 };
 
-const Graph: FC<GraphType> = ({ ir }) => {
+const Graph: FC<GraphType> = ({ ir, setClickedNode }) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
-  const detailMenuRef = useRef<HTMLDivElement | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [clickedNode, setClickedNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
 
   cytoscape.use(cise);
@@ -68,15 +66,7 @@ const Graph: FC<GraphType> = ({ ir }) => {
   useIRHighlight(cy, ir, createIREdges(ir.microservices), hoveredNode);
 
   return ir.microservices.length > 0 ? (
-    <div ref={cyRef} className="w-full h-full relative z-0">
-      {clickedNode &&
-        ReactDOM.createPortal(
-          <div ref={detailMenuRef}>
-            <h1>aaa</h1>
-          </div>,
-          cyRef.current!
-        )}
-    </div>
+    <div ref={cyRef} className="w-full h-full relative z-0"></div>
   ) : (
     <p className="m-5">The provided call graph does not contain any nodes!</p>
   );
