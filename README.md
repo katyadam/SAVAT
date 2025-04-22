@@ -1,4 +1,4 @@
-# SAVANT
+# SAVAT
 
 This project is part of a bachelor's thesis exploring the application of established Change Impact Analysis techniques in microservice-based systems.
 
