@@ -1,7 +1,7 @@
 import { getMsDependencies, getMsEdges } from "@/api/irs/graphFunctions";
 import { IREdge, Microservice } from "@/api/irs/types";
 import { FC, useState } from "react";
-import DependencyDetail from "./DependencyDetail";
+import ListingDetail from "./ListingDetail";
 
 type DependenciesListType = {
   ms: Microservice;
@@ -25,9 +25,9 @@ const DependenciesList: FC<DependenciesListType> = ({ ms, irEdges }) => {
     <div className="flex flex-row gap-4">
       <div className="flex flex-col gap-4 my-2 mx-6">
         {getMsDependencies(ms, irEdges).map((dep, i) => (
-          <DependencyDetail
+          <ListingDetail
             key={i}
-            dependencyMsName={dep}
+            msName={dep}
             openOrClose={() => handleOpenClose(dep)}
           />
         ))}

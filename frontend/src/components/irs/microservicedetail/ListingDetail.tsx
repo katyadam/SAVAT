@@ -1,20 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { FC } from "react";
 
-type DependencyDetailType = {
-  dependencyMsName: string;
+type ListingDetailType = {
+  msName: string;
   openOrClose: () => void;
 };
 
-const DependencyDetail: FC<DependencyDetailType> = ({
-  dependencyMsName,
+const ListingDetail: FC<ListingDetailType> = ({
+  msName: usedByMsName,
   openOrClose,
 }) => {
   return (
     <Button onClick={openOrClose} variant="ghost" className="bg-slate-200">
-      {dependencyMsName}
+      {usedByMsName}
     </Button>
   );
 };
 
-export default DependencyDetail;
+export default ListingDetail;
