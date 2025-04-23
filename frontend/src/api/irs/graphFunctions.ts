@@ -6,13 +6,28 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
     const collectedIREdges = new Map<string, IREdge>();
 
     restCalls.forEach((rc) => {
-        const targetEndpoint = endpointsMap.get(rc.targetURI);
-        if (targetEndpoint) {
-            const key = `${rc.microservice}->${targetEndpoint.microservice}`;
-            collectedIREdges.set(key, {
-                sourceMs: rc.microservice,
-                targetMs: targetEndpoint.microservice
-            });
+        if (rc.url) {
+            const targetEndpoint = endpointsMap.get(rc.url);
+            if (targetEndpoint) {
+                const key = `${rc.microservice}->${targetEndpoint.microservice}`;
+                const existingEdge = collectedIREdges.get(key);
+
+                if (existingEdge) {
+                    existingEdge.connections.push({
+                        restCall: rc,
+                        endpoint: targetEndpoint
+                    });
+                } else {
+                    collectedIREdges.set(key, {
+                        sourceMs: rc.microservice,
+                        targetMs: targetEndpoint.microservice,
+                        connections: [{
+                            restCall: rc,
+                            endpoint: targetEndpoint
+                        }]
+                    });
+                }
+            }
         }
     });
 
@@ -29,7 +44,7 @@ export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], in
 
     while (queue.length > 0) {
         const currNode: string | undefined = queue.shift(); // can't be undefined -> guarded by while condition
-        const currNodeEdges: IREdge[] = getAdjacents(edges, currNode!);
+        const currNodeEdges: IREdge[] = getMsEdges(edges, currNode!);
         for (const edge of currNodeEdges) {
             if (!visited.has(edge.targetMs)) {
                 collectedNodes.push(nodesMap.get(edge.targetMs)!);
@@ -44,7 +59,11 @@ export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], in
 
 const createEndpointsMap = (endpoints: Endpoint[]): Map<string, Endpoint> => {
     const endpointsMap = new Map<string, Endpoint>();
-    endpoints.forEach((endpoint) => endpointsMap.set(endpoint.URI, endpoint));
+    endpoints.forEach((endpoint) => {
+        if (endpoint.url) {
+            endpointsMap.set(endpoint.url.includes("{") ? endpoint.url.split("{")[0] + "{?}" : endpoint.url, endpoint);
+        }
+    });
     return endpointsMap;
 }
 
@@ -57,7 +76,7 @@ export const getMsEndpoints = (ms: Microservice): Endpoint[] => {
     return ms.controllers.flatMap((controller) => {
         return controller.methods
             .filter((method) => "url" in method)
-            .map((method) => ({ URI: method.url || "", method: method.name, microservice: ms.name }));
+            .map((method) => ({ microservice: ms.name, ...method }));
     });
 }
 
@@ -69,11 +88,11 @@ export const getMsRESTCalls = (ms: Microservice): RESTCall[] => {
     return ms.services.flatMap((service) => {
         return service.methodCalls
             .filter((methodCall) => "url" in methodCall)
-            .map((methodCall) => ({ targetURI: methodCall.url || "", method: methodCall.calledFrom, microservice: ms.name }));
+            .map((methodCall) => ({ microservice: ms.name, ...methodCall }));
     });
 }
 
-const getAdjacents = (edges: IREdge[], ms: string): IREdge[] => {
+export const getMsEdges = (edges: IREdge[], ms: string): IREdge[] => {
     return edges
         .filter((edge) => edge.sourceMs === ms);
 }

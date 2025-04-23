@@ -9,7 +9,7 @@ const EndpointsList: FC<EndpointsListType> = ({ endpoints }) => {
   return (
     <div>
       {endpoints.map((endpoint, i) => (
-        <p key={i}>{endpoint.URI}</p>
+        <p key={i}>{endpoint.url}</p>
       ))}
     </div>
   );

@@ -9,7 +9,7 @@ const RESTCallsList: FC<RESTCallsListType> = ({ restCalls }) => {
   return (
     <div>
       {restCalls.map((restCall, i) => (
-        <p key={i}>{restCall.targetURI}</p>
+        <p key={i}>{restCall.url}</p>
       ))}
     </div>
   );

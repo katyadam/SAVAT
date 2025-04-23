@@ -1,14 +1,25 @@
+import { IREdge, Microservice } from "@/api/irs/types";
 import { FC } from "react";
+import UsedByDetail from "./UsedByDetail";
+import { getMsEdges, getMsUsedBy } from "@/api/irs/graphFunctions";
 
 type UsedByListType = {
-  usedBy: string[];
+  ms: Microservice;
+  irEdges: IREdge[];
 };
 
-const UsedByList: FC<UsedByListType> = ({ usedBy }) => {
+const UsedByList: FC<UsedByListType> = ({ ms, irEdges }) => {
   return (
     <div>
-      {usedBy.map((dep, i) => (
-        <p key={i}>{dep}</p>
+      {getMsUsedBy(ms, irEdges).map((dep, i) => (
+        <UsedByDetail
+          key={i}
+          usedByMsName={dep}
+          connections={
+            getMsEdges(irEdges, dep).find((edge) => edge.targetMs === ms.name)
+              ?.connections
+          }
+        />
       ))}
     </div>
   );

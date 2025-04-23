@@ -7,12 +7,7 @@ import EndpointsList from "./EndpointsList";
 import RESTCallsList from "./RESTCallsList";
 import DependenciesList from "./DependenciesList";
 import UsedByList from "./UsedByList";
-import {
-  getMsDependencies,
-  getMsEndpoints,
-  getMsRESTCalls,
-  getMsUsedBy,
-} from "@/api/irs/graphFunctions";
+import { getMsEndpoints, getMsRESTCalls } from "@/api/irs/graphFunctions";
 
 type MicroserviceDetailPanelType = {
   ms: Microservice | undefined;
@@ -45,20 +40,16 @@ const MicroserviceDetailPanel: FC<MicroserviceDetailPanelType> = ({
       </TabsList>
 
       <TabsContent value="Endpoints">
-        <h1>Endpoints</h1>
         <EndpointsList endpoints={getMsEndpoints(ms)} />
       </TabsContent>
       <TabsContent value="REST calls">
-        <h1>REST calls</h1>
         <RESTCallsList restCalls={getMsRESTCalls(ms)} />
       </TabsContent>
       <TabsContent value="Dependencies">
-        <h1>Dependencies</h1>
-        <DependenciesList dependencies={getMsDependencies(ms, irEdges)} />
+        <DependenciesList ms={ms} irEdges={irEdges} />
       </TabsContent>
       <TabsContent value="Depends on">
-        <h1>Used By</h1>
-        <UsedByList usedBy={getMsUsedBy(ms, irEdges)} />
+        <UsedByList ms={ms} irEdges={irEdges} />
       </TabsContent>
     </Tabs>
   );
