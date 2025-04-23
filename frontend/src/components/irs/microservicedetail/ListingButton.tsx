@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { FC } from "react";
 
-type ListingDetailType = {
+type ListingButtonType = {
   msName: string;
   openOrClose: () => void;
 };
 
-const ListingDetail: FC<ListingDetailType> = ({
+const ListingButton: FC<ListingButtonType> = ({
   msName: usedByMsName,
   openOrClose,
 }) => {
@@ -17,4 +17,4 @@ const ListingDetail: FC<ListingDetailType> = ({
   );
 };
 
-export default ListingDetail;
+export default ListingButton;

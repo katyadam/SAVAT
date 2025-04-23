@@ -1,7 +1,8 @@
 import { IREdge, Microservice } from "@/api/irs/types";
 import { FC, useState } from "react";
 import { getMsEdges, getMsUsedBy } from "@/api/irs/graphFunctions";
-import ListingDetail from "./ListingDetail";
+import ListingButton from "./ListingButton";
+import ConnectionDetail from "./ConnectionDetail";
 
 type UsedByListType = {
   ms: Microservice;
@@ -24,7 +25,7 @@ const UsedByList: FC<UsedByListType> = ({ ms, irEdges }) => {
     <div className="flex flex-row gap-4">
       <div className="flex flex-col gap-4 my-2 mx-6">
         {getMsUsedBy(ms, irEdges).map((dep, i) => (
-          <ListingDetail
+          <ListingButton
             key={i}
             openOrClose={() => handleOpenClose(dep)}
             msName={dep}
@@ -34,13 +35,11 @@ const UsedByList: FC<UsedByListType> = ({ ms, irEdges }) => {
       {selectedDep && (
         <div className="flex flex-col gap-2">
           <p>{selectedDep}</p>
-          <div>
+          <div className="flex flex-col gap-2">
             {getMsEdges(irEdges, selectedDep)
               .find((edge) => edge.targetMs === ms.name)
               ?.connections.map((conn, i) => (
-                <p key={i}>
-                  {conn.endpoint.name} {conn.endpoint.url}
-                </p>
+                <ConnectionDetail key={i} connection={conn} />
               ))}
           </div>
         </div>
