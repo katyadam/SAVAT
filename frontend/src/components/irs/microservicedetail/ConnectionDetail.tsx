@@ -1,6 +1,12 @@
 import { Connection } from "@/api/irs/types";
 import { FC } from "react";
 import ConnectionDetailAttribute from "./ConnectionDetailAttribute";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type ConnectionDetailType = {
   connection: Connection;
@@ -9,11 +15,32 @@ type ConnectionDetailType = {
 const ConnectionDetail: FC<ConnectionDetailType> = ({ connection }) => {
   return (
     <div className="border-2 p-4 rounded-md">
-      {Object.entries(connection.endpoint).map(([key, value]) =>
-        typeof value === "string" || typeof value === "number" ? (
-          <ConnectionDetailAttribute key={key} title={key} value={value} />
-        ) : null
-      )}
+      <Accordion type="single" collapsible>
+        <AccordionItem
+          value={`${connection.restCall.name}__${connection.endpoint.name}`}
+        >
+          <AccordionTrigger className="flex flex-row gap-2 items-center">
+            <p>
+              <span className="font-bold">
+                {connection.restCall.calledFrom}
+              </span>{" "}
+              calls{" "}
+              <span className="font-bold">{connection.endpoint.name}</span>
+            </p>
+          </AccordionTrigger>
+          <AccordionContent>
+            {Object.entries(connection.endpoint).map(([key, value]) =>
+              typeof value === "string" || typeof value === "number" ? (
+                <ConnectionDetailAttribute
+                  key={key}
+                  title={key}
+                  value={value}
+                />
+              ) : null
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };
