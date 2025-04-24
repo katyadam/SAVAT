@@ -1,4 +1,4 @@
-import { Endpoint, IREdge, Microservice, RESTCall } from "./types";
+import { Endpoint, Graph, IREdge, Microservice, RESTCall } from "./types";
 
 export const createIREdges = (microservices: Microservice[]): IREdge[] => {
     const endpointsMap = createEndpointsMap(getEndpoints(microservices));
@@ -34,7 +34,7 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
     return Array.from(collectedIREdges.values());
 }
 
-export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMs: string) => {
+export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMs: string): Graph => {
     const nodesMap = new Map(microservices.map(node => [node.name, node]));
     const collectedNodes: Microservice[] = nodesMap.has(initialMs) ? [nodesMap.get(initialMs)!] : [];
     const collectedEdges: IREdge[] = [];
@@ -54,7 +54,7 @@ export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], in
             }
         }
     }
-    return { nodes: collectedNodes, links: collectedEdges }
+    return { nodes: collectedNodes, edges: collectedEdges }
 }
 
 const createEndpointsMap = (endpoints: Endpoint[]): Map<string, Endpoint> => {

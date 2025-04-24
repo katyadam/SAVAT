@@ -190,7 +190,7 @@ export const useIRHighlight = (
                     node.addClass("highlighted");
                 }
             });
-            subgraph.links.forEach((iterEdge) => {
+            subgraph.edges.forEach((iterEdge) => {
                 const edge = cy.getElementById(`${iterEdge.sourceMs}__${iterEdge.targetMs}`);
                 if (edge) {
                     edge.addClass("highlighted")

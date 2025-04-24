@@ -84,3 +84,8 @@ export type IREdge = {
     targetMs: string;
     connections: Connection[];
 };
+
+export type Graph = {
+    nodes: Microservice[];
+    edges: IREdge[];
+}
