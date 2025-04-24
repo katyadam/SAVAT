@@ -1,7 +1,7 @@
 // @ts-expect-error Necessary for compatibility with cytoscape-cise
 import { CiseLayoutOptions } from "cytoscape-cise";
 import Cytoscape, { ElementsDefinition } from "cytoscape";
-import { CY_COLOR_HIGHLIGHTED, CY_COLOR_NEUTRAL } from "@/api/utils";
+import { CY_COLOR_HIGHLIGHTED, CY_COLOR_NEUTRAL, CY_COLOR_RED } from "@/api/utils";
 
 const layoutOptions: CiseLayoutOptions = {
     name: "cise",
@@ -40,6 +40,14 @@ const getNodeStyles = (): Cytoscape.Stylesheet[] => {
                 "background-color": CY_COLOR_HIGHLIGHTED,
             },
         },
+        {
+            selector: "node.partOfCycle",
+            style: {
+                "border-width": 4,
+                "border-color": CY_COLOR_RED,
+                "background-color": CY_COLOR_RED,
+            },
+        },
     ]
 }
 
@@ -64,6 +72,14 @@ const getEdgeStyles = (): Cytoscape.Stylesheet[] => {
                 "target-arrow-color": CY_COLOR_HIGHLIGHTED,
             },
         },
+        {
+            selector: "edge.partOfCycle",
+            style: {
+                "line-color": CY_COLOR_RED,
+                "target-arrow-color": CY_COLOR_RED,
+            },
+        },
+
     ]
 }
 

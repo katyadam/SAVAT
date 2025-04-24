@@ -8,6 +8,7 @@ import { getLinkSignature } from "@/api/sdgs/utils";
 import { getSubgraph } from "@/api/sdgs/subgraph";
 import { IR, IREdge } from "@/api/irs/types";
 import { getIRSubGraph } from "@/api/irs/graphFunctions";
+import Antipatterns from "@/api/irs/antipatterns";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
@@ -213,3 +214,46 @@ export const useIRHighlight = (
         }
     }, [selectedNode]);
 };
+
+export const useIRCyclesHighlight = (
+    cy: Cytoscape.Core | null,
+    ir: IR | null,
+    edges: IREdge[],
+    doHighlight: boolean
+) => {
+    useEffect(() => {
+        if (!cy || !ir) return;
+        if (doHighlight) {
+            const cycles = Antipatterns.johnsonsAlgorithm({ nodes: ir.microservices, edges: edges });
+            for (const graph of cycles) {
+                graph.nodes.forEach((ms) => {
+                    const node = cy.getElementById(ms.name);
+                    console.log(node);
+                    if (node) {
+                        node.addClass("partOfCycle");
+                    }
+                });
+                graph.edges.forEach((iterEdge) => {
+                    const edge = cy.getElementById(`${iterEdge.sourceMs}__${iterEdge.targetMs}`);
+                    if (edge) {
+                        edge.addClass("partOfCycle")
+                    }
+                });
+            }
+        } else {
+            ir.microservices.forEach((ms) => {
+                const node = cy.getElementById(ms.name);
+                if (node) {
+                    node.removeClass("partOfCycle");
+                }
+            });
+
+            edges.forEach((iterEdge) => {
+                const edge = cy.getElementById(`${iterEdge.sourceMs}__${iterEdge.targetMs}`);
+                if (edge) {
+                    edge.removeClass("partOfCycle")
+                }
+            });
+        }
+    }, [doHighlight]);
+}

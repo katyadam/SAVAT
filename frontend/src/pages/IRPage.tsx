@@ -32,20 +32,29 @@ const IRPage = () => {
   }, [ir]);
 
   const [clickedNode, setClickedNode] = useState<string | null>(null);
+  const [highlightCycles, setHighlightCycles] = useState<boolean>(false);
 
   const renderContent = () => {
     if (isLoading) return <Loading />;
     if (error) return <p>This IR file doesn't exist!</p>;
     if (ir) {
       return (
-        <Graph ir={ir} irEdges={irEdges} setClickedNode={setClickedNode} />
+        <Graph
+          ir={ir}
+          irEdges={irEdges}
+          setClickedNode={setClickedNode}
+          highlightCycles={highlightCycles}
+        />
       );
     }
   };
   return (
     <>
       <div className="h-screen w-screen">
-        <Navbar />
+        <Navbar
+          highlightCycles={highlightCycles}
+          setHighlightCycles={setHighlightCycles}
+        />
         <Separator className="mt-2" />
         {renderContent()}
         {clickedNode && (

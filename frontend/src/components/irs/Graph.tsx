@@ -6,20 +6,24 @@ import cise from "cytoscape-cise";
 import cytoscape from "cytoscape";
 import { getCyInstance } from "./CytoscapeInstance";
 import { IR, IREdge } from "@/api/irs/types";
-import { createIREdges } from "@/api/irs/graphFunctions";
-import { useIRHighlight } from "@/hooks/useGraphEffects";
+import { useIRCyclesHighlight, useIRHighlight } from "@/hooks/useGraphEffects";
 
 type GraphType = {
   ir: IR;
   irEdges: IREdge[];
   setClickedNode: (arg: string) => void;
+  highlightCycles: boolean;
 };
 
-const Graph: FC<GraphType> = ({ ir, irEdges, setClickedNode }) => {
+const Graph: FC<GraphType> = ({
+  ir,
+  irEdges,
+  setClickedNode,
+  highlightCycles,
+}) => {
   const cyRef = useRef<HTMLDivElement | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
-
   cytoscape.use(cise);
   useEffect(() => {
     if (cyRef.current) {
@@ -63,7 +67,8 @@ const Graph: FC<GraphType> = ({ ir, irEdges, setClickedNode }) => {
     }
   }, [ir]);
 
-  useIRHighlight(cy, ir, createIREdges(ir.microservices), hoveredNode);
+  useIRHighlight(cy, ir, irEdges, hoveredNode);
+  useIRCyclesHighlight(cy, ir, irEdges, highlightCycles);
 
   return ir.microservices.length > 0 ? (
     <div ref={cyRef} className="w-full h-full relative z-0"></div>
