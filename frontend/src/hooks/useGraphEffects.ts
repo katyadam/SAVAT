@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { CallGraph } from "@/api/callgraphs/types";
-import { getCommonDateString } from "@/api/utils";
+import { CY_COLOR_NEUTRAL, CY_COLOR_RED, getCommonDateString } from "@/api/utils";
 import { Action } from "@/pages/CallGraphPage";
 import Cytoscape from "cytoscape";
 import { SDG } from "@/api/sdgs/types";
@@ -8,7 +8,7 @@ import { getLinkSignature } from "@/api/sdgs/utils";
 import { getSubgraph } from "@/api/sdgs/subgraph";
 import { IR, IREdge } from "@/api/irs/types";
 import { getIRSubGraph } from "@/api/irs/graphFunctions";
-import Antipatterns from "@/api/irs/antipatterns";
+import Antipatterns from "@/api/irs/antipatterns/antipatterns";
 
 export const useHighlightMethod = (
     cy: Cytoscape.Core | null,
@@ -228,7 +228,6 @@ export const useIRCyclesHighlight = (
             for (const graph of cycles) {
                 graph.nodes.forEach((ms) => {
                     const node = cy.getElementById(ms.name);
-                    console.log(node);
                     if (node) {
                         node.addClass("partOfCycle");
                     }
@@ -256,4 +255,30 @@ export const useIRCyclesHighlight = (
             });
         }
     }, [doHighlight]);
+}
+
+export const useIRCouplingHighlight = (
+    cy: Cytoscape.Core | null,
+    ir: IR | null,
+    edges: IREdge[],
+    threshold: number
+) => {
+    useEffect(() => {
+        if (!cy || !ir) return;
+        ir.microservices.forEach((ms) => {
+            const node = cy.getElementById(ms.name);
+            if (node) {
+                node.style('background-color', CY_COLOR_NEUTRAL);
+            }
+        });
+        const microservices = Antipatterns.getMicroservicesBasedOnCouplingIndex({ nodes: ir.microservices, edges: edges }, threshold);
+        console.log(microservices);
+        microservices.forEach((ms) => {
+            const node = cy.getElementById(ms.name);
+            if (node) {
+                node.style('background-color', CY_COLOR_RED);
+            }
+        });
+
+    }, [threshold]);
 }

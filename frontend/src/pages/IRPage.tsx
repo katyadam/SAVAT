@@ -33,6 +33,7 @@ const IRPage = () => {
 
   const [clickedNode, setClickedNode] = useState<string | null>(null);
   const [highlightCycles, setHighlightCycles] = useState<boolean>(false);
+  const [couplingThreshold, setCouplingThreshold] = useState<number>(0);
 
   const renderContent = () => {
     if (isLoading) return <Loading />;
@@ -44,6 +45,7 @@ const IRPage = () => {
           irEdges={irEdges}
           setClickedNode={setClickedNode}
           highlightCycles={highlightCycles}
+          couplingThreshold={couplingThreshold}
         />
       );
     }
@@ -54,6 +56,8 @@ const IRPage = () => {
         <Navbar
           highlightCycles={highlightCycles}
           setHighlightCycles={setHighlightCycles}
+          couplingThreshold={couplingThreshold}
+          setCouplingThreshold={setCouplingThreshold}
         />
         <Separator className="mt-2" />
         {renderContent()}

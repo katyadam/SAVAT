@@ -3,13 +3,21 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
+import NumberInput from "../ui/NumberInput";
 
 type NavbarType = {
   highlightCycles: boolean;
   setHighlightCycles: (arg: boolean) => void;
+  couplingThreshold: number;
+  setCouplingThreshold: (arg: number) => void;
 };
 
-const Navbar: FC<NavbarType> = ({ highlightCycles, setHighlightCycles }) => {
+const Navbar: FC<NavbarType> = ({
+  highlightCycles,
+  setHighlightCycles,
+  couplingThreshold,
+  setCouplingThreshold,
+}) => {
   const { selectedIRFileState, selectedIRFileDispatch } = useSelectedIRFile();
 
   return (
@@ -21,6 +29,7 @@ const Navbar: FC<NavbarType> = ({ highlightCycles, setHighlightCycles }) => {
           onClick={() => {
             selectedIRFileDispatch({ type: "MOVE_TO_PREV" });
             setHighlightCycles(false);
+            setCouplingThreshold(0);
           }}
         />
         <p className="p-2">{selectedIRFileState.selectedIRFile}</p>
@@ -30,6 +39,7 @@ const Navbar: FC<NavbarType> = ({ highlightCycles, setHighlightCycles }) => {
           onClick={() => {
             selectedIRFileDispatch({ type: "MOVE_TO_NEXT" });
             setHighlightCycles(false);
+            setCouplingThreshold(0);
           }}
         />
       </div>
@@ -44,6 +54,13 @@ const Navbar: FC<NavbarType> = ({ highlightCycles, setHighlightCycles }) => {
           onCheckedChange={() => setHighlightCycles(!highlightCycles)}
         />
       </div>
+      <NumberInput
+        value={couplingThreshold}
+        setValue={setCouplingThreshold}
+        min={0}
+        max={50}
+        step={1}
+      />
     </div>
   );
 };

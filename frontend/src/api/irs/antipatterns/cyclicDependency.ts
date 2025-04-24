@@ -1,6 +1,6 @@
-import { Graph, IREdge } from "./types";
+import { Graph, IREdge } from "../types";
 
-const johnsonsAlgorithm = (graph: Graph): Graph[] => {
+export const johnsonsAlgorithm = (graph: Graph): Graph[] => {
     const allCycles: string[][] = [];
     const blocked: Set<string> = new Set();
     const blockMap: Map<string, Set<string>> = new Map();
@@ -103,9 +103,3 @@ const buildSubgraph = (
     }
     return subgraph;
 }
-
-const Antipatterns = {
-    johnsonsAlgorithm,
-};
-
-export default Antipatterns;
