@@ -15,7 +15,11 @@ type ConnectionDetailType = {
 const ConnectionDetail: FC<ConnectionDetailType> = ({ connection }) => {
   return (
     <div className="border-2 p-4 rounded-md">
-      <Accordion type="single" collapsible>
+      <Accordion
+        type="single"
+        collapsible
+        key={`${connection.restCall.name}__${connection.endpoint.name}`}
+      >
         <AccordionItem
           value={`${connection.restCall.name}__${connection.endpoint.name}`}
         >

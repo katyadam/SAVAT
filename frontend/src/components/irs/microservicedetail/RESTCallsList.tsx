@@ -1,5 +1,12 @@
 import { RESTCall } from "@/api/irs/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { FC } from "react";
+import ConnectionDetailAttribute from "./ConnectionDetailAttribute";
 
 type RESTCallsListType = {
   restCalls: RESTCall[];
@@ -7,9 +14,26 @@ type RESTCallsListType = {
 
 const RESTCallsList: FC<RESTCallsListType> = ({ restCalls }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {restCalls.map((restCall, i) => (
-        <p key={i}>{restCall.url}</p>
+        <Accordion type="single" collapsible key={i}>
+          <AccordionItem value={`${restCall.name}`}>
+            <AccordionTrigger className="font-bold">
+              {restCall.calledFrom}
+            </AccordionTrigger>
+            <AccordionContent>
+              {Object.entries(restCall).map(([key, value]) =>
+                typeof value === "string" || typeof value === "number" ? (
+                  <ConnectionDetailAttribute
+                    key={key}
+                    title={key}
+                    value={value}
+                  />
+                ) : null
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       ))}
     </div>
   );
