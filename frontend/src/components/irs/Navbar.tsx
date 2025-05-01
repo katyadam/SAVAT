@@ -54,13 +54,19 @@ const Navbar: FC<NavbarType> = ({
           onCheckedChange={() => setHighlightCycles(!highlightCycles)}
         />
       </div>
-      <NumberInput
-        value={couplingThreshold}
-        setValue={setCouplingThreshold}
-        min={0}
-        max={50}
-        step={1}
-      />
+      <div className="flex flex-col items-center mx-5">
+        <label htmlFor="highlightCyclesSwitch" className="text-gray-500 mb-1">
+          Show Coupling
+        </label>
+
+        <NumberInput
+          value={couplingThreshold}
+          setValue={setCouplingThreshold}
+          min={0}
+          max={50}
+          step={1}
+        />
+      </div>
     </div>
   );
 };
