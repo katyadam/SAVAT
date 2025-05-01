@@ -10,7 +10,7 @@ import {
   useIRCouplingHighlight,
   useIRCyclesHighlight,
   useIRHighlight,
-} from "@/hooks/useGraphEffects";
+} from "@/hooks/useIRGraphEffects";
 
 type GraphType = {
   ir: IR;
