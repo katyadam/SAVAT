@@ -12,7 +12,7 @@ import {
 } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 import { CallGraphMethod } from "@/api/callgraphs/types";
-import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { useCallGraphLookup } from "@/context/callGraph/CallGraphMethodLookupContext";
 import {
   Table,
   TableBody,

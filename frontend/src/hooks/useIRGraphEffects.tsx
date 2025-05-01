@@ -116,7 +116,6 @@ export const useIRCouplingHighlight = (
       { nodes: ir.microservices, edges: edges },
       threshold
     );
-    console.log(microservices);
     microservices.forEach((ms) => {
       const node = cy.getElementById(ms.name);
       if (node) {
@@ -124,4 +123,23 @@ export const useIRCouplingHighlight = (
       }
     });
   }, [threshold]);
+};
+
+export const useHighlightAfterLookup = (
+  cy: Cytoscape.Core | null,
+  msName: string,
+  ir: IR | null,
+  removeLookup: () => void
+) => {
+  useEffect(() => {
+    if (!cy || !ir) return;
+    const node = cy.getElementById(msName);
+    if (node) {
+      cy.animate({
+        fit: { padding: 300, eles: node },
+        duration: 500,
+      });
+    }
+    removeLookup();
+  }, [msName, cy]);
 };

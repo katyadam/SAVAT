@@ -2,7 +2,7 @@ import { useIRFiles } from "@/hooks/useIR";
 import { FC } from "react";
 import Loading from "../loading/Loading";
 import { useNavigate } from "react-router-dom";
-import { useSelectedIRFile } from "@/context/SelectedIRFileContext";
+import { useSelectedIRFile } from "@/context/ir/SelectedIRFileContext";
 
 type IRTabsType = {};
 

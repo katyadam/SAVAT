@@ -14,7 +14,7 @@ import { toast } from "@/hooks/use-toast";
 import { useCallGraphInput, useMethodReachability } from "@/hooks/useCallGraph";
 import { getElementGHUrl } from "@/api/github/connect";
 import { useProject } from "@/hooks/useProject";
-import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import { useCallGraphMethodReach } from "@/context/callGraph/CallGraphMethodReachContext";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type ContextNodeMenuType = {

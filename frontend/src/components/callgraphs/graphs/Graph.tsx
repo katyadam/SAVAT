@@ -12,7 +12,7 @@ import {
 } from "@/api/callgraphs/types";
 import cytoscape from "cytoscape";
 import ContextNodeMenu from "../context-menu/ContextNodeMenu";
-import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { useCallGraphLookup } from "@/context/callGraph/CallGraphMethodLookupContext";
 import { Action } from "@/pages/CallGraphPage";
 import {
   useHighlightMethod,

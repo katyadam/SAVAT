@@ -7,6 +7,7 @@ import cytoscape from "cytoscape";
 import { getCyInstance } from "./CytoscapeInstance";
 import { IR, IREdge } from "@/api/irs/types";
 import {
+  useHighlightAfterLookup,
   useIRCouplingHighlight,
   useIRCyclesHighlight,
   useIRHighlight,
@@ -76,7 +77,7 @@ const Graph: FC<GraphType> = ({
   useIRHighlight(cy, ir, irEdges, hoveredNode);
   useIRCyclesHighlight(cy, ir, irEdges, highlightCycles);
   useIRCouplingHighlight(cy, ir, irEdges, couplingThreshold);
-
+  useHighlightAfterLookup(cy, "", ir, () => {});
   return ir.microservices.length > 0 ? (
     <div ref={cyRef} className="w-full h-full relative z-0"></div>
   ) : (

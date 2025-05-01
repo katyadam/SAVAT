@@ -6,7 +6,7 @@ import Navbar from "@/components/irs/Navbar";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
-import { useSelectedIRFile } from "@/context/SelectedIRFileContext";
+import { useSelectedIRFile } from "@/context/ir/SelectedIRFileContext";
 import { useIRFileContent } from "@/hooks/useIR";
 import { useEffect, useMemo, useState } from "react";
 

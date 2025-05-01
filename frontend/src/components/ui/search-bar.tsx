@@ -12,7 +12,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { cn } from "@/lib/utils";
 import { CallGraphMethod } from "@/api/callgraphs/types";
-import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { useCallGraphLookup } from "@/context/callGraph/CallGraphMethodLookupContext";
 
 type SearchBarProps = {
   data: { key: string; value: CallGraphMethod }[];

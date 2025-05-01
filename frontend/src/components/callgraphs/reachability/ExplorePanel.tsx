@@ -1,5 +1,5 @@
 import NumberInput from "@/components/ui/NumberInput";
-import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import { useCallGraphMethodReach } from "@/context/callGraph/CallGraphMethodReachContext";
 import { GenericCallGraph } from "@/api/callgraphs/types";
 import { FC, useEffect, useState } from "react";
 import {

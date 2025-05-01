@@ -1,4 +1,4 @@
-import { useSelectedIRFile } from "@/context/SelectedIRFileContext";
+import { useSelectedIRFile } from "@/context/ir/SelectedIRFileContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 import { Switch } from "../ui/switch";
