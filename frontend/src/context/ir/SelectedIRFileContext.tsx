@@ -84,19 +84,20 @@ export const SelectedIRFileProvider: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export const useSelectedIRFile = () => {
-  const context = useContext(SelectedIRFileContext);
+  let context = useContext(SelectedIRFileContext);
   if (!context) {
     throw new Error(
       "useSelectedIRFile must be used within SelectedIRFileProvider!"
     );
   }
-  if (!context.selectedIRFileState.selectedIRFile)
-    return {
+  if (!context.selectedIRFileState.selectedIRFile) {
+    context = {
       selectedIRFileState: {
         selectedIRFile: localStorage.getItem("selectedIRFile"),
         irFiles: context.selectedIRFileState.irFiles,
       },
       selectedIRFileDispatch: context.selectedIRFileDispatch,
     };
+  }
   return context;
 };

@@ -4,7 +4,7 @@ import { Eye } from "lucide-react";
 import LegendTable from "./LegendTable";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { CallGraphMethod } from "@/api/callgraphs/types";
-import SearchBar from "../ui/search-bar";
+import CallGraphSearchBar from "./CallGraphSearchBar";
 import { Action } from "@/pages/CallGraphPage";
 import ActionsTable from "./ActionsTable";
 
@@ -34,7 +34,7 @@ const Navbar: FC<NavbarType> = ({
 }) => {
   return (
     <div className="flex flex-row ml-5 gap-4 justify-start items-center w-full h-12">
-      <SearchBar
+      <CallGraphSearchBar
         data={methods.map((method) => ({
           key: method.methodSignature,
           value: method,

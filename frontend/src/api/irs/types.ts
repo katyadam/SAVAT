@@ -67,11 +67,11 @@ export type MethodCall = {
 // IR GRAPH CREATION
 
 export type Endpoint = Method & {
-    microservice: string;
+    msId: string;
 };
 
 export type RESTCall = MethodCall & {
-    microservice: string;
+    msId: string;
 };
 
 export type Connection = {
@@ -80,8 +80,8 @@ export type Connection = {
 };
 
 export type IREdge = {
-    sourceMs: string;
-    targetMs: string;
+    sourceMsId: string;
+    targetMsId: string;
     connections: Connection[];
 };
 

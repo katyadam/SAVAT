@@ -1,5 +1,5 @@
 import { irAI } from "../config";
-import { IR } from "./types";
+import { IR, Microservice } from "./types";
 
 const IRs_PATH = "/irs";
 
@@ -13,9 +13,14 @@ const getIR = async (fileName: string): Promise<IR> => {
     return await fileResp.json();
 }
 
+const getMsId = (ms: Microservice): string => {
+    return ms.name + "/" + ms.path
+}
+
 const IRApi = {
     getIR,
-    getIRFiles
+    getIRFiles,
+    getMsId
 };
 
 export default IRApi;

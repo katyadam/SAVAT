@@ -34,7 +34,8 @@ const ConnectionDetail: FC<ConnectionDetailType> = ({ connection }) => {
           </AccordionTrigger>
           <AccordionContent>
             {Object.entries(connection.endpoint).map(([key, value]) =>
-              typeof value === "string" || typeof value === "number" ? (
+              (typeof value === "string" || typeof value === "number") &&
+              key !== "msId" ? (
                 <ConnectionDetailAttribute
                   key={key}
                   title={key}

@@ -23,7 +23,8 @@ const RESTCallsList: FC<RESTCallsListType> = ({ restCalls }) => {
             </AccordionTrigger>
             <AccordionContent>
               {Object.entries(restCall).map(([key, value]) =>
-                typeof value === "string" || typeof value === "number" ? (
+                (typeof value === "string" || typeof value === "number") &&
+                key !== "msId" ? (
                   <ConnectionDetailAttribute
                     key={key}
                     title={key}

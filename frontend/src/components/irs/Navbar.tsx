@@ -4,12 +4,16 @@ import { FC } from "react";
 import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import NumberInput from "../ui/NumberInput";
+import MsSearchBar from "./MsSearchBar";
+import { Microservice } from "@/api/irs/types";
+import IRApi from "@/api/irs/api";
 
 type NavbarType = {
   highlightCycles: boolean;
   setHighlightCycles: (arg: boolean) => void;
   couplingThreshold: number;
   setCouplingThreshold: (arg: number) => void;
+  microservices: Microservice[];
 };
 
 const Navbar: FC<NavbarType> = ({
@@ -17,11 +21,17 @@ const Navbar: FC<NavbarType> = ({
   setHighlightCycles,
   couplingThreshold,
   setCouplingThreshold,
+  microservices,
 }) => {
   const { selectedIRFileState, selectedIRFileDispatch } = useSelectedIRFile();
-
   return (
     <div className="ml-10 flex flex-row items-center gap-8">
+      <MsSearchBar
+        data={microservices.map((ms) => ({
+          key: IRApi.getMsId(ms),
+          value: ms,
+        }))}
+      />
       <div className="flex flex-row gap-2 items-center text-xl">
         <ChevronLeft
           size="45"

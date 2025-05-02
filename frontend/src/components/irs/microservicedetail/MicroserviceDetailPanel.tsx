@@ -1,4 +1,4 @@
-import { IREdge, Microservice } from "@/api/irs/types";
+import { Graph, Microservice } from "@/api/irs/types";
 import { Tabs, TabsList } from "@/components/ui/tabs";
 import { FC, useState } from "react";
 import MicroserviceDetailTabsTrigger from "./MicroserviceDetailTabsTrigger";
@@ -11,7 +11,7 @@ import { getMsEndpoints, getMsRESTCalls } from "@/api/irs/graphFunctions";
 
 type MicroserviceDetailPanelType = {
   ms: Microservice | undefined;
-  irEdges: IREdge[];
+  graph: Graph;
 };
 
 export type AllowedTabs =
@@ -22,7 +22,7 @@ export type AllowedTabs =
 
 const MicroserviceDetailPanel: FC<MicroserviceDetailPanelType> = ({
   ms,
-  irEdges,
+  graph,
 }) => {
   const [activeTab, setActiveTab] = useState<AllowedTabs>("Endpoints");
 
@@ -46,10 +46,14 @@ const MicroserviceDetailPanel: FC<MicroserviceDetailPanelType> = ({
         <RESTCallsList restCalls={getMsRESTCalls(ms)} />
       </TabsContent>
       <TabsContent value="Dependencies">
-        <DependenciesList ms={ms} irEdges={irEdges} />
+        <DependenciesList
+          ms={ms}
+          microservices={graph.nodes}
+          irEdges={graph.edges}
+        />
       </TabsContent>
       <TabsContent value="Depends on">
-        <UsedByList ms={ms} irEdges={irEdges} />
+        <UsedByList ms={ms} microservices={graph.nodes} irEdges={graph.edges} />
       </TabsContent>
     </Tabs>
   );

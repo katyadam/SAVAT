@@ -12,6 +12,8 @@ import {
   useIRCyclesHighlight,
   useIRHighlight,
 } from "@/hooks/useIRGraphEffects";
+import { useIRMicroserviceLookup } from "@/context/ir/IRMicroserviceLookupContext";
+import IRApi from "@/api/irs/api";
 
 type GraphType = {
   ir: IR;
@@ -31,13 +33,16 @@ const Graph: FC<GraphType> = ({
   const cyRef = useRef<HTMLDivElement | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
+  const { irMicroserviceLookupState, irMicroserviceLookupDispatch } =
+    useIRMicroserviceLookup();
+
   cytoscape.use(cise);
   useEffect(() => {
     if (cyRef.current) {
       const elements: ElementsDefinition = {
         nodes: ir.microservices.map((ms) => ({
           data: {
-            id: ms.name,
+            id: IRApi.getMsId(ms),
             label: ms.name || "Unnamed",
           },
           group: "nodes",
@@ -45,9 +50,9 @@ const Graph: FC<GraphType> = ({
 
         edges: irEdges.map((edge) => ({
           data: {
-            id: `${edge.sourceMs}__${edge.targetMs}`,
-            source: edge.sourceMs,
-            target: edge.targetMs,
+            id: `${edge.sourceMsId}__${edge.targetMsId}`,
+            source: edge.sourceMsId,
+            target: edge.targetMsId,
           },
           group: "edges",
         })),
@@ -77,7 +82,9 @@ const Graph: FC<GraphType> = ({
   useIRHighlight(cy, ir, irEdges, hoveredNode);
   useIRCyclesHighlight(cy, ir, irEdges, highlightCycles);
   useIRCouplingHighlight(cy, ir, irEdges, couplingThreshold);
-  useHighlightAfterLookup(cy, "", ir, () => {});
+  useHighlightAfterLookup(cy, irMicroserviceLookupState.msId, ir, () =>
+    irMicroserviceLookupDispatch({ type: "REMOVE_LOOKUP" })
+  );
   return ir.microservices.length > 0 ? (
     <div ref={cyRef} className="w-full h-full relative z-0"></div>
   ) : (

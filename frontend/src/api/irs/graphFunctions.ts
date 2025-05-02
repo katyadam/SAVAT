@@ -1,3 +1,4 @@
+import IRApi from "./api";
 import { Endpoint, Graph, IREdge, Microservice, RESTCall } from "./types";
 
 export const createIREdges = (microservices: Microservice[]): IREdge[] => {
@@ -9,7 +10,7 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
         if (rc.url) {
             const targetEndpoint = endpointsMap.get(rc.url);
             if (targetEndpoint) {
-                const key = `${rc.microservice}->${targetEndpoint.microservice}`;
+                const key = `${rc.msId}->${targetEndpoint.msId}`;
                 const existingEdge = collectedIREdges.get(key);
 
                 if (existingEdge) {
@@ -19,8 +20,8 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
                     });
                 } else {
                     collectedIREdges.set(key, {
-                        sourceMs: rc.microservice,
-                        targetMs: targetEndpoint.microservice,
+                        sourceMsId: rc.msId,
+                        targetMsId: targetEndpoint.msId,
                         connections: [{
                             restCall: rc,
                             endpoint: targetEndpoint
@@ -34,23 +35,25 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
     return Array.from(collectedIREdges.values());
 }
 
-export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMs: string): Graph => {
-    const nodesMap = new Map(microservices.map(node => [node.name, node]));
-    const collectedNodes: Microservice[] = nodesMap.has(initialMs) ? [nodesMap.get(initialMs)!] : [];
+export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMsId: string): Graph => {
+    const msMap = new Map(microservices.map(ms => [IRApi.getMsId(ms), ms]));
+    const collectedNodes: Microservice[] = msMap.has(initialMsId) ? [msMap.get(initialMsId)!] : [];
     const collectedEdges: IREdge[] = [];
     const visited = new Set<string>();
     const queue: string[] = [];
-    queue.push(initialMs);
+    queue.push(initialMsId);
 
     while (queue.length > 0) {
-        const currNode: string | undefined = queue.shift(); // can't be undefined -> guarded by while condition
-        const currNodeEdges: IREdge[] = getMsEdges(edges, currNode!);
-        for (const edge of currNodeEdges) {
-            if (!visited.has(edge.targetMs)) {
-                collectedNodes.push(nodesMap.get(edge.targetMs)!);
-                collectedEdges.push(edge);
-                visited.add(edge.targetMs);
-                queue.push(edge.targetMs);
+        const currNode: string | undefined = queue.shift();
+        if (currNode && msMap.has(currNode)) {
+            const currNodeEdges: IREdge[] = getMsEdges(edges, msMap.get(currNode)!);
+            for (const edge of currNodeEdges) {
+                if (!visited.has(edge.targetMsId)) {
+                    collectedNodes.push(msMap.get(edge.targetMsId)!);
+                    collectedEdges.push(edge);
+                    visited.add(edge.targetMsId);
+                    queue.push(edge.targetMsId);
+                }
             }
         }
     }
@@ -76,7 +79,7 @@ export const getMsEndpoints = (ms: Microservice): Endpoint[] => {
     return ms.controllers.flatMap((controller) => {
         return controller.methods
             .filter((method) => "url" in method)
-            .map((method) => ({ microservice: ms.name, ...method }));
+            .map((method) => ({ msId: IRApi.getMsId(ms), ...method }));
     });
 }
 
@@ -88,23 +91,25 @@ export const getMsRESTCalls = (ms: Microservice): RESTCall[] => {
     return ms.services.flatMap((service) => {
         return service.methodCalls
             .filter((methodCall) => "url" in methodCall)
-            .map((methodCall) => ({ microservice: ms.name, ...methodCall }));
+            .map((methodCall) => ({ msId: IRApi.getMsId(ms), ...methodCall }));
     });
 }
 
-export const getMsEdges = (edges: IREdge[], ms: string): IREdge[] => {
+export const getMsEdges = (edges: IREdge[], ms: Microservice): IREdge[] => {
     return edges
-        .filter((edge) => edge.sourceMs === ms);
+        .filter((edge) => edge.sourceMsId === IRApi.getMsId(ms));
 }
 
-export const getMsDependencies = (ms: Microservice, irEdges: IREdge[]): string[] => {
+export const getMsDependencies = (initialMs: Microservice, microservices: Microservice[], irEdges: IREdge[]): Microservice[] => {
+    const msMap = new Map(microservices.map(ms => [IRApi.getMsId(ms), ms]));
     return irEdges
-        .filter((irEdge) => irEdge.sourceMs === ms.name)
-        .map((irEdge) => irEdge.targetMs);
+        .filter((irEdge) => irEdge.sourceMsId === IRApi.getMsId(initialMs) && msMap.has(irEdge.targetMsId))
+        .map((irEdge) => msMap.get(irEdge.targetMsId)!);
 }
 
-export const getMsUsedBy = (ms: Microservice, irEdges: IREdge[]): string[] => {
+export const getMsUsedBy = (initialMs: Microservice, microservices: Microservice[], irEdges: IREdge[]): Microservice[] => {
+    const msMap = new Map(microservices.map(ms => [IRApi.getMsId(ms), ms]));
     return irEdges
-        .filter((irEdge) => irEdge.targetMs === ms.name)
-        .map((irEdge) => irEdge.sourceMs);
+        .filter((irEdge) => irEdge.targetMsId === IRApi.getMsId(initialMs) && msMap.has(irEdge.sourceMsId))
+        .map((irEdge) => msMap.get(irEdge.sourceMsId)!);
 }

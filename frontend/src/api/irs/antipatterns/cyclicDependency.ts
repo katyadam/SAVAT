@@ -1,3 +1,4 @@
+import IRApi from "../api";
 import { Graph, IREdge } from "../types";
 
 export const johnsonsAlgorithm = (graph: Graph): Graph[] => {
@@ -8,10 +9,10 @@ export const johnsonsAlgorithm = (graph: Graph): Graph[] => {
 
     const adjacency: Map<string, string[]> = new Map();
     for (const node of graph.nodes) {
-        adjacency.set(node.name, []);
+        adjacency.set(IRApi.getMsId(node), []);  // Changed from name to id
     }
     for (const edge of graph.edges) {
-        adjacency.get(edge.sourceMs)?.push(edge.targetMs);
+        adjacency.get(edge.sourceMsId)?.push(edge.targetMsId);
     }
 
     const unblock = (node: string) => {
@@ -58,10 +59,10 @@ export const johnsonsAlgorithm = (graph: Graph): Graph[] => {
         return foundCycle;
     };
 
-    const sortedNodes = [...graph.nodes.map(n => n.name)].sort();
+    const sortedNodeIds = [...graph.nodes.map(n => IRApi.getMsId(n))].sort();
 
-    for (let i = 0; i < sortedNodes.length; i++) {
-        const subgraphNodes = sortedNodes.slice(i);
+    for (let i = 0; i < sortedNodeIds.length; i++) {
+        const subgraphNodes = sortedNodeIds.slice(i);
         const subgraph = buildSubgraph(adjacency, subgraphNodes);
 
         for (const node of subgraphNodes) {
@@ -75,15 +76,15 @@ export const johnsonsAlgorithm = (graph: Graph): Graph[] => {
     }
 
     return allCycles.map(cycle => {
-        const nodesSet = new Set(cycle);
-        const nodes = graph.nodes.filter(n => nodesSet.has(n.name));
+        const nodeSet = new Set(cycle);
+        const nodes = graph.nodes.filter(n => nodeSet.has(IRApi.getMsId(n)));
 
         const edges: IREdge[] = [];
         for (let i = 0; i < cycle.length - 1; i++) {
             edges.push({
-                sourceMs: cycle[i],
-                targetMs: cycle[i + 1],
-                connections: [], // Ignored since we are only visualizing within the Graph, not within its details...
+                sourceMsId: cycle[i],
+                targetMsId: cycle[i + 1],
+                connections: [], // Ignored
             });
         }
 

@@ -23,7 +23,8 @@ const EndpointsList: FC<EndpointsListType> = ({ endpoints }) => {
             </AccordionTrigger>
             <AccordionContent>
               {Object.entries(endpoint).map(([key, value]) =>
-                typeof value === "string" || typeof value === "number" ? (
+                (typeof value === "string" || typeof value === "number") &&
+                key !== "msId" ? (
                   <ConnectionDetailAttribute
                     key={key}
                     title={key}

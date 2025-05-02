@@ -3,16 +3,22 @@ import { IREdge, Microservice } from "@/api/irs/types";
 import { FC, useState } from "react";
 import ListingButton from "./ListingButton";
 import ConnectionDetail from "./ConnectionDetail";
+import IRApi from "@/api/irs/api";
 
 type DependenciesListType = {
   ms: Microservice;
+  microservices: Microservice[];
   irEdges: IREdge[];
 };
 
-const DependenciesList: FC<DependenciesListType> = ({ ms, irEdges }) => {
-  const [selectedDep, setSelectedDep] = useState<string | null>(null);
+const DependenciesList: FC<DependenciesListType> = ({
+  ms,
+  microservices,
+  irEdges,
+}) => {
+  const [selectedDep, setSelectedDep] = useState<Microservice | null>(null);
 
-  const handleOpenClose = (dep: string) => {
+  const handleOpenClose = (dep: Microservice) => {
     if (!selectedDep) {
       setSelectedDep(dep);
     } else if (selectedDep === dep) {
@@ -25,22 +31,23 @@ const DependenciesList: FC<DependenciesListType> = ({ ms, irEdges }) => {
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-col gap-4 my-2 mx-6">
-        {getMsDependencies(ms, irEdges).map((dep, i) => (
+        {getMsDependencies(ms, microservices, irEdges).map((dep, i) => (
           <ListingButton
             key={i}
-            msName={dep}
+            msName={dep.name}
             openOrClose={() => handleOpenClose(dep)}
           />
         ))}
       </div>
       <div className="flex flex-col gap-2">
-        <p>{selectedDep}</p>
+        <p>{selectedDep?.name}</p>
         <div className="flex flex-col gap-2">
-          {getMsEdges(irEdges, ms.name)
-            .find((edge) => edge.targetMs === selectedDep)
-            ?.connections.map((conn, i) => (
-              <ConnectionDetail key={i} connection={conn} />
-            ))}
+          {selectedDep &&
+            getMsEdges(irEdges, ms)
+              .find((edge) => edge.targetMsId === IRApi.getMsId(selectedDep))
+              ?.connections.map((conn, i) => (
+                <ConnectionDetail key={i} connection={conn} />
+              ))}
         </div>
       </div>
     </div>

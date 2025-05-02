@@ -1,3 +1,4 @@
+import IRApi from "@/api/irs/api";
 import { createIREdges } from "@/api/irs/graphFunctions";
 import { IREdge } from "@/api/irs/types";
 import Graph from "@/components/irs/Graph";
@@ -51,26 +52,29 @@ const IRPage = () => {
     }
   };
   return (
-    <>
+    ir && (
       <div className="h-screen w-screen">
         <Navbar
           highlightCycles={highlightCycles}
           setHighlightCycles={setHighlightCycles}
           couplingThreshold={couplingThreshold}
           setCouplingThreshold={setCouplingThreshold}
+          microservices={ir?.microservices}
         />
         <Separator className="mt-2" />
         {renderContent()}
         {clickedNode && (
           <Overlay closeFunc={() => setClickedNode(null)} width="1/2">
             <MicroserviceDetailPanel
-              ms={ir?.microservices.find((ms) => ms.name === clickedNode)}
-              irEdges={irEdges}
+              ms={ir?.microservices.find(
+                (ms) => IRApi.getMsId(ms) === clickedNode
+              )}
+              graph={{ nodes: ir.microservices, edges: irEdges }}
             />
           </Overlay>
         )}
       </div>
-    </>
+    )
   );
 };
 
