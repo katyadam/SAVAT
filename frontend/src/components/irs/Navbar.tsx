@@ -27,12 +27,6 @@ const Navbar: FC<NavbarType> = ({
   const { selectedIRFileDispatch } = useSelectedIRFile();
   return (
     <div className="ml-10 flex flex-row items-center gap-8">
-      <MsSearchBar
-        data={microservices.map((ms) => ({
-          key: IRApi.getMsId(ms),
-          value: ms,
-        }))}
-      />
       <div className="flex flex-row gap-2 items-center text-xl">
         <ChevronLeft
           size="45"
@@ -54,7 +48,16 @@ const Navbar: FC<NavbarType> = ({
           }}
         />
       </div>
+
+      <MsSearchBar
+        data={microservices.map((ms) => ({
+          key: IRApi.getMsId(ms),
+          value: ms,
+        }))}
+      />
+
       <Separator orientation="vertical" className="p-0.5 h-[40px]" />
+
       <div className="flex flex-col items-center mx-5">
         <label htmlFor="highlightCyclesSwitch" className="text-gray-500 mb-1">
           Show Cycles
@@ -65,6 +68,7 @@ const Navbar: FC<NavbarType> = ({
           onCheckedChange={() => setHighlightCycles(!highlightCycles)}
         />
       </div>
+
       <div className="flex flex-col items-center mx-5">
         <label htmlFor="highlightCyclesSwitch" className="text-gray-500 mb-1">
           Show Coupling
