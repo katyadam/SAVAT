@@ -14,6 +14,7 @@ import {
 } from "@/hooks/useIRGraphEffects";
 import { useIRMicroserviceLookup } from "@/context/ir/IRMicroserviceLookupContext";
 import IRApi from "@/api/irs/api";
+import { useIRMsReach } from "@/context/ir/IRMsReachContext";
 
 type GraphType = {
   ir: IR;
@@ -35,6 +36,8 @@ const Graph: FC<GraphType> = ({
   const [cy, setCy] = useState<Cytoscape.Core | null>(null);
   const { irMicroserviceLookupState, irMicroserviceLookupDispatch } =
     useIRMicroserviceLookup();
+
+  const { irMsReachDispatch } = useIRMsReach();
 
   cytoscape.use(cise);
   useEffect(() => {
@@ -71,6 +74,13 @@ const Graph: FC<GraphType> = ({
 
       cyInstance.on("tap", "node", (event) => {
         setClickedNode(event.target.data().id);
+      });
+
+      cyInstance.on("cxttap", "node", (event) => {
+        irMsReachDispatch({
+          payload: { msId: event.target.data().id, reachValue: 1 },
+          type: "SET_MS_REACH",
+        });
       });
 
       return () => {

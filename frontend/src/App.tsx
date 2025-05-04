@@ -6,16 +6,19 @@ import { CallGraphLookupProvider } from "./context/callGraph/CallGraphMethodLook
 import { CGMethodReachProvider } from "./context/callGraph/CallGraphMethodReachContext";
 import { SelectedIRFileProvider } from "./context/ir/SelectedIRFileContext";
 import { IRMicroserviceLookupProvider } from "./context/ir/IRMicroserviceLookupContext";
+import { IRMsReachProvider } from "./context/ir/IRMsReachContext";
 
 const ContextProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <IRMicroserviceLookupProvider>
-      <SelectedIRFileProvider>
-        <CallGraphLookupProvider>
-          <CGMethodReachProvider>{children}</CGMethodReachProvider>
-        </CallGraphLookupProvider>
-      </SelectedIRFileProvider>
-    </IRMicroserviceLookupProvider>
+    <IRMsReachProvider>
+      <IRMicroserviceLookupProvider>
+        <SelectedIRFileProvider>
+          <CallGraphLookupProvider>
+            <CGMethodReachProvider>{children}</CGMethodReachProvider>
+          </CallGraphLookupProvider>
+        </SelectedIRFileProvider>
+      </IRMicroserviceLookupProvider>
+    </IRMsReachProvider>
   );
 };
 

@@ -35,29 +35,61 @@ export const createIREdges = (microservices: Microservice[]): IREdge[] => {
     return Array.from(collectedIREdges.values());
 }
 
-export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMsId: string): Graph => {
+export const getIRSubGraph = (microservices: Microservice[], edges: IREdge[], initialMsId: string, level?: number): Graph => {
     const msMap = new Map(microservices.map(ms => [IRApi.getMsId(ms), ms]));
     const collectedNodes: Microservice[] = msMap.has(initialMsId) ? [msMap.get(initialMsId)!] : [];
     const collectedEdges: IREdge[] = [];
     const visited = new Set<string>();
-    const queue: string[] = [];
-    queue.push(initialMsId);
+    const queue: ([string, number])[] = [];
+    queue.push([initialMsId, 0]);
 
     while (queue.length > 0) {
-        const currNode: string | undefined = queue.shift();
-        if (currNode && msMap.has(currNode)) {
-            const currNodeEdges: IREdge[] = getMsEdges(edges, msMap.get(currNode)!);
+        const currNode: [string, number] | undefined = queue.shift();
+        if (currNode && msMap.has(currNode[0])) {
+            const currNodeEdges: IREdge[] = getMsEdges(edges, msMap.get(currNode[0])!);
             for (const edge of currNodeEdges) {
                 if (!visited.has(edge.targetMsId)) {
                     collectedNodes.push(msMap.get(edge.targetMsId)!);
                     collectedEdges.push(edge);
                     visited.add(edge.targetMsId);
-                    queue.push(edge.targetMsId);
+                    const nextLevel = currNode?.[1] ?? 0;
+                    if (!level || nextLevel < level - 1) {
+                        queue.push([edge.targetMsId, nextLevel + 1]);
+                    }
                 }
             }
         }
     }
     return { nodes: collectedNodes, edges: collectedEdges }
+}
+
+export const getMaxSubgraphReachLevel = (microservices: Microservice[], edges: IREdge[], initialMsId: string) => {
+    const msMap = new Map(microservices.map(ms => [IRApi.getMsId(ms), ms]));
+    const collectedNodes: Microservice[] = msMap.has(initialMsId) ? [msMap.get(initialMsId)!] : [];
+    const collectedEdges: IREdge[] = [];
+    const visited = new Set<string>();
+    const queue: ([string, number])[] = [];
+    let maxLevel = 0;
+
+    queue.push([initialMsId, 0]);
+
+    while (queue.length > 0) {
+        const currNode: [string, number] | undefined = queue.shift();
+        if (currNode) {
+            const currNodeEdges: IREdge[] = getMsEdges(edges, msMap.get(currNode[0])!);
+            for (const edge of currNodeEdges) {
+                if (!visited.has(edge.targetMsId)) {
+                    collectedNodes.push(msMap.get(edge.targetMsId)!);
+                    collectedEdges.push(edge);
+                    visited.add(edge.targetMsId);
+                    const nextLevel: number = currNode?.[1];
+                    maxLevel = Math.max(nextLevel + 1, maxLevel);
+                    queue.push([edge.targetMsId, nextLevel + 1]);
+                }
+            }
+        }
+    }
+    return maxLevel;
 }
 
 const createEndpointsMap = (endpoints: Endpoint[]): Map<string, Endpoint> => {

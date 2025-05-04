@@ -48,6 +48,14 @@ const getNodeStyles = (): Cytoscape.Stylesheet[] => {
                 "background-color": CY_COLOR_BLUE,
             },
         },
+        {
+            selector: "node.initialSubgraphNode",
+            style: {
+                "border-width": 4,
+                "border-color": CY_COLOR_HIGHLIGHTED,
+                "background-color": CY_COLOR_HIGHLIGHTED,
+            },
+        }
     ]
 }
 

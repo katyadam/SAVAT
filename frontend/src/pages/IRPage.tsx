@@ -1,12 +1,14 @@
 import IRApi from "@/api/irs/api";
 import { createIREdges } from "@/api/irs/graphFunctions";
 import { IREdge } from "@/api/irs/types";
-import Graph from "@/components/irs/Graph";
+import Graph from "@/components/irs/graphs/Graph";
 import MicroserviceDetailPanel from "@/components/irs/microservicedetail/MicroserviceDetailPanel";
 import Navbar from "@/components/irs/Navbar";
+import ExplorePanel from "@/components/irs/reachability/ExplorePanel";
 import Loading from "@/components/loading/Loading";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
+import { useIRMsReach } from "@/context/ir/IRMsReachContext";
 import { useSelectedIRFile } from "@/context/ir/SelectedIRFileContext";
 import { useIRFileContent } from "@/hooks/useIR";
 import { useEffect, useMemo, useState } from "react";
@@ -24,6 +26,8 @@ const IRPage = () => {
     isLoading,
     error,
   } = useIRFileContent(selectedIRFileState.selectedIRFile || "");
+
+  const { irMsReachState, irMsReachDispatch } = useIRMsReach();
 
   const irEdges: IREdge[] = useMemo(() => {
     if (ir?.microservices) {
@@ -72,6 +76,18 @@ const IRPage = () => {
           />
         </Overlay>
       )}
+      {ir &&
+        irEdges &&
+        irMsReachState.msId &&
+        irMsReachState.reachValue &&
+        irMsReachState.reachValue > 0 && (
+          <Overlay
+            closeFunc={() => irMsReachDispatch({ type: "REMOVE_MS_REACH" })}
+            width={"5/6"}
+          >
+            <ExplorePanel graph={{ nodes: ir.microservices, edges: irEdges }} />
+          </Overlay>
+        )}
     </div>
   ) : (
     <Loading />
