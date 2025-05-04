@@ -17,7 +17,8 @@ type SelectedIRFileAction =
       payload: { selectedIRFile: string; irFiles: string[] };
     }
   | { type: "MOVE_TO_PREV" }
-  | { type: "MOVE_TO_NEXT" };
+  | { type: "MOVE_TO_NEXT" }
+  | { type: "SET_SELECTED_FILE"; payload: string };
 
 const SelectedIRFileContext = createContext<
   | {
@@ -62,6 +63,10 @@ const selectedIRFileReducer = (
         };
       }
       return { ...state };
+    }
+    case "SET_SELECTED_FILE": {
+      localStorage.setItem("selectedIRFile", action.payload);
+      return { irFiles: state.irFiles, selectedIRFile: action.payload };
     }
     default:
       return state;

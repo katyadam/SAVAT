@@ -7,6 +7,7 @@ import NumberInput from "../ui/NumberInput";
 import MsSearchBar from "./MsSearchBar";
 import { Microservice } from "@/api/irs/types";
 import IRApi from "@/api/irs/api";
+import IRPicker from "./IRPicker";
 
 type NavbarType = {
   highlightCycles: boolean;
@@ -23,7 +24,7 @@ const Navbar: FC<NavbarType> = ({
   setCouplingThreshold,
   microservices,
 }) => {
-  const { selectedIRFileState, selectedIRFileDispatch } = useSelectedIRFile();
+  const { selectedIRFileDispatch } = useSelectedIRFile();
   return (
     <div className="ml-10 flex flex-row items-center gap-8">
       <MsSearchBar
@@ -42,7 +43,7 @@ const Navbar: FC<NavbarType> = ({
             setCouplingThreshold(0);
           }}
         />
-        <p className="p-2">{selectedIRFileState.selectedIRFile}</p>
+        <IRPicker />
         <ChevronRight
           size="45"
           className="cursor-pointer p-2 hover:text-slate-400 duration-200"
