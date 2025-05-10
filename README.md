@@ -18,6 +18,9 @@ cd backend && ./mvnw clean package -DskipTests && ./mvnw compile quarkus:dev
 
 # Start the frontend
 cd frontend && yarn install && yarn dev
+
+# Start the IR part
+cd IR && ./mvnw clean package -DskipTests && ./mvnw compile quarkus:dev
 ```
 
 Once the project is running in development mode, you can access:
@@ -26,6 +29,8 @@ Once the project is running in development mode, you can access:
 - The frontend UI: <http://localhost:8000>
 
 ### Docker-Compose Mode
+
+> ⚠️ **Warning:** It is important to note that IR service is not yet runnable in this mode!
 
 - The application is served at <http://localhost:8081>.
 - In the `frontend` directory, create a `.env` file based on `env.prod`.
