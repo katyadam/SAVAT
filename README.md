@@ -22,8 +22,8 @@ cd frontend && yarn install && yarn dev
 
 Once the project is running in development mode, you can access:
 
+- The Application: <http://localhost:5173>
 - The Swagger UI: <http://localhost:8080/q/swagger-ui/>
-- The frontend UI: <http://localhost:8000>
 
 ### Docker-Compose Mode
 
