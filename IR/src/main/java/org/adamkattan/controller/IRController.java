@@ -1,9 +1,10 @@
-package org.adamkattan.tempapi;
+package org.adamkattan.controller;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -14,15 +15,16 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 
-@Path("/api/files")
-public class IRResource {
+@Path("/files")
+public class IRController {
 
-    public static final String IRS_PATH = "/home/adamkattan/muni/change-impact-analysis/frontend/public/irs";
+    @ConfigProperty(name = "irs.path")
+    String irsPath;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> listJsonFiles() throws IOException {
-        try (DirectoryStream<java.nio.file.Path> stream = Files.newDirectoryStream(Paths.get(IRS_PATH), "*.json")) {
+        try (DirectoryStream<java.nio.file.Path> stream = Files.newDirectoryStream(Paths.get(irsPath), "*.json")) {
             return StreamSupport.stream(stream.spliterator(), false)
                     .map(path -> path.getFileName().toString())
                     .collect(Collectors.toList());

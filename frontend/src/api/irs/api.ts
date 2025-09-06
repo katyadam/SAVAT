@@ -4,7 +4,7 @@ import { IR, Microservice } from "./types";
 const IRs_PATH = "/irs";
 
 const getIRFiles = async (): Promise<string[]> => {
-    const resp = await irAI.get("/api/files");
+    const resp = await irAI.get("/files");
     return resp.data;
 }
 
