@@ -1,3 +1,8 @@
+### 0.2.0
+
+- IR files
+- Deployment for IR files
+
 ### 0.1.0
 
 - Error messages at the initial loading
