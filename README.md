@@ -8,6 +8,7 @@ This project is part of a bachelor's thesis exploring the application of establi
 
 - The application is served at <http://localhost:5173>.
 - In the `frontend` directory, create a `.env` file based on `env.dev`.
+- In the `application.properties` within the `IR` directory, write correct irs.path - `<path-to-base-directory>/frontend/public/irs`
 
 ```shell
 # Create a PostgreSQL database
@@ -38,6 +39,7 @@ Once the project is running in development mode, you can access:
 
 ```shell
 cd backend && ./mvnw clean package -DskipTests
+cd IR && ./mvnw clean package -DskipTests
 
 docker compose up -d
 ```
