@@ -13,6 +13,12 @@
       "isInterserviceCall": false
     },
     {
+      "source": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserService.createEvent(user.dto.AuthDto)",
+      "target": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserServiceImpl.createEvent(user.dto.AuthDto)",
+      "httpMethod": null,
+      "isInterserviceCall": false
+    },
+    {
       "source": "ts-admin-basic-info-service/org.springframework.http.HttpEntity adminbasic.controller.AdminBasicInfoController.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
       "target": "ts-admin-basic-info-service/edu.fudan.common.util.Response adminbasic.service.AdminBasicInfoServiceImpl.addPrice(adminbasic.entity.PriceInfo, org.springframework.http.HttpHeaders)",
       "httpMethod": null,
@@ -5155,12 +5161,6 @@
       "isInterserviceCall": false
     },
     {
-      "source": "ts-price-service/org.springframework.http.HttpEntity price.controller.PriceController.update(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
       "source": "ts-price-service/boolean price.entity.PriceConfig.equals(java.lang.Object)",
       "target": "ts-price-service/boolean price.entity.PriceConfig.canEqual(java.lang.Object)",
       "httpMethod": null,
@@ -5395,44 +5395,8 @@
       "isInterserviceCall": false
     },
     {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getId(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/double price.entity.PriceConfig.getBasicPriceRate(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/double price.entity.PriceConfig.getFirstClassPriceRate(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getRouteId(empty)",
-      "httpMethod": null,
-      "isInterserviceCall": false
-    },
-    {
-      "source": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)",
-      "target": "ts-price-service/java.lang.String price.entity.PriceConfig.getTrainType(empty)",
+      "source": "ts-rebook-service/org.springframework.http.HttpEntity rebook.controller.RebookController.payDifference(rebook.entity.RebookInfo, org.springframework.http.HttpHeaders)",
+      "target": "ts-rebook-service/edu.fudan.common.util.Response rebook.service.RebookServiceImpl.payDifference(rebook.entity.RebookInfo, org.springframework.http.HttpHeaders)",
       "httpMethod": null,
       "isInterserviceCall": false
     },
@@ -5629,10 +5593,10 @@
       "isInterserviceCall": false
     },
     {
-      "source": "ts-rebook-service/edu.fudan.common.util.Response rebook.service.RebookServiceImpl.updateOrder(edu.fudan.common.entity.Order, rebook.entity.RebookInfo, edu.fudan.common.entity.TripAllDetail, java.lang.String, org.springframework.http.HttpHeaders)",
-      "target": "ts-rebook-service/edu.fudan.common.util.Response rebook.service.RebookServiceImpl.createOrder(edu.fudan.common.entity.Order, java.lang.String, org.springframework.http.HttpHeaders)",
-      "httpMethod": null,
-      "isInterserviceCall": false
+      "source": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryByIdBatch(java.util.List, org.springframework.http.HttpHeaders)",
+      "target": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserService.createEvent(user.dto.AuthDto)",
+      "httpMethod": "POST",
+      "isInterserviceCall": true
     },
     {
       "source": "ts-rebook-service/boolean rebook.service.RebookServiceImpl.drawBackMoney(java.lang.String, java.lang.String, org.springframework.http.HttpHeaders)",
@@ -14673,7 +14637,7 @@
       ],
       "returnType": "edu.fudan.common.util.Response",
       "endpointURI": null,
-      "bytecodeHash": "a3e08ad0be061c24126dc7dbccaa48827fcab2546b675c90194922ccb6e55caf",
+      "bytecodeHash": "bbb08ad0be061c24126dc7dbccaa48827fcab2546b685c90194922ccb6e55caf",
       "microservice": "ts-basic-service",
       "endpointMethod": false,
       "methodSignature": "ts-basic-service/edu.fudan.common.util.Response fdse.microservice.service.BasicServiceImpl.queryForTravel(edu.fudan.common.entity.Travel, org.springframework.http.HttpHeaders)"
@@ -27694,25 +27658,6 @@
       "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceService.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
     },
     {
-      "id": 10262,
-      "name": "updatePriceConfig",
-      "type": "price.service.PriceServiceImpl",
-      "flags": "p",
-      "display": "p.s.PSI.updatePriceConfig",
-      "entryPoint": false,
-      "httpMethod": null,
-      "parameters": [
-        "price.entity.PriceConfig",
-        "org.springframework.http.HttpHeaders"
-      ],
-      "returnType": "edu.fudan.common.util.Response",
-      "endpointURI": null,
-      "bytecodeHash": "8eaad2601d64f58d407ff1366c87b74573efe427fad7377d2cc050c41e25a595",
-      "microservice": "ts-price-service",
-      "endpointMethod": false,
-      "methodSignature": "ts-price-service/edu.fudan.common.util.Response price.service.PriceServiceImpl.updatePriceConfig(price.entity.PriceConfig, org.springframework.http.HttpHeaders)"
-    },
-    {
       "id": 42198,
       "name": "setId",
       "type": "price.entity.PriceConfig",
@@ -31184,7 +31129,7 @@
       ],
       "returnType": "org.springframework.http.HttpEntity",
       "endpointURI": "/api/v1/stationservice/stations/name/{stationIdForName}",
-      "bytecodeHash": "b45f515a5a06cb604e9cc4a285cb0c1c8f28f6776c1e0ab6dfbd9de9fd40eecd",
+      "bytecodeHash": "bbbf515a5a06cb604e9cc4a285cb0c1c8f28f6776c1e0ab6dfbd9de9fd40eecd",
       "microservice": "ts-station-service",
       "endpointMethod": true,
       "methodSignature": "ts-station-service/org.springframework.http.HttpEntity fdse.microservice.controller.StationController.queryById(java.lang.String, org.springframework.http.HttpHeaders)"
@@ -31531,7 +31476,7 @@
       "parameters": ["java.util.List", "org.springframework.http.HttpHeaders"],
       "returnType": "edu.fudan.common.util.Response",
       "endpointURI": null,
-      "bytecodeHash": "9901542ac8546cd3345c572f1e32d9a803a80c84fde810245ebf3a0a70cd4c2f",
+      "bytecodeHash": "bbb1542ac8546cd3345c572f1e32d9a803a80c84fde810245ebf3a0a70cd4c2f",
       "microservice": "ts-station-service",
       "endpointMethod": false,
       "methodSignature": "ts-station-service/edu.fudan.common.util.Response fdse.microservice.service.StationServiceImpl.queryByIdBatch(java.util.List, org.springframework.http.HttpHeaders)"
@@ -37002,6 +36947,38 @@
       "microservice": "ts-user-service",
       "endpointMethod": false,
       "methodSignature": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserServiceImpl.createDefaultAuthUser(user.dto.AuthDto)"
+    },
+    {
+      "id": 13957,
+      "name": "createEvent",
+      "type": "user.service.impl.UserServiceImpl",
+      "flags": "P",
+      "display": "u.s.i.USI.createEvent",
+      "entryPoint": false,
+      "httpMethod": null,
+      "parameters": ["user.dto.AuthDto"],
+      "returnType": "edu.fudan.common.util.Response",
+      "endpointURI": null,
+      "bytecodeHash": "bbb9dfa0346fad05f214056543609ef65eee8567bf61465ad909643b5c16e7db",
+      "microservice": "ts-user-service",
+      "endpointMethod": false,
+      "methodSignature": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserServiceImpl.createEvent(user.dto.AuthDto)"
+    },
+    {
+      "id": 13957,
+      "name": "createEvent",
+      "type": "user.service.impl.UserService",
+      "flags": "P",
+      "display": "u.s.i.USI.createEvent",
+      "entryPoint": false,
+      "httpMethod": null,
+      "parameters": ["user.dto.AuthDto"],
+      "returnType": "edu.fudan.common.util.Response",
+      "endpointURI": null,
+      "bytecodeHash": "aaa9dfa0346fad05f214056543609ef65eee8567bf61465ad909643b5c16e7db",
+      "microservice": "ts-user-service",
+      "endpointMethod": false,
+      "methodSignature": "ts-user-service/edu.fudan.common.util.Response user.service.impl.UserService.createEvent(user.dto.AuthDto)"
     },
     {
       "id": 17549,

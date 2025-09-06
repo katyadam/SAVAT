@@ -1,4 +1,4 @@
-import { axiosInstance } from "../config"
+import { ciaAI } from "../config"
 import { CompareMethodsResponse } from "./types";
 import { MicroserviceNode } from "./types";
 
@@ -9,7 +9,7 @@ async function compareMethods(
     analysisInputId: string,
     microservices: MicroserviceNode[]
 ): Promise<CompareMethodsResponse> {
-    const resp = await axiosInstance.put(`${METHODS_COMPARE_PREFIX}/analysis-input/${analysisInputId}`, {
+    const resp = await ciaAI.put(`${METHODS_COMPARE_PREFIX}/analysis-input/${analysisInputId}`, {
         microservices: microservices
     })
     return resp.data;

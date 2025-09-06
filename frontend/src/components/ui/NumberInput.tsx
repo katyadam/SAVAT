@@ -39,7 +39,7 @@ const NumberInput: FC<NumberInputType> = ({
         size="icon"
         variant="outline"
         onClick={handleDecrement}
-        className={value - 1 > min ? "" : "invisible"}
+        className={value > min ? "" : "invisible"}
       >
         <Minus className="w-4 h-4" />
       </Button>

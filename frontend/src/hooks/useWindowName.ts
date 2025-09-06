@@ -12,6 +12,7 @@ type SARTypeMap = {
     sdgInput: SDGFullDto;
     cgInput: CallGraphInput;
     cgOutput: CallGraphOutputFullDto;
+    empty: ""
 };
 
 export const useVariousSAR = <T extends keyof SARTypeMap>(
@@ -50,7 +51,7 @@ const decideTypeToCall = (pathname: string) => {
         return "cgInput";
     if (pathname.includes("call-graph-output"))
         return "cgOutput";
-    return "cmOutput";
+    return "empty";
 }
 
 export const useWindowName = () => {

@@ -1,7 +1,6 @@
 import {
   useDeleteProject,
   useProject,
-  useProjectSDGs,
   useProjectSummary,
 } from "@/hooks/useProject";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
@@ -22,6 +21,7 @@ import { columns } from "@/components/sdgs/Columns";
 import ContextMapCreateDialog from "@/components/projects/ContextMapCreateDialog";
 import SDGCreateDialog from "@/components/projects/SDGCreateDialog";
 import ContextMapsTabs from "@/components/context-maps/ContextMapsTabs";
+import IRTabs from "@/components/irs/IRTabs";
 
 const ProjectPage = () => {
   const { id: projectId } = useParams();
@@ -36,10 +36,6 @@ const ProjectPage = () => {
   }, [activeTab]);
 
   const { data: project, isLoading: projectLoading } = useProject(
-    projectId || ""
-  );
-
-  const { data: sdgs, isLoading: sdgsLoading } = useProjectSDGs(
     projectId || ""
   );
 
@@ -126,11 +122,20 @@ const ProjectPage = () => {
           <TabsTrigger
             value="callgraphs"
             className={
-              "py-2 px-4 rounded-r-md transition-all duration-200 focus:outline-none" +
+              "py-2 px-4 transition-all duration-200 focus:outline-none" +
               (activeTab === "callgraphs" ? " bg-gray-300" : "")
             }
           >
             Call Graphs
+          </TabsTrigger>
+          <TabsTrigger
+            value="irs"
+            className={
+              "py-2 px-4 rounded-r-md transition-all duration-200 focus:outline-none" +
+              (activeTab === "irs" ? " bg-gray-300" : "")
+            }
+          >
+            CIMET IRs
           </TabsTrigger>
         </TabsList>
 
@@ -139,15 +144,15 @@ const ProjectPage = () => {
         </TabsContent>
 
         <TabsContent value="sdgs">
-          {sdgsLoading ? (
-            <Loading overlay={false} />
-          ) : (
-            <SDGsTable columns={columns} data={sdgs!} projectId={projectId} />
-          )}
+          <SDGsTable columns={columns} projectId={projectId} />
         </TabsContent>
 
         <TabsContent value="callgraphs">
           <CallGraphsTabs projectId={projectId} />
+        </TabsContent>
+
+        <TabsContent value="irs">
+          <IRTabs />
         </TabsContent>
       </Tabs>
       {importExportDialogUp != null && (

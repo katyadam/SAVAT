@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import Loading from "@/components/loading/Loading";
 import Navbar from "@/components/callgraphs/Navbar";
 import { CallGraphOutputHint } from "@/components/ui/hints";
-import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import { useCallGraphMethodReach } from "@/context/callGraph/CallGraphMethodReachContext";
 import Overlay from "@/components/ui/Overlay";
 import ExplorePanel from "@/components/callgraphs/reachability/ExplorePanel";
 

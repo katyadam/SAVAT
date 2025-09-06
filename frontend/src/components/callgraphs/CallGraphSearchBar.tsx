@@ -6,19 +6,19 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "./command";
+} from "../ui/command";
 import { Button } from "../ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { CallGraphMethod } from "@/api/callgraphs/types";
-import { useCallGraphLookup } from "@/context/CallGraphMethodLookupContext";
+import { useCallGraphLookup } from "@/context/callGraph/CallGraphMethodLookupContext";
 
-type SearchBarProps = {
+type CallGraphSearchBarType = {
   data: { key: string; value: CallGraphMethod }[];
 };
 
-const SearchBar: FC<SearchBarProps> = ({ data }) => {
+const CallGraphSearchBar: FC<CallGraphSearchBarType> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<CallGraphMethod | null>(
     null
@@ -108,4 +108,4 @@ const SearchBar: FC<SearchBarProps> = ({ data }) => {
   );
 };
 
-export default SearchBar;
+export default CallGraphSearchBar;

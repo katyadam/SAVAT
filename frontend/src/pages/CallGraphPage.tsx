@@ -11,7 +11,7 @@ import Loading from "@/components/loading/Loading";
 import { CallGraphInputHint } from "@/components/ui/hints";
 import Overlay from "@/components/ui/Overlay";
 import { Separator } from "@/components/ui/separator";
-import { useCallGraphMethodReach } from "@/context/CallGraphMethodReachContext";
+import { useCallGraphMethodReach } from "@/context/callGraph/CallGraphMethodReachContext";
 import { useCallGraphInput } from "@/hooks/useCallGraph";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

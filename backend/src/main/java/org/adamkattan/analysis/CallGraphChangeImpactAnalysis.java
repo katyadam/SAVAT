@@ -26,8 +26,11 @@ public class CallGraphChangeImpactAnalysis {
         Set<CallGraphCall> dependencyGraphCalls = new HashSet<>();
         changedMethodsMap.forEach((key, value) -> {
             ChangedCallGraph dependencyGraph = MethodDependency.getDependencyGraph(targetCallGraph, key, targetMethodsMap);
+            ChangedCallGraph srcDependencyGraph = MethodDependency.getDependencyGraph(sourceCallGraph, key, sourceMethodsMap);
             dependencyGraphMethods.addAll(dependencyGraph.methods());
             dependencyGraphCalls.addAll(dependencyGraph.calls());
+            dependencyGraphMethods.addAll(srcDependencyGraph.methods());
+            dependencyGraphCalls.addAll(srcDependencyGraph.calls());
         });
 
         List<ChangedCallGraphMethod> allMethods = new ArrayList<>(changedMethodsMap.values());
